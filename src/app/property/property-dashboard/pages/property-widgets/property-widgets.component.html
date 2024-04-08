@@ -1,0 +1,34 @@
+<div class="row" *ngIf="loaded">
+  <div class="col-lg-3 col-sm-4">
+    <div class="info-box7 bg-blue order-info-box7" matTooltip="Properties" routerLink="/property/manage">
+      <div class="info-box7-block">
+        <h4 class="m-b-20">Properties</h4>
+        <h2 class="text-end"><span class="float-start">{{data.totalProperties}}</span><i class="fas fa-th"></i></h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-4">
+    <div class="info-box7 bg-orange order-info-box7" matTooltip="Available Units" routerLink="/property/manage">
+      <div class="info-box7-block">
+        <h4 class="m-b-20">Available Units</h4>
+        <h2 class="text-end"><span class="float-start">{{data.availableUnits}}</span><i class="fas fa-th"></i></h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-4">
+    <div class="info-box7 bg-green order-info-box7" matTooltip="All tenants" routerLink="/tenants/tsmanage">
+      <div class="info-box7-block">
+        <h4 class="m-b-20">All tenants</h4>
+        <h2 class="text-end"><span class="float-start">{{data.allTenants}}</span><i class="fas fa-th"></i></h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-4">
+    <div class="info-box7 bg-grey order-info-box7" matTooltip="Paid Invoices" routerLink="/staff/sales/collections">
+      <div class="info-box7-block">
+        <h4 class="m-b-20">Paid Invoices</h4>
+        <h2 class="text-end"><span class="float-start">{{data.sentInvoices}}</span><i class="fas fa-th"></i></h2>
+      </div>
+    </div>
+  </div>
+</div>

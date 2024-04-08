@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Expenses</h2>
+
+<div mat-dialog-content>
+  <p><strong>Property:</strong> {{ row.propertyId }}</p>
+  <p><strong>Property:</strong> {{ row.propertyName }}</p>
+  <p><strong>Unit:</strong> {{ row.unitName }}</p>
+  <p><strong>Expense:</strong> {{ row.expenseId }}</p>
+  <p><strong>Expense:</strong> {{ row.expenseName }}</p>
+  <p><strong>Amount:</strong> {{ row.amount }}</p>
+  <p><strong>Description:</strong> {{ row.description }}</p>
+
+
+  <!-- <p><strong>Date Occurred:</strong> {{ row.dateOccurred }}</p> -->
+  <!-- <p><strong>Category:</strong> {{ row.category }}</p> -->
+  <!-- <p><strong>Vendor:</strong> {{ row.vendor }}</p>
+  <p><strong>Date Created:</strong> {{ row.createdDate }}</p>
+  <p><strong>Created By:</strong> {{ row.createdBy }}</p>
+  <p><strong>Status</strong> {{ row.status }}</p> -->
+
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>

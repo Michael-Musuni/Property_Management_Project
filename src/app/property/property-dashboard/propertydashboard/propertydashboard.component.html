@@ -1,0 +1,17 @@
+<style>
+    .content-block {
+      background-color: rgb(227, 227, 237);
+    }
+  </style>
+  
+  <section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <app-breadcrumb [title]="'Dashboard'" [items]="['Dashboard']" [active_item]="'Property Dashboard'"></app-breadcrumb>
+      </div>
+  
+      <app-property-widgets></app-property-widgets>
+     
+      <app-property-analytics></app-property-analytics>
+    </div>
+  </section>

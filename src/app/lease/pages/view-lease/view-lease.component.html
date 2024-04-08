@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Lease Contract</h2>
+
+<div mat-dialog-content style="display: flex;">
+  <!-- Left section -->
+  <div style="flex: 1; margin-right: 20px;">
+    <p><strong>Owner's Name:</strong> {{ this.lease.data.ownerName }}</p>
+    <p><strong>Owner Phone No:</strong> {{ this.lease.data.ownerPhoneNo }}</p>
+    <p><strong>Tenant Name</strong> {{ this.lease.data.tenantName }}</p>
+    <p><strong>Tenant Phone No:</strong> {{ this.lease.data.tenantPhoneNo }}</p>
+    <p><strong>Unit Name:</strong> {{ this.lease.data.unitName }}</p>
+    <p><strong>Monthly Rent:</strong> {{ this.lease.data.monthlyRent }}</p>
+    <p><strong>Deposit:</strong> {{ this.lease.data.deposit }}</p>
+    <p><strong>Late Payment Fee:</strong> {{ this.lease.data.latePaymentFee }}</p>
+    <p><strong>Charge Name:</strong> {{ this.lease.data.charges.chargeName}}</p>
+    <p><strong>Charge Amount:</strong> {{ this.lease.data.charges.chargeAmount}}</p>
+
+
+  </div>
+
+ 
+
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>

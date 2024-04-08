@@ -1,0 +1,82 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <app-breadcrumb [title]="'Billing'" [items]="['bills']" [active_item]="'Billling Management'">
+      </app-breadcrumb>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="card">
+          <div class="body">
+            <canvas baseChart [datasets]="invoiceData" [labels]="monthLabels" [options]="barGraphOptions"
+              [chartType]="'bar'"></canvas>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Select property</mat-label>
+                <input formControlName="propertyName" matInput required readonly />
+                <button (click)="pickProperty()" mat-icon-button matSuffix [attr.aria-label]="'Search for property'">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Invoices
+        </ng-template>
+        <app-invoices></app-invoices>
+      </mat-tab>
+
+      <mat-tab *ngIf="role=='ROLE_AGENT'">
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Amount Payables
+        </ng-template>
+        <app-revenues></app-revenues>
+      </mat-tab>
+      <mat-tab *ngIf="role=='ROLE_AGENT'">
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Commissions
+        </ng-template>
+        <app-commissions></app-commissions>
+      </mat-tab>
+      <mat-tab *ngIf="role=='ROLE_LANDLORD'">
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Revenues
+        </ng-template>
+        <app-revenues></app-revenues>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Expenses
+        </ng-template>
+        <app-all-expenses></app-all-expenses>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Vat
+        </ng-template>
+        <app-vat></app-vat>
+      </mat-tab>
+
+    </mat-tab-group>
+
+
+  </div>
+</section>

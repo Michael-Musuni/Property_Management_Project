@@ -1,0 +1,15 @@
+<div id="invoice-content" class="invoice-container">
+    <div class="invoice-header">
+        <h1>Invoice</h1>
+    </div>
+    <div class="invoice-body">
+        <p><strong>Invoice Number:</strong> {{ invoice?.invoiceNumber }}</p>
+        <p><strong>Tenant Name:</strong> {{ invoice?.tenantName }}</p>
+        <p><strong>Property Name:</strong> {{ invoice?.propertyName }}</p>
+        <p><strong>Property Location:</strong> {{ invoice?.propertyLocation }} - {{ invoice?.unitNumber }}</p>
+        <p><strong>Item & Amount:</strong> {{ invoice?.item }} - KSh {{ invoice?.amount }}</p>
+    </div>
+    <div class="invoice-footer">
+        <p>Thank you for your prompt payment.</p>
+    </div>
+</div>

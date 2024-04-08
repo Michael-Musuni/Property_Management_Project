@@ -1,0 +1,114 @@
+<mat-card>
+    <mat-card-title class="contact-details-name mb-1">Expense Details</mat-card-title>
+
+    <mat-card-content>
+        <form [formGroup]="expensesForm">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Select property </mat-label>
+
+                        <input formControlName="propertyId" matInput [value]="property" required readonly />
+
+                        <button (click)="pickProperty()" mat-icon-button matSuffix [attr.aria-label]="'Hide password'">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Select unit</mat-label>
+
+                        <mat-select formControlName="unitId" (selectionChange)="onUnitChange($event)">
+                            <mat-option *ngFor="let unit of units" [value]="unit.id">
+                                {{ unit.unitName }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Expense</mat-label>
+                        <input matInput formControlName="expenseName" required />
+                        <mat-error *ngIf="expensesForm.get('expenseName').hasError('required')">
+
+                            Field required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Date Occurred</mat-label>
+
+                        <input matInput [matDatepicker]="dateOccurredPicker" formControlName="dateOccurred" required />
+                        <mat-datepicker-toggle matSuffix [for]="dateOccurredPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dateOccurredPicker></mat-datepicker>
+
+                        <mat-error *ngIf="expensesForm.get('dateOccurred').hasError('required')">
+                            Date Occurred is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Amount </mat-label>
+                        <input matInput formControlName="amount" pattern="[0-9]+(\.[0-9]+)?" required />
+                        <mat-error *ngIf="expensesForm.get('amount').hasError('required')">
+                            Field required </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Category </mat-label>
+                        <input matInput formControlName="category" />
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Description </mat-label>
+                        <input matInput formControlName="description" required />
+                        <mat-error *ngIf="expensesForm.get('description').hasError('required')">
+                            Field required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                    <mat-form-field class="example-full-width" appearance="outline">
+
+                        <mat-label>Vendor </mat-label>
+                        <input matInput formControlName="vendor" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+
+                    <mat-label>Upload File</mat-label>
+
+                    <input class="form-controls mt-2" type="file" (change)="onIDChange($event)">
+                    <div class="form-group">
+                        <!-- Display file name instead of the image -->
+                        <span *ngIf="this.id" class="col-md-12 mt-2">{{ id.name }}</span>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="row">
+            <mat-card>
+                <mat-card-content>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-0">
+                        <div class="example-button-row">
+                            <button mat-raised-button color="primary" [disabled]="!expensesForm.valid"
+                                (click)="onSubmit()">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                <b>Submit</b>
+                            </button>
+                            <button mat-button (click)="closeDialog()">Close</button>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

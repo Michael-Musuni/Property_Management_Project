@@ -1,0 +1,54 @@
+<div class="auth-container">
+  <div class="row auth-main">
+    <div class="col-sm-12 auth-form-section down">
+      <div class="form-section">
+        <div class="auth-wrapper">
+          <div class="text-center">
+            <img src="assets/images/emtech.jpg" width="100%" height="250px" alt="" />
+          </div>
+          <br />
+          <form class="validate-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Username</mat-label>
+                  <input matInput formControlName="username" />
+                  <mat-icon matSuffix>face</mat-icon>
+                  <mat-error *ngIf="authForm.get('username').hasError('required')">
+                    Username is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                  <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </a>
+                  <mat-error *ngIf="authForm.get('password').hasError('required')">
+                    Password is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-5">{{error}}</div>
+            <div class="container-auth-form-btn">
+              <div>
+                <button mat-raised-button color="primary" [class.auth-spinner]="loading" [disabled]="loading"
+                  [disabled]="!authForm.valid " type="submit">LOGIN</button>
+              </div>
+            </div>
+            <!-- <div class="mt-2">
+              <a class="txt1" routerLink="/authentication/forgot-password"><b>FORGOT PASSWORD?</b></a>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

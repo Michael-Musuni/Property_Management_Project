@@ -1,0 +1,155 @@
+<!-- #END# Widgets -->
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="body">
+                <div class="table-responsive">
+                    <div class="materialTableHeader">
+                        <div class="row">
+                            <div class="col-8">
+                                <ul class="header-buttons-left ms-0">
+                                    <li>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Select Month</mat-label>
+                                            <mat-select [(value)]="selectedMonth"
+                                                (selectionChange)="onMonthSelectionChange()">
+                                                <mat-option *ngFor="let month of months" [value]="month.value">
+                                                    {{ month.name }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </li>
+                                    <li class="dropdown m-l-5">
+                                        <label for="search-input"><i
+                                                class="material-icons search-icon">search</i></label>
+                                        <input placeholder="Search" type="text" (keyup)="applyFilter($event)" #filter
+                                            class="browser-default search-field" aria-label="Search box" />
+                                    </li>
+                                    <li>
+                                        <div class="m-l" matTooltip="Refresh">
+                                            <button mat-mini-fab color="primary" (click)="refresh(selectedMonth)">
+                                                <mat-icon class="col-white">refresh</mat-icon>
+                                            </button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-4">
+                                <ul class="header-buttons">
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="XLSX">
+                                            <img src="assets/images/icons/xlsx.png" alt="" (click)="
+                                    exporter.exportTable('xlsx', {
+                                      fileName: 'assets-list',
+                                      sheet: 'sheet1'
+                                    })
+                                  " />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="CSV">
+                                            <img src="assets/images/icons/csv.png" alt=""
+                                                (click)="exporter.exportTable('csv')" />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="JSON">
+                                            <img src="assets/images/icons/json.png" alt=""
+                                                (click)="exporter.exportTable('json')" />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="TXT">
+                                            <img src="assets/images/icons/txt.png" alt=""
+                                                (click)="exporter.exportTable('txt')" />
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
+                        #exporter="matTableExporter">
+                        <!-- Checkbox Column -->
+                        <ng-container matColumnDef="select">
+                            <mat-header-cell *matHeaderCellDef>
+                                <mat-checkbox (change)="$event ? masterToggle() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                                </mat-checkbox>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)">
+                                </mat-checkbox>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="propertyName">
+                            <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">
+                                <a (click)="selectProperty()">{{ revenue.propertyName }}</a>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="grossRevenue">
+                            <mat-header-cell *matHeaderCellDef>Gross Revenue</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">{{ revenue.grossRevenue }}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="totalExpenses">
+                            <mat-header-cell *matHeaderCellDef>Expenses</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">{{ revenue.totalExpenses }}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="totalTax">
+                            <mat-header-cell *matHeaderCellDef>Tax</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">{{ revenue.totalTax }}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="agentCommission">
+                            <mat-header-cell *matHeaderCellDef>Commission</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">{{ revenue.agentCommission }}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="netAmount">
+                            <mat-header-cell *matHeaderCellDef>Net Revenue</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">{{ revenue.netAmount }}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="date">
+                            <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">{{ revenue.date }}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="totalDeposits">
+                            <mat-header-cell *matHeaderCellDef>Deposits</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">{{ revenue.totalDeposits }}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="totalLatePaymentFee">
+                            <mat-header-cell *matHeaderCellDef>Late Payment Fees</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">{{ revenue.totalLatePaymentFee }}</mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                            <mat-cell *matCellDef="let revenue">
+                                <button mat-icon-button color="primary" (click)="viewRevenueDetails(revenue)"
+                                    matTooltip="View">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                            </mat-cell>
+                        </ng-container>
+                    
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'"
+                            matRipple></mat-row>
+                        <mat-cell *matNoDataRow colspan="5">No data matching the filter "{{ input.value }}"</mat-cell>
+                    </mat-table>
+
+                    <!-- Loading spinner -->
+                    <div *ngIf="isLoading" class="tbl-spinner">
+                        <mat-progress-spinner color="primary" [diameter]="60" mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div>
+                    <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
