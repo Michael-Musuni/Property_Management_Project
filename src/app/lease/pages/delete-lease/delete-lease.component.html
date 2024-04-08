@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+        <p>    Are you sure you want to delete contract for {{this.rowdata.data.tenantName}}?</p>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <div class="example-button-row" align="center">
+            <button mat-raised-button color="primary" (click)="onDelete()">
+                Yes
+            </button>
+            <button mat-raised-button color="warn" (click)="this.dialogRef.close()" tabindex="-1">
+                No
+            </button>
+        </div>
+    </div>
+</div>

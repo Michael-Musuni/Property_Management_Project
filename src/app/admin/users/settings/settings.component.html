@@ -1,0 +1,97 @@
+<section class="content">
+    <div class="container-fluid content-block">
+        <div class="modalHeader">
+            <div class="editRowModal">
+                <div class="modalHeader clearfix">
+                    <div class="modal-about">
+                        <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+                            UPDATE YOUR PASSWORD
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-content>
+            <form class="register-form m-4" [formGroup]="updatePasswordForm">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input matInput formControlName="username" readonly required />
+                            <mat-error *ngIf="updatePasswordForm.get('username').hasError('required')">
+                                User name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Current Password</mat-label>
+                            <input matInput formControlName="currpassword" required />
+                            <mat-error *ngIf="updatePasswordForm.get('currpassword').hasError('required')">
+                                Current Password is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>New Password</mat-label>
+                            <input matInput formControlName="password" required />
+                            <mat-error *ngIf="updatePasswordForm.get('password').hasError('required')">
+                                Password is required
+                            </mat-error>
+                            <mat-error *ngIf="updatePasswordForm.get('password').hasError('minlength')">
+                                Password must be at least 12 characters long
+                            </mat-error>
+                            <mat-error *ngIf="updatePasswordForm.get('password').hasError('maxlength')">
+                                Password length be at most 20 characters long
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput formControlName="confirmpassword" required />
+                            <mat-error *ngIf="updatePasswordForm.get('confirmpassword').hasError('required')">
+                                Confirm Password is required
+                            </mat-error>
+                            <mat-error *ngIf="updatePasswordForm.get('confirmpassword').hasError('minlength')">
+                                Confirm Password must be at least 12 characters long
+                            </mat-error>
+                            <mat-error *ngIf="updatePasswordForm.get('confirmpassword').hasError('maxlength')">
+                                Password length be at most 20 characters long
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <div class="example-button-row" align="end">
+                            <button mat-raised-button color="primary" [disabled]="!updatePasswordForm.valid"
+                                (click)="onSubmit()">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                <b>SUBMIT</b>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+        </div>
+        <div class="password-policies">
+            <h4>Password Policies:</h4>
+            <ol>
+                <li *ngFor="let policy of passwordPolicies">{{ policy }}</li>
+            </ol>
+        </div>
+    </div>
+</section>

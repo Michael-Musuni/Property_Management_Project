@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Revenue</h2>
+
+<div mat-dialog-content>
+  <p><strong>Property Name:</strong> {{ revenue.propertyName }}</p>
+  <p><strong>Gross Revenue:</strong> {{ revenue.grossRevenue }}</p>
+  <p><strong>Total Expenses:</strong> {{ revenue.totalExpenses }}</p>
+  <p><strong>Tax:</strong> {{ revenue.totalTax }}</p>
+  <p><strong>Agent Commission:</strong> {{ revenue.agentCommission }}</p>
+  <p><strong>Net Revenue:</strong> {{ revenue.netAmount }}</p>
+  <p><strong>Date:</strong> {{ revenue.date }}</p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>

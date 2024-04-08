@@ -1,0 +1,146 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="body">
+                <div class="table-responsive">
+                    <div class="materialTableHeader">
+                        <div class="row">
+                            <div class="col-8">
+                                <ul class="header-buttons-left ms-0">
+                                    <!-- Month selection dropdown -->
+                                    <li>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Select Month</mat-label>
+                                            <mat-select (selectionChange)="onMonthSelectionChange()">
+                                                <mat-option *ngFor="let month of months" [value]="month.value">
+                                                    {{ month.name }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </li>
+
+                                    <!-- Search input -->
+                                    <li class="dropdown m-l-5">
+                                        <label for="search-input"><i
+                                                class="material-icons search-icon">search</i></label>
+                                        <input placeholder="Search" type="text" (keyup)="applyFilter($event)" #filter
+                                            class="browser-default search-field" aria-label="Search box" />
+                                    </li>
+                                    <!-- Refresh button -->
+                                    <li>
+                                        <div class="m-l" matTooltip="Refresh">
+                                            <button mat-mini-fab color="primary" (click)="refresh(selectedMonth)">
+                                                <mat-icon class="col-white">refresh</mat-icon>
+                                            </button>
+                                        </div>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                            <!-- Export buttons -->
+                            
+                            <div class="col-4">
+                                <ul class="header-buttons">
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="XLSX">
+                                            <img src="assets/images/icons/xlsx.png" alt=""
+                                                (click)="exportData('xlsx')" />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="CSV">
+                                            <img src="assets/images/icons/csv.png" alt="" (click)="exportData('csv')" />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="JSON">
+                                            <img src="assets/images/icons/json.png" alt=""
+                                                (click)="exportData('json')" />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="TXT">
+                                            <img src="assets/images/icons/txt.png" alt="" (click)="exportData('txt')" />
+                                        </div>
+                                    </li>
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Table -->
+                    <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
+                        #exporter="matTableExporter">
+                        <!-- Checkbox Column -->
+                        <ng-container matColumnDef="select">
+                            <mat-header-cell *matHeaderCellDef>
+                                <mat-checkbox (change)="$event ? masterToggle() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                                </mat-checkbox>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)">
+                                </mat-checkbox>
+                            </mat-cell>
+                        </ng-container>
+                        <!-- Property Name Column -->
+
+                        <ng-container matColumnDef="propertyName">
+                            <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
+                            <mat-cell *matCellDef="let vat">
+                                <a (click)="selectProperty()">{{ vat.propertyName }}</a>
+                            </mat-cell>
+                        </ng-container>
+                        <!-- Monthly Rent Column -->
+                        <ng-container matColumnDef="grossRevenue">
+                            <mat-header-cell *matHeaderCellDef>Gross Revenue</mat-header-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.grossRevenue }}</mat-cell>
+                        </ng-container>
+                        <!-- Tax Amount Column -->
+                        <ng-container matColumnDef="taxAmount">
+                            <mat-header-cell *matHeaderCellDef>Tax Amount</mat-header-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.taxAmount }}</mat-cell>
+                        </ng-container>
+                        <!-- Late Penalty Column -->
+                        <ng-container matColumnDef="Penalty">
+                            <mat-header-cell *matHeaderCellDef>Penalty</mat-header-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.Penalty }}</mat-cell>
+                        </ng-container>
+                        <!-- Net Revenue Column -->
+                        <ng-container matColumnDef="lastTaxResetDate">
+                            <mat-header-cell *matHeaderCellDef>Last Tax Reset Date </mat-header-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.lastTaxRestDate }}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="overDueTaxAndPenalty">
+                            <mat-header-cell *matHeaderCellDef>Over Due Tax And Penalty</mat-header-cell>
+                            <mat-cell *matCellDef="let vat">
+                                <a (click)="selectProperty()">{{ vat.overDueTaxAndPenalty }}</a>
+                            </mat-cell>
+                        </ng-container>
+                        <!-- Table header row -->
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <!-- Table row -->
+                        <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple>
+                        </mat-row>
+                        <!-- No data message -->
+                        <mat-cell *matNoDataRow colspan="5">No data matching the filter "{{ input.value }}"</mat-cell>
+                    </mat-table>
+                    <!-- Loading spinner -->
+                    <div *ngIf="isLoading" class="tbl-spinner">
+                        <mat-progress-spinner color="primary" [diameter]="60"
+                            mode="indeterminate"></mat-progress-spinner>
+                    </div>
+                    <!-- Paginator -->
+                    <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

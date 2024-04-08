@@ -1,0 +1,66 @@
+
+<div class="row clearfix">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card">
+        <button mat-icon-button class="col-xl-12 col-lg-12 col-md-12 col-sm-12" (click)="dialogRef.close()"
+        aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+    </button>
+        <div class="header">
+          <h2>Add Utility Details</h2>
+        </div>
+
+        <div class="body">
+      
+          <form class="validate-form" [formGroup]="utilityForm">
+            <div class="row">
+              <div class="class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input matInput formControlName="name" />
+                  <mat-icon matSuffix>face</mat-icon>
+                  <mat-error *ngIf="utilityForm.get('name').hasError('required')">
+                   Name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <input matInput formControlName="description" />
+                  <mat-icon matSuffix>face</mat-icon>
+                  <mat-error *ngIf="utilityForm.get('description').hasError('required')">
+                   Name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>VAT &</mat-label>
+                  <input matInput formControlName="vat" />
+                  <mat-icon matSuffix>face</mat-icon>
+                  <mat-error *ngIf="utilityForm.get('vat').hasError('required')">
+                   VAT is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <div class="example-button-row" align="end">
+                  <button mat-raised-button color="warn" (click)="clearForm()">
+                    Clear
+                  </button>
+                  <button mat-raised-button color="primary" [disabled]="!utilityForm.valid" (click)="addUtility()">
+                    Add Utility
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+   

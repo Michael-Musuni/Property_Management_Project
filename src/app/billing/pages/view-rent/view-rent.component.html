@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Rent Details</h2>
+
+<div mat-dialog-content style="display: flex;">
+  <!-- Left section -->
+  <div style="flex: 1; margin-right: 20px;">
+    <p><strong>Invoice Number:</strong> {{ rent.invoiceNumber }}</p>
+    <p><strong>Property Name:</strong> {{ rent.propertyName }}</p>
+    <p><strong>Item:</strong> {{ rent.item }}</p>
+    <p><strong>Status:</strong> {{ rent.status }}</p>
+    <p><strong>Amount:</strong> {{ rent.amount }}</p>
+    <p><strong>Invoice Month:</strong> {{ rent.invoiceMonth }}</p>
+    <p><strong>Invoicing Date:</strong> {{ rent.invoicingDate | date }}</p>
+    <p><strong>Is Sent:</strong> {{ rent.isSent }}</p>
+  </div>
+
+  <!-- Right section -->
+  <div style="flex: 1;">
+    <p><strong>Tenant Name:</strong> {{ rent.tenantName }}</p>
+    <p><strong>Tenant Id:</strong> {{ rent.tenantId }}</p>
+    <p><strong>Unit:</strong> {{ rent.unit }}</p>
+    <p><strong>Unit Id:</strong> {{ rent.unitId }}</p>
+    <p><strong>Balance:</strong> {{ rent.balance }}</p>
+    <p><strong>Channel:</strong> {{ rent.channel }}</p>
+    <p><strong>Mode of Payment:</strong> {{ rent.modeOfPayment }}</p>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>

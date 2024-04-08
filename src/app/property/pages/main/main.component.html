@@ -1,0 +1,55 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <app-breadcrumb [title]="'Property'" [items]="['Manage']" [active_item]="'Property Management'">
+            </app-breadcrumb>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <div class="card">
+                <div class="body">
+                  <canvas baseChart [datasets]="PropertyOnboardedData" [labels]="PropertyOnboardedLabels" [options]="PropertyOnboardedOptions"
+                    [chartType]="'line'"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <div class="card">
+                <div class="body">
+                  <canvas baseChart [datasets]="rentpaidData" [labels]="rentpaidLabels" [options]="rentpaidOptions"
+                    [chartType]="'bar'"></canvas>
+                </div>
+              </div>
+            </div>
+               
+            </div>
+          </div>
+      
+                
+        <mat-tab-group>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+                    Properties
+                </ng-template>
+                <app-property-management></app-property-management>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+                    Rent Configurations
+                </ng-template>
+
+                <app-rentconfigurations></app-rentconfigurations>
+            </mat-tab>
+            <mat-tab *ngIf="role=='ROLE_AGENT'">
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+                    Landlords
+                </ng-template>
+                <app-property-owners></app-property-owners>
+            </mat-tab>
+        </mat-tab-group>
+    
+
+

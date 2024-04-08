@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Invoice Details</h2>
+
+<div mat-dialog-content style="display: flex; flex-wrap: wrap;">
+  <!-- Left section -->
+  <div style="flex: 1 1 calc(50% - 20px); margin-right: 20px;">
+    <p><strong>Invoice Number:</strong> {{ invoice.invoiceNumber }}</p>
+    <p><strong>Property Name:</strong> {{ invoice.propertyName }}</p>
+    <p><strong>Status:</strong> {{ invoice.status }}</p>
+    <p><strong>Total Amount:</strong> {{ getTotalAmount(invoice.details) }}</p>
+    <p><strong>Invoice Month:</strong> {{ invoice.invoiceMonth }}</p>
+    <p><strong>Invoicing Date:</strong> {{ invoice.invoicingDate | date }}</p>
+    <p><strong>Is Sent:</strong> {{ invoice.isSent }}</p>
+    <p><strong>Due Status:</strong> {{ invoice.dueStatus }}</p>
+
+
+  </div>
+  <!-- Right section -->
+  <div style="flex: 1 1 calc(50% - 20px);" >
+    <p ><strong>Tenant Name:</strong> {{ invoice.tenantName }}</p>
+    <p><strong>Tenant Id:</strong> {{ invoice.tenantId }}</p>
+    <p><strong>Unit:</strong> {{ invoice.unit }}</p>
+    <p><strong>Unit Id:</strong> {{ invoice.unitId }}</p>
+    <p><strong>Balance:</strong> {{ invoice.balance }}</p>
+    <p><strong>Channel:</strong> {{ invoice.channel }}</p>
+    <p><strong>Mode of Payment:</strong> {{ invoice.modeOfPayment }}</p>
+  </div>
+</div>
+
+<div mat-dialog-content>
+  <h3 class=>Charges</h3>
+  <div style="overflow-x: auto;">
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of invoice.details">
+          <td>{{ detail.chargeName }}</td>
+          <td>{{ detail.chargeAmount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div mat-dialog-actions style="justify-content: flex-end;">
+  <button mat-icon-button color="primary" (click)="downloadInvoice(invoice)"
+  matTooltip="Download" [disabled]="downloading">
+  <mat-icon >cloud_download</mat-icon>
+  <span *ngIf="invoice.downloading">Downloading...</span>
+</button>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>

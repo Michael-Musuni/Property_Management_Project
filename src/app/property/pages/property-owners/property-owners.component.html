@@ -1,0 +1,136 @@
+<!-- #END# Widgets -->
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="body">
+                <div class="table-responsive">
+                    <div class="materialTableHeader">
+                        <div class="row">
+                            <div class="col-8">
+                                <ul class="header-buttons-left ms-0">
+
+                                    <li class="dropdown m-l-5">
+                                        <label for="search-input"><i
+                                                class="material-icons search-icon">search</i></label>
+                                        <input placeholder="Search" type="text" (keyup)="applyFilter($event)" #filter
+                                            class="browser-default search-field" aria-label="Search box" />
+                                    </li>
+                                    
+                                    <li>
+                                        <div class="m-l" matTooltip="Refresh">
+                                            <button mat-mini-fab color="primary" (click)="refresh()">
+                                                <mat-icon class="col-white">refresh</mat-icon>
+                                            </button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-4">
+                                <ul class="header-buttons">
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="XLSX">
+                                            <img src="assets/images/icons/xlsx.png" alt="" (click)="
+                                        exporter.exportTable('xlsx', {
+                                          fileName: 'assets-list',
+                                          sheet: 'sheet1'
+                                        })
+                                      " />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="CSV">
+                                            <img src="assets/images/icons/csv.png" alt=""
+                                                (click)="exporter.exportTable('csv')" />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="JSON">
+                                            <img src="assets/images/icons/json.png" alt=""
+                                                (click)="exporter.exportTable('json')" />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="TXT">
+                                            <img src="assets/images/icons/txt.png" alt=""
+                                                (click)="exporter.exportTable('txt')" />
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
+                        #exporter="matTableExporter">
+                        <!-- Checkbox Column -->
+                        <ng-container matColumnDef="owner_name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Owner
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">
+                                {{ row.owner_name }}
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="owner_type">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                class="table-img column-nowrap text-left">owner_type
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                [class.even-row]="!(i % 2)" class="table-img  column-nowrap">
+                                {{row.owner_type}}
+                            </mat-cell>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="property_name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property
+                                Name</mat-header-cell>
+                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{
+                                row.property_name
+                                }}</mat-cell>
+                        </ng-container>
+
+                        
+                        <ng-container matColumnDef="phone">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                class="table-img column-nowrap text-left">Phone
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                [class.even-row]="!(i % 2)" class="table-img  column-nowrap">
+                                {{row.phone}}
+                            </mat-cell>
+                        </ng-container>
+                        
+
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell class="pr-0 column-nowrap" *matHeaderCellDef>Actions</mat-header-cell>
+                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                [class.even-row]="!(i % 2)" class="pr-0">
+
+                                <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
+                                    (click)="editCall(row)" class="tbl-action-btn" matTooltip="Update Account">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </mat-cell>
+
+                        </ng-container>
+
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple>
+                        </mat-row>
+                        <mat-cell *matNoDataRow colspan="4">
+                            No data matching the filter "{{ input.value }}"</mat-cell>
+                    </mat-table>
+
+                    <!-- Loading spinner -->
+                    <div *ngIf="!loading" class="tbl-spinner">
+                        <mat-progress-spinner color="primary" [diameter]="60" mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div>
+                    <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

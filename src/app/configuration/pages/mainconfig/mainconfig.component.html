@@ -1,0 +1,51 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <app-breadcrumb [title]="'Property Configuration'" [items]="['config']" [active_item]="'Property Configuration'">
+      </app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="card">
+          <div class="body">
+            <canvas baseChart [datasets]="AmenityOnboardedData" [labels]="AmenityOnboardedLabels"
+              [options]="AmenityOnboardedOptions" [chartType]="'bar'"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="card">
+          <div class="body">
+            <canvas baseChart [datasets]="utilityexpensesData" [labels]="utilityexpensesLabels"
+              [options]="utilityexpensesOptions" [chartType]="'line'"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Amenities
+        </ng-template>
+        <app-amenities></app-amenities>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Utilities
+        </ng-template>
+        <app-utilities></app-utilities>
+      </mat-tab>
+
+      <mat-tab>
+        <!-- <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Expenses
+        </ng-template> -->
+        <!-- <app-view-expense></app-view-expense> -->
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</section>
