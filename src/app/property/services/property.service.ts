@@ -50,8 +50,8 @@ export class PropertyService {
   }
 
 
-  public downloadUnitsOccupiedReport(propertyName: any): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-occupied?propertyName=${propertyName}`);
+  public downloadUnitsOccupiedReport(propertyName: any): Observable<Blob> {
+    return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-occupied?propertyName=${propertyName}`, { responseType: 'blob'});
   }
   
   public downloadUnitsunoccupiedReport(propertyName: any): Observable<Blob> {
