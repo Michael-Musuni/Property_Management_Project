@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>Payment Details Confirmation</h1>
-<div mat-dialog-content *ngIf="data && data.invoice">
+<h1 mat-dialog-title>Payment Confirmation</h1>
+<div mat-dialog-content class="dialog-content" *ngIf="data && data.invoice" style="padding-top: 10px;overflow-y: hidden;">
     <p>Invoice Number: {{ data.invoice.invoiceNumber }}</p>
     <p>Property: {{ data.invoice.propertyName }}</p>
     <p>Tenant: {{ data.invoice.tenantName }}</p>

@@ -13,15 +13,23 @@
                                         <div class="m-l-5">
                                             <mat-form-field class="example-full-width mb-3" appearance="outline">
                                                 <mat-label>Filter By </mat-label>
-                                                <mat-select (value)="selected" (selectionChange)="fetchData()">
+                                                <mat-select [(value)]="selected" (selectionChange)="fetchData()">
                                                     <mat-option value="all"><b>All Invoices</b></mat-option>
                                                     <mat-option value="paid"><b>Paid</b></mat-option>
                                                     <mat-option value="standing"><b>Not Paid</b></mat-option>
-                                                    <mat-option value="pending"><b>Pending</b></mat-option>
+                                                    <!-- <mat-option value="pending"><b>Pending</b></mat-option> -->
 
                                                 </mat-select>
-                                            </mat-form-field>
+                                              </mat-form-field>
                                         </div>
+                                    </li>
+                                    <li>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Select Date</mat-label>
+                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="filterByDate($event.value)">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                      </mat-form-field>
                                     </li>
 
                                     <li class="dropdown m-l-5">
@@ -89,7 +97,7 @@
                         </div>
                     </div>
                     <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
-                        #exporter="matTableExporter">
+           #exporter="matTableExporter">
                         <!-- Checkbox Column -->
                         <ng-container matColumnDef="select">
                             <mat-header-cell *matHeaderCellDef>
@@ -126,9 +134,12 @@
                         <ng-container matColumnDef="status">
                             <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
                             <mat-cell *matCellDef="let invoice">
-                              <ng-container *ngIf="invoice.status === 'NOT PAID'">
-                                <a (click)="openPaymentDialog(invoice)">{{ invoice.status }}</a>
-                              </ng-container>
+                             <ng-container *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_AGENT'">
+                                    <a (click)="openPaymentDialog(invoice)">{{ invoice.status }}</a>
+                                  </ng-container>
+                                  <ng-container *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_LANDLORD'">
+                                    {{ invoice.status }}
+                                  </ng-container>
                               <ng-container *ngIf="invoice.status === 'PENDING'">
                                 <a (click)="handlePendingInvoice(invoice)">{{ invoice.status }}</a>
                               </ng-container>
@@ -185,7 +196,7 @@
                         </ng-container>
 
                         <ng-container matColumnDef="invoicingDate">
-                            <mat-header-cell *matHeaderCellDef>Invoicing Date</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
                             <mat-cell *matCellDef="let invoice">{{ invoice.invoicingDate | date }}</mat-cell>
                         </ng-container>
 
@@ -228,11 +239,11 @@
                                     <mat-icon>email</mat-icon>
                                   </button> -->
                                 <button mat-button color="primary" class="small-button"
-                                    (click)="openSendOptionsDialog(invoice)" matTooltip="Send">
+                                    (click)="openSendOptionsDialog(invoice)" matTooltip="Send" *ngIf="role=='ROLE_AGENT'">
                                     <mat-icon size="small">send</mat-icon>
                                 </button>
                                 <button mat-raised-button color="primary" (click)="openPaymentDialog(invoice)"
-                                    matTooltip="Pay" *ngIf="invoice.status === 'NOT PAID'">
+                                    matTooltip="Pay" *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_AGENT'">
                                     <mat-icon size="small">payment</mat-icon>
                                 </button>
                                 <button mat-raised-button color="primary" (click)="handlePendingInvoice(invoice)"
