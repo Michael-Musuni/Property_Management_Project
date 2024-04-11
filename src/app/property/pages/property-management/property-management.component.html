@@ -108,20 +108,20 @@
                 {{row.propertyOwner.ownerName}}
               </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="units">
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Units
+            <ng-container matColumnDef="totalUnits">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Total Units
               </mat-header-cell>
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                 class="table-img  column-nowrap">
-                {{row.units.length}}
+                {{row.totalUnits}}
               </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="status">
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Status
+            <ng-container matColumnDef="vacantUnits">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Vacant Units
               </mat-header-cell>
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                 class="table-img  column-nowrap">
-                {{row.status}}
+                {{row.vacantUnits}}
               </mat-cell>
             </ng-container>
             <!-- actions -->
