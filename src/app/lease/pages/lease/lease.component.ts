@@ -9,12 +9,14 @@ import { SnackbarService } from 'src/app/shared/snackbar.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ReportoptionsComponent } from '../reportoptions/reportoptions.component';
 
+import { MatTable } from '@angular/material/table';
+import { MatTableExporterModule } from 'mat-table-exporter';
 import { ViewLeaseComponent } from '../view-lease/view-lease.component';
 import { HttpParams } from '@angular/common/http';
 import { DeleteLeaseComponent } from '../delete-lease/delete-lease.component';
 import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
-import { ReportoptionsComponent } from '../reportoptions/reportoptions.component';
 
 
 
@@ -24,8 +26,9 @@ import { ReportoptionsComponent } from '../reportoptions/reportoptions.component
   styleUrls: ['./lease.component.sass']
 })
 export class LeaseComponent implements OnInit {
-  
-  
+viewReportOptions() {
+throw new Error('Method not implemented.');
+}
   
   loading: Boolean
   isdata: Boolean = false
@@ -231,19 +234,5 @@ public onDelete(row){
   const dialogRef = this.dialog.open(DeleteLeaseComponent, dialogConfig);
   dialogRef.afterClosed().subscribe((result) => {
   });
-}
-viewReportOptions(){
-  const dialogConfig = new MatDialogConfig()
-  dialogConfig.disableClose = true
-  dialogConfig.autoFocus = true
-  dialogConfig.width = '600px'
-  dialogConfig.data = { test: "data" }
-
-  const dialogRef = this.dialog.open(ReportoptionsComponent, dialogConfig);
-
-
-  dialogRef.afterClosed().subscribe((result) => {
-    console.log('closed');
-    });
 }
 }
