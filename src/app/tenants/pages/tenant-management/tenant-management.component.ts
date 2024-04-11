@@ -9,7 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ReportoptionsComponent } from '../reportoptions/reportoptions.component';
 import { UpdatetenantComponent } from '../updatetenant/updatetenant.component';
 import { Subscription } from 'rxjs';
-
+import { TokenStorageService } from 'src/app/core/service/token-storage.service';
 import { DeleteComponent } from '../delete/delete.component';
 @Component({
   selector: 'app-tenant-management',
@@ -21,6 +21,11 @@ export class TenantManagementComponent implements OnInit {
 
 
   data: any;
+  role :string
+  selectedDate: string; // Selected date from the date picker
+    today: Date = new Date(); // Today's date
+    activeTenantsForSelectedDate: number; // Number of active tenants for the selected date
+
 
 
   constructor(
@@ -28,6 +33,8 @@ export class TenantManagementComponent implements OnInit {
     private snackbar: SnackbarService,
     private router: Router,
     private dialog: MatDialog,
+    private tokenStorage: TokenStorageService,
+    
 
   ) { }
   subscription!: Subscription
@@ -44,8 +51,25 @@ export class TenantManagementComponent implements OnInit {
   ngOnInit(): void {
     this.fetchTenantData();
     this.fetchOnboardedTenantsData();
-  }
+    this.role = this.tokenStorage.getUser()?.roles[0];
+      // Initialize selectedDate with today's date
+      this.selectedDate = this.today.toISOString().split('T')[0];
 
+      // Calculate active tenants for the selected date
+      this.calculateActiveTenantsForSelectedDate();
+    
+  }
+  onDateChange(): void {
+    // Calculate active tenants for the newly selected date
+    this.calculateActiveTenantsForSelectedDate();
+}
+
+calculateActiveTenantsForSelectedDate(): void {
+    // Perform logic to calculate active tenants for the selected date
+    // Assign the result to activeTenantsForSelectedDate variable
+    // For example:
+    // this.activeTenantsForSelectedDate = ...
+}
 
   fetchOnboardedTenantsData() {
     this.tenantService.getOnboardedTenantsData().subscribe({
