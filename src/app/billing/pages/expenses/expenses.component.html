@@ -77,14 +77,8 @@
                                 <a (click)="selectProperty(row)">{{ row.propertyName }}</a>
                             </mat-cell>
                         </ng-container>
-                        <!-- <ng-container matColumnDef="unitId">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Unit
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">
-                                <a (click)="selectProperty(row)">{{ row.unitNmae }}</a>
-                            </mat-cell>
-                        </ng-container> -->
+
+
                         <ng-container matColumnDef="unitName">
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Unit
                             </mat-header-cell>
@@ -164,9 +158,9 @@
                                     (click)="deleteExpense(row)" class="tbl-action-btn" matTooltip="Delete Expense">
                                     <mat-icon>delete</mat-icon>
                                 </button> -->
-                            </mat-cell>
+                            <!-- </mat-cell> -->
 
-                        </ng-container>
+                        <!-- </ng-container> -->
 
                         <!-- Checkbox Column -->
 
