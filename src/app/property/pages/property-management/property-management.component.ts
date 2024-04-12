@@ -88,8 +88,8 @@ export class PropertyManagementComponent implements OnInit {
 
   }
   fetchPropertyData() {
-    this.propertyService.getProperty().subscribe({
-      next: (response) => {
+    this.propertyService.getProperties().subscribe({
+      next: (response: any) => {
         console.log('Response:', response);
         this.dataSource = new MatTableDataSource<any>(response.entity);
         this.dataSource.paginator = this.paginator;

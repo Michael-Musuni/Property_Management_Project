@@ -10,8 +10,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class PropertyService {
-  getmonthlyrentdata: any;
-  getpropertycountdata: any;
+  // getmonthlyrentdata: any;
+  // getpropertycountdata: any;
 
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
