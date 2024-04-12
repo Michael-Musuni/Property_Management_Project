@@ -28,12 +28,12 @@
                                             </button>
                                         </div>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                             <div class="col-4">
                                 <ul class="header-buttons">
-                                    <li>
+                                    <!-- <li>
                                         <div class="export-button m-l-10" matTooltip="XLSX">
                                             <img src="assets/images/icons/xlsx.png" alt="" (click)="
                                     exporter.exportTable('xlsx', {
@@ -60,7 +60,7 @@
                                             <img src="assets/images/icons/txt.png" alt=""
                                                 (click)="exporter.exportTable('txt')" />
                                         </div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -121,7 +121,11 @@
                                 [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.amount
                                 }}</mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="category">
+
+
+
+
+                        <!-- <ng-container matColumnDef="category">
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Category
                             </mat-header-cell>
                             <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
