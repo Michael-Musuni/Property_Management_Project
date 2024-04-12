@@ -41,81 +41,54 @@
             </mat-form-field>
         </div>
 
-        <div class="col-md-12 mb-2">
+        <!-- <div class="col-md-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Month</mat-label>
                 <mat-select placeholder="Select Month" formControlName="selectedMonth">
                     <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
                 </mat-select>
             </mat-form-field>
+        </div> -->
+
+
+        <div class="col-md-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Start Date - End Date</mat-label>
+                <mat-date-range-input [rangePicker]="rangePicker" [formGroup]="dateForm">
+                    <input matStartDate matInput placeholder="Start Date" formControlName="start"
+                        (dateChange)="selectedStartDate = $event.value">
+                    <input matEndDate matInput placeholder="End Date" formControlName="end"
+                        (dateChange)="selectedEndDate = $event.value">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker></mat-date-range-picker>
+            </mat-form-field>
         </div>
+
+        <!-- <div class="col-md-12 mb-2">
+            <mat-form-field class="example-form-field" appearance="outline">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" formControlName="start">
+                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #startDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-12 mb-2">
+            <mat-form-field class="example-form-field" appearance="outline">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" formControlName="end">
+                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div> -->
+
+
+
+
     </form>
 </form>
 
 <div>
     <button mat-raised-button color="primary" (click)="downloadReport()">Download PDF</button>
 </div>
-
-
-
-
-
-
-<!-- <div class="row">
-
-    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-2">
-        <img src="/assets/images/emtech.png" width="60px" height="45px" class="px-2 mx-2" alt="avatar" />
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-2 d-flex justify-content-center align-items-center">
-        <span style="font-weight: bold; font-size: 16px;">Download Reports</span>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-2 d-flex justify-content-end align-items-center">
-        <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
-            <mat-icon>close</mat-icon>
-        </button>
-            
-    </div>
-</div>
-
-
-<form [formGroup]="optionsForm">
-    <div class="row">
-        <div class="col-md-12 mb-2">
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Report type</mat-label>
-                <input type="text" placeholder="Pick one" aria-label="Report type" matInput formControlName="reportType"
-                    [matAutocomplete]="auto">
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{ option
-                        }}</mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </div>
-
-        <div class="col-md-12 mb-2">
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Property Name</mat-label>
-                <input type="text" placeholder="Pick one" aria-label="Property Name" matInput
-                    formControlName="propertyName" [matAutocomplete]="auto2">
-                <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredPropertyNames | async" [value]="option">{{ option
-                        }}</mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </div>
-
-        <div class="col-md-12 mb-2">
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Month</mat-label>
-                <mat-select placeholder="Select Month" formControlName="selectedMonth">
-                    <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-
-</form>
-
-<div>
-    <button mat-raised-button color="primary" (click)="downloadReport()">Download PDF</button>
-</div> -->

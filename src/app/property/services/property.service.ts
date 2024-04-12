@@ -39,12 +39,19 @@ export class PropertyService {
     return this.http.get(`${environment.apiUrl}/api/v1/analytics/onboardedTenants`, httpOptions);
   }
 
+ 
+   
+  public getmonthlyrentdata(){
+    return this.http.get(`${environment.apiUrl}/api/v1/analytics/monthly-rent`,httpOptions);
+  }
+
+  public getpropertycountdata(){
+    return this.http.get(`${environment.apiUrl}/api/v1/analytics/property-count`,httpOptions);
+  }
+
+
   public downloadUnitsOccupiedReport(propertyName: any): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-occupied?propertyName=${propertyName}`, { responseType: 'blob'});
-  }
-  getProperty(){
-    const addTenantUrl = `${this.apiUrl}/api/property/tenant/tenants`;
-    return this.http.get<any>(addTenantUrl);
   }
   
   public downloadUnitsunoccupiedReport(propertyName: any): Observable<Blob> {
