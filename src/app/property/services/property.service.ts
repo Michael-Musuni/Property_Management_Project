@@ -10,10 +10,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class PropertyService {
-  // getmonthlyrentdata: any;
-  // getpropertycountdata: any;
+  getmonthlyrentdata: any;
+  getpropertycountdata: any;
 
-
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
   public registerProperty(property: any) {
@@ -39,32 +39,25 @@ export class PropertyService {
     return this.http.get(`${environment.apiUrl}/api/v1/analytics/onboardedTenants`, httpOptions);
   }
 
- 
-   
-  public getmonthlyrentdata(){
-    return this.http.get(`${environment.apiUrl}/api/v1/analytics/monthly-rent`,httpOptions);
+  public downloadUnitsOccupiedReport(propertyName: any): Observable<Blob> {
+    return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-occupied?propertyName=${propertyName}`, { responseType: 'blob'});
   }
-
-  public getpropertycountdata(){
-    return this.http.get(`${environment.apiUrl}/api/v1/analytics/property-count`,httpOptions);
-  }
-
-
-  public downloadUnitsOccupiedReport(propertyName: any): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-occupied?propertyName=${propertyName}`);
+  getProperty(){
+    const addTenantUrl = `${this.apiUrl}/api/property/tenant/tenants`;
+    return this.http.get<any>(addTenantUrl);
   }
   
   public downloadUnitsunoccupiedReport(propertyName: any): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-unoccupied?propertyName=${propertyName}`, { responseType: 'blob'});
   }
-
-  public getamenityonboardeddata() {
-    return this.http.get(`${environment.apiUrl}/api/v1/analytics/amenity-onboarded`,httpOptions);
+  public updateProperty(id: any, data: any): Observable<any>{
+    console.log("next of kin to be submitted "+data.nextOfKin.nextOfKinName)
+    return this.http.put(`${environment.apiUrl}/api/property/tenant/${id}`, data)
   }
-
-  public getutilitycostdata() {
-    return this.http.get(`${environment.apiUrl}/api/v1/analytics/utility-cost`,httpOptions);
+  public deleteProperty(id: any): Observable<any>{
+    return this.http.delete(`${environment.apiUrl}/api/v1/customer/delete/${id}`)
   }
+  
   downloadUnitsperPropertyReport(propertyName: string): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-per-property?propertyName=${propertyName}`, { responseType: 'blob'});
 }

@@ -149,7 +149,6 @@ property: any;
         }
 
       });
-    
 
         error: (error) => {
           console.error('Error occurred:', error);

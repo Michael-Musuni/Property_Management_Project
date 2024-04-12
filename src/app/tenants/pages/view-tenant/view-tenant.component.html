@@ -5,7 +5,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Update Tenant</h2>
+                            <h2>View Tenant Details</h2>
                         </div>
                         <div class="body">
                             <form [formGroup]="tenantForm" class="m-4">
@@ -13,26 +13,21 @@
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                             <mat-label>Tenant Name</mat-label>
-                                            <input formControlName="tenantName" matInput required />
-                                            <mat-error *ngIf="tenantForm.get('tenantName').hasError('required')">
-                                                Tenant name is required
-                                            </mat-error>
+                                            <input formControlName="tenantName" readonly matInput />
+                                           
                                         </mat-form-field>
                                     </div>
                                     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-3">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                             <mat-label>Tenant Phone Number</mat-label>
-                                            <input formControlName="tenantPhoneNumber" matInput type="tel"
-                                                pattern="[0-9]*" required />
-                                            <mat-error *ngIf="tenantForm.get('tenantPhoneNumber').hasError('required')">
-                                                Tenant phone number is required
-                                            </mat-error>
+                                            <input formControlName="tenantPhoneNumber" readonly matInput />
+                                            
                                         </mat-form-field>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                             <mat-label>Tenant Email Address</mat-label>
-                                            <input formControlName="tenantEmailAddress" matInput type="email" />
+                                            <input formControlName="tenantEmailAddress" readonly matInput />
 
                                         </mat-form-field>
                                     </div>
@@ -41,47 +36,28 @@
                                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                             <mat-form-field class="example-full-width" appearance="outline">
                                                 <mat-label>Select Identification Type</mat-label>
-                                                <mat-select formControlName="identificationType" required>
+                                                <mat-select formControlName="identificationType" readonly matInput>
                                                     <mat-option value="ID Number">ID Number</mat-option>
                                                     <mat-option value="Passport">Passport</mat-option>
                                                     <mat-option value="Registration Number">Registration
                                                         Number</mat-option>
                                                 </mat-select>
-                                                <mat-error
-                                                    *ngIf="tenantForm.get('identificationType').hasError('required')">
-                                                    Owner Type is required
-                                                </mat-error>
+                                                
                                             </mat-form-field>
                                         </div>
                                         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-3">
                                             <mat-form-field class="example-full-width mb-3" appearance="outline">
                                                 <mat-label>Tenant ID Number</mat-label>
-                                                <input formControlName="identificationNumber" matInput required />
-                                                <mat-error
-                                                    *ngIf="tenantForm.get('identificationNumber').hasError('required')">
-                                                    Identification Number is required
-                                                </mat-error>
+                                                <input formControlName="identificationNumber" readonly matInput />
+                                                
                                             </mat-form-field>
                                         </div>
-                                        <!-- <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-3">
-                                            <button mat-raised-button color="primary" (click)="verify()">
-                                                <b>Verify</b>
-                                            </button>
-                                        </div> -->
-
-                                    </div>
-
-
-
-
-                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                     </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                             <mat-label>Tenant Occupation</mat-label>
-                                            <input formControlName="tenantOccupation" matInput />
-                                            <mat-error
-                                            *ngIf="tenantForm.get('tenantOccupation').hasError('required')">
-                                            tenantOccupation is required
-                                        </mat-error>
+                                            <input formControlName="tenantOccupation" readonly matInput />
+                                            
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -94,11 +70,8 @@
                                             <form [formGroup]="nextOfKinForm">
                                                 <mat-form-field class="example-full-width mb-3" appearance="outline">
                                                     <mat-label>Next Of Kin Name</mat-label>
-                                                    <input formControlName="nextOfKinName" matInput required />
-                                                    <mat-error
-                                                    *ngIf="nextOfKinForm.get('nextOfKinName').hasError('required')">
-                                                    Next of KinName is required
-                                                </mat-error>
+                                                    <input formControlName="nextOfKinName" readonly matInput />
+                                                    
                                                 </mat-form-field>
                                             </form>
                                         </div>
@@ -106,11 +79,8 @@
                                             <form [formGroup]="nextOfKinForm">
                                                 <mat-form-field class="example-full-width mb-3" appearance="outline">
                                                     <mat-label>Next Of Kin Id Number</mat-label>
-                                                    <input formControlName="nextOfKinIdNumber" matInput type="number" />
-                                                    <mat-error
-                                                    *ngIf="nextOfKinForm.get('nextOfKinIdNumber').hasError('required')">
-                                                    tenantOccupation is required
-                                                </mat-error>
+                                                    <input formControlName="nextOfKinIdNumber" readonly matInput />
+                                                    
                                                 </mat-form-field>
                                             </form>
                                         </div>
@@ -118,11 +88,8 @@
                                             <form [formGroup]="nextOfKinForm">
                                                 <mat-form-field class="example-full-width mb-3" appearance="outline">
                                                     <mat-label>Next Of Kin Email Address</mat-label>
-                                                    <input formControlName="nextOfKinEmailAddress" matInput="email" />
-                                                    <mat-error
-                                                    *ngIf="nextOfKinForm.get('nextOfKinEmailAddress').hasError('required')">
-                                                    tenantOccupation is required
-                                                </mat-error>
+                                                    <input formControlName="nextOfKinEmailAddress" readonly matInput />
+                                                    
                                                 </mat-form-field>
                                             </form>
                                         </div>
@@ -130,11 +97,8 @@
                                             <form [formGroup]="nextOfKinForm">
                                                 <mat-form-field class="example-full-width mb-3" appearance="outline">
                                                     <mat-label>Next Of Kin Relationship</mat-label>
-                                                    <input formControlName="nextOfKinRelationship" matInput required />
-                                                    <mat-error
-                                                    *ngIf="nextOfKinForm.get('nextOfKinRelationship').hasError('required')">
-                                                    tenantOccupation is required
-                                                </mat-error>
+                                                    <input formControlName="nextOfKinRelationship" readonly matInput />
+                                                    
                                                 </mat-form-field>
                                             </form>
                                         </div>
@@ -143,11 +107,8 @@
                                             <form [formGroup]="nextOfKinForm">
                                                 <mat-form-field class="example-full-width mb-3" appearance="outline">
                                                     <mat-label>Next Of Kin Phone Number</mat-label>
-                                                    <input formControlName="nextOfKinPhoneNumber" matInput />
-                                                    <mat-error
-                                                    *ngIf="nextOfKinForm.get('nextOfKinPhoneNumber').hasError('required')">
-                                                    tenantOccupation is required
-                                                </mat-error>
+                                                    <input formControlName="nextOfKinPhoneNumber" readonly matInput />
+                                                   
                                                 </mat-form-field>
                                             </form>
                                         </div>
@@ -167,7 +128,7 @@
                                                     <mat-form-field class="example-full-width mb-3"
                                                         appearance="outline">
                                                         <mat-label>Member Name</mat-label>
-                                                        <input formControlName="name" matInput required />
+                                                        <input formControlName="name" readonly matInput />
                                                         <mat-error *ngIf="membersForm.get('name').hasError('required')">
                                                             Member Name is required
                                                         </mat-error>
@@ -185,7 +146,7 @@
                                                     <mat-form-field class="example-full-width mb-3"
                                                         appearance="outline">
                                                         <mat-label>Member Relationship</mat-label>
-                                                        <input formControlName="relationship" matInput required />
+                                                        <input formControlName="relationship" readonly matInput />
                                                         <mat-error
                                                             *ngIf="membersForm.get('relationship').hasError('required')">
                                                             Member Relationship is required
@@ -241,11 +202,11 @@
                                         <p *ngIf="submissionStatus" class="submission-status">{{
                                             submissionStatus }}
                                         </p>
-                                        <button mat-raised-button color="primary" [disabled]="!tenantForm.valid"
+                                        <!-- <button mat-raised-button color="primary" [disabled]="!tenantForm.valid"
                                             (click)="updateTenant()">
                                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                             <b>Submit</b>
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </div>
 
@@ -255,4 +216,5 @@
                 </div>
             </div>
         </div>
+
 

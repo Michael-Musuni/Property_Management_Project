@@ -77,15 +77,14 @@
                                 <a (click)="selectProperty(row)">{{ row.propertyName }}</a>
                             </mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="propertyName">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property
+                        <!-- <ng-container matColumnDef="unitId">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Unit
                             </mat-header-cell>
                             <mat-cell *matCellDef="let row; let i = index" [class.odd-row]="i % 2"
                                 [class.even-row]="!(i % 2)" class="table-img column-nowrap">
-                                <a (click)="selectProperty(row)">{{ row.propertyName }}</a>
+                                <a (click)="selectProperty(row)">{{ row.unitNmae }}</a>
                             </mat-cell>
-                        </ng-container>
-                    
+                        </ng-container> -->
                         <ng-container matColumnDef="unitName">
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Unit
                             </mat-header-cell>
@@ -98,22 +97,17 @@
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Service
                             </mat-header-cell>
                             <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.expenseName}}
+                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.expenseName }}
 
                             </mat-cell>
                         </ng-container>
-
-
- 
-                        <ng-container matColumnDef="dateOccurred">
-
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Date
-                                Occurred
+                        <ng-container matColumnDef="expenseId">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Service
                             </mat-header-cell>
                             <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.dateOccurred
+                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.expenseId
                                 }}</mat-cell>
-                        </ng-container> 
+                        </ng-container>
                         <ng-container matColumnDef="amount">
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Amount
                             </mat-header-cell>
@@ -121,18 +115,6 @@
                                 [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.amount
                                 }}</mat-cell>
                         </ng-container>
-
-                        
-                     
-
-                        <!-- <ng-container matColumnDef="category">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Category
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.category
-                                }}</mat-cell>
-                        </ng-container> -->
-
                         <ng-container matColumnDef="description">
                             <mat-header-cell *matHeaderCellDef mat-sort-header
                                 class="table-img column-nowrap">Description
@@ -141,47 +123,12 @@
                                 [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.description
                                 }}</mat-cell>
                         </ng-container>
-                        <!-- <ng-container matColumnDef="vendor">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Service
-                            Vendor
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.vendor
-                                }}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="createdDate">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Service
-                                Created Date
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.createdDate
-                                }}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="createdBy">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Service
-                                Created By
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.createdBy
-                                }}</mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="status">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Service
-                                Status
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.status
-
-                                }}</mat-cell>
-                        </ng-container> -->
-
                         <ng-container matColumnDef="actions">
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Actions
                             </mat-header-cell>
                             <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
                                 [class.even-row]="!(i % 2)" class="table-img column-nowrap">
-
-                                <button mat-icon-button color="primary" (click)="viewExpenses(invoice)"
+                                <button mat-icon-button color="primary" (click)="viewExpenses(row)"
                                     matTooltip="View">
                                     <mat-icon>visibility</mat-icon>
                                 </button>

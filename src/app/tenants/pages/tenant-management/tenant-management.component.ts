@@ -11,6 +11,7 @@ import { UpdatetenantComponent } from '../updatetenant/updatetenant.component';
 import { Subscription } from 'rxjs';
 
 import { DeleteComponent } from '../delete/delete.component';
+import { ViewTenantComponent } from '../view-tenant/view-tenant.component';
 @Component({
   selector: 'app-tenant-management',
   templateUrl: './tenant-management.component.html',
@@ -184,6 +185,20 @@ export class TenantManagementComponent implements OnInit {
         this.isLoading = false
         
         this.dataSource = new MatTableDataSource<any>(this.data);
+    })
+  }
+  viewTenant(tenant) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false
+    dialogConfig.autoFocus = true
+    dialogConfig.width = "60%"
+    dialogConfig.data = {
+      tenant,
+    }
+
+    const dialogRef = this.dialog.open(ViewTenantComponent, dialogConfig)
+    dialogRef.afterClosed().subscribe((res)=> {
+      
     })
   }
 }

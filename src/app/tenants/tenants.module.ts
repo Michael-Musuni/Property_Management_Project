@@ -37,6 +37,7 @@ import { UpdatetenantComponent } from './pages/updatetenant/updatetenant.compone
 import { ChartsModule } from 'ng2-charts';
 
 import { DeleteComponent } from './pages/delete/delete.component';
+import { ViewTenantComponent } from './pages/view-tenant/view-tenant.component';
 
 
 
@@ -55,6 +56,7 @@ import { DeleteComponent } from './pages/delete/delete.component';
     UpdatetenantComponent,
     UpdatetenantComponent,
     ReportoptionsComponent,
+    ViewTenantComponent,
   
  
   ],
