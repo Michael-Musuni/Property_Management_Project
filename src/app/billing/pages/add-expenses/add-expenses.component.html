@@ -1,7 +1,12 @@
-<mat-card>
-    <mat-card-title class="contact-details-name mb-1">Expense Details</mat-card-title>
-
-    <mat-card-content>
+<!-- <mat-card> -->
+    <div>
+    <div class="modalHeader">
+        <div class="contact-details-name mb-1">Add Expense</div>
+        <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <!-- <mat-card-content> -->
         <form [formGroup]="expensesForm">
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
@@ -95,8 +100,8 @@
         </form>
 
         <div class="row">
-            <mat-card>
-                <mat-card-content>
+            <!-- <mat-card> -->
+                <!-- <mat-card-content> -->
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-0">
                         <div class="example-button-row">
                             <button mat-raised-button color="primary" [disabled]="!expensesForm.valid"
@@ -104,11 +109,12 @@
                                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                 <b>Submit</b>
                             </button>
-                            <button mat-button (click)="closeDialog()">Close</button>
+                            <!-- <button mat-button (click)="closeDialog()">Close</button> -->
                         </div>
                     </div>
-                </mat-card-content>
-            </mat-card>
+                <!-- </mat-card-content> -->
+            <!-- </mat-card> -->
         </div>
-    </mat-card-content>
-</mat-card>
+        </div>
+    <!-- </mat-card-content>
+</mat-card> -->

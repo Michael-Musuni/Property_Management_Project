@@ -1,13 +1,12 @@
-<div mat-dialog-content>
-    <h2 mat-dialog-title>Send Invoice</h2>
-    <p>Select the method to send the invoice:</p>
-    <mat-radio-group [(ngModel)]="selectedMethod">
-      <mat-radio-button value="sms">Send via SMS</mat-radio-button>
-      <mat-radio-button value="email">Send via Email</mat-radio-button>
-    </mat-radio-group>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onCancelClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="{ method: selectedMethod }" cdkFocusInitial>Send</button>
-  </div>
-  
+<div mat-dialog-content style="overflow-y: hidden;">
+  <h2 mat-dialog-title>Send Invoice</h2>
+  <!-- <p>Select the method to send the invoice:</p> -->
+  <mat-radio-group [(ngModel)]="selectedMethod">
+    <mat-radio-button value="sms">Via SMS</mat-radio-button>
+    <mat-radio-button value="email">Via Email</mat-radio-button>
+  </mat-radio-group>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="{ method: selectedMethod }" cdkFocusInitial>Send</button>
+</div>

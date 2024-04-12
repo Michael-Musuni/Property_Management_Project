@@ -21,9 +21,6 @@ export type ChartOptions = {
   styleUrls: ['./property-analytics.component.sass']
 })
 export class PropertyAnalyticsComponent implements OnInit {
-pickProperty() {
-throw new Error('Method not implemented.');
-}
   propertyName: any;
   areachartOptions: Partial<ChartOptions>;
   name: string;
@@ -146,7 +143,7 @@ throw new Error('Method not implemented.');
       this.loaded = true;
       this.lineChartOptions = {
         series: [{
-          name: "Tenants",
+          name: "Desktops",
           data: this.data.values
         }],
         chart: {

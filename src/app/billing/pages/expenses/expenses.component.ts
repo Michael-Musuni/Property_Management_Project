@@ -8,6 +8,7 @@ import { BillingService } from '../../billing.service';
 import { Subscription } from 'rxjs';
 import { AddExpensesComponent } from '../add-expenses/add-expenses.component';
 import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/core/service/token-storage.service';
 import { DeleteExpensesComponent } from '../delete-expenses/delete-expenses.component';
 import { UpdateExpensesComponent } from '../update-expenses/update-expenses.component';
 import { ViewExpensesComponent } from '../view-expenses/view-expenses.component';
@@ -18,6 +19,7 @@ import { ViewExpensesComponent } from '../view-expenses/view-expenses.component'
   styleUrls: ['./expenses.component.sass']
 })
 export class ExpensesComponent implements OnInit {
+  role: any
   data: any
   subscription: Subscription
   isLoading: Boolean
@@ -33,12 +35,14 @@ export class ExpensesComponent implements OnInit {
   constructor(
     private billingService: BillingService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private tokenStorageService: TokenStorageService
   ) {
 
   }
 
   ngOnInit(): void {
+    this.role = this.tokenStorageService.getUser().roles[0]
     this.getExpenses()
 
   }
@@ -56,7 +60,7 @@ export class ExpensesComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
-    dialogConfig.width = "100%"
+    dialogConfig.width = "830px"
     dialogConfig.data = {
       test: ""
     }

@@ -11,10 +11,10 @@ import { ViewInvoiceComponent } from '../view-invoice/view-invoice.component';
 import { UploadBillComponent } from '../upload-bill/upload-bill.component';
 import { TokenStorageService } from 'src/app/core/service/token-storage.service';
 import { PrintInvoiceComponent } from '../print-invoice/print-invoice.component';
-import { ReportOptionsComponent } from '../report-options/report-options.component';
-import { CheckerDialogComponent } from '../checker-dialog/checker-dialog.component';
 import { SendOptionsDialogComponent } from '../send-options-dialog/send-options-dialog.component';
 import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
+import { CheckerDialogComponent } from '../checker-dialog/checker-dialog.component';
+import { ReportOptionsComponent } from '../report-options/report-options.component';
 
 @Component({
   selector: 'app-invoices',
@@ -25,12 +25,11 @@ export class InvoicesComponent implements OnInit {
 
 
   selected = 'all';
-  value:any
   role: any
   invoices: any[] = [];
   isLoading: boolean = false;
   isDownloadSuccessful: boolean = false;
-  displayedColumns: string[] = ['invoiceNumber', 'status', 'totalAmount', 'tenantName', 'unit', 'actions'];
+  displayedColumns: string[] = ['invoicingDate','invoiceNumber', 'status', 'totalAmount', 'tenantName', 'actions'];
   subscription: Subscription;
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -40,6 +39,9 @@ export class InvoicesComponent implements OnInit {
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: "0px", y: "0px" };
   downloading: boolean;
+  selectedDate: Date | null = null;
+  // filteredInvoices: MatTableDataSource<any>;
+
 
   constructor(private router: Router, private billingService: BillingService, private dialog: MatDialog, private tokenStorageService: TokenStorageService) { }
 
@@ -171,14 +173,13 @@ export class InvoicesComponent implements OnInit {
       a.download = `Invoice_${invoiceNumber}.pdf`;
       a.click();
       window.URL.revokeObjectURL(url);
-      invoice.downloading = false;        
-
+      invoice.downloading = false;
     });
   }
  
   openSendOptionsDialog(invoice: any) {
     const dialogRef = this.dialog.open(SendOptionsDialogComponent, {
-      width: '600px',
+      width: '300px',
       data: { invoiceNumber: invoice.invoiceNumber }
     });
 
@@ -261,6 +262,32 @@ export class InvoicesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
     });
   }
+  filterByDate(selectedDate: string | null): void {
+    this.selectedDate = selectedDate ? new Date(selectedDate) : null;
+    if (this.selectedDate) {
+      const formattedSelectedDate = this.selectedDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric'
+      });
+      this.dataSource.filterPredicate = (data: any, filter: string) => {
+        const invoiceDate = new Date(data.invoicingDate);
+        const formattedInvoiceDate = invoiceDate.toLocaleDateString('en-US', {
+          month: 'short',
+          day: '2-digit',
+          year: 'numeric'
+        });
+        return formattedInvoiceDate === filter;
+      };
+      this.dataSource.filter = formattedSelectedDate;
+    } else {
+      this.dataSource.filter = ''; // Show all invoices if no date selected
+    }
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  
 
 
   viewReportOptions() {
