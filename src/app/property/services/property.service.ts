@@ -59,10 +59,10 @@ export class PropertyService {
   }
   public updateProperty(id: any, data: any): Observable<any>{
     console.log("next of kin to be submitted "+data.nextOfKin.nextOfKinName)
-    return this.http.put(`${environment.apiUrl}/api/property/tenant/${id}`, data)
+    return this.http.put(`${environment.apiUrl}/api/v1/property/update?id=${id}`, data)
   }
   public deleteProperty(id: any): Observable<any>{
-    return this.http.delete(`${environment.apiUrl}/api/v1/customer/delete/${id}`)
+    return this.http.delete(`${environment.apiUrl}/api/v1/property/delete?id=${id}`)
   }
   
   downloadUnitsperPropertyReport(propertyName: string): Observable<Blob> {
