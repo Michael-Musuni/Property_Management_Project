@@ -64,7 +64,7 @@ export class ReportoptionsComponent implements OnInit {
     const propertyName = this.optionsForm.value.propertyName;
     console.log("property name", propertyName)
     if (reportType === "Tenants per property") {
-
+      alert("Download will start shortly...");
       console.log("property name", propertyName)
       this.propertyService.downloadTenantsPerPropertyReport(propertyName).subscribe({
         next: ((res) => {

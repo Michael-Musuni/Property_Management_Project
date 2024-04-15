@@ -29,7 +29,7 @@ export class PropertyManagementComponent implements OnInit {
   subscription!:Subscription
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ["name","type","location","owner","units","status","actions"]
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
   @ViewChild(MatMenuTrigger)
@@ -66,17 +66,16 @@ export class PropertyManagementComponent implements OnInit {
     this.loading = true;
     this.subscription = this.propertyService.getProperties().subscribe(
       (res) => {
-        this.data= res
-        console.log("Data ",this.data.entity) 
+        this.data = res;
+        console.log("Data ", this.data.entity);
+  
         if (this.data.length > 0) {
-          this.loading = false;
+        this.loading = false;
           this.isdata = true;
           this.dataSource = new MatTableDataSource<any>(this.data.entity);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          
-        }
-        else {
+        } else {
           this.isdata = false;
           this.dataSource = new MatTableDataSource<Account>(this.data.entity);
         }
@@ -85,8 +84,8 @@ export class PropertyManagementComponent implements OnInit {
         this.snackbar.showNotification("snackbar-danger", err);
       }
     );
-
   }
+  
   fetchPropertyData() {
     this.propertyService.getProperties().subscribe({
       next: (response: any) => {
@@ -150,13 +149,13 @@ export class PropertyManagementComponent implements OnInit {
       
     })
   }
-  deleteCall(property) {
+  deleteCall(property: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
     dialogConfig.width = "40%"
     dialogConfig.data = {
-      property,
+      property: property,
     }
 
     const dialogRef = this.dialog.open(DeletePropertyComponent, dialogConfig)

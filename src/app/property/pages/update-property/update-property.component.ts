@@ -55,7 +55,7 @@ export class UpdatePropertyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.property = {};
+    this.property = this.data.property;
     this.getUnits();
     this.initOwnerDetails(); 
     this.initCaretackerDetails();
@@ -65,6 +65,7 @@ export class UpdatePropertyComponent implements OnInit {
   }
 updatePropertyForm():void{
 this.propertyDetails = this.fb.group({
+  id: [this.property.id, [Validators.required]],
   propertyName: [this.property.propertyName, [Validators.required]],
   location: [this.property.location, [Validators.required]],
   physicalAddress: [this.property.physicalAddress, [Validators.required]],
@@ -75,38 +76,38 @@ this.propertyDetails = this.fb.group({
 }
   initOwnerDetails():void {
     this.ownerDetails = this.fb.group({
-      ownerName: [this.property.ownerName, [Validators.required]],
-      phone: [this.property.phone, [Validators.required]],
-      ownerType: [this.property.ownerType, [Validators.required]],
-      email: [this.property.email, [Validators.required]],
-      idNumber: [this.property.idNumber, [Validators.required]],
-      kraPin: [this.property.kraPin, [Validators.required]],
-      physicalAddress: [this.property.physicalAddress, [Validators.required]],
-      accountNumber: [this.property.accountNumber, [Validators.required]],
-      paymentMethod: [this.property.paymentMethod, [Validators.required]],
+      ownerName: [this.property.propertyOwner.ownerName, [Validators.required]],
+      phone: [this.property.propertyOwner.phone, [Validators.required]],
+      ownerType: [this.property.propertyOwner.ownerType, [Validators.required]],
+      email: [this.property.propertyOwner.email, [Validators.required]],
+      idNumber: [this.property.propertyOwner.idNumber, [Validators.required]],
+      kraPin: [this.property.propertyOwner.kraPin, [Validators.required]],
+      physicalAddress: [this.property.propertyOwner.physicalAddress, [Validators.required]],
+      accountNumber: [this.property.propertyOwner.accountNumber, [Validators.required]],
+      paymentMethod: [this.property.propertyOwner.paymentMethod, [Validators.required]],
 
     });
   }
   initCaretackerDetails():void {
    this.caretakerDetails=this.fb.group({
-    name: [this.property.name, [Validators.required]],
-    phone: [this.property.phone, [Validators.required]],
+    name: [this.property.caretaker.name, [Validators.required]],
+    phone: [this.property.caretaker.phone, [Validators.required]],
    });
   }
   initUnitsForm():void {
     this.unitsForm=this.fb.group({
-      unitName: [this.property.unitName, [Validators.required]],
-      maxOccupants: [this.property.maxOccupants, [Validators.required]],
-      deposit: [this.property.deposit, [Validators.required]],
-      rentAmount: [this.property.rentAmount, [Validators.required]],
+      unitName: [this.property.units.unitName, [Validators.required]],
+      maxOccupants: [this.property.units.maxOccupants, [Validators.required]],
+      deposit: [this.property.units.deposit, [Validators.required]],
+      rentAmount: [this.property.units.rentAmount, [Validators.required]],
     });
     
   }
   initRentConfigForm():void {
     this.rentConfigForm=this.fb.group({
-      rentDueDate: [this.property.rentDueDate, [Validators.required]],
-      latePaymentFee: [this.property.latePaymentFee, [Validators.required]],
-      managementCommission: [this.property.managementCommission, [Validators.required]],
+      rentDueDate: [this.property.rentConfig.rentDueDate, [Validators.required]],
+      latePaymentFee: [this.property.rentConfig.latePaymentFee, [Validators.required]],
+      managementCommission: [this.property.rentConfig.managementCommission, [Validators.required]],
     });
   }
   get members() {
@@ -123,7 +124,11 @@ this.propertyDetails = this.fb.group({
   }
   updateProperty() {
     this.loading = true;
-    this.propertyService.updateProperty(this.property.any, this.propertyDetails.value).subscribe(
+    console.log("These is the body", this.propertyDetails.value)
+    const body = {
+      
+    }
+    this.propertyService.updateProperty(this.property.id, this.propertyDetails.value).subscribe(
       (res) => {
         
         this.loading = false;
