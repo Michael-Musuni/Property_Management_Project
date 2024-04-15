@@ -26,6 +26,7 @@ export class ReportOptionsComponent implements OnInit {
   propertyNamesOptions: string[];
   filteredPropertyNames: Observable<string[]>;
   service: any;
+form: any;
 
   // months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   // filteredMonths: Observable<string[]>;

@@ -77,14 +77,7 @@
                                 <a (click)="selectProperty(row)">{{ row.propertyName }}</a>
                             </mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="propertyName">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let row; let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">
-                                <a (click)="selectProperty(row)">{{ row.propertyName }}</a>
-                            </mat-cell>
-                        </ng-container>
+                       
                     
                         <ng-container matColumnDef="unitName">
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Unit
