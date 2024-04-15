@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, map, startWith, switchMap } from 'rxjs';
 import { LeaseComponent } from '../lease/lease.component';
 import { MatDialogRef } from '@angular/material/dialog';
-import { PropertyService } from 'src/app/property/services/property.service';
 import { LeaseService } from '../../service/lease.service';
 
 @Component({
