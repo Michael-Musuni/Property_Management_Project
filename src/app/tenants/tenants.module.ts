@@ -55,6 +55,7 @@ import { DeleteComponent } from './pages/delete/delete.component';
     UpdatetenantComponent,
     UpdatetenantComponent,
     ReportoptionsComponent,
+
   
  
   ],

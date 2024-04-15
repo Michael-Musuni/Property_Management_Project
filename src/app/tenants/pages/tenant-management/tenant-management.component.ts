@@ -18,9 +18,9 @@ import { DeleteComponent } from '../delete/delete.component';
 })
 
 export class TenantManagementComponent implements OnInit {
+ 
 
-
-  data: any;
+  data: any
 
 
   constructor(
@@ -159,6 +159,7 @@ export class TenantManagementComponent implements OnInit {
       this.getData()
     })
   }
+ 
   getData() {
     
     this.isLoading = true
