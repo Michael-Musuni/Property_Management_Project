@@ -88,20 +88,27 @@ calculateActiveTenantsForSelectedDate(): void {
     });
   }
   fetchTenantData() {
+    this.isLoading = true;
     this.tenantService.getTenant().subscribe({
       next: (response) => {
         console.log('Response:', response);
-        this.dataSource = new MatTableDataSource<any>(response.entity);
+  
+        // Prepend the new tenant to the existing data array
+        const newData = [response.entity, ...this.dataSource.data];
+  
+        // Update the data source with the new data
+        this.dataSource = new MatTableDataSource<any>(newData);
         this.dataSource.paginator = this.paginator;
+  
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Error occurred:', error);
         this.snackbar.showNotification("snackbar-danger", error);
+        this.isLoading = false;
       }
     });
   }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
