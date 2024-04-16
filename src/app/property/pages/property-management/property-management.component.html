@@ -1,5 +1,3 @@
-<section class="{{this.divcss?'content':''}}" >
-  <div class="{{this.divcss?'content-block':''}}">
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
@@ -44,7 +42,7 @@
               <div class="col-4">
                 <ul class="header-buttons">
                   
-                  <li>
+                  <!-- <li>
                     <div class="export-button m-l-10" matTooltip="XLSX">
                       <img src="assets/images/icons/xlsx.png" alt="" (click)="
                                       exporter.exportTable('xlsx', {
@@ -68,15 +66,13 @@
                     <div class="export-button m-l-10" matTooltip="TXT">
                       <img src="assets/images/icons/txt.png" alt="" (click)="exporter.exportTable('txt')" />
                     </div>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
           </div>
           <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
             #exporter="matTableExporter">
-            <!-- Checkbox Column -->
-
             <ng-container matColumnDef="name">
               <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property
                 Name</mat-header-cell>
@@ -108,20 +104,20 @@
                 {{row.propertyOwner.ownerName}}
               </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="totalUnits">
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Total Units
+            <ng-container matColumnDef="units">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Units
               </mat-header-cell>
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                 class="table-img  column-nowrap">
-                {{row.totalUnits}}
+                {{row.units.length}}
               </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="vacantUnits">
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Vacant Units
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Status
               </mat-header-cell>
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                 class="table-img  column-nowrap">
-                {{row.vacantUnits}}
+                {{row.status}}
               </mat-cell>
             </ng-container>
             <!-- actions -->
@@ -130,53 +126,15 @@
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                 class="pr-0">
                 
-                <button mat-icon-button color="primary" (click)="$event.stopPropagation()" (click)="editCall(row)"
-                  class="tbl-action-btn" matTooltip="Update Account">
-                  <mat-icon>edit</mat-icon>
+                <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateProperty(property)"
+                   matTooltip="Update Property"><mat-icon>edit</mat-icon>
                 </button>
-                <!-- 
-                    <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
-                      (click)="changePasswordCall(user.username)" class="tbl-action-btn" matTooltip="Change Password">
-                      <mat-icon>launch</mat-icon>
-                    </button>
-                    <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
-                      (click)="changeDepartmentCall(user)" class="tbl-action-btn" matTooltip="Change Department">
-                      <mat-icon>edit_note</mat-icon>
-                    </button>
-                    <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
-                      (click)="changeRoleCall(user)" class="tbl-action-btn" matTooltip="Change Role">
-                      <mat-icon>settings_applications</mat-icon>
-                    </button>
-                    
-                    <button mat-icon-button *ngIf="user.deleteFlag == 'N'" color="primary"
-                      (click)="$event.stopPropagation()" (click)="deleteDetailsCall(user)" matTooltip="Delete Account"
-                      class="tbl-action-btn">
-                      <mat-icon>delete_outline</mat-icon>
-                      
-                    </button> 
-                    
-
-                    <button mat-icon-button *ngIf="user.deleteFlag == 'Y'" color="primary"
-                      (click)="$event.stopPropagation()" (click)="restoreAccountCall(user)"
-                      matTooltip="Restore Deleted Account" class="tbl-action-btn">
-                      <mat-icon>restore</mat-icon>
-                    </button>
-                    <button mat-icon-button color="primary" *ngIf="user.isAcctLocked=='N'"
-                      (click)="$event.stopPropagation()" (click)="lockAccountCall(user)" matTooltip="Lock Account"
-                      class="tbl-action-btn">
-                      <mat-icon>lock</mat-icon>
-                    </button>
-
-                    <button mat-icon-button color="primary" *ngIf="user.isAcctLocked=='Y'"
-                      (click)="$event.stopPropagation()" (click)="unLockAccountCall(user)" matTooltip="Unlock Account"
-                      class="tbl-action-btn">
-                      <mat-icon>lock_open</mat-icon>
-                    </button>
-                  -->
-
-                <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
-                  (click)="accountDetailsCall(user)" class="tbl-action-btn" matTooltip="View Details">
+                
+                <button mat-icon-button color="primary" (click)="$event.stopPropagation();viewProperty(row)" matTooltip="View Details">
                   <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall(property)">
+                  <mat-icon>delete</mat-icon>
                 </button>
               </mat-cell>
             </ng-container>
@@ -200,5 +158,3 @@
     </div>
   </div>
 </div>
-</div>
-</section>

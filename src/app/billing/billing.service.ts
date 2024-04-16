@@ -103,12 +103,32 @@ export class BillingService {
     const url = `${this.apiUrl}/api/v1/invoices/approve-payment/${invoiceNumber}`
     return this.http.put<any>(url, invoiceNumber);
   }
-  public downloadPaidInvoiceReport(propertyName: string): Observable<Blob> {
-    return this.http.get(`${environment.apiUrl}http://localhost:9701/swagger-ui/index.html#/report-controller/getPaidInvoices?propertyName=${propertyName}`, { responseType: 'blob'});
-}
-  public downloadUnpaidInvoiceReport(propertyName: string): Observable<Blob> {
-    return this.http.get(`${environment.apiUrl}http://localhost:9701/swagger-ui/index.html#/report-controller/getUnPaidInvoices?propertyName=${propertyName}`, { responseType: 'blob'});
-}
+ 
+  public downloadPaidInvoiceReport(propertyName: string, startDate: string, endDate: string): Observable<Blob> {
+    // Adjust the URL and parameters as per your backend API
+    const url = `/api/v1/reports/property/paid-invoices-report=${startDate}&endDate=${endDate}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
+  public downloadUnpaidInvoiceReport(propertyName: string, startDate: string, endDate: string): Observable<Blob> {
+    // Adjust the URL and parameters as per your backend API
+    const url = `/api/v1/reports/property/paid-invoices-report=${startDate}&endDate=${endDate}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
+
+
+  // public downloadPaidInvoiceReport(propertyName: string, startDate: Date, endDate: Date): Observable<Blob> {
+  //   const url = `${this.apiUrl}/api/v1/reports/property/paid-invoices-report`;
+  //   const params = { propertyName: propertyName, startDate: startDate.toISOString(), endDate: endDate.toISOString() };
+  //   return this.http.get(url, { responseType: 'blob' });
+  // }
+
+  // public downloadUnpaidInvoiceReport(propertyName: string, startDate: Date, endDate: Date): Observable<Blob> {
+  //   const url = `${this.apiUrl}/api/v1/reports/property/paid-invoices-report`;
+  //   const params = { propertyName: propertyName, startDate: startDate.toISOString(), endDate: endDate.toISOString() };
+  //   return this.http.get(url, { responseType: 'blob' });
+  // }
 
 }
 

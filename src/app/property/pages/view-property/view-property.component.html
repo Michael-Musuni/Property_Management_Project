@@ -1,0 +1,608 @@
+<div class="content-block">
+    <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="header">
+                    <h2>View Property Details</h2>
+                </div>
+                <mat-stepper linear #stepper>
+                    <mat-step [stepControl]="propertyDetails" [editable]="isEditable">
+                        <form [formGroup]="propertyDetails">
+                            <ng-template matStepLabel>Fill Property Details</ng-template>
+                            <!--Property Details-->
+                            <div class="row">
+                                <mat-card>
+                                    <mat-card-title style="font-size: x-small;">Property Details</mat-card-title>
+                                    <mat-card-content>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <mat-label>Property Name</mat-label>
+                                                    <input matInput formControlName="propertyName" readonly matInput />
+                                                    </mat-form-field>
+                                            
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <mat-label>Location</mat-label>
+                                                    <input matInput formControlName="location" readonly matInput/>
+                                                    
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <mat-label>Property physical Address</mat-label>
+                                                    <input matInput formControlName="physicalAddress"readonly matInput />
+        
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                                <mat-form-field class="example-full-width mb-1" appearance="outline">
+                                                    <mat-label>Select property Type</mat-label>
+                                                    <mat-select formControlName="category">
+                                                        <mat-option value="Master">Master</mat-option>
+                                                        <mat-option value="Detached">Detached</mat-option>
+                                                    </mat-select>
+                                                   
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                                <mat-form-field class="example-full-width mb-1" appearance="outline">
+                                                    <mat-label>Select type</mat-label>
+                                                    <mat-select formControlName="propertyType"readonly matInput>
+                                                        <mat-option value="Residential">Residential</mat-option>
+                                                        <mat-option value="Commercial">Commercial</mat-option>
+                                                        <mat-option value="Industrial">Industrial</mat-option>
+                                                    </mat-select>
+                                                    
+                                                </mat-form-field>
+                                            </div>
+        
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <mat-label>Description</mat-label>
+                                                    <textarea matInput formControlName="description"
+                                                        placeholder="Describe property..."readonly matInput></textarea>
+        
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </mat-card-content>
+                                </mat-card>
+                                <div>
+                                    <button mat-raised-button color="primary" mat-button (click)=" onCancel()" tabindex="-2">
+                                        <b>CANCEL</b>
+                                    </button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="ownerDetails" [editable]="isEditable">
+                        <form [formGroup]="ownerDetails">
+                            <ng-template matStepLabel>Fill out Owner Details</ng-template>
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Owner Name</mat-label>
+                                        <input matInput formControlName="ownerName" readonly matInput/>
+                                        
+                                    </mat-form-field>
+                                </div>
+                               
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Owner phone</mat-label>
+                                        <input matInput formControlName="phone" readonly matInput/>
+                                        
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Select Owner Type</mat-label>
+                                        <mat-select formControlName="ownerType"readonly matInput>
+                                            <mat-option value="Individual">Individual</mat-option>
+                                            <mat-option value="Group">Group</mat-option>
+                                        </mat-select>
+                                        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                              
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Owner email</mat-label>
+                                        <input matInput formControlName="email" readonly matInput/>
+                                        
+                                    </mat-form-field>
+                                </div>
+                              
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Identification Number</mat-label>
+                                        <input matInput formControlName="idNumber"readonly matInput />
+                                       
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>KRA Pin</mat-label>
+                                        <input matInput formControlName="kraPin"readonly matInput />
+                                       
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                
+        
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>physicalAddress</mat-label>
+                                        <input matInput formControlName="physicalAddress" readonly matInput/>
+                                        
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Owner Account</mat-label>
+                                        <input matInput formControlName="accountNumber"readonly matInput/>
+                                        
+                                    </mat-form-field>
+                                </div>
+                               
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Select Payment Method </mat-label>
+                                        <mat-select formControlName="paymentMethod" readonly matInput>
+                                            <mat-option value="Mpesa">Mpesa</mat-option>
+                                            <mat-option value="Cash">Cash</mat-option>
+                                            <mat-option value="Cheque">Cheque</mat-option>
+                                            <mat-option value="PayPal">PayPal</mat-option>
+                                            <mat-option value="CreditCard">CreditCard</mat-option>
+                                        </mat-select>
+                                      
+                                    </mat-form-field>
+                                </div>
+                            </div>
+        
+                            <div>
+                                <button mat-raised-button color="primary" matStepperPrevious>
+                                    <b>Back</b>
+                                </button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button mat-raised-button color="primary" matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="caretakerDetails" [editable]="isEditable">
+                        <form [formGroup]="caretakerDetails">
+                            <ng-template matStepLabel>Fill out caretaker Details</ng-template>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>CareTaker Name</mat-label>
+                                    <input matInput formControlName="name" readonly matInput/>
+                                    
+                                </mat-form-field>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>CareTaker Phone</mat-label>
+                                    <input matInput formControlName="phone"readonly matInput />
+                                    
+                                </mat-form-field>
+                            </div>
+                           
+                            <div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
+                                <button mat-raised-button color="primary" matStepperPrevious>
+                                    <b>Back</b>
+                                </button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button mat-raised-button color="primary" matStepperNext>Next</button>
+                            </div>
+                        </div>
+                        
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="subPropertiesForm" [editable]="isEditable">
+        
+                        <ng-template matStepLabel>Fill out Units</ng-template>
+        
+                        <mat-accordion>
+                            <mat-expansion-panel (opened)="unitPanelState = true" (closed)="unitPanelState = false">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-description>
+                                        View property Units
+                                    </mat-panel-description>
+                                    <mat-panel-title (click)="togglePanel2()">
+                                        <div class="row">
+                                            <p *ngIf="!unitPanelState">Click to Open </p>
+                                            <p *ngIf="unitPanelState">Close</p>
+                                        </div>
+                                    </mat-panel-title>
+                                    
+                                </mat-expansion-panel-header>
+                                <form [formGroup]="unitsForm">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-0">
+        
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <mat-label>Unit Name</mat-label>
+                                                <input matInput formControlName="unitName" readonly matInput/>
+        
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-0">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <mat-label>Maximum Number of accupants</mat-label>
+                                                <input matInput formControlName="maxOccupants"readonly matInput/>
+        
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-0">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <mat-label>Rent Amount</mat-label>
+                                                <input matInput formControlName="rentAmount" readonly matInput/>
+                                               
+        
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-0">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <mat-label>Deposit Amount</mat-label>
+                                                <input matInput formControlName="deposit"readonly matInput/>
+                                               
+        
+                                            </mat-form-field>
+                                        </div>
+        
+                                    </div>
+                                    <!-- <button mat-raised-button [disabled]="!unitsForm.valid" (click)="addUnit()">Add
+                                        Unit</button> -->
+                                </form>
+                                <form>
+                                <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort
+                                    class="mat-cell" #exporter="matTableExporter">
+        
+                                    
+                                    <ng-container matColumnDef="id">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Id
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                            [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.id
+                                            }}</mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="unit">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
+                                            Unit Name
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                            [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.unitName
+                                            }}</mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="maxOccupants">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
+                                            Max No. of Occupants
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                            [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.maxOccupants
+                                            }}</mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="rent">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
+                                            Rent Amount
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                            [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.rentAmount
+                                            }}</mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="deposit">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
+                                            Deposit Amount
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                            [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.deposit
+                                            }}</mat-cell>
+                                    </ng-container>
+        
+                                    <ng-container matColumnDef="actions">
+                                        <mat-header-cell class="pr-0 column-nowrap" *matHeaderCellDef>Actions</mat-header-cell>
+                                        <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                            [class.even-row]="!(i % 2)" class="pr-0">
+                                            <button mat-icon-button color="primary"
+                                                (click)="$event.stopPropagation(); removeUnits(row, i)" class="tbl-action-btn"
+                                                matTooltip="Delete Unit">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </mat-cell>
+                                    </ng-container>
+                                    <mat-header-row *matHeaderRowDef="displayedUnitColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedUnitColumns" [style.cursor]="'pointer'"
+                                        matRipple>
+                                    </mat-row>
+                                    <mat-cell *matNoDataRow colspan="4">
+                                        No data matching the filter "{{ input.value }}"</mat-cell>
+                                </mat-table>
+                            </form>
+                            </mat-expansion-panel>
+                            <mat-divider></mat-divider>
+        
+                        </mat-accordion>
+        
+        
+                        <div>
+                            <button mat-raised-button color="primary" matStepperPrevious>
+                                <b>Back</b>
+                            </button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button mat-raised-button color="primary" matStepperNext>Next</button>
+                        </div>
+        
+                    </mat-step>
+                    <!-- <mat-step [stepControl]="utilityForm" [editable]="isEditable">
+        
+                        <ng-template matStepLabel>Fill out Service Charges</ng-template>
+        
+                        <mat-expansion-panel (opened)="utilityPanelState = true" (closed)="utilityPanelState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title (click)="togglePanel3()">
+                                    <div class="row">
+        
+                                        <p *ngIf="!utilityPanelState">Click to Open </p>
+                                        <p *ngIf="utilityPanelState">Close</p>
+        
+                                    </div>
+        
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Add Utilities
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <form [formGroup]="utilityForm">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+        
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label>utility Name</mat-label>
+                                            <mat-select formControlName="name">
+                                                <mat-option *ngFor="let utility of utilities" [value]="utility.name">
+                                                    {{ utility.name }}
+                                                </mat-option>
+                                            </mat-select>
+        
+                                        </mat-form-field>
+        
+                                    </div>
+        
+                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+        
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label>Charge Amount </mat-label>
+                                            <input matInput formControlName="cost" />
+                                        </mat-form-field>
+                                    </div>
+        
+                                </div>
+                                <button mat-raised-button [disabled]="!utilityForm.valid" (click)="addUtility()">Add
+                                    Utility Charge</button>
+        
+        
+        
+                            </form>
+                            <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
+                                #exporter="matTableExporter">
+                                <ng-container matColumnDef="id">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Id
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                        [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.id
+                                        }}</mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="utility">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
+                                        Utility Name
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                        [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.name
+                                        }}</mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="charge">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
+                                        Charge Amount
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                        [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.cost
+                                        }}</mat-cell>
+                                </ng-container>
+        
+                                <ng-container matColumnDef="actions">
+                                    <mat-header-cell class="pr-0 column-nowrap" *matHeaderCellDef>Actions</mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                        [class.even-row]="!(i % 2)" class="pr-0">
+                                        <button mat-icon-button color="primary"
+                                            (click)="$event.stopPropagation(); removeUtilities(row, i)" class="tbl-action-btn"
+                                            matTooltip="Delete Subproperty">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+                                <mat-header-row *matHeaderRowDef="displayedUtilitiesColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedUtilitiesColumns" [style.cursor]="'pointer'"
+                                    matRipple>
+                                </mat-row>
+                                
+                                <mat-cell *matNoDataRow colspan="4">
+                                    No data matching the filter "{{ input.value }}"</mat-cell>
+                            </mat-table>
+                        </mat-expansion-panel>
+                        <mat-divider></mat-divider>
+        
+                        <mat-expansion-panel (opened)="amenityPanelState = true" (closed)="amenityPanelState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title (click)="togglePanel4()">
+                                    <div class="row">
+        
+        
+                                        <p *ngIf="!amenityPanelState">Click to Open </p>
+                                        <p *ngIf="amenityPanelState">Close</p>
+                                    </div>
+        
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Add Amenities
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <form [formGroup]="amenityForm">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+        
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-select formControlName="name">
+                                                <mat-option *ngFor="let amenity of amenities" [value]="amenity.name">
+                                                    {{ amenity.name }}
+                                                </mat-option>
+                                            </mat-select>
+        
+                                        </mat-form-field>
+        
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+        
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label>Charge Amount </mat-label>
+                                            <input matInput formControlName="cost" />
+                                        </mat-form-field>
+                                    </div>
+        
+        
+                                </div>
+                                <button mat-raised-button [disabled]="!amenityForm.valid" (click)="addAmenity()">Add
+                                    Amenity Charge</button>
+        
+        
+        
+                            </form>
+                            <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
+                                #exporter="matTableExporter">
+        
+        
+                                <ng-container matColumnDef="id">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Id
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                        [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.id
+                                        }}</mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="amenity">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
+                                        Amenity Name
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                        [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.name
+                                        }}</mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="charge">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
+                                        Charge Amount
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                        [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.cost
+                                        }}</mat-cell>
+                                </ng-container>
+        
+                                <ng-container matColumnDef="actions">
+                                    <mat-header-cell class="pr-0 column-nowrap" *matHeaderCellDef>Actions</mat-header-cell>
+                                    <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                                        [class.even-row]="!(i % 2)" class="pr-0">
+                                        <button mat-icon-button color="primary"
+                                            (click)="$event.stopPropagation(); removeAmenities(row, i)" class="tbl-action-btn"
+                                            matTooltip="Delete Amenity">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+                                <mat-header-row *matHeaderRowDef="displayedAmenitiesColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedAmenitiesColumns" [style.cursor]="'pointer'"
+                                    matRipple>
+                                </mat-row>
+                                 
+                                <mat-cell *matNoDataRow colspan="4">
+                                    No data matching the filter "{{ input.value }}"</mat-cell>
+                            </mat-table>
+        
+                        </mat-expansion-panel>
+                        <div>
+                            <button mat-raised-button color="primary" matStepperPrevious>
+                                <b>Back</b>
+                            </button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button mat-raised-button color="primary" matStepperNext>Next</button>
+                        </div>
+                    </mat-step>
+         -->
+                    <mat-step [stepControl]="rentConfigForm" [editable]="isEditable">
+                        <form [formGroup]="rentConfigForm">
+                            <ng-template matStepLabel>Fill Rent Configuration Details</ng-template>
+                            
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                      <mat-label>Rent Due Date</mat-label>
+                                      <input matInput formControlName="rentDueDate"readonly matInput/>
+                                    </mat-form-field>
+                                  </div>
+                                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Late Payment Fee</mat-label>
+                                        <input matInput formControlName="latePaymentFee"readonly matInput />
+                                        
+                                    </mat-form-field>
+                                </div>
+                             
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Management Commission in percentage (%)</mat-label>
+                                        <input matInput formControlName="managementCommission"readonly matInput/>
+        
+                                    </mat-form-field>
+                                </div>
+        
+                            </div>
+        
+                            <div>
+                                <button mat-raised-button color="primary" matStepperPrevious>
+                                    <b>Back</b>
+                                </button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button mat-raised-button color="primary" matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step>
+                        <ng-template matStepLabel>Done</ng-template>
+                        <p>Viewing Done.</p>
+                        <div>
+                            <button mat-raised-button color="primary" matStepperPrevious>
+                                <b>Back</b>
+                            </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button mat-raised-button color="primary" mat-button (click)=" onCancel()" tabindex="-2">
+                                <b>CLOSE</b>
+                            </button>
+                        </div>
+                    </mat-step>
+                </mat-stepper>
+                        </div>
+        </div>
+    </div>
+</div>
+
+

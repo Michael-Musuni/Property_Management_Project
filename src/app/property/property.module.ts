@@ -39,6 +39,9 @@ import { MatInputModule } from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { ChartsModule } from 'ng2-charts';
+import { UpdatePropertyComponent } from './pages/update-property/update-property.component';
+import { ViewPropertyComponent } from './pages/view-property/view-property.component';
+import { DeletePropertyComponent } from './pages/delete-property/delete-property.component';
 
 
 
@@ -53,6 +56,10 @@ import { ChartsModule } from 'ng2-charts';
     PropertyOwnersComponent,
     ReportOptionsComponent,
    
+    ReportOptionsComponent,
+    UpdatePropertyComponent,
+    ViewPropertyComponent,
+    DeletePropertyComponent
   ],
 
  
