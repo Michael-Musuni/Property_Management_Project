@@ -17,7 +17,7 @@ export class PropertyWidgetsComponent implements OnInit {
   totalProperties=0
   availableUnits=0
   allTenants=0
-  sentInvoices=0
+  paidInvoices=0
   constructor(private service: DashboardService) { }
 
 
@@ -37,7 +37,7 @@ export class PropertyWidgetsComponent implements OnInit {
       this.totalProperties=this.data.totalProperties
       this.allTenants=this.data.allTenants
       this.availableUnits=this.data.availableUnits
-      this.sentInvoices=this.data.sentInvoices
+      this.paidInvoices=this.data.paidInvoices
     })
   };
   fetchvacantunitsData() {
