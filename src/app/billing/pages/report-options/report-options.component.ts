@@ -16,37 +16,33 @@ import { BillingService } from '../../billing.service';
 export class ReportOptionsComponent implements OnInit {
   optionsForm: FormGroup;
   monthForm: FormGroup;
+  dateForm: FormGroup;
+  selectedStartDate: Date;
+  selectedEndDate: Date;
 
   options: string[] = ['Paid Invoice', 'Unpaid Invoice',];
   filteredOptions: Observable<string[]>;
 
   propertyNamesOptions: string[];
   filteredPropertyNames: Observable<string[]>;
+  service: any;
 
-  months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  filteredMonths: Observable<string[]>;
+  // months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  // filteredMonths: Observable<string[]>;
+
 
 
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<InvoicesComponent>,
     private propertyService: BillingService) { }
-  // campaignOne = new FormGroup({
-  //   start: new FormControl(new Date(year, month, 13)),
-  //   end: new FormControl(new Date(year, month, 16)),
-  // });
-  // campaignTwo = new FormGroup({
-  //   start: new FormControl(new Date(year, month, 15)),
-  //   end: new FormControl(new Date(year, month, 19)),
-  // });
+
 
 
   ngOnInit(): void {
     this.optionsForm = this.formBuilder.group({
       reportType: ["", Validators.required],
       propertyName: ["", Validators.required],
-      selectedMonth: ['']
-      // start: ["", Validators.required],
-      // end: ["", Validators.required]
+
     });
 
     this.filteredOptions = this.optionsForm.get("reportType")?.valueChanges.pipe(
@@ -63,10 +59,10 @@ export class ReportOptionsComponent implements OnInit {
         })
       ))
     );
-    this.filteredMonths = this.monthForm.get('selectedMonth').valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterMonths(value))
-    );
+    this.dateForm = this.formBuilder.group({
+      start: [null],
+      end: [null]
+    });
   }
 
   private _filter(value: string): string[] {
@@ -79,67 +75,86 @@ export class ReportOptionsComponent implements OnInit {
     return this.propertyNamesOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  private _filterMonths(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.months.filter(month => month.toLowerCase().includes(filterValue));
+  fetchData(): void {
+    const startDate = this.dateForm.get('start').value;
+    const endDate = this.dateForm.get('end').value;
+
+    // Call your service method to fetch blob data with start and end dates as parameters
+    this.service.fetchBlobData(startDate, endDate).subscribe((blobData) => {
+      // Process the blob data here
+      // For example, you can download the blob data or display it in your UI
+    });
   }
 
+
+
+
+  public downloadReport() {
+    // Add your download logic here
+    const reportType = this.optionsForm.value.reportType;
+    const propertyName = this.optionsForm.value.propertyName;
+    const startDate = this.dateForm.get('start').value;
+    const endDate = this.dateForm.get('end').value;
+
+
+    console.log("property name:", propertyName);
+    console.log("start date:", startDate);
+    console.log("end date:", endDate);
+
+    if (reportType === "Paid Invoice") {
+      console.log("property type", reportType)
+      this.propertyService.downloadPaidInvoiceReport(propertyName, startDate, endDate).subscribe({
+        next: ((res) => {
+          console.log("response", res);
+          const blob = new Blob([res], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(res);
+          const a = document.createElement('a');
+          document.body.appendChild(a);
+          a.style.display = 'none';
+          a.href = url;
+          a.download = `Report_${propertyName}.pdf`;
+          a.click();
+          window.URL.revokeObjectURL(url);
+        }),
+        error: ((error) => {
+
+        }),
+        complete: (() => { })
+      })
+    }
+
+    if (reportType === "Unpaid Invoice") {
+      console.log("property name:", propertyName);
+      console.log("start date:", startDate);
+      console.log("end date:", endDate);
+
+      this.propertyService.downloadUnpaidInvoiceReport(propertyName, startDate, endDate).subscribe({
+        next: ((res) => {
+
+          
+          const blob = new Blob([res], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(res);
+          const a = document.createElement('a');
+          document.body.appendChild(a);
+          a.style.display = 'none';
+          a.href = url;
+          a.download = `Report_${propertyName}.pdf`;
+          a.click();
+          window.URL.revokeObjectURL(url);
+
+          this.dialogRef.close();
+          console.log("response", res);
+
+        }),
+        error: ((error) => {
+          console.log("error", error);
   
- public downloadReport() {
-  // Add your download logic here
-  const reportType = this.optionsForm.value.reportType;
-  const propertyName = this.optionsForm.value.propertyName;
-  console.log("property name", propertyName)
-  if (reportType === "Paid Invoice") {
-    console.log("property type", reportType)
-    this.propertyService.downloadPaidInvoiceReport(propertyName).subscribe({
-      next: ((res) => {
-        console.log("response", res);
-        const blob = new Blob([res], { type: 'application/pdf' });
-        const url = window.URL.createObjectURL(res);
-        const a = document.createElement('a');
-        document.body.appendChild(a);
-        a.style.display = 'none';
-        a.href = url;
-        a.download = `Report_${propertyName}.pdf`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-      }),
-      error: ((error) => {
+          this.dialogRef.close();
 
-      }),
-      complete: (() => { })
-    })
+        }),
+        complete: (() => { })
+      })
+
+    }
   }
-
-  if (reportType === "Unpaid Invoice") {
-    console.log("property name", propertyName)
-
-    this.propertyService.downloadUnpaidInvoiceReport(propertyName).subscribe({
-      next: ((res) => {
-
-        console.log("response", res);
-        const blob = new Blob([res], { type: 'application/pdf' });
-        const url = window.URL.createObjectURL(res);
-        const a = document.createElement('a');
-        document.body.appendChild(a);
-        a.style.display = 'none';
-        a.href = url;
-        a.download = `Report_${propertyName}.pdf`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-
-        this.dialogRef.close();
-
-      }),
-      error: ((error) => {
-        console.log("error", error);
-        this.dialogRef.close();
-
-      }),
-      complete: (() => { })
-    })
-
-  }
-}
 }

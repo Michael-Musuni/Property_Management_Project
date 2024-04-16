@@ -22,6 +22,7 @@ export class MainBillingComponent implements OnInit {
   constructor(private billingService: BillingService,
     private tokenStorageService: TokenStorageService,
     private dialog: MatDialog) {
+      
     this.monthLabels = ['January', 'February'];
     this.barGraphOptions = {
       responsive: true,

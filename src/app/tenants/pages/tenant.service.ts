@@ -48,6 +48,10 @@ export class TenantService {
     console.log("next of kin to be submitted "+data.nextOfKin.nextOfKinName)
     return this.http.put(`${environment.apiUrl}/api/property/tenant/${id}`, data)
   }
+  public viewTenant(id: any, data: any): Observable<any>{
+    console.log("next of kin to be submitted "+data.nextOfKin.nextOfKinName)
+    return this.http.put(`${environment.apiUrl}/api/property/tenant/${id}`, data)
+  }
   
   getOnboardedTenantsData(): Observable<any> {
     const onboardedTenantsUrl = `${this.apiUrl}/api/v1/analytics/onboardedTenants`;

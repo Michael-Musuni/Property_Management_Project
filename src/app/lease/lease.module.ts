@@ -30,18 +30,16 @@ import { MatInputModule } from '@angular/material/input';
 import { ChartsModule } from 'ng2-charts';
 import { LeaseformComponent } from './pages/leaseform/leaseform.component';
 import { ViewLeaseComponent } from './pages/view-lease/view-lease.component';
-import { PrintLeaseComponent } from './pages/print-lease/print-lease.component';
-import { DeleteLeaseComponent } from './pages/delete-lease/delete-lease.component';
-import { UpdateLeaseComponent } from './pages/updatelease/updatelease.component';
 
-@NgModule({
+
+ @NgModule ({
   declarations: [
     LeaseformComponent,
     ReportoptionsComponent,
     LeaseComponent,
     ViewLeaseComponent,
-    DeleteLeaseComponent,
-    UpdateLeaseComponent
+    DeleteLeaseComponent
+    
   ],
 
   imports: [

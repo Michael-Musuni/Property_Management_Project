@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PropertyService } from 'src/app/property/services/property.service';
@@ -28,8 +28,8 @@ export class LeaseformComponent implements OnInit {
   dialogData: any
   subscription: Subscription;
   units: any
-  startDate: Date;
-  endDate: Date;
+  startDate: String;
+  endDate: String;
   // Initialize the FormArray
   chargesArray = this.fb.array([]);
 
@@ -45,6 +45,7 @@ export class LeaseformComponent implements OnInit {
     private leaseService: LeaseService,
     private router: Router,
     private dialog: MatDialog,
+    
   ) {
     this.tenantId = this.route.snapshot.paramMap.get('id');
     console.log("Tenant Id ", this.tenantId);
@@ -63,9 +64,9 @@ export class LeaseformComponent implements OnInit {
 
   }
 
-  onCancel() {
-    // Implement the cancellation logic if needed
-  }
+  // onCancelClick(): void {
+  //   this.dialog.close();
+  // }
 
   submit() {
     // Implement the form submission logic
@@ -74,8 +75,8 @@ export class LeaseformComponent implements OnInit {
     formData.tenant = this.tenantData
     // console.log("Start Date Type:", typeof formData.startDate);
     // console.log("End Date Type:", typeof formData.endDate);
-    // formData.startDate = this.formatDate(formData.startDate);
-    // formData.endDate = this.formatDate(formData.endDate);
+    formData.startDate = this.formatDate(formData.startDate);
+    formData.endDate = this.formatDate(formData.endDate);
     console.log("My Data ", this.Leaseform.value)
     this.subscription = this.leaseService.newContract(this.Leaseform.value).subscribe({
       next: ((res) => {
@@ -250,12 +251,12 @@ pickProperty() {
     return this.chargesArray.at(index) as FormGroup;
   }
 
-  // private formatDate(date: Date): string {
-  //   const year = date.getFullYear();
-  //   const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  //   const day = date.getDate().toString().padStart(2, '0');
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
 
-  //   return `${year}-${month}-${day}`;
-  // }
+    return `${year}-${month}-${day}`;
+  }
 }
 

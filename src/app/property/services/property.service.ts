@@ -13,7 +13,7 @@ export class PropertyService {
   // getmonthlyrentdata: any;
   // getpropertycountdata: any;
 
-
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
   public registerProperty(property: any) {
@@ -50,21 +50,21 @@ export class PropertyService {
   }
 
 
-  public downloadUnitsOccupiedReport(propertyName: any): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-occupied?propertyName=${propertyName}`);
+  public downloadUnitsOccupiedReport(propertyName: any): Observable<Blob> {
+    return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-occupied?propertyName=${propertyName}`, { responseType: 'blob'});
   }
   
   public downloadUnitsunoccupiedReport(propertyName: any): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-unoccupied?propertyName=${propertyName}`, { responseType: 'blob'});
   }
-
-  public getamenityonboardeddata() {
-    return this.http.get(`${environment.apiUrl}/api/v1/analytics/amenity-onboarded`,httpOptions);
+  public updateProperty(id: any, data: any): Observable<any>{
+    console.log("next of kin to be submitted "+data.nextOfKin.nextOfKinName)
+    return this.http.put(`${environment.apiUrl}/api/v1/property/update?id=${id}`, data)
   }
-
-  public getutilitycostdata() {
-    return this.http.get(`${environment.apiUrl}/api/v1/analytics/utility-cost`,httpOptions);
+  public deleteProperty(id: any): Observable<any>{
+    return this.http.delete(`${environment.apiUrl}/api/v1/property/delete?id=${id}`)
   }
+  
   downloadUnitsperPropertyReport(propertyName: string): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-per-property?propertyName=${propertyName}`, { responseType: 'blob'});
 }

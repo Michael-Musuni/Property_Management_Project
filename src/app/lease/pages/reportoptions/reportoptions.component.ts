@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, map, startWith, switchMap } from 'rxjs';
 import { LeaseComponent } from '../lease/lease.component';
 import { MatDialogRef } from '@angular/material/dialog';
-import { PropertyService } from 'src/app/property/services/property.service';
 import { LeaseService } from '../../service/lease.service';
 
 @Component({
@@ -23,7 +22,7 @@ export class ReportoptionsComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<LeaseComponent>,
-     private propertyService: LeaseService) { }
+    private propertyService: LeaseService) { }
 
   ngOnInit(): void {
     this.optionsForm = this.formBuilder.group({
@@ -62,9 +61,9 @@ export class ReportoptionsComponent implements OnInit {
     const reportType = this.optionsForm.value.reportType;
     const propertyName = this.optionsForm.value.propertyName;
     console.log("property name", propertyName)
-    if (reportType === "Active contracts"){
+    if (reportType === "Active contracts") {
       console.log("property name", propertyName)
-      this.propertyService.downloadActiveContractsReport (propertyName).subscribe({
+      this.propertyService.downloadActiveContractsReport(propertyName).subscribe({
         next: ((res) => {
           console.log("response", res);
           const blob = new Blob([res], { type: 'application/pdf' });
@@ -74,41 +73,39 @@ export class ReportoptionsComponent implements OnInit {
           document.body.appendChild(a);
           a.style.display = 'none';
           a.href = url;
-          a.download = `Report_${propertyName}.pdf`;
+          a.download = Report_${ propertyName }.pdf;
         a.click();
         window.URL.revokeObjectURL(url);
-        }),
+      }),
         error: ((error) => {
-  
-        }),
-        complete: (() => {})
-      })
-    } 
-    if (reportType === "Terminated contracts"){
-      console.log("property name", propertyName)
-      this.propertyService.downloadTerminatedContractsReport (propertyName).subscribe({
-        next: ((res) => {
-          console.log("response", res);
-          const blob = new Blob([res], { type: 'application/pdf' });
 
-          const url = window.URL.createObjectURL(res);
-          const a = document.createElement('a');
-          document.body.appendChild(a);
-          a.style.display = 'none';
-          a.href = url;
-          a.download = `Report_${propertyName}.pdf`;
-        a.click();
-        window.URL.revokeObjectURL(url);
         }),
-        error: ((error) => {
-  
-        }),
-        complete: (() => {})
-      })
+          complete: (() => { })
+    })
+  }
+  if(reportType === "Terminated contracts") {
+  console.log("property name", propertyName)
+  this.propertyService.downloadTerminatedContractsReport(propertyName).subscribe({
+    next: ((res) => {
+      console.log("response", res);
+      const blob = new Blob([res], { type: 'application/pdf' });
+
+      const url = window.URL.createObjectURL(res);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.style.display = 'none';
+      a.href = url;
+      a.download = Report_${ propertyName }.pdf;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }),
+    error: ((error) => {
+
+    }),
+      complete: (() => { })
+})
 
 
     }
   }
 }
-
-

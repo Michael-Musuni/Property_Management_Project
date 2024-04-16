@@ -85,35 +85,34 @@ export class ReportOptionsComponent implements OnInit {
       })
     }
     if (reportType === "Units unoccupied") {
-      console.log("property name", propertyName)
-
+      console.log("property name", propertyName);
+    
+     
+      alert("Download started");
+    
       this.propertyService.downloadUnitsunoccupiedReport(propertyName).subscribe({
         next: ((res) => {
-          
-            console.log("response", res);
-            const blob = new Blob([res], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(res);
-            const a = document.createElement('a');
-            document.body.appendChild(a);
-            a.style.display = 'none';
-            a.href = url;
-            a.download = `Report_${propertyName}.pdf`;
-            a.click();
-            window.URL.revokeObjectURL(url);
-
-            this.dialogRef.close();
-       
-
+          console.log("response", res);
+          const blob = new Blob([res], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(res);
+          const a = document.createElement('a');
+          document.body.appendChild(a);
+          a.style.display = 'none';
+          a.href = url;
+          a.download = `Report_${propertyName}.pdf`;
+          a.click();
+          window.URL.revokeObjectURL(url);
+    
+          this.dialogRef.close();
         }),
         error: ((error) => {
           console.log("error", error);
           this.dialogRef.close();
-
         }),
         complete: (() => { })
-      })
-
+      });
     }
+    
     
     
     if (reportType === "Units per property") {

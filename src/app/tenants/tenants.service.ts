@@ -28,8 +28,8 @@ export class TenantService {
   deletetenant(tenantData: any): Observable<any>{
     return this.http.delete(`${environment.apiUrl}/api/v1/customer/delete/`)
   }
-  public downloadTenantsPerPropertyReport(propertyName: any): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/v1/reports/property/tenants-per-property?propertyName=${propertyName}`);
+  public downloadTenantsPerPropertyReport(propertyName: any): Observable<Blob> {
+    return this.http.get(`${environment.apiUrl}/api/v1/reports/property/tenants-per-property?propertyName=${propertyName}`, { responseType: 'blob'});
   }
 
 }
