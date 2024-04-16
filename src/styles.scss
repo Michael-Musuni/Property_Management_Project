@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 .odd-row {
-  background-color: white;
+  background-color: rgb(204, 195, 195);
 }
 
 .even-row {
-  background-color: #eee;
+  background-color: rgb(204, 195, 195);
 }
 
 html,
@@ -23,19 +23,19 @@ body {
 
 
 .bg {
-  background: linear-gradient(to left, #34336D, #fafafa);
+  background: linear-gradient(to left, hsl(115, 95%, 25%), #a2beade8);
 }
 
 .bg1 {
-  background: linear-gradient(to right, #34336D, #fafafa);
+  background: linear-gradient(to right, hsl(115, 95%, 25%), #a2beade8);
 }
 
 .down {
-  background: linear-gradient(to bottom, #CACAD9, #fafafa);
+  background: linear-gradient(to bottom, hsl(115, 95%, 25%), #a2beade8);
 }
 
 .fg {
-  color: #34336D;
+  color: #a6a5e4;
   font-weight: bolder;
 }
 

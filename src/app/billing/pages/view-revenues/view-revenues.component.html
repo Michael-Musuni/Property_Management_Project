@@ -1,4 +1,9 @@
-<h2 mat-dialog-title>Revenue</h2>
+<div class="modalHeader">
+  <div class="contact-details-name mb-1"><strong></strong></div>
+  <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 
 <div mat-dialog-content>
   <p><strong>Property Name:</strong> {{ revenue.propertyName }}</p>
@@ -10,6 +15,6 @@
   <p><strong>Date:</strong> {{ revenue.date }}</p>
 </div>
 
-<div mat-dialog-actions>
+<!-- <div mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Close</button>
-</div>
+</div> -->

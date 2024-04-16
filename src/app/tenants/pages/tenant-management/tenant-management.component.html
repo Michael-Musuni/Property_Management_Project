@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-    
+
       <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="card">
           <div class="body">
@@ -23,6 +23,15 @@
           </div>
         </div> -->
       <!-- </div> -->
+
+      <!-- Date Picker -->
+      <input type="date" [(ngModel)]="selectedDate" (change)="onDateChange()" max="{{ today | date: 'yyyy-MM-dd' }}" />
+
+      <!-- Widget for active tenants -->
+      <div class="widget">
+        <h2>Active Tenants </h2>
+        <p>Number of active tenants on {{ selectedDate | date: 'mediumDate' }}: {{ activeTenantsForSelectedDate }}</p>
+      </div>
 
     </div>
 
@@ -44,10 +53,12 @@
                           class="browser-default search-field" aria-label="Search box" />
                       </li>
                       <li>
-                        <div class="m-l-5" matTooltip="Add">
-                          <button mat-mini-fab color="primary" routerLink="/tenants/add">
-                            <mat-icon matTooltip="Add new Tenant" class="col-white">add</mat-icon>
-                          </button>
+                        <div *ngIf="role === 'ROLE_AGENT'">
+                          <div class="m-l-5" matTooltip="Add">
+                            <button mat-mini-fab color="primary" routerLink="/tenants/add">
+                              <mat-icon matTooltip="Add new Tenant" class="col-white">add</mat-icon>
+                            </button>
+                          </div>
                         </div>
                       </li>
                       <li>
@@ -66,17 +77,17 @@
                         </div>
                       </li> -->
                       <li>
-                    <div class="m-l mb-2" matTooltip="Download report">
-                      <button mat-mini-fab color="primary" (click)="viewReportOptions()">
-                        <mat-icon class="col-white">cloud_download</mat-icon>
-                      </button>
-                    </div>
-                  </li>
+                        <div class="m-l mb-2" matTooltip="Download report">
+                          <button mat-mini-fab color="primary" (click)="viewReportOptions()">
+                            <mat-icon class="col-white">cloud_download</mat-icon>
+                          </button>
+                        </div>
+                      </li>
                     </ul>
                   </div>
                   <div class="col-4">
                     <ul class="header-buttons">
-                      <li>
+                      <!-- <li>
                         <div class="export-button m-l-10" matTooltip="XLSX">
                           <img src="assets/images/icons/xlsx.png" alt="" (click)="
                             exporter.exportTable('xlsx', {
@@ -100,7 +111,7 @@
                         <div class="export-button m-l-10" matTooltip="TXT">
                           <img src="assets/images/icons/txt.png" alt="" (click)="exporter.exportTable('txt')" />
                         </div>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                 </div>
@@ -146,18 +157,22 @@
                   <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                   <mat-cell *matCellDef="let tenant">
                     <!-- Add your action buttons here -->
-                    <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateTenant(tenant)"
-                      matTooltip="update"> <mat-icon>edit</mat-icon>
-                    </button>
+                    <div *ngIf="role === 'ROLE_AGENT'">
+                      <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateTenant(tenant)"
+                        matTooltip="update"> <mat-icon>edit</mat-icon>
+                      </button>
 
-                    <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall($event, tenant)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                    <button mat-icon-button color="primary" (click)="issueContract(tenant)" matTooltip="Issue contract">
-                      <mat-icon>note</mat-icon>
-                    </button>
+                      <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall($event, tenant)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <button mat-icon-button color="primary" (click)="issueContract(tenant)"
+                        matTooltip="Issue contract">
+                        <mat-icon>note</mat-icon>
+                      </button>
+                    </div>
                   </mat-cell>
                 </ng-container>
+
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple></mat-row>

@@ -1,12 +1,21 @@
-<h2 mat-dialog-title>Expenses</h2>
+<div class="modalHeader">
+  <div class="contact-details-name mb-1"><strong></strong></div>
+  <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 
 <div mat-dialog-content>
-  <p><strong>Property:</strong> {{ row.propertyId }}</p>
+  <!-- <p><strong>Property Id:</strong> {{ row.propertyId }}</p> -->
   <p><strong>Property:</strong> {{ row.propertyName }}</p>
   <p><strong>Unit:</strong> {{ row.unitName }}</p>
-  <p><strong>Expense:</strong> {{ row.expenseId }}</p>
+  <!-- <p><strong>Expense:</strong> {{ row.expenseId }}</p> -->
   <p><strong>Expense:</strong> {{ row.expenseName }}</p>
   <p><strong>Amount:</strong> {{ row.amount }}</p>
+  <p><strong>Category:</strong> {{ row.category }}</p>
+  <p><strong>Vendor:</strong> {{ row.vendor }}</p>
+  <p><strong>Date:</strong> {{ row.dateOccurred }}</p>
+
   <p><strong>Description:</strong> {{ row.description }}</p>
 
 
@@ -20,6 +29,6 @@
 
 </div>
 
-<div mat-dialog-actions>
+<!-- <div mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Close</button>
-</div>
+</div> -->
