@@ -29,10 +29,7 @@ export class PropertyManagementComponent implements OnInit {
   subscription!:Subscription
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ["name","type","location","owner","units","status","actions"]
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild("filter", { static: true }) filter: ElementRef;
-  @ViewChild(MatMenuTrigger)
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: "0px", y: "0px" };
   isLoading: boolean;
@@ -51,13 +48,7 @@ export class PropertyManagementComponent implements OnInit {
     this.getProperties()
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+ 
   refresh(){
     this.getProperties()
   }
@@ -73,11 +64,13 @@ export class PropertyManagementComponent implements OnInit {
         this.loading = false;
           this.isdata = true;
           this.dataSource = new MatTableDataSource<any>(this.data.entity);
+          console.log("datasource", this.dataSource);
+          
           this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
         } else {
           this.isdata = false;
           this.dataSource = new MatTableDataSource<Account>(this.data.entity);
+          console.log("datasource else", this.dataSource);
         }
       },
       (err) => {
@@ -99,6 +92,14 @@ export class PropertyManagementComponent implements OnInit {
         this.snackbar.showNotification("snackbar-danger", error);
       }
     });
+  }
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   updateProperty(property) {
     const dialogConfig = new MatDialogConfig();
@@ -124,9 +125,9 @@ export class PropertyManagementComponent implements OnInit {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = "90%"
-    dialogConfig.width = '800px';
+    dialogConfig.width = '600px';
     dialogConfig.data = { test: "data" }
+   
 
     const dialogRef = this.dialog.open(ReportOptionsComponent, dialogConfig);
 

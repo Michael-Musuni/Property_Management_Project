@@ -11,7 +11,7 @@
                   <li class="dropdown m-l-5">
                     <label for="search-input"><i class="material-icons search-icon">search</i></label>
                     <input placeholder="Search" type="text" (keyup)="applyFilter($event)" #filter
-                      class="browser-default search-field" aria-label="Search box" />
+                          class="browser-default search-field" aria-label="Search box" />
                   </li>
                   <li *ngIf="role=='ROLE_LANDLORD'">
                     <div class="m-l-5" matTooltip="Add">
@@ -88,6 +88,7 @@
                 {{ row.propertyType }}
               </mat-cell>
             </ng-container>
+            
             <ng-container matColumnDef="location">
               <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Location
               </mat-header-cell>
@@ -96,6 +97,7 @@
                 {{row.location}}
               </mat-cell>
             </ng-container>
+
             <ng-container matColumnDef="owner">
               <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Owner
               </mat-header-cell>
@@ -104,6 +106,7 @@
                 {{row.propertyOwner.ownerName}}
               </mat-cell>
             </ng-container>
+
             <ng-container matColumnDef="units">
               <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Units
               </mat-header-cell>
@@ -112,6 +115,7 @@
                 {{row.units.length}}
               </mat-cell>
             </ng-container>
+
             <ng-container matColumnDef="status">
               <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Status
               </mat-header-cell>
@@ -120,7 +124,7 @@
                 {{row.status}}
               </mat-cell>
             </ng-container>
-            <!-- actions -->
+
             <ng-container matColumnDef="actions">
               <mat-header-cell class="pr-0 column-nowrap" *matHeaderCellDef>Actions</mat-header-cell>
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
@@ -147,7 +151,7 @@
           </mat-table>
 
           <!-- Loading spinner -->
-          <div *ngIf="!loading" class="tbl-spinner">
+          <div *ngIf="isLoading" class="tbl-spinner">
             <mat-progress-spinner color="primary" [diameter]="60" mode="indeterminate">
             </mat-progress-spinner>
           </div>

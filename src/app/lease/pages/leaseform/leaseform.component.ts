@@ -77,7 +77,7 @@ export class LeaseformComponent implements OnInit {
     // formData.startDate = this.formatDate(formData.startDate);
     // formData.endDate = this.formatDate(formData.endDate);
     console.log("My Data ", this.Leaseform.value)
-    this.subscription = this.leaseService.newContract(this.Leaseform.value).subscribe({
+    this.subscription = this.leaseService.newContract(this.tenantData.value).subscribe({
       next: ((res) => {
         console.log("My response ", res)
         this.snackbar.showNotification("snackbar-success", this.data.message);

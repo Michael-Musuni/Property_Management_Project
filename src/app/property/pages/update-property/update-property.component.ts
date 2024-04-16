@@ -132,7 +132,7 @@ this.propertyDetails = this.fb.group({
       (res) => {
         
         this.loading = false;
-        this.snackbar.showNotification('snackbar-success', 'Tenant information updated successfully!');
+        this.snackbar.showNotification('snackbar-success', 'Property information updated successfully!');
         this.propertyDetails.reset();
         this.dialogRef.close();
       },
