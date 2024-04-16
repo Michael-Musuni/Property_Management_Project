@@ -90,11 +90,10 @@
                                         </mat-form-field>
                                     </div> -->
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
-                                        <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-form-field class="example-full-width mb-1" appearance="outline">
                                             <mat-label>Description</mat-label>
                                             <textarea matInput formControlName="description"
                                                 placeholder="Describe property..."></textarea>
-
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -126,7 +125,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Owner phone</mat-label>
-                                <input matInput formControlName="phone" required type="number" />
+                                <input matInput formControlName="phone"/>
                                 <mat-error *ngIf="ownerDetails.get('phone').hasError('required')">
                                     phone name is required
                                 </mat-error>
@@ -161,7 +160,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Identification Number</mat-label>
-                                <input matInput formControlName="idNumber"type="number" />
+                                <input matInput formControlName="idNumber" />
                                 <mat-error *ngIf="ownerDetails.get('idNumber').hasError('required')">
                                     Id no is required
                                 </mat-error>
@@ -268,7 +267,7 @@
                 <ng-template matStepLabel>Fill out Subproperty</ng-template>
 
                 <mat-accordion>
-                    <mat-expansion-panel hideToggle>
+                    <!-- <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
                             <mat-panel-title (click)="togglePanel()">
                                 <div class="row">
@@ -334,21 +333,21 @@
                             </mat-row>
                             <mat-cell *matNoDataRow colspan="4">
                                 No data matching the filter "{{ input.value }}"</mat-cell>
-                        </mat-table>
+                        <!-- </mat-table>
 
-                    </mat-expansion-panel>
+                    </mat-expansion-panel> -->
                     <mat-divider></mat-divider>
 
                     <mat-expansion-panel (opened)="unitPanelState = true" (closed)="unitPanelState = false">
                         <mat-expansion-panel-header>
                             <mat-panel-title (click)="togglePanel2()">
                                 <div class="row">
-                                    <p *ngIf="!unitPanelState">Click to Open </p>
+                                    <p *ngIf="!unitPanelState">Add Property Units</p>
                                     <p *ngIf="unitPanelState">Close</p>
                                 </div>
                             </mat-panel-title>
                             <mat-panel-description>
-                                Add property Units
+                                Click to Open 
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <form [formGroup]="unitsForm">
@@ -416,7 +415,7 @@
                             </ng-container>
                             <ng-container matColumnDef="maxOccupants">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
-                                    Max No. of Occupants
+                                    Maximum Occupants
                                 </mat-header-cell>
                                 <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
                                     [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.maxOccupants
@@ -482,14 +481,14 @@
                         <mat-panel-title (click)="togglePanel3()">
                             <div class="row">
 
-                                <p *ngIf="!utilityPanelState">Click to Open </p>
+                                <p *ngIf="!utilityPanelState"> Add Utilities </p>
                                 <p *ngIf="utilityPanelState">Close</p>
 
                             </div>
 
                         </mat-panel-title>
                         <mat-panel-description>
-                            Add Utilities
+                              Click to Open
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <form [formGroup]="utilityForm">
@@ -577,14 +576,12 @@
                             <div class="row">
 
 
-                                <p *ngIf="!amenityPanelState">Click to Open </p>
+                                <p *ngIf="!amenityPanelState"> Add Amenities </p>
                                 <p *ngIf="amenityPanelState">Close</p>
                             </div>
 
                         </mat-panel-title>
-                        <mat-panel-description>
-                            Add Amenities
-                        </mat-panel-description>
+                        <mat-panel-description>Click to Open</mat-panel-description>
                     </mat-expansion-panel-header>
                     <form [formGroup]="amenityForm">
                         <div class="row">
@@ -679,7 +676,7 @@
             <mat-step [stepControl]="rentConfigForm" [editable]="isEditable">
                 <form [formGroup]="rentConfigForm">
                     <ng-template matStepLabel>Fill Rent Configuration Details</ng-template>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Select Payment Method </mat-label>
@@ -714,7 +711,7 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
