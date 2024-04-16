@@ -17,8 +17,8 @@ import { Router } from '@angular/router';
 })
 export class AddpropertyComponent implements OnInit {
   rentConfigForm: FormGroup;
-  minDate = 1; // Minimum date
-  maxDate = 31; // Maximum date
+  min: 1
+  max: 100
   role: any
   loading = false;
   isLoading: Boolean;
@@ -46,6 +46,8 @@ export class AddpropertyComponent implements OnInit {
   unitsForm: FormGroup
   utilityForm: FormGroup
   amenityForm: FormGroup
+  ID: any;
+  Passport: any;
 
 
 
@@ -86,6 +88,7 @@ export class AddpropertyComponent implements OnInit {
       email: [this.user.email,],
       ownerType: ["", [Validators.required]],
       idNumber: ["",],
+      IDPassportNumber: ["",],
       kraPin: ['',],
       physicalAddress: ["", [Validators.required]],//lease,rent
 
@@ -93,7 +96,7 @@ export class AddpropertyComponent implements OnInit {
     });
     this.rentConfigForm = this.fb.group({
       rentDueDate: ["", [Validators.required]],
-      accountNumber: [""], 
+      accountNumber: [""],
       accountName: [""],
       payBillNumber: [""],
       latePaymentFee: ["", [Validators.required]],
@@ -101,9 +104,13 @@ export class AddpropertyComponent implements OnInit {
       managementCommission: ["",]
     })
 
+
+
     this.caretakerDetails = this.fb.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
+      caretakerID: ['', [Validators.required]],
+      physicalAddress: ["", [Validators.required]],
     });
     this.subPropertiesForm = this.fb.group({
       subPropertyName: ['',],
@@ -127,6 +134,13 @@ export class AddpropertyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Initialize the form with validation for managementCommission
+    // this.rentConfigForm = this.fb.group({
+    //   managementCommission: ['', [Validators.required, Validators.min(1), Validators.max(100)]]
+    // });
+  
+  
+
     this.fetchAmenities();
     this.fetchUtilities();
     this.role = this.tokenStorageService.getUser().roles[0]
@@ -180,8 +194,7 @@ export class AddpropertyComponent implements OnInit {
       console.log(this.data.message)
       this.loading = false;
       this.snackbar.showNotification("snackbar-success", this.data.message);
-      this.router.navigate(['/property/manage'])
-
+      this.router.navigate(['/property/main'])
     })
 
   }

@@ -14,7 +14,7 @@
                           class="browser-default search-field" aria-label="Search box" />
                   </li>
                   <li *ngIf="role=='ROLE_LANDLORD'">
-                    <div class="m-l-5" matTooltip="Add">
+                    <div class="m-l-5" matTooltip="Add property">
                       <button mat-mini-fab color="primary" routerLink="/property/create">
                         <mat-icon class="col-white">add</mat-icon>
                       </button>
@@ -102,26 +102,24 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Owner
               </mat-header-cell>
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
-                class="table-img  column-nowrap">
+                class="table-img column-nowrap">
                 {{row.propertyOwner.ownerName}}
               </mat-cell>
             </ng-container>
-
-            <ng-container matColumnDef="units">
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Units
+            <ng-container matColumnDef="totalUnits">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Total Units
               </mat-header-cell>
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                 class="table-img  column-nowrap">
-                {{row.units.length}}
+                {{row.totalUnits.length}}
               </mat-cell>
             </ng-container>
-
-            <ng-container matColumnDef="status">
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Status
+            <ng-container matColumnDef="vacantUnits">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Vacant Units
               </mat-header-cell>
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                 class="table-img  column-nowrap">
-                {{row.status}}
+                {{row.vacantUnits}}
               </mat-cell>
             </ng-container>
 
