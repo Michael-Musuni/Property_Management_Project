@@ -41,7 +41,7 @@
               </div>
               <div class="col-4">
                 <ul class="header-buttons">
-                  
+
                   <!-- <li>
                     <div class="export-button m-l-10" matTooltip="XLSX">
                       <img src="assets/images/icons/xlsx.png" alt="" (click)="
@@ -125,17 +125,20 @@
               <mat-header-cell class="pr-0 column-nowrap" *matHeaderCellDef>Actions</mat-header-cell>
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                 class="pr-0">
-                
+
                 <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateProperty(property)"
-                   matTooltip="Update Property"><mat-icon>edit</mat-icon>
+                  matTooltip="Update Property"><mat-icon>Edit</mat-icon>
                 </button>
                 
-                <button mat-icon-button color="primary" (click)="$event.stopPropagation();viewProperty(row)" matTooltip="View Details">
-                  <mat-icon>visibility</mat-icon>
-                </button>
-                <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall(property)">
-                  <mat-icon>delete</mat-icon>
-                </button>
+                  <button mat-icon-button color="primary" (click)="$event.stopPropagation();viewProperty(row)"
+                    matTooltip="View Details">
+                    <mat-icon>View</mat-icon>
+                  </button>
+                
+                  <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall(property)">
+                    <mat-icon>Delete</mat-icon>
+                  </button>
+               
               </mat-cell>
             </ng-container>
 
