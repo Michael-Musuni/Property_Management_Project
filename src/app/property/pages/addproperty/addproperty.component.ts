@@ -180,8 +180,7 @@ export class AddpropertyComponent implements OnInit {
       console.log(this.data.message)
       this.loading = false;
       this.snackbar.showNotification("snackbar-success", this.data.message);
-      this.router.navigate(['/property/manage'])
-
+      this.router.navigate(['/property/main'])
     })
 
   }

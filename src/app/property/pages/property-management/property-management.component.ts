@@ -30,6 +30,9 @@ export class PropertyManagementComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ["name","type","location","owner","units","status","actions"]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild("filter", { static: true }) filter: ElementRef;
+  @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: "0px", y: "0px" };
   isLoading: boolean;
@@ -64,9 +67,9 @@ export class PropertyManagementComponent implements OnInit {
         this.loading = false;
           this.isdata = true;
           this.dataSource = new MatTableDataSource<any>(this.data.entity);
-          console.log("datasource", this.dataSource);
-          
           this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          console.log("datasource", this.dataSource);
         } else {
           this.isdata = false;
           this.dataSource = new MatTableDataSource<Account>(this.data.entity);
