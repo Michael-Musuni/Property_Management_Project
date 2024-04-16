@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from 'src/app/shared/snackbar.service';
 import { PropertyService } from '../../services/property.service';
@@ -9,13 +9,16 @@ import { AmenitiesService } from 'src/app/configuration/services/amenities.servi
 import { UtilitiesService } from 'src/app/configuration/services/utilities.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-addproperty',
   templateUrl: './addproperty.component.html',
   styleUrls: ['./addproperty.component.scss']
 })
 export class AddpropertyComponent implements OnInit {
-
+  rentConfigForm: FormGroup;
+  minDate = 1; // Minimum date
+  maxDate = 31; // Maximum date
   role: any
   loading = false;
   isLoading: Boolean;
@@ -32,7 +35,7 @@ export class AddpropertyComponent implements OnInit {
   isEditable: Boolean = true;
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ["subPropertyName", "actions"]
-  displayedUnitColumns: string[] = ["unit", "maxOccupants","rent","deposit", "actions"]
+  displayedUnitColumns: string[] = ["unit", "maxOccupants", "rent", "deposit", "actions"]
   displayedUtilitiesColumns: string[] = ["utility", "charge", "actions"]
   displayedAmenitiesColumns: string[] = ["amenity", "charge", "actions"]
 
@@ -43,7 +46,7 @@ export class AddpropertyComponent implements OnInit {
   unitsForm: FormGroup
   utilityForm: FormGroup
   amenityForm: FormGroup
-  rentConfigForm:FormGroup
+
 
 
 
@@ -73,7 +76,7 @@ export class AddpropertyComponent implements OnInit {
       units: this.fb.array([]), // FormArray for units
       amenities: this.fb.array([]), // FormArray for units
       utilities: this.fb.array([]), // FormArray for units
-      category: ["", ]//lease,rent
+      category: ["",]//lease,rent
 
     });
     this.ownerDetails = this.fb.group({
@@ -89,13 +92,13 @@ export class AddpropertyComponent implements OnInit {
 
     });
     this.rentConfigForm = this.fb.group({
-      rentDueDate:["",[Validators.required]],
-      accountNumber: ["", [Validators.required]],
-      accountName:[""],
-      payBillNumber: ["", [Validators.required]],
+      rentDueDate: ["", [Validators.required]],
+      accountNumber: [""], 
+      accountName: [""],
+      payBillNumber: [""],
       latePaymentFee: ["", [Validators.required]],
-      paymentMethod:[""],
-      managementCommission:["",]
+      paymentMethod: [""],
+      managementCommission: ["",]
     })
 
     this.caretakerDetails = this.fb.group({
@@ -108,8 +111,8 @@ export class AddpropertyComponent implements OnInit {
     this.unitsForm = this.fb.group({
       unitName: ['',],
       maxOccupants: ['', []],
-      rentAmount:['',Validators.required],
-      deposit:['',Validators.required]
+      rentAmount: ['', Validators.required],
+      deposit: ['', Validators.required]
 
     })
     this.utilityForm = this.fb.group({
@@ -160,14 +163,14 @@ export class AddpropertyComponent implements OnInit {
   onKeyPress(event: KeyboardEvent) {
     const allowedChars = /[a-zA-Z '-]/;
     if (!allowedChars.test(event.key)) {
-        event.preventDefault();
+      event.preventDefault();
     }
-}
+  }
   onSubmit() {
     this.loading = true;
     this.propertyDetails.value.caretaker = this.caretakerDetails.value
     this.propertyDetails.value.propertyOwner = this.ownerDetails.value
-    this.propertyDetails.value.rentConfig=this.rentConfigForm.value
+    this.propertyDetails.value.rentConfig = this.rentConfigForm.value
     this.isLoading = true;
 
 
