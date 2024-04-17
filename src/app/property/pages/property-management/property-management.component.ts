@@ -29,7 +29,7 @@ export class PropertyManagementComponent implements OnInit {
   role:any
   subscription!:Subscription
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["name","type","location","owner","units","status","actions"]
+  displayedColumns: string[] = ["name","type","location","owner","totalUnits","vacantUnits","actions"]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
