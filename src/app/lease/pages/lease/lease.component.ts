@@ -15,7 +15,7 @@ import { MatTable } from '@angular/material/table';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { ViewLeaseComponent } from '../view-lease/view-lease.component';
 import { HttpParams } from '@angular/common/http';
-import { Deletele
+import { DeleteLeaseComponent } from '../delete-lease/delete-lease.component';
 import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
 
 

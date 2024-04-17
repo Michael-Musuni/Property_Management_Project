@@ -32,6 +32,7 @@ import { RentconfigurationsComponent } from './pages/rentconfigurations/rentconf
 import { MainComponent } from './pages/main/main.component';
 import { PropertyOwnersComponent } from './pages/property-owners/property-owners.component';
 
+import { MatNativeDateModule } from '@angular/material/core';
 import { ReportOptionsComponent } from './pages/report-options/report-options.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -53,6 +54,8 @@ import { DeletePropertyComponent } from './pages/delete-property/delete-property
     RentconfigurationsComponent,
     MainComponent,
     PropertyOwnersComponent,
+    ReportOptionsComponent,
+   
     ReportOptionsComponent,
     UpdatePropertyComponent,
     ViewPropertyComponent,
@@ -94,6 +97,7 @@ import { DeletePropertyComponent } from './pages/delete-property/delete-property
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatNativeDateModule,
     // AsyncPipe
 
     ChartsModule

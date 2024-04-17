@@ -21,7 +21,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MatSortModule } from '@angular/material/sort';
 import { LeaseComponent } from './pages/lease/lease.component';
 
-import { ReportoptionsComponent } from './pages/reportoptions/reportoptions.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
@@ -30,15 +30,16 @@ import { MatInputModule } from '@angular/material/input';
 import { ChartsModule } from 'ng2-charts';
 import { LeaseformComponent } from './pages/leaseform/leaseform.component';
 import { ViewLeaseComponent } from './pages/view-lease/view-lease.component';
-
+import { ReportoptionsComponent } from './pages/reportoptions/reportoptions.component';
+import { DeleteLeaseComponent } from './pages/delete-lease/delete-lease.component'
 
  @NgModule ({
   declarations: [
-    LeaseformComponent,
-    ReportoptionsComponent,
     LeaseComponent,
+    LeaseformComponent,
     ViewLeaseComponent,
-    DeleteLeaseComponent
+    DeleteLeaseComponent,
+    ReportoptionsComponent
     
   ],
 
