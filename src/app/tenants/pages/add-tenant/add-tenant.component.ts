@@ -105,7 +105,7 @@ export class AddTenantComponent implements OnInit {
     //
     // Additional initialization
   }
-
+  
 
   // Method to handle file changes
   onFileChange(event: any) {
@@ -117,6 +117,7 @@ export class AddTenantComponent implements OnInit {
     });
 
     // ... other logic
+  
   }
   onIDChange(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -201,6 +202,8 @@ export class AddTenantComponent implements OnInit {
     // Update the table data source
     this.memberTableDataSource.data = [...this.memberTableDataSource.data];
 
+   
+
   }
 
   // New method to submit member table data to the 'members' form array
@@ -224,11 +227,13 @@ export class AddTenantComponent implements OnInit {
     });
 
     this.members.push(memberGroup);
+   
   }
 
   // Method to remove a member from the 'members' form array
   removeMember(index: number): void {
     this.members.removeAt(index);
+    
   }
 
   // Helper method to format date controls

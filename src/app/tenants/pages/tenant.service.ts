@@ -61,4 +61,17 @@ export class TenantService {
   // deleteTenant(tenantId: number): Observable<any> {
   //   return this.http.delete(`/api/property/tenant/${tenantId}`);
   // }
+  getActiveTenants(startDate: Date, endDate: Date): Observable<number> {
+    const activeTenantsUrl = `${this.apiUrl}/api/property/tenant/active-tenants`;
+
+    // You might need to pass start and end date as query parameters
+    // Adjust the API endpoint and parameters as needed
+    return this.http.get<number>(activeTenantsUrl, {
+      params: {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString()
+      }
+    });
+  }
+
 }

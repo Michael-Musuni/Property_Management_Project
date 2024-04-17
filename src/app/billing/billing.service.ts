@@ -85,9 +85,8 @@ export class BillingService {
     return this.http.get(`${environment.apiUrl}/api/v1/property/get`);
   }
 
-
   getVatData(month: number): Observable<any> {
-    return this.http.get(`http://localhost:9701/api/property/revenue/tax/?month=${month}`);
+    return this.http.get(`/api/property/revenue/tax/${month}`);
 }
   getTotalExpenses(month: number){
     return this.http.get(`${this.apiUrl}/api/property/revenue/expenses/${month}`, httpOptions);

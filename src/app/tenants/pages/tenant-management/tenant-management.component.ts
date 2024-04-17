@@ -19,13 +19,15 @@ import { ViewTenantComponent } from '../view-tenant/view-tenant.component';
 })
 
 export class TenantManagementComponent implements OnInit {
-
-
+  startDate: Date;
+  endDate: Date;
+  maxEndDate: Date;
   data: any;
   role :string
-  selectedDate: string; // Selected date from the date picker
+  selectedDates: string; // Selected date from the date picker
     today: Date = new Date(); // Today's date
-    activeTenantsForSelectedDate: number; // Number of active tenants for the selected date
+    // activeTenantsForSelectedDate: number; // Number of active tenants for the selected date
+activeTenantsForSelectedDates: number;
 
 
 
@@ -37,39 +39,53 @@ export class TenantManagementComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     
 
-  ) { }
+  ) {this.maxEndDate = new Date();
+  }
+  
   subscription!: Subscription
   isLoading: boolean = false;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['tenantName', 'tenantPhoneNumber', 'tenantIdNumber', 'unit', 'actions'];
+  displayedColumns: string[] = ['tenantName', 'tenantPhoneNumber', 'tenantIdNumber', 'propertyName', 'unit',  'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  tenantsOnboardedData = [{ data: [], label: 'Tenants Onboarded' }];
+  tenantsOnboardedData = [{ data: [], label: 'Tenants Onboarded', backgroundColor: '#3F51B5' }]; 
   tenantsOnboardedLabels = ['January', 'February', 'March', 'April'];
   tenantsOnboardedOptions = { responsive: true };
+ 
 
   ngOnInit(): void {
     this.fetchTenantData();
     this.fetchOnboardedTenantsData();
     this.role = this.tokenStorage.getUser()?.roles[0];
       // Initialize selectedDate with today's date
-      this.selectedDate = this.today.toISOString().split('T')[0];
+      this.selectedDates = this.today.toISOString().split('T')[0];
 
       // Calculate active tenants for the selected date
-      this.calculateActiveTenantsForSelectedDate();
+      this.calculateActiveTenantsForSelectedDates();
     
   }
   onDateChange(): void {
     // Calculate active tenants for the newly selected date
-    this.calculateActiveTenantsForSelectedDate();
+    this.calculateActiveTenantsForSelectedDates();
 }
 
-calculateActiveTenantsForSelectedDate(): void {
-    // Perform logic to calculate active tenants for the selected date
-    // Assign the result to activeTenantsForSelectedDate variable
-    // For example:
-    // this.activeTenantsForSelectedDate = ...
+calculateActiveTenantsForSelectedDates(): void {
+     // Fetch data based on the selected date range and calculate the number of active tenants
+    // Example: Call a service method to fetch data and perform calculations
+    this.tenantService.getActiveTenants(this.startDate, this.endDate)
+      .subscribe(count => {
+        this.activeTenantsForSelectedDates = count;
+      }, error => {
+        console.error('Error calculating active tenants:', error);
+        this.snackbar.showNotification("snackbar-danger", error);
+      });
+  
+}
+onDateRangeInput(event: any): void {
+  this.startDate = event.value.start;
+  // Ensure that the end date is always after the start date
+  this.endDate = this.startDate && event.value.end <= this.startDate ? null : event.value.end;
 }
 
   fetchOnboardedTenantsData() {
@@ -78,38 +94,32 @@ calculateActiveTenantsForSelectedDate(): void {
         console.log('Onboarded Tenants Data:', response);
 
         // Update tenantsOnboardedData with fetched values and labels
-        this.tenantsOnboardedData = [{ data: response.values, label: 'Tenants Onboarded' }];
+        this.tenantsOnboardedData = [{ data: response.values, label: 'Tenants Onboarded', backgroundColor: '#3F51B5' }];
+
         this.tenantsOnboardedLabels = response.labels;
         this.tenantsOnboardedOptions = { responsive: true };
       },
       error: (error) => {
         console.error('Error fetching onboarded tenants data:', error);
         this.snackbar.showNotification("snackbar-danger", error);
-      }
+      }   
     });
   }
   fetchTenantData() {
-    this.isLoading = true;
     this.tenantService.getTenant().subscribe({
       next: (response) => {
         console.log('Response:', response);
-  
-        // Prepend the new tenant to the existing data array
-        const newData = [response.entity, ...this.dataSource.data];
-  
-        // Update the data source with the new data
-        this.dataSource = new MatTableDataSource<any>(newData);
+        this.dataSource = new MatTableDataSource<any>(response.entity);
         this.dataSource.paginator = this.paginator;
-  
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Error occurred:', error);
         this.snackbar.showNotification("snackbar-danger", error);
-        this.isLoading = false;
       }
     });
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
