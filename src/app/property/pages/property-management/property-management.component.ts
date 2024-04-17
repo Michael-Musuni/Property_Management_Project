@@ -66,8 +66,7 @@ export class PropertyManagementComponent implements OnInit {
       (res) => {
         this.data = res;
         console.log("Data ", this.data.entity);
-  
-        if (this.data.length > 0) {
+        if (this.data.entity.length > 0) {
         this.loading = false;
           this.isdata = true;
           this.dataSource = new MatTableDataSource<any>(this.data.entity);
