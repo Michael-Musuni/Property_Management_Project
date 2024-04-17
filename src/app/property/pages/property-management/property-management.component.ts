@@ -13,6 +13,7 @@ import { ReportOptionsComponent } from '../report-options/report-options.compone
 import { UpdatePropertyComponent } from '../update-property/update-property.component';
 import { ViewPropertyComponent } from '../view-property/view-property.component';
 import { DeletePropertyComponent } from '../delete-property/delete-property.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class PropertyManagementComponent implements OnInit {
   role:any
   subscription!:Subscription
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["name","type","location","owner","units","status","actions"]
+  displayedColumns: string[] = ["name","type","location","owner","totalUnits","vacantUnits","actions"]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
@@ -42,22 +43,19 @@ export class PropertyManagementComponent implements OnInit {
     private snackbar:SnackbarService,
     private tokenStorageService: TokenStorageService,
     private dialog: MatDialog,
+    private router: Router
 
   ) { }
+  divcss= false
 
   ngOnInit(): void {
+    if(this.router.url == '/property/manage') this.divcss=true
     this.role = this.tokenStorageService.getUser().roles[0]
 
     this.getProperties()
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+ 
   refresh(){
     this.getProperties()
   }
@@ -66,27 +64,28 @@ export class PropertyManagementComponent implements OnInit {
     this.loading = true;
     this.subscription = this.propertyService.getProperties().subscribe(
       (res) => {
-        this.data= res
-        console.log("Data ",this.data.entity) 
+        this.data = res;
+        console.log("Data ", this.data.entity);
+  
         if (this.data.length > 0) {
-          this.loading = false;
+        this.loading = false;
           this.isdata = true;
           this.dataSource = new MatTableDataSource<any>(this.data.entity);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          
-        }
-        else {
+          console.log("datasource", this.dataSource);
+        } else {
           this.isdata = false;
           this.dataSource = new MatTableDataSource<Account>(this.data.entity);
+          console.log("datasource else", this.dataSource);
         }
       },
       (err) => {
         this.snackbar.showNotification("snackbar-danger", err);
       }
     );
-
   }
+  
   fetchPropertyData() {
     this.propertyService.getProperties().subscribe({
       next: (response: any) => {
@@ -100,6 +99,14 @@ export class PropertyManagementComponent implements OnInit {
         this.snackbar.showNotification("snackbar-danger", error);
       }
     });
+  }
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   updateProperty(property) {
     const dialogConfig = new MatDialogConfig();
@@ -125,9 +132,9 @@ export class PropertyManagementComponent implements OnInit {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = "90%"
-    dialogConfig.width = '800px';
+    dialogConfig.width = '600px';
     dialogConfig.data = { test: "data" }
+   
 
     const dialogRef = this.dialog.open(ReportOptionsComponent, dialogConfig);
 
@@ -150,13 +157,13 @@ export class PropertyManagementComponent implements OnInit {
       
     })
   }
-  deleteCall(property) {
+  deleteCall(property: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
     dialogConfig.width = "40%"
     dialogConfig.data = {
-      property,
+      property: property,
     }
 
     const dialogRef = this.dialog.open(DeletePropertyComponent, dialogConfig)

@@ -298,7 +298,7 @@ export class InvoicesComponent implements OnInit {
     dialogConfig.data = { test: "data" }
     const dialogRef = this.dialog.open(ReportOptionsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('closed');
+      // console.log('closed');
     });
   }
 

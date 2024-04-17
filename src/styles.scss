@@ -21,17 +21,21 @@ body {
   font-family: 'Roboto'
 }
 
-
 .bg {
-  background: linear-gradient(to left, hsl(115, 95%, 25%), #a2beade8);
+  background-color: rgb(206, 222, 238);
 }
 
-.bg1 {
-  background: linear-gradient(to right, hsl(115, 95%, 25%), #a2beade8);
-}
+
+// .bg {
+//   background: linear-gradient(to left, hsl(115, 25%, 90%), #a8d1b8e8);
+// }
+
+// .bg1 {
+//   background: linear-gradient(to right, hsl(120, 2%, 52%), #a8d1b8e8);
+// }
 
 .down {
-  background: linear-gradient(to bottom, hsl(115, 95%, 25%), #a2beade8);
+  background: linear-gradient(to left, #5d7cbc, white,#5d7cbc)
 }
 
 .fg {
