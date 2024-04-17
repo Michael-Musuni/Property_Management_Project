@@ -13,6 +13,7 @@ import { ReportOptionsComponent } from '../report-options/report-options.compone
 import { UpdatePropertyComponent } from '../update-property/update-property.component';
 import { ViewPropertyComponent } from '../view-property/view-property.component';
 import { DeletePropertyComponent } from '../delete-property/delete-property.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -42,10 +43,13 @@ export class PropertyManagementComponent implements OnInit {
     private snackbar:SnackbarService,
     private tokenStorageService: TokenStorageService,
     private dialog: MatDialog,
+    private router: Router
 
   ) { }
+  divcss= false
 
   ngOnInit(): void {
+    if(this.router.url == '/property/manage') this.divcss=true
     this.role = this.tokenStorageService.getUser().roles[0]
 
     this.getProperties()

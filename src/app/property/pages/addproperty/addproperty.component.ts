@@ -8,6 +8,7 @@ import { TokenStorageService } from 'src/app/core/service/token-storage.service'
 import { AmenitiesService } from 'src/app/configuration/services/amenities.service';
 import { UtilitiesService } from 'src/app/configuration/services/utilities.service';
 import { Router } from '@angular/router';
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -46,6 +47,8 @@ export class AddpropertyComponent implements OnInit {
   unitsForm: FormGroup
   utilityForm: FormGroup
   amenityForm: FormGroup
+  // units: FormArray; // Define FormArray
+
 
 
 
@@ -58,7 +61,8 @@ export class AddpropertyComponent implements OnInit {
     private amenityService: AmenitiesService,
     private utilityservice: UtilitiesService,
     private tokenStorageService: TokenStorageService,
-    private router: Router
+    private router: Router,
+    
   ) {
     this.user = this.tokenStorageService.getUser()
 
@@ -113,7 +117,6 @@ export class AddpropertyComponent implements OnInit {
       maxOccupants: ['', []],
       rentAmount: ['', Validators.required],
       deposit: ['', Validators.required]
-
     })
     this.utilityForm = this.fb.group({
       name: ['',],
@@ -173,6 +176,8 @@ export class AddpropertyComponent implements OnInit {
     this.propertyDetails.value.rentConfig = this.rentConfigForm.value
     this.isLoading = true;
 
+    console.log("added units", this.propertyDetails.value)
+
 
     this.subscription = this.propertyService.registerProperty(this.propertyDetails.value).subscribe(res => {
       this.data = res
@@ -206,6 +211,55 @@ export class AddpropertyComponent implements OnInit {
       this.utilities = this.data.entity
       console.log(this.amenities)
       // this.snackbar.showNotification("snackbar-success", this.data.message);
+    })
+  }
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    this.readExcel(file);
+  }
+
+  readExcel(file: File): void {
+    const reader: FileReader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const data: ArrayBuffer = e.target.result;
+      const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'array' });
+      const sheetName: string = workbook.SheetNames[0];
+      const worksheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
+      
+      // Convert excel data to JSON
+      const excelData: any[] = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+
+      // Remove the header row
+      if (excelData.length > 0) {
+        excelData.shift(); // Remove the first row
+      }
+
+      this.dataSource = new MatTableDataSource<any>(excelData)
+      console.log("data received from excel",excelData);
+
+      this.patchFormArray(excelData)
+      
+    };
+
+    reader.readAsArrayBuffer(file);
+  }
+
+    // Function to patch FormArray with excel data
+  patchFormArray(data: any[]): void {
+      data.forEach(item => {
+        const group: FormGroup = this.createUnitsFormGroup(item);
+        console.log("One item ", group)
+        this.propertyDetails.value.units.push(group.value);
+      });
+  }
+
+  createUnitsFormGroup(item: any): FormGroup{
+    return this.fb.group({
+      unitName: [item.unitName, []],
+      maxOccupants: [item.maxOccupants, []],
+      rentAmount: [item.rentAmount, Validators.required],
+      deposit: [item.deposit, Validators.required]
     })
   }
 
