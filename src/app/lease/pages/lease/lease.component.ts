@@ -26,7 +26,7 @@ import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/
   styleUrls: ['./lease.component.sass']
 })
 export class LeaseComponent implements OnInit {
-  z
+
 
   loading: Boolean
   isdata: Boolean = false
@@ -233,7 +233,8 @@ export class LeaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
     });
 
-  } viewReportOptions() {
+  } 
+  viewReportOptions() {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.disableClose = true
     dialogConfig.autoFocus = true

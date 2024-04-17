@@ -51,37 +51,27 @@
         </div> -->
 
 
+        
+
+        
         <div class="col-md-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Start Date - End Date</mat-label>
-                <mat-date-range-input [rangePicker]="rangePicker" [formGroup]="dateForm">
-                    <input matStartDate matInput placeholder="Start Date" formControlName="start"
-                        (dateChange)="selectedStartDate = $event.value">
-                    <input matEndDate matInput placeholder="End Date" formControlName="end"
-                        (dateChange)="selectedEndDate = $event.value">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                <mat-date-range-picker #rangePicker></mat-date-range-picker>
-            </mat-form-field>
-        </div>
-        
-        <!-- <div class="col-md-12 mb-2">
-            <mat-form-field class="example-form-field" appearance="outline">
                 <mat-label>Start Date</mat-label>
-                <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" formControlName="start">
+                <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" formControlName="start" [max]="maxEndDate">
                 <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
                 <mat-datepicker #startDatePicker></mat-datepicker>
             </mat-form-field>
         </div>
-
+        
         <div class="col-md-12 mb-2">
-            <mat-form-field class="example-form-field" appearance="outline">
+            <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>End Date</mat-label>
-                <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" formControlName="end">
+                <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" formControlName="end" [min]="minStartDate" [max]="maxEndDate">
                 <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                 <mat-datepicker #endDatePicker></mat-datepicker>
             </mat-form-field>
-        </div> -->
+        </div>
+        
 
 
 
