@@ -28,7 +28,7 @@
                                     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-3">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                             <mat-label>Tenant Phone Number</mat-label>
-                                            <input formControlName="tenantPhoneNumber" matInput type="number" required />
+                                            <input formControlName="tenantPhoneNumber" matInput type="text" required />
                                             <mat-error *ngIf="tenantForm.get('tenantPhoneNumber').hasError('required')">
                                                 Tenant phone number is required
                                             </mat-error>
@@ -92,6 +92,8 @@
                                                 <mat-label>Select payment period</mat-label>
                                                 <mat-select formControlName="category">
                                                     <mat-option value="Master">Monthly</mat-option>
+                                                    <mat-option value="Detached">Quatery</mat-option>
+                                                    <mat-option value="Detached">Semi-Anually</mat-option>
                                                     <mat-option value="Detached">Yearly</mat-option>
                                                 </mat-select>
                                             </mat-form-field>

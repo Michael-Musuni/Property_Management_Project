@@ -19,7 +19,7 @@ export class AmenitiesComponent implements OnInit {
   isLoading: Boolean
   subscription:Subscription
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["name","description","vat","actions"]
+  displayedColumns: string[] = ["name","description","actions"]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;

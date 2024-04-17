@@ -27,11 +27,12 @@ export class DeletePropertyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.property = this.property.propertyName + " " + this.property.location
+    this.property = this.data.property;
   }
 
   onDelete(){
-    this.subscription = this.propertyService.deleteProperty(this.data.customer.id)
+    console.log("Passed Id", this.property.id)
+    this.subscription = this.propertyService.deleteProperty(this.property.id)
     .subscribe((res)=> {
       this.isloading = true;
       this.snackbar.showNotification("snackbar-success", "Successful!");
