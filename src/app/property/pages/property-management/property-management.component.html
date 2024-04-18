@@ -1,3 +1,5 @@
+<section class="{{this.divcss?'content':''}}" >
+  <div class="{{this.divcss?'content-block':''}}">
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
@@ -11,10 +13,10 @@
                   <li class="dropdown m-l-5">
                     <label for="search-input"><i class="material-icons search-icon">search</i></label>
                     <input placeholder="Search" type="text" (keyup)="applyFilter($event)" #filter
-                      class="browser-default search-field" aria-label="Search box" />
+                          class="browser-default search-field" aria-label="Search box" />
                   </li>
                   <li *ngIf="role=='ROLE_LANDLORD'">
-                    <div class="m-l-5" matTooltip="Add">
+                    <div class="m-l-5" matTooltip="Add property">
                       <button mat-mini-fab color="primary" routerLink="/property/create">
                         <mat-icon class="col-white">add</mat-icon>
                       </button>
@@ -72,13 +74,13 @@
             </div>
           </div>
           <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
-            #exporter="matTableExporter">
-            <ng-container matColumnDef="name">
-              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property
-                Name</mat-header-cell>
-              <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
-                class="table-img column-nowrap">{{ row.propertyName }}</mat-cell>
-            </ng-container>
+          #exporter="matTableExporter">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property
+              Name</mat-header-cell>
+            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+              class="table-img column-nowrap">{{ row.propertyName }}</mat-cell>
+          </ng-container>
 
             <ng-container matColumnDef="type">
               <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property
@@ -140,15 +142,15 @@
               </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple>
-            </mat-row>
-            <mat-cell *matNoDataRow colspan="4">
-              No data matching the filter "{{ input.value }}"</mat-cell>
-          </mat-table>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple>
+          </mat-row>
+          <mat-cell *matNoDataRow colspan="4">
+            No data matching the filter "{{ input.value }}"</mat-cell>
+        </mat-table>
 
           <!-- Loading spinner -->
-          <div *ngIf="!loading" class="tbl-spinner">
+          <div *ngIf="isLoading" class="tbl-spinner">
             <mat-progress-spinner color="primary" [diameter]="60" mode="indeterminate">
             </mat-progress-spinner>
           </div>
@@ -159,3 +161,5 @@
     </div>
   </div>
 </div>
+</div>
+</section>

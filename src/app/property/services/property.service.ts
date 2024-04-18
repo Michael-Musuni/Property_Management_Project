@@ -57,7 +57,7 @@ export class PropertyService {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/units-unoccupied?propertyName=${propertyName}`, { responseType: 'blob'});
   }
   public updateProperty(id: any, data: any): Observable<any>{
-    console.log("next of kin to be submitted "+data.nextOfKin.nextOfKinName)
+    // console.log("next of kin to be submitted "+data.nextOfKin.nextOfKinName)
     return this.http.put(`${environment.apiUrl}/api/v1/property/update?id=${id}`, data)
   }
   public deleteProperty(id: any): Observable<any>{

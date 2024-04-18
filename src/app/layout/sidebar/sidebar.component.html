@@ -1,6 +1,20 @@
+<style>
+  #leftsidebar {
+    background-color: rgb(208, 227, 245);
+    color: white;
+  }
+
+  .menu-top {
+    color: rgb(203, 247, 9); /* Ensures text color is white */
+  }
+
+  .hide-menu {
+    color: white; /* Ensures text color is white */
+  }
+</style>
 <div>
   <!-- Left Sidebar -->
-  <aside id="leftsidebar" class="sidebar down" (mouseenter)="mouseHover($event)" (mouseleave)="mouseOut($event)">
+  <aside id="leftsidebar" class="sidebar down" (mouseenter)="mouseHover($event)" (mouseleave)="mouseOut($event)" style="background:linear-gradient(to bottom, #5d7cbc, white)">
     <!-- Menu -->
     <div class="menu">
       <ul class="list"

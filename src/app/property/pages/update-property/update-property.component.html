@@ -85,7 +85,7 @@
                                             </mat-card-content>
                                         </mat-card>
                                         <div>
-                                            <button mat-raised-button color="primary" routerLink="/property/manage">Cancel</button>
+                                            <button mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <button mat-raised-button color="primary" matStepperNext>Next</button>
                                         </div>
@@ -641,7 +641,7 @@
                                         <b>Back</b>
                                     </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
-                                    <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <!-- <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
                 
                                     <button mat-raised-button color="primary" [disabled]="!propertyDetails.valid" (click)="updateProperty()">
                                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
