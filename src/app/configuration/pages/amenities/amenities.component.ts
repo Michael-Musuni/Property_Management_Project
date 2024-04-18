@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { EditAmenityComponent } from '../edit-amenity/edit-amenity.component';
+import { DeleteAmenityComponent } from '../delete-amenity/delete-amenity.component';
 
 @Component({
   selector: 'app-amenities',
@@ -59,11 +61,30 @@ export class AmenitiesComponent implements OnInit {
     }
     this.dialog.open(AddAmenitiesComponent, dialogConfig)
   }
-  editCall(){
+  editCall(data: any){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false
+    dialogConfig.autoFocus = true
+    dialogConfig.width = "40%"
+    dialogConfig.data = {
+      customer: data
+    }
 
+    console.log("passed data", data)
+    const dialogRef=this.dialog.open(EditAmenityComponent, dialogConfig)
+    dialogRef.afterClosed().subscribe((res)=> {
+      this.fetchAmenities()
+    })
   }
   deleteCall(){
-    
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false
+    dialogConfig.autoFocus = true
+    dialogConfig.width = "40%"
+    dialogConfig.data = {
+      test: ""
+    }
+    this.dialog.open(DeleteAmenityComponent, dialogConfig)
   }
   fetchAmenities() {
     this.isLoading = true

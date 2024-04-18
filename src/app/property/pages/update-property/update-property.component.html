@@ -2,16 +2,19 @@
             <div class="row clearfix">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>Update Property</h2>
-                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h5>Update Property</h5>
+                            <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
                         <mat-stepper linear #stepper>
                             <mat-step [stepControl]="propertyDetails" [editable]="isEditable">
                                 <form [formGroup]="propertyDetails">
                                     <ng-template matStepLabel>Fill Property Details</ng-template>
                                     <!--Property Details-->
                                     <div class="row">
-                                        <mat-card>
+                                        
                                             <mat-card-title style="font-size: x-small;">Property Details</mat-card-title>
                                             <mat-card-content>
                                                 <div class="row">
@@ -83,11 +86,13 @@
                                                     </div>
                                                 </div>
                                             </mat-card-content>
-                                        </mat-card>
-                                        <div>
-                                            <button mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button mat-raised-button color="primary" matStepperNext>Next</button>
+                                   </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <button mat-raised-button class="pull-left" color="primary" (click)="onCancel()">Cancel</button>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6"> 
+                                            <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
                                         </div>
                                     </div>
                                 </form>
@@ -200,13 +205,13 @@
                                             </mat-form-field>
                                         </div>
                                     </div>
-                
-                                    <div>
-                                        <button mat-raised-button color="primary" matStepperPrevious>
-                                            <b>Back</b>
-                                        </button>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button mat-raised-button color="primary" matStepperNext>Next</button>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6"> 
+                                            <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
+                                        </div>
                                     </div>
                                 </form>
                             </mat-step>
@@ -233,18 +238,36 @@
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
-                                   
+                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label>CareTaker ID Number</mat-label>
+                                            <input matInput formControlName="caretakerID" required />
+                                            <mat-error *ngIf="caretakerDetails.get('caretakerID').hasError('required')">
+                                                Caretaker ID Number is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label>Physical Address</mat-label>
+                                            <input matInput formControlName="physicalAddress" required pattern="[a-zA-Z '-]*"
+                                            (keypress)="onKeyPress($event)" />
+                                            <mat-error *ngIf="caretakerDetails.get('physicalAddress').hasError('required')">
+                                                Physical Address name is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
                                     <div>
                                     </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
-                                        <button mat-raised-button color="primary" matStepperPrevious>
-                                            <b>Back</b>
-                                        </button>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button mat-raised-button color="primary" matStepperNext>Next</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6"> 
+                                        <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
                                     </div>
                                 </div>
-                                
                                 </form>
                             </mat-step>
                             <mat-step [stepControl]="subPropertiesForm" [editable]="isEditable">
@@ -311,8 +334,6 @@
                                         <form>
                                         <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort
                                             class="mat-cell" #exporter="matTableExporter">
-                
-                                            
                                             <ng-container matColumnDef="id">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Id
                                                 </mat-header-cell>
@@ -376,17 +397,15 @@
                                     <mat-divider></mat-divider>
                 
                                 </mat-accordion>
-                
-                
-                                <div>
-                                    <button mat-raised-button color="primary" matStepperPrevious>
-                                        <b>Back</b>
-                                    </button>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6"> 
+                                        <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
+                                    </div>
                                 </div>
-                
-                            </mat-step>
+                                </mat-step>
                             <!-- <mat-step [stepControl]="utilityForm" [editable]="isEditable">
                 
                                 <ng-template matStepLabel>Fill out Service Charges</ng-template>
@@ -616,45 +635,41 @@
                                      
                                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                             <mat-form-field class="example-full-width" appearance="outline">
-                                                <mat-label>Management Commission in percentage (%)</mat-label>
+                                                <mat-label>Agent percentage (%)</mat-label>
                                                 <input matInput formControlName="managementCommission"  />
                 
                                             </mat-form-field>
                                         </div>
                 
                                     </div>
-                
-                                    <div>
-                                        <button mat-raised-button color="primary" matStepperPrevious>
-                                            <b>Back</b>
-                                        </button>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button mat-raised-button color="primary" matStepperNext>Next</button>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6"> 
+                                            <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
+                                        </div>
                                     </div>
                                 </form>
                             </mat-step>
                             <mat-step>
                                 <ng-template matStepLabel>Done</ng-template>
                                 <p>You are now done.</p>
-                                <div>
-                                    <button mat-raised-button color="primary" matStepperPrevious>
-                                        <b>Back</b>
-                                    </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                
-                                    <!-- <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-                
-                                    <button mat-raised-button color="primary" [disabled]="!propertyDetails.valid" (click)="updateProperty()">
-                                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                                        <b>SUBMIT</b>
-                                    </button>
-                                </div>
-                            </mat-step>
+                                
+                                   <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6"> 
+                                            <button mat-raised-button class="float-right" color="primary" [disabled]="!propertyDetails.valid" (click)="updateProperty()">
+                                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                                <b>SUBMIT</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                           </mat-step>
                         </mat-stepper>
-                                    
-
-                            
-                        
-                    </div>
+                   </div>
                 </div>
             </div>
         </div>
