@@ -23,10 +23,19 @@ export class MainBillingComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private dialog: MatDialog) {
 
-    this.monthLabels = ['January', 'February', 'March', 'April'];
+    this.monthLabels = [];
     this.barGraphOptions = {
+      chart: {
+        type: "bar",
+        height: 50,
+        width: '80%', // Set width to utilize available space
+        toolbar: {
+          show: false ,// Hide toolbar if not needed
+        
       responsive: true,
       maintainAspectRatio: false
+        }
+      }
     };
     this.invoiceData = [
       { data: [], label: 'Paid' },
@@ -53,20 +62,23 @@ export class MainBillingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        console.log(result)
+      
         this.selectedProperty = result.propertyName; // Update the selected property
-        this.updateBarGraph(this.selectedProperty); // Update the bar graph based on the selected property
+        this.updateBarGraph(result.data.id); // Update the bar graph based on the selected property
       }
     });
   }
 
-  updateBarGraph(property: string): void {
-    const propertyId = this.properties.findIndex(prop => prop === property) + 1
+  updateBarGraph(propertyId: any): void {
+    // const propertyId = this.properties.findIndex(prop => prop === property) + 1
   
     this.billingService.getInvoiceStatusPerProperty(propertyId).subscribe({
       next: (data) => {
         // Initialize arrays to hold monthly paid and unpaid amounts
-        const monthlyPaidAmounts = Array(12).fill(0); // Initialize with zeros for each month
-        const monthlyUnpaidAmounts = Array(12).fill(0); // Initialize with zeros for each month
+        this.monthLabels = data.PAID.labels
+        const monthlyPaidAmounts = data.PAID.values; // Initialize with zeros for each month
+        const monthlyUnpaidAmounts = data.PAID.values; // Initialize with zeros for each month
   
         // Check if the 'PAID' and 'NOT PAID' properties exist in the data object
         if (data.hasOwnProperty('PAID') && data.hasOwnProperty('NOT PAID')) {

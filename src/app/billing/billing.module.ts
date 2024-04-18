@@ -56,6 +56,7 @@ import { AllExpensesComponent } from './pages/all-expenses/all-expenses.componen
 import { AddExpensesComponent,} from './pages/add-expenses/add-expenses.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ChartsModule } from 'ng2-charts';
+
 import { ReportOptionsComponent } from './pages/report-options/report-options.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { VatComponent } from './pages/vat/vat.component';
@@ -90,7 +91,7 @@ import { ExpensesComponent } from './pages/expenses/expenses.component';
     PaymentDialogComponent,
     CheckerDialogComponent,
     TotalExpensesComponent,
-    AllExpensesComponent
+    AllExpensesComponent,
 
   ],
   imports: [
@@ -124,7 +125,8 @@ import { ExpensesComponent } from './pages/expenses/expenses.component';
     MatNativeDateModule,
     MatRadioModule,
     ChartsModule
-
+    
+    
   ]
 })
 export class BillingModule { }
