@@ -1,58 +1,62 @@
-<div class="modalHeader" style="background-color: #f0f0f0; padding: 10px; border-bottom: 1px solid #ccc;">
-  <div class="contact-details-name mb-1"><strong style="color: rgb(24, 28, 29);">{{invoice.invoiceNumber}}</strong></div>
-  <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog" style="margin-left: auto;">
-    <mat-icon>close</mat-icon>
-  </button>
-</div>
-
-<div mat-dialog-content style="display: flex; flex-wrap: wrap; padding: 20px;">
-  <!-- Left section -->
-  <div style="flex: 1 1 calc(50% - 20px); margin-right: 20px;">
-    <p><span style="color: #555;">Tenant Name:</span> {{ invoice.tenantName }}</p>
-    <p><span style="color: #555;">Property Name:</span> {{ invoice.propertyName }}</p>
-    <p><span style="color: #555;">Unit:</span> {{ invoice.unit }}</p>
-    <p><span style="color: #555;">Total Amount:</span> {{ getTotalAmount(invoice.details) }}</p>
-    <p><span style="color: #555;">Invoice Month:</span> {{ invoice.invoiceMonth }}</p>
-    <p><span style="color: #555;">Invoicing Date:</span> {{ invoice.invoicingDate | date }}</p>
+<div style="padding: 5px; overflow-y: auto; max-height: 100vh;">
+  <div class="modalHeader" style="background-color: #f0f0f0; padding: 10px; border-bottom: 1px solid #ccc;">
+    <div class="contact-details-name mb-1"><strong style="color: rgb(24, 28, 29);">{{invoice.invoiceNumber}}</strong></div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog" style="margin-left: auto;">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-  <!-- Right section -->
-  <div style="flex: 1 1 calc(50% - 20px);" >
-    <!-- <p><span style="color: #555;">Tenant Id:</span> {{ invoice.tenantId }}</p> -->
-    <!-- <p><span style="color: #555;">Unit Id:</span> {{ invoice.unitId }}</p> -->
-    <p><span style="color: #555;">Is Sent:</span> {{ invoice.isSent }}</p>
-    <p><span style="color: #555;">Status:</span> {{ invoice.status }}</p>
-    <p><span style="color: #555;">Balance:</span> {{ invoice.balance }}</p>
-    <p><span style="color: #555;">Channel:</span> {{ invoice.channel }}</p>
-    <p><span style="color: #555;">Due Status:</span> {{ invoice.dueStatus }}</p>
-    <p><span style="color: #555;">Mode of Payment:</span> {{ invoice.modeOfPayment }}</p>
-  </div>
-</div>
 
-<div mat-dialog-content style="padding: 20px;">
-  <h5 style="color: rgb(10, 9, 26);">Charges</h5>
-  <div style="overflow-x: auto;">
-    <table style="width: 100%; border-collapse: collapse;">
-      <thead style="background-color: #f0f0f0;">
-        <tr>
-          <th style="padding: 10px; border: 1px solid #ccc;">Item</th>
-          <th style="padding: 10px; border: 1px solid #ccc;">Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let detail of invoice.details">
-          <td style="padding: 10px; border: 1px solid #ccc;"><span style="color: #555;">{{ detail.chargeName }}</span></td>
-          <td style="padding: 10px; border: 1px solid #ccc;"><span style="color: #555;">{{ detail.chargeAmount }}</span></td>
-        </tr>
-      </tbody>
-    </table>
+  <div mat-dialog-content style="display: flex; flex-wrap: wrap;">
+    <!-- Left section -->
+    <div style="flex: 1 1 calc(50% - 10px); margin-right: 20px;padding: 5px">
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Tenant Name:</span> {{ invoice.tenantName | uppercase}}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Property Name:</span> {{ invoice.propertyName | uppercase }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Unit:</span> {{ invoice.unit }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Total Amount:</span> {{ getTotalAmount(invoice.details) }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Invoice Month:</span> {{ invoice.invoiceMonth }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Invoicing Date:</span> {{ invoice.invoicingDate | date }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Date Paid:</span> {{ invoice.datePaid }}</p>
+    </div>
+    <!-- Right section -->
+    <div style="flex: 1 1 calc(50% - 10px);padding: 5px;">
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Is Sent:</span> {{ invoice.isSent }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Status:</span> {{ invoice.status }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Balance:</span> {{ invoice.balance }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Channel:</span> {{ invoice.channel }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Due Status:</span> {{ invoice.dueStatus }}</p>
+      <p style="margin-bottom: 5px;"><span style="color: #555;">Mode of Payment:</span> {{ invoice.modeOfPayment }}</p>
+      
+    </div>
   </div>
-</div>
 
-<div mat-dialog-actions style="justify-content: flex-end; padding: 20px;">
-  <button mat-icon-button color="primary" (click)="downloadInvoice(invoice)"
-  matTooltip="Download" [disabled]="downloading">
-    <mat-icon>cloud_download</mat-icon>
-    <span *ngIf="invoice.downloading" style="color: #555;">Downloading...</span>
-  </button>
-  <!-- <button mat-button (click)="closeDialog()" style="background-color: #e0e0e0;">Close</button> -->
+  <div mat-dialog-content style="padding: 10px;">
+    <h5 style="color: rgb(10, 9, 26); margin-bottom: 5px;">&nbsp; Charges</h5>
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; border: 1px solid #111111;">
+        <thead style="background-color: #f0f0f0;">
+          <tr>
+            <th style="padding: 10px; border: 1px solid #ccc;">Item</th>
+            <th style="padding: 10px; border: 1px solid #ccc;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let detail of invoice.details">
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ccc;"><span style="color: #555;">{{ detail.chargeName }}</span></td>
+              <td style="padding: 10px; border: 1px solid #ccc;"><span style="color: #555;">{{ detail.chargeAmount }}</span></td>
+            </tr>
+          </ng-container>
+        </tbody>
+        
+      </table>
+    </div>
+  </div>
+
+  <div mat-dialog-actions style="justify-content: flex-end; padding: 10px;">
+    <button mat-icon-button color="primary" (click)="downloadInvoice(invoice)" matTooltip="Download"
+      [disabled]="downloading">
+      <mat-icon>cloud_download</mat-icon>
+      <span *ngIf="invoice.downloading" style="color: #555;">Downloading...</span>
+    </button>
+  </div>
 </div>
