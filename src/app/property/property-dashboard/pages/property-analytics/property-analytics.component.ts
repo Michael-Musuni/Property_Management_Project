@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexStroke, ApexTooltip, ApexDataLabels, ChartComponent, ApexTitleSubtitle, ApexGrid, ApexResponsive, ApexNonAxisChartSeries } from 'ng-apexcharts';
 import { DashboardService } from '../../dashboardservice/dashboard.service';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
 
 
 export type ChartOptions = {
@@ -21,6 +23,7 @@ export type ChartOptions = {
   styleUrls: ['./property-analytics.component.sass']
 })
 export class PropertyAnalyticsComponent implements OnInit {
+  piechartbOptions: Partial<ChartOptions>;
   propertyName: any;
   areachartOptions: Partial<ChartOptions>;
   name: string;
@@ -35,72 +38,74 @@ export class PropertyAnalyticsComponent implements OnInit {
   dialog: any;
   dialogData: any;
   units: any;
+
+
+
+
+
+  initializeForm() {
+    this.chargesArray = this.fb.array([]);
+    // this.getChargesPerProperty(this.dialogData.data.id);
+
+
+    this.Propertyform = this.fb.group({
+      propertyId: [''],
+      propertyName: [''],
+
+
+    });
+  }
+
   
-
-
-  
-
-  // initializeForm() {
-  //   this.chargesArray = this.fb.array([]);
-  //   // this.getChargesPerProperty(this.dialogData.data.id);
-
-
-  //   this.Propertyform = this.fb.group({
-  //     propertyId:[''],
-  //     propertyName: [''],
-
-    
-  //   });
-  // }
-
-  // pickProperty() {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = false;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.width = '50%';
-  //   dialogConfig.data = {
-  //     user: '',
-  //   };
-  //   const dialogRef = this.dialog.open(
-  //     PropertyLookupComponent,
-  //     dialogConfig
-  //   );
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     this.dialogData = result;
-  //     this.Propertyform.patchValue({
-        
-  //       propertyId:this.dialogData.data.id,
-  //       propertyName: this.dialogData.data.propertyName
-
-  //     });
-  //     this.units = this.getUnitsPerProperty("VACANT", this.dialogData.data.id);
-  //     this.getChargesPerProperty(this.dialogData.data.id)
-
-  //   });
-
-  // }
-  // getUnitsPerProperty(arg0: string, id: any): any {
-  //   throw new Error('Method not implemented.');
-  // }
-  // getChargesPerProperty(id: any) {
-  //   throw new Error('Method not implemented.');
-  // }
+  getUnitsPerProperty(arg0: string, id: any): any {
+    throw new Error('Method not implemented.');
+  }
+  getChargesPerProperty(id: any) {
+    throw new Error('Method not implemented.');
+  }
 
   @ViewChild("chart") chart: ChartComponent;
   public areaChartOptions: Partial<ChartOptions>;
   public lineChartOptions: Partial<ChartOptions>;
   public piechartOptions: any;
-  public piechartbOptions: any;
+  
 
-  constructor(private service: DashboardService) {}
+
+  constructor(private service: DashboardService) { }
   ngOnInit(): void {
     this.name = "something"
     this.getRevenuePieChartData()
-    this.fetchDashboardData()
     this.getLineGraphData()
-    this.fetchRevenueFromPropertiesData();
-
+    this.fetchRevenueFromPropertiesData()
     
+    
+  }
+ pickProperty() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '50%';
+    dialogConfig.data = {
+      user: '',
+    };
+    const dialogRef = this.dialog.open(
+      PropertyLookupComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {
+      this.dialogData = result;
+      this.Propertyform.patchValue({
+
+        propertyId: this.dialogData.data.id,
+        propertyName: this.dialogData.data.propertyName
+
+      });
+      // this.units = this.getUnitsPerProperty("VACANT", this.dialogData.data.id);
+      // this.getChargesPerProperty(this.dialogData.data.id)
+      console.log("Selected property ID", this.dialogData.data.id)
+      this.fetchDashboardData(this.dialogData.data.id)
+    });
+
   }
 
   fetchRevenueFromPropertiesData() {
@@ -130,9 +135,9 @@ export class PropertyAnalyticsComponent implements OnInit {
           }
         };
 
-        
+
       },
-      
+
     );
   }
 
@@ -179,7 +184,7 @@ export class PropertyAnalyticsComponent implements OnInit {
         this.data = res
 
         console.log("myrevenuedata", this.data)
-        this.loading = false;  
+        this.loading = false;
         this.piechartOptions = {
           series: this.data.values,
           chart: {
@@ -201,13 +206,13 @@ export class PropertyAnalyticsComponent implements OnInit {
             }
           ]
         };
-  
-      },)
-      
-  }  
-  fetchDashboardData() {
 
-    this.subscription = this.service.getChartsdata().subscribe(res => {
+      },)
+
+  }
+  fetchDashboardData(propertyId: number) {
+
+    this.subscription = this.service.getChartsdata(propertyId).subscribe(res => {
       this.data = res
 
       console.log("mychartsdata", this.data)
@@ -241,14 +246,14 @@ export class PropertyAnalyticsComponent implements OnInit {
 
     this.subscription = this.service.getpropertydata().subscribe(res => {
       this.data = res
-      this.loaded = true; 
+      this.loaded = true;
 
-      console.log("mypropertydata",this.data)
-      this.Propertyform=this.data.propertyName
-      
+      console.log("mypropertydata", this.data)
+      this.Propertyform = this.data.propertyName
+
     })
   }
- 
+
   public generateData(baseval, count, yrange) {
     var i = 0;
     var series = [];
@@ -263,7 +268,9 @@ export class PropertyAnalyticsComponent implements OnInit {
       i++;
     }
     return series;
-  } 
+  }
+
+
 }
 
 

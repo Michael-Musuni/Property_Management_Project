@@ -28,7 +28,7 @@ export class PropertyManagementComponent implements OnInit {
   role:any
   subscription!:Subscription
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["name","type","location","owner","totalUnits","vacantUnits","actions"]
+  displayedColumns: string[] = ["name","type","location","owner","units","vacantunits","actions"]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
@@ -67,7 +67,7 @@ export class PropertyManagementComponent implements OnInit {
     this.subscription = this.propertyService.getProperties().subscribe(
       (res) => {
         this.data= res
-        console.log("Data ",this.data.entity) 
+        console.log("Data",this.data.entity) 
         if (this.data.length > 0) {
           this.loading = false;
           this.isdata = true;
@@ -143,7 +143,7 @@ export class PropertyManagementComponent implements OnInit {
     dialogConfig.width = "60%"
     dialogConfig.data = {
       property: property,
-    }
+    };
 
     const dialogRef = this.dialog.open(ViewPropertyComponent, dialogConfig)
     dialogRef.afterClosed().subscribe((res)=> {

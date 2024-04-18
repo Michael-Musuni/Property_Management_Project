@@ -111,22 +111,20 @@
   <div class="card col-lg-6">
     <div class="card-body">
       <h3>Occupied and Vacant Units</h3>
-      <!-- <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
-          <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Select Property</mat-label>
+      <div class="row">
+         <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Select property</mat-label>
+                <input formControlName="propertyName" matInput required readonly />
+                <button (click)="pickProperty()" mat-icon-button matSuffix [attr.aria-label]="'Search for property'">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
       
-            <input formControlName="propertyName" matInput required />
-            <button (click)="pickProperty()" mat-icon-button matSuffix [attr.aria-label]="'Hide password'">
-              <mat-icon>search</mat-icon>
-            </button>
-          </mat-form-field>
-        </div> -->
-        
-      <!-- </div> -->
-      
-      <apx-chart [series]="piechartbOptions.series" [chart]="piechartbOptions.chart"
+      <apx-chart *ngIf="piechartbOptions" [series]="piechartbOptions.series" [chart]="piechartbOptions.chart"
         [labels]="piechartbOptions.labels" [responsive]="piechartbOptions.responsive"></apx-chart>
-
+        </div>
   </div>
 </div>
