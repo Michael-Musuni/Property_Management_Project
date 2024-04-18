@@ -65,34 +65,32 @@ export class LeaseformComponent implements OnInit {
 
   }
 
-  // onCancelClick(): void {
-  //   this.dialog.close();
-  // }
-
+ 
   submit() {
-    // Implement the form submission logic
     const formData = this.Leaseform.value;
-    console.log("formdata", formData);
-    formData.tenant = this.tenantData
-    // console.log("Start Date Type:", typeof formData.startDate);
-    // console.log("End Date Type:", typeof formData.endDate);
+  
+    // Format date fields if needed
     formData.startDate = this.formatDate(formData.startDate);
     formData.endDate = this.formatDate(formData.endDate);
-    formData.startDate = this.formatDate(formData.startDate);
-    formData.endDate = this.formatDate(formData.endDate);
-    console.log("My Data ", this.Leaseform.value)
-    this.subscription = this.leaseService.newContract(this.Leaseform.value).subscribe({
-      next: ((res) => {
-        console.log("My response ", res)
-        this.snackbar.showNotification("snackbar-success", this.data.message);
-        this.router.navigate(["/leasing/lease"])
-      })
-      // res => {
-      //   console.log("My response ", res)
-      //   this.snackbar.showNotification("snackbar-success", this.data.message);
-      //   this.router.navigate(["/leasing/lease"])
-      // }
-    })
+  
+    // Make sure 'this.tenantData' is correctly defined
+    formData.tenant = this.tenantData;
+  
+    console.log("Form Data:", formData);
+  
+    this.subscription = this.leaseService.newContract(formData).subscribe({
+      next: (res) => {
+        console.log("Response:", res);
+        // Assuming 'data' is part of the response, adjust accordingly
+        this.snackbar.showNotification("snackbar-success", res.message || 'Contract created successfully');
+        this.router.navigate(["/leasing/lease"]);
+      },
+      error: (err) => {
+        console.error("Error:", err);
+        this.snackbar.showNotification("snackbar-error", "Failed to submit the form. Please try again.");
+        // Handle error appropriately, e.g., display an error message
+      }
+    });
   }
 
   getTenantById(tenantId) {
