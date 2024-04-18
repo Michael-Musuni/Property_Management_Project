@@ -426,7 +426,7 @@
 
                                     </mat-form-field>
                                 </div>
-
+                                <input type="file" (change)="onFileChange($event)">
                             </div>
                             <button mat-raised-button [disabled]="!unitsForm.valid" (click)="addUnit()">Add
                                 Unit</button>

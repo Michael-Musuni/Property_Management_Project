@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexStroke, ApexTooltip, ApexDataLabels, ChartComponent, ApexTitleSubtitle, ApexGrid, ApexResponsive, ApexNonAxisChartSeries } from 'ng-apexcharts';
 import { DashboardService } from '../../dashboardservice/dashboard.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ReportoptionsComponent } from 'src/app/tenants/pages/reportoptions/reportoptions.component';
 
 
 export type ChartOptions = {
@@ -143,12 +145,12 @@ export class PropertyAnalyticsComponent implements OnInit {
       this.loaded = true;
       this.lineChartOptions = {
         series: [{
-          name: "Desktops",
+          name: "Tenants",
           data: this.data.values
         }],
         chart: {
           height: 350,
-          width: 1000,
+          
           type: "line",
           zoom: {
             enabled: false
@@ -263,7 +265,21 @@ export class PropertyAnalyticsComponent implements OnInit {
       i++;
     }
     return series;
-  } 
+  }
+  pickProperty() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.disableClose = true
+    dialogConfig.autoFocus = true
+    dialogConfig.width = '600px'
+    dialogConfig.data = { test: "data" }
+
+    const dialogRef = this.dialog.open(ReportoptionsComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('closed');
+    });
+    } 
 }
 
 
