@@ -149,9 +149,9 @@ export class LeaseComponent implements OnInit {
   activeContractsOptions = { responsive: true };
 
   // // Define the data and options for deleted tenants bar graph
-  // deactivatedContractsData = [{ data: [10, 20, 30, 40], label: 'Deactivated Contracts' }];
-  // deactivatedContractsLabels = ['January', 'February', 'March', 'April'];
-  // deactivatedContractsOptions = { responsive: true };
+  deactivatedContractsData = [{ data: [10, 20, 30, 40], label: 'Deactivated Contracts' }];
+  deactivatedContractsLabels = ['January', 'February', 'March', 'April'];
+  deactivatedContractsOptions = { responsive: true };
 
 
 

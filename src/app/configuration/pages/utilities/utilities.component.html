@@ -78,12 +78,12 @@
                             <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
                                 [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.description }}</mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="vat">
+                        <!-- <ng-container matColumnDef="vat">
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
                             VAT %</mat-header-cell>
                             <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
                                 [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.vat }}</mat-cell>
-                        </ng-container>
+                        </ng-container> -->
                         <ng-container matColumnDef="actions">
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Actions
                             </mat-header-cell>

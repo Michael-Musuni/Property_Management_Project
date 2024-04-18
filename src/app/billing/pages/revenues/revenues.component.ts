@@ -21,7 +21,9 @@ export class RevenuesComponent implements OnInit {
   subscription: Subscription;
   dataSource!: MatTableDataSource<any>;
   selectedMonth: number; 
+  selectedYear: number;
   months: { name: string, value: number }[];
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
@@ -52,6 +54,8 @@ export class RevenuesComponent implements OnInit {
       
     ];
 
+
+
     // Fetch revenues for the initially selected month
     this.fetchRevenues(this.selectedMonth);
   }
@@ -60,7 +64,7 @@ export class RevenuesComponent implements OnInit {
     // Fetch revenues for the selected month
     this.fetchRevenues(this.selectedMonth);
   }
-
+ 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

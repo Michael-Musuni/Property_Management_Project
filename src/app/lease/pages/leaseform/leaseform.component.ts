@@ -30,6 +30,7 @@ export class LeaseformComponent implements OnInit {
   units: any
   startDate: String;
   endDate: String;
+  
   // Initialize the FormArray
   chargesArray = this.fb.array([]);
 
@@ -75,6 +76,8 @@ export class LeaseformComponent implements OnInit {
     formData.tenant = this.tenantData
     // console.log("Start Date Type:", typeof formData.startDate);
     // console.log("End Date Type:", typeof formData.endDate);
+    formData.startDate = this.formatDate(formData.startDate);
+    formData.endDate = this.formatDate(formData.endDate);
     formData.startDate = this.formatDate(formData.startDate);
     formData.endDate = this.formatDate(formData.endDate);
     console.log("My Data ", this.Leaseform.value)
@@ -255,8 +258,10 @@ pickProperty() {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
+ 
 
     return `${year}-${month}-${day}`;
   }
+  
 }
 

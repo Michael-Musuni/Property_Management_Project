@@ -13,7 +13,18 @@
           </div>
         </div>
       </div>
-          <div class="row">
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="card">
+          <div class="body">
+            <canvas baseChart [datasets]="deactivatedContractsData" [labels]="deactivatedContractsLabels"
+              [options]="deactivatedContractsOptions" [chartType]="'bar'"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
               <mat-form-field class="example-full-width mb-3" appearance="outline">
                 <mat-label>Select property</mat-label>
@@ -24,8 +35,8 @@
               </mat-form-field>
         </div>
        </div>
-      </div>
-      <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      </div> -->
+    <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="card">
           <div class="body">
             <canvas baseChart [datasets]="deactivatedContractsData" [labels]="deactivatedContractsLabels"
@@ -114,7 +125,8 @@
                 <!-- Checkbox Column -->
                 <!-- "", "", "termination_date", "termination_status" -->
                 <ng-container matColumnDef="tenantName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap">Tenant Name</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap">Tenant
+                    Name</mat-header-cell>
                   <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                     class="column-nowrap">
                     {{row.tenantName}}
@@ -155,12 +167,12 @@
                       <mat-icon>cloud_download</mat-icon>
                     </button>
                     <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateLease(lease)"
-                    matTooltip="update"> <mat-icon>edit</mat-icon>
-                  </button>
-                    <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
-                    (click)="onDelete(row)" matTooltip="Delete"><mat-icon>delete</mat-icon>
+                      matTooltip="update"> <mat-icon>edit</mat-icon>
                     </button>
-                  
+                    <button mat-icon-button color="primary" (click)="$event.stopPropagation()" (click)="onDelete(row)"
+                      matTooltip="Delete"><mat-icon>delete</mat-icon>
+                    </button>
+
                   </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

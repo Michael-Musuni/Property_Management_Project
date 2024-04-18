@@ -65,6 +65,7 @@ export class ReportOptionsComponent implements OnInit {
     console.log("property name", propertyName)
     if (reportType === "Units occupied") {
       console.log("property type", reportType)
+      alert("Download will start shortly...");
       this.propertyService.downloadUnitsOccupiedReport(propertyName).subscribe({
         next: ((res) => {
           console.log("response", res);
@@ -87,10 +88,8 @@ export class ReportOptionsComponent implements OnInit {
     if (reportType === "Units unoccupied") {
       console.log("property name", propertyName);
     
-     
-      alert("Download started");
-    
-      this.propertyService.downloadUnitsunoccupiedReport(propertyName).subscribe({
+      alert("Download will start shortly...");
+     this.propertyService.downloadUnitsunoccupiedReport(propertyName).subscribe({
         next: ((res) => {
           console.log("response", res);
           const blob = new Blob([res], { type: 'application/pdf' });
@@ -117,6 +116,7 @@ export class ReportOptionsComponent implements OnInit {
     
     if (reportType === "Units per property") {
       console.log("property type", reportType)
+      alert("Download will start shortly...");
       this.propertyService.downloadUnitsperPropertyReport(propertyName).subscribe({
         next: ((res) => {
           

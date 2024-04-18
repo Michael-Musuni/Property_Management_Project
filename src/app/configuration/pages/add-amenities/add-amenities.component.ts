@@ -28,7 +28,7 @@ export class AddAmenitiesComponent implements OnInit {
     this.amenityForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      vat: ['', Validators.required],
+      // vat: ['', Validators.required],
     }); 
   }
    // Method to add amenity

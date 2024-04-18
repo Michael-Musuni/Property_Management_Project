@@ -24,7 +24,7 @@ export class AddUtilitiesComponent implements OnInit {
     this.utilityForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      vat: ['', Validators.required],
+      // vat: ['', Validators.required],
 
     });
   }
