@@ -4,6 +4,7 @@ import { DashboardService } from '../../dashboardservice/dashboard.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ReportoptionsComponent } from 'src/app/tenants/pages/reportoptions/reportoptions.component';
 import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 export type ChartOptions = {
@@ -33,13 +34,12 @@ export class PropertyAnalyticsComponent implements OnInit {
   loading: boolean;
   loaded: boolean;
   chargesArray: any;
-  fb: any;
-  Propertyform: any;
+  // fb: any;
+  // Propertyform: any;
   tenantData: any;
-  dialog: any;
   dialogData: any;
   units: any;
-
+  Propertyform: FormGroup;
 
 
 
@@ -72,7 +72,7 @@ export class PropertyAnalyticsComponent implements OnInit {
   
 
 
-  constructor(private service: DashboardService) { }
+  constructor(private dialog: MatDialog, private service: DashboardService, private fb: FormBuilder) {this.initializeForm(); }
   ngOnInit(): void {
     this.name = "something"
     this.getRevenuePieChartData()
@@ -104,7 +104,7 @@ export class PropertyAnalyticsComponent implements OnInit {
       // this.units = this.getUnitsPerProperty("VACANT", this.dialogData.data.id);
       // this.getChargesPerProperty(this.dialogData.data.id)
       console.log("Selected property ID", this.dialogData.data.id)
-      this.fetchDashboardData(this.dialogData.data.id)
+      this.getChartsData(this.dialogData.data.id)
     });
 
   }
@@ -211,7 +211,7 @@ export class PropertyAnalyticsComponent implements OnInit {
       },)
 
   }
-  fetchDashboardData(propertyId: number) {
+  getChartsData(propertyId: number) {
 
     this.subscription = this.service.getChartsdata(propertyId).subscribe(res => {
       this.data = res
@@ -269,7 +269,8 @@ export class PropertyAnalyticsComponent implements OnInit {
       i++;
     }
     return series;
-  } 
+  }
+  
 }
 
 
