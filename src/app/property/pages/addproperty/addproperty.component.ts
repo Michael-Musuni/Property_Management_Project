@@ -90,7 +90,8 @@ export class AddpropertyComponent implements OnInit {
       email: [this.user.email,],
       ownerType: ["", [Validators.required]],
       idNumber: ["",],
-      IDPassportNumber: ["",],
+      ownerIdType:["", [Validators.required]],
+      idpassportNumber: ["",],
       kraPin: ['',],
       physicalAddress: ["", [Validators.required]],//lease,rent
 
@@ -111,7 +112,7 @@ export class AddpropertyComponent implements OnInit {
     this.caretakerDetails = this.fb.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
-      caretakerID: ['', [Validators.required]],
+      nationalId: ['', [Validators.required]],
       physicalAddress: ["", [Validators.required]],
     });
     this.subPropertiesForm = this.fb.group({

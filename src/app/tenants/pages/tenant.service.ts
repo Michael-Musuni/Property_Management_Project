@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TenantService {
+  getTenants(startDate: Date, endDate: Date) {
+    throw new Error('Method not implemented.');
+  }
   
   private apiUrl = environment.apiUrl;
   
@@ -62,10 +65,9 @@ export class TenantService {
   //   return this.http.delete(`/api/property/tenant/${tenantId}`);
   // }
   getActiveTenants(startDate: Date, endDate: Date): Observable<number> {
-    const activeTenantsUrl = `${this.apiUrl}/api/property/tenant/active-tenants`;
+    const activeTenantsUrl = `${this.apiUrl}/api/property/tenant/active/range`;
 
-    // You might need to pass start and end date as query parameters
-    // Adjust the API endpoint and parameters as needed
+    
     return this.http.get<number>(activeTenantsUrl, {
       params: {
         startDate: startDate.toISOString(),
@@ -73,5 +75,6 @@ export class TenantService {
       }
     });
   }
+  
 
 }

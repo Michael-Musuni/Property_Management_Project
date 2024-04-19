@@ -19,6 +19,7 @@ import { ViewTenantComponent } from '../view-tenant/view-tenant.component';
 })
 
 export class TenantManagementComponent implements OnInit {
+
   startDate: Date;
   endDate: Date;
   maxEndDate: Date;
@@ -28,6 +29,8 @@ export class TenantManagementComponent implements OnInit {
     today: Date = new Date(); // Today's date
     // activeTenantsForSelectedDate: number; // Number of active tenants for the selected date
 activeTenantsForSelectedDates: number;
+picker: any;
+onDateRangeInput: any;
 
 
 
@@ -82,10 +85,12 @@ calculateActiveTenantsForSelectedDates(): void {
       });
   
 }
-onDateRangeInput(event: any): void {
-  this.startDate = event.value.start;
-  // Ensure that the end date is always after the start date
-  this.endDate = this.startDate && event.value.end <= this.startDate ? null : event.value.end;
+onEndDateChange(): void {
+  // Check if both start date and end date are selected
+  if (this.startDate && this.endDate) {
+    // Calculate active tenants for the selected date range
+    this.calculateActiveTenantsForSelectedDates();
+  }
 }
 
   fetchOnboardedTenantsData() {
@@ -111,6 +116,8 @@ onDateRangeInput(event: any): void {
         console.log('Response:', response);
         this.dataSource = new MatTableDataSource<any>(response.entity);
         this.dataSource.paginator = this.paginator;
+        this.activeTenantsForSelectedDates = response.entity.length;
+      
         this.isLoading = false;
       },
       error: (error) => {

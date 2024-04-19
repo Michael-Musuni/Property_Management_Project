@@ -30,24 +30,18 @@
         <mat-card-content>
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <mat-form-field>
-                <mat-label>Enter a date range</mat-label>
-                <mat-date-range-input [rangePicker]="picker" (dateRangeInput)="onDateRangeInput($event)">
-                  <input matStartDate placeholder="Start date" [max]="maxEndDate" [(ngModel)]="startDate">
-                  <input matEndDate placeholder="End date" [min]="startDate" [max]="maxEndDate" [(ngModel)]="endDate">
-                </mat-date-range-input>
-                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-              </mat-form-field>
+              <mat-date-range-input [rangePicker]="picker" (dateRangeInput)="onDateRangeInput($event)">
+                <input matStartDate placeholder="Start date" [max]="maxEndDate" [(ngModel)]="startDate">
+                <input matEndDate placeholder="End date" [min]="startDate" [max]="maxEndDate" [(ngModel)]="endDate" (dateChange)="onEndDateChange()">
+              </mat-date-range-input>
             </div>
           </div>
       
     
       <!-- Widget -->
       
-          <h2>Tenants</h2>
-          <p>Number of tenants from {{ startDate | date: 'mediumDate' }} to {{ endDate | date: 'mediumDate' }}: {{ activeTenantsForSelectedDates }}</p>
+       
+       <h4>  Number of tenants {{ startDate | date: 'mediumDate' }}  {{ endDate | date: 'mediumDate' }}: {{ activeTenantsForSelectedDates }}</h4> 
         </mat-card-content>
       </mat-card>
     </div>

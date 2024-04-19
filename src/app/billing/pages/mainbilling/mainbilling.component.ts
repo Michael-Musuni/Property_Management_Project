@@ -27,8 +27,8 @@ export class MainBillingComponent implements OnInit {
     this.barGraphOptions = {
       chart: {
         type: "bar",
-        height: 50,
-        width: '80%', // Set width to utilize available space
+        height: 100,
+        width: '100%', // Set width to utilize available space
         toolbar: {
           show: false ,// Hide toolbar if not needed
         
@@ -77,8 +77,9 @@ export class MainBillingComponent implements OnInit {
       next: (data) => {
         // Initialize arrays to hold monthly paid and unpaid amounts
         this.monthLabels = data.PAID.labels
+        
         const monthlyPaidAmounts = data.PAID.values; // Initialize with zeros for each month
-        const monthlyUnpaidAmounts = data.NOTPAID.values; // Initialize with zeros for each month
+        const monthlyUnpaidAmounts = data.PAID.values; // Initialize with zeros for each month
   
         // Check if the 'PAID' and 'NOT PAID' properties exist in the data object
         if (data.hasOwnProperty('PAID') && data.hasOwnProperty('NOT PAID')) {
