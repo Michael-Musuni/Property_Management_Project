@@ -22,6 +22,10 @@ export class AmenitiesService {
 
     return this.httpClient.post(`${environment.apiUrl}/api/v1/amenities/add`, data)
   }
+  updateAmenity(data: any) {
+  
+    return this.httpClient.put(`${environment.apiUrl}/api/v1/utilities/add`, data)
+  }
 }
 
 

@@ -16,22 +16,29 @@ export class AddAmenitiesComponent implements OnInit {
   submittedAmenities: any[] = []; // Define submitted amenities array
   loading:boolean
   data:any
-
-
-
-
-  constructor(private formBuilder: FormBuilder, private amenitiesService: AmenitiesService,private snackbar:SnackbarService,
-    public dialogRef: MatDialogRef<AmenitiesComponent>,
+constructor(
+  private formBuilder: FormBuilder, 
+  private amenitiesService: AmenitiesService,
+  private snackbar:SnackbarService,
+  public dialogRef: MatDialogRef<AmenitiesComponent>,
     ) { }
 
   ngOnInit(): void {
     this.amenityForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      // vat: ['', Validators.required],
+     
     }); 
+    const savedFormData = localStorage.getItem('formData');
+    if (savedFormData) {
+  this.amenityForm.patchValue(JSON.parse(savedFormData));
+    }
+  this.amenityForm.valueChanges.subscribe(value => {
+      localStorage.setItem('formData', JSON.stringify(value));
+    });
   }
-   // Method to add amenity
+   
+  
    addAmenity() {
       console.log(this.amenityForm.value)
       this.amenitiesService.addAmenities(this.amenityForm.value).subscribe(
@@ -50,10 +57,7 @@ export class AddAmenitiesComponent implements OnInit {
     
   }
 
-  // Method to update amenity
-  updateAmenity(amenity: any) {
-    // Implement update logic here
-  }
+ 
 
   // Method to delete amenity
   deleteAmenity(amenity: any) {
