@@ -30,7 +30,7 @@ import { IdverificationComponent } from './pages/idverification/idverification.c
 import { ReportoptionsComponent } from './pages/reportoptions/reportoptions.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { MatSortModule } from '@angular/material/sort';
 
 
 import { UpdatetenantComponent } from './pages/updatetenant/updatetenant.component';
@@ -104,7 +104,8 @@ import { ViewTenantComponent } from './pages/view-tenant/view-tenant.component';
     // AsyncPipe,
 
     ChartsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSortModule,
     
     
 

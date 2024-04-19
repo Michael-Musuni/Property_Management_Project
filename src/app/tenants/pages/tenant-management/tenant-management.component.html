@@ -5,7 +5,7 @@
       </app-breadcrumb>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center"> <!-- Add justify-content-center class to center the content -->
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="card">
           <div class="body">
@@ -23,16 +23,27 @@
           </div>
         </div> -->
       <!-- </div> -->
+      
 
       <!-- Date Picker -->
-      <input type="date" [(ngModel)]="selectedDate" (change)="onDateChange()" max="{{ today | date: 'yyyy-MM-dd' }}" />
-
-      <!-- Widget for active tenants -->
-      <div class="widget">
-        <h2>Active Tenants </h2>
-        <p>Number of active tenants on {{ selectedDate | date: 'mediumDate' }}: {{ activeTenantsForSelectedDate }}</p>
-      </div>
-
+      <mat-card>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <mat-date-range-input [rangePicker]="picker" (dateRangeInput)="onDateRangeInput($event)">
+                <input matStartDate placeholder="Start date" [max]="maxEndDate" [(ngModel)]="startDate">
+                <input matEndDate placeholder="End date" [min]="startDate" [max]="maxEndDate" [(ngModel)]="endDate" (dateChange)="onEndDateChange()">
+              </mat-date-range-input>
+            </div>
+          </div>
+      
+    
+      <!-- Widget -->
+      
+       
+       <h4>  Number of tenants {{ startDate | date: 'mediumDate' }}  {{ endDate | date: 'mediumDate' }}: {{ activeTenantsForSelectedDates }}</h4> 
+        </mat-card-content>
+      </mat-card>
     </div>
 
 
@@ -88,7 +99,7 @@
                   </div>
                   <div class="col-4">
                     <ul class="header-buttons">
-                      <!-- <li>
+                        <li>
                         <div class="export-button m-l-10" matTooltip="XLSX">
                           <img src="assets/images/icons/xlsx.png" alt="" (click)="
                             exporter.exportTable('xlsx', {
@@ -102,8 +113,8 @@
                         <div class="export-button m-l-10" matTooltip="CSV">
                           <img src="assets/images/icons/csv.png" alt="" (click)="exporter.exportTable('csv')" />
                         </div>
-                      </li>
-                      <li>
+                      </li> 
+                      <!-- <li>
                         <div class="export-button m-l-10" matTooltip="JSON">
                           <img src="assets/images/icons/json.png" alt="" (click)="exporter.exportTable('json')" />
                         </div>
@@ -112,7 +123,7 @@
                         <div class="export-button m-l-10" matTooltip="TXT">
                           <img src="assets/images/icons/txt.png" alt="" (click)="exporter.exportTable('txt')" />
                         </div>
-                      </li> -->
+                      </li>  -->
                     </ul>
                   </div>
                 </div>
@@ -152,6 +163,10 @@
                 <ng-container matColumnDef="unit">
                   <mat-header-cell *matHeaderCellDef>Unit</mat-header-cell>
                   <mat-cell *matCellDef="let tenant">{{ tenant.unit?.unitName || '-' }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="propertyName">
+                  <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
+                  <mat-cell *matCellDef="let tenant">{{ tenant.property?.propertyName || '-' }}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="actions">

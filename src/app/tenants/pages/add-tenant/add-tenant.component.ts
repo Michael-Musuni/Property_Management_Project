@@ -120,6 +120,7 @@ populateFormGroupFromLocalStorage(formName: string): void {
     });
 
     // ... other logic
+  
   }
   onIDChange(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -204,6 +205,8 @@ populateFormGroupFromLocalStorage(formName: string): void {
     // Update the table data source
     this.memberTableDataSource.data = [...this.memberTableDataSource.data];
 
+   
+
   }
 
   // New method to submit member table data to the 'members' form array
@@ -227,11 +230,13 @@ populateFormGroupFromLocalStorage(formName: string): void {
     });
 
     this.members.push(memberGroup);
+   
   }
 
   // Method to remove a member from the 'members' form array
   removeMember(index: number): void {
     this.members.removeAt(index);
+    
   }
 
   // Helper method to format date controls

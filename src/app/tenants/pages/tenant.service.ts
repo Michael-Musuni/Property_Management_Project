@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TenantService {
+  getTenants(startDate: Date, endDate: Date) {
+    throw new Error('Method not implemented.');
+  }
   
   private apiUrl = environment.apiUrl;
   
@@ -61,4 +64,17 @@ export class TenantService {
   // deleteTenant(tenantId: number): Observable<any> {
   //   return this.http.delete(`/api/property/tenant/${tenantId}`);
   // }
+  getActiveTenants(startDate: Date, endDate: Date): Observable<number> {
+    const activeTenantsUrl = `${this.apiUrl}/api/property/tenant/active/range`;
+
+    
+    return this.http.get<number>(activeTenantsUrl, {
+      params: {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString()
+      }
+    });
+  }
+  
+
 }
