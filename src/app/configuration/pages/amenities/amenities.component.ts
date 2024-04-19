@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AmenitiesService } from '../../services/amenities.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { AddAmenitiesComponent } from '../add-amenities/add-amenities.component';
 import { Subscription } from 'rxjs';
@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EditAmenityComponent } from '../edit-amenity/edit-amenity.component';
 import { DeleteAmenityComponent } from '../delete-amenity/delete-amenity.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-amenities',
@@ -76,15 +77,19 @@ export class AmenitiesComponent implements OnInit {
       this.fetchAmenities()
     })
   }
-  deleteCall(){
+  deleteCall(data:any){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
     dialogConfig.width = "40%"
     dialogConfig.data = {
-      test: ""
+      customer:data
     }
-    this.dialog.open(DeleteAmenityComponent, dialogConfig)
+    console.log("passed data", data)
+    const dialogRef=this.dialog.open(DeleteAmenityComponent, dialogConfig)
+    dialogRef.afterClosed().subscribe((res)=> {
+      
+    })
   }
   fetchAmenities() {
     this.isLoading = true

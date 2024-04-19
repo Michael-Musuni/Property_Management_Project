@@ -30,7 +30,7 @@ constructor(
     }
 amenityDetails(): FormGroup {
     return this.fb.group({
-     
+      id: [this.data.customer.id, [Validators.required]],
       name: [this.data.customer.name, [Validators.required]],
       description: [this.data.customer.description, [Validators.required]],
     });
@@ -42,7 +42,7 @@ amenityDetails(): FormGroup {
     const body = {
       
     }
-    this.amenitiesService.updateAmenity(this.amenityForm, ).subscribe(
+    this.amenitiesService.updateAmenity(this.amenityForm.value.id,this.amenityForm.value, ).subscribe(
       (res) => {
         
         this.loading = false;

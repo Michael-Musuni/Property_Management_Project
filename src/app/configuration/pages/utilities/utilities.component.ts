@@ -7,6 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { UtilitiesService } from '../../services/utilities.service';
 import { Subscription } from 'rxjs';
+import { EditUtilityComponent } from '../edit-utility/edit-utility.component';
+import { DeleteUtilityComponent } from '../delete-utility/delete-utility.component';
 
 @Component({
   selector: 'app-utilities',
@@ -55,11 +57,34 @@ export class UtilitiesComponent implements OnInit {
     }
     this.dialog.open(AddUtilitiesComponent, dialogConfig)
   }
-  editCall() {
+  editCall(data:any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false
+    dialogConfig.autoFocus = true
+    dialogConfig.width = "40%"
+    dialogConfig.data = {
+      customer: data
+    }
 
+    console.log("passed data", data)
+    const dialogRef=this.dialog.open(EditUtilityComponent, dialogConfig)
+    dialogRef.afterClosed().subscribe((res)=> {
+      this.fetchUtilities()
+    })
   }
-  deleteCall() {
-
+  deleteCall(data:any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false
+    dialogConfig.autoFocus = true
+    dialogConfig.width = "40%"
+    dialogConfig.data = {
+      customer:data
+    }
+    console.log("passed data", data)
+    const dialogRef=this.dialog.open(DeleteUtilityComponent, dialogConfig)
+    dialogRef.afterClosed().subscribe((res)=> {
+      
+    })
   }
   fetchUtilities() {
     this.isLoading = true
