@@ -4,6 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, map, startWith, switchMap } from 'rxjs';
 import { InvoicesComponent } from '../invoices/invoices.component';
 import { BillingService } from '../../billing.service';
+import { DatePipe } from '@angular/common';
+
 // const today = new Date();
 // const month = today.getMonth();
 // const year = today.getFullYear();
@@ -19,6 +21,11 @@ export class ReportOptionsComponent implements OnInit {
   dateForm: FormGroup;
   selectedStartDate: Date;
   selectedEndDate: Date;
+  maxEndDate = new Date();
+    minStartDate: Date;
+    
+    form: FormGroup;
+
 
   options: string[] = ['Paid Invoice', 'Unpaid Invoice',];
   filteredOptions: Observable<string[]>;
@@ -26,15 +33,18 @@ export class ReportOptionsComponent implements OnInit {
   propertyNamesOptions: string[];
   filteredPropertyNames: Observable<string[]>;
   service: any;
+  group: any;
+  
 
   // months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   // filteredMonths: Observable<string[]>;
 
 
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder, private datePipe: DatePipe,
     public dialogRef: MatDialogRef<InvoicesComponent>,
     private propertyService: BillingService) { }
+    
 
 
 
@@ -59,11 +69,12 @@ export class ReportOptionsComponent implements OnInit {
         })
       ))
     );
-    this.dateForm = this.formBuilder.group({
-      start: [null],
-      end: [null]
-    });
-  }
+    this.minStartDate = new Date();
+        this.form = this.group({
+            start: [null, Validators.required],
+            end: [null, Validators.required]
+        });
+    }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -85,6 +96,12 @@ export class ReportOptionsComponent implements OnInit {
       // For example, you can download the blob data or display it in your UI
     });
   }
+  // Update the minimum date for the end date picker whenever the start date changes
+  updateMinEndDate(event: Event) {
+    const startDate = (event.target as HTMLInputElement).value;
+    this.minStartDate = new Date(startDate);
+}
+
 
 
 
@@ -99,7 +116,7 @@ export class ReportOptionsComponent implements OnInit {
 
     console.log("property name:", propertyName);
     console.log("start date:", startDate);
-    console.log("end date:", endDate);
+    console.log("end date:", endDate.format("DD/MM/YYYY"));
 
     if (reportType === "Paid Invoice") {
       console.log("property type", reportType)

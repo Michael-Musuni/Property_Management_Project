@@ -8,6 +8,7 @@ import { TenantService } from 'src/app/tenants/pages/tenant.service';
 import { LeaseService } from '../../service/lease.service';
 import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ReportoptionsComponent } from '../reportoptions/reportoptions.component';
 
 @Component({
   selector: 'app-leaseform',
@@ -254,6 +255,10 @@ pickProperty() {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
+
+  //   return `${year}-${month}-${day}`;
+  // }
+ 
 
     return `${year}-${month}-${day}`;
   }
