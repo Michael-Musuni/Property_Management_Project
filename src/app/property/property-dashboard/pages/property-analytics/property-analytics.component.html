@@ -121,9 +121,10 @@
         </div>
         <apx-chart *ngIf="piechartbOptions" [series]="piechartbOptions.series" [chart]="piechartbOptions.chart"
           [labels]="piechartbOptions.labels" [responsive]="piechartbOptions.responsive"></apx-chart>
-
       </div>
-
+      <div *ngIf="Propertyform.get('propertyName').value">
+        <p> <strong>Selected Property: {{ Propertyform.get('propertyName').value }} </strong></p>
+      </div>
     </div>
   </div>
 
