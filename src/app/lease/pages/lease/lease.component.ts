@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ReportoptionsComponent } from '../reportoptions/reportoptions.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 import { MatTable } from '@angular/material/table';
 import { MatTableExporterModule } from 'mat-table-exporter';
@@ -17,6 +19,7 @@ import { ViewLeaseComponent } from '../view-lease/view-lease.component';
 import { HttpParams } from '@angular/common/http';
 import { DeleteLeaseComponent } from '../delete-lease/delete-lease.component';
 import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
+import { TerminateDialogComponent } from '../terminate-dialog/terminate-dialog.component';
 
 
 
@@ -144,14 +147,14 @@ export class LeaseComponent implements OnInit {
   }
   
 
-  activeContractsData = [{ data: [], label: 'Active Contracts' }];
-  activeContractsLabels = ['January', 'February', 'March', 'April'];
+  activeContractsData = [{ data: [10,20,30,40], label: 'Active Contracts', backgroundColor:'#3F51B5'}];
+  activeContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
   activeContractsOptions = { responsive: true };
 
   // // Define the data and options for deleted tenants bar graph
-  deactivatedContractsData = [{ data: [10, 20, 30, 40], label: 'Deactivated Contracts' }];
-  deactivatedContractsLabels = ['January', 'February', 'March', 'April'];
-  deactivatedContractsOptions = { responsive: true };
+  terminatedContractsData = [{ data: [10,20,30,40], label: 'Terminated Contracts',backgroundColor:'#3F51B5' }];
+  terminatedContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr','May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
+  terminatedContractsOptions = { responsive: true };
 
 
 
@@ -245,4 +248,21 @@ viewReportOptions() {
     console.log('closed');
   });
 }
+
+openTerminateDialog(lease: any): void {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = false;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = '400px';
+  dialogConfig.data = {
+    lease,
+  };
+
+  const dialogRef = this.dialog.open(TerminateDialogComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(result => {
+    this.ngOnInit();
+  });
+}
+
 }

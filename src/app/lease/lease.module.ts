@@ -20,6 +20,8 @@ import { ComponentsModule } from '../shared/components/components.module';
 import { SharedModule } from '../shared/shared.module';
 import { MatSortModule } from '@angular/material/sort';
 import { LeaseComponent } from './pages/lease/lease.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,7 +33,8 @@ import { ChartsModule } from 'ng2-charts';
 import { LeaseformComponent } from './pages/leaseform/leaseform.component';
 import { ViewLeaseComponent } from './pages/view-lease/view-lease.component';
 import { ReportoptionsComponent } from './pages/reportoptions/reportoptions.component';
-import { DeleteLeaseComponent } from './pages/delete-lease/delete-lease.component'
+import { DeleteLeaseComponent } from './pages/delete-lease/delete-lease.component';
+import { TerminateDialogComponent } from './pages/terminate-dialog/terminate-dialog.component'
 
  @NgModule ({
   declarations: [
@@ -39,7 +42,8 @@ import { DeleteLeaseComponent } from './pages/delete-lease/delete-lease.componen
     LeaseformComponent,
     ViewLeaseComponent,
     DeleteLeaseComponent,
-    ReportoptionsComponent
+    ReportoptionsComponent,
+    TerminateDialogComponent
     
   ],
 
@@ -63,6 +67,7 @@ import { DeleteLeaseComponent } from './pages/delete-lease/delete-lease.componen
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatCheckboxModule,
 
     FormsModule,
     MatFormFieldModule,
