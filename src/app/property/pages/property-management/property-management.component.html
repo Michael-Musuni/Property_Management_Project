@@ -43,7 +43,7 @@
               </div>
               <div class="col-4">
                 <ul class="header-buttons">
-                  
+
                   <!-- <li>
                     <div class="export-button m-l-10" matTooltip="XLSX">
                       <img src="assets/images/icons/xlsx.png" alt="" (click)="
@@ -82,66 +82,65 @@
               class="table-img column-nowrap">{{ row.propertyName }}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="type">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property
-              Type</mat-header-cell>
-            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
-              class="table-img column-nowrap">
-              {{ row.propertyType }}
-            </mat-cell>
-          </ng-container>
-          
-          <ng-container matColumnDef="location">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Location
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
-              class="table-img  column-nowrap">
-              {{row.location}}
-            </mat-cell>
-          </ng-container>
+            <ng-container matColumnDef="type">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property
+                Type</mat-header-cell>
+              <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                class="table-img column-nowrap">
+                {{ row.propertyType }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="location">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Location
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                class="table-img  column-nowrap">
+                {{row.location}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="owner">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Owner
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                class="table-img column-nowrap">
+                {{row.propertyOwner.ownerName}}
+              </mat-cell>
+            </ng-container>
+           <ng-container matColumnDef="units">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left"> Total Units
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                class="table-img  column-nowrap">
+                {{row.units.length}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="vacantunits">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Vacant Units
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                class="table-img  column-nowrap">
+                {{row.vacantunits}}
+              </mat-cell>
+            </ng-container>
+            <!-- actions -->
+            <ng-container matColumnDef="actions">
+              <mat-header-cell class="pr-0 column-nowrap" *matHeaderCellDef>Actions</mat-header-cell>
+              <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                class="pr-0">
 
-          <ng-container matColumnDef="owner">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Owner
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
-              class="table-img column-nowrap">
-              {{row.propertyOwner.ownerName}}
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="totalUnits">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Total Units
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
-              class="table-img  column-nowrap">
-              {{row.totalUnits}}
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="vacantUnits">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap text-left">Vacant Units
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
-              class="table-img  column-nowrap">
-              {{row.vacantUnits}}
-            </mat-cell>
-          </ng-container>
+                <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateProperty(property)"
+                  matTooltip="Update Property"><mat-icon>edit</mat-icon>
+                </button>
 
-          <ng-container matColumnDef="actions">
-            <mat-header-cell class="pr-0 column-nowrap" *matHeaderCellDef>Actions</mat-header-cell>
-            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
-              class="pr-0">
-              
-              <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateProperty(row)"
-                 matTooltip="Update Property"><mat-icon>edit</mat-icon>
-              </button>
-              
-              <button mat-icon-button color="primary" (click)="$event.stopPropagation();viewProperty(row)" matTooltip="View Details">
-                <mat-icon>visibility</mat-icon>
-              </button>
-              <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall(row)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
+                <button mat-icon-button color="primary" (click)="$event.stopPropagation();viewProperty(row)"
+                  matTooltip="View Details">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall(property)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple>
