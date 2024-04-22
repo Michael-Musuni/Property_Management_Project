@@ -4,8 +4,11 @@
             <div class="row clearfix">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>View Tenant Details</h2>
+                        <div class="d-flex justify-content-between">
+                            <h5>View Tenant Details</h5>
+                            <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+                                <mat-icon>close</mat-icon>
+                            </button>
                         </div>
                         <div class="body">
                             <form [formGroup]="tenantForm" class="m-4">
@@ -196,7 +199,7 @@
                                 </mat-card> -->
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <div class="example-button-row" align="end">
-                                        <button mat-raised-button color="warn" (click)="onCancel">
+                                        <button mat-raised-button color="primary" (click)="onCancel">
                                             Cancel
                                         </button>
                                         <p *ngIf="submissionStatus" class="submission-status">{{

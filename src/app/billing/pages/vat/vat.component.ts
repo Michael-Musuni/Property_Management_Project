@@ -62,6 +62,7 @@ export class VatComponent implements OnInit {
   onMonthSelectionChange(): void {
     // Fetch VAT data for the selected month
     this.fetchVatData(this.selectedMonth);
+    console.log("the data"+this.selectedMonth)
   }
 
   fetchVatData(selectedMonth: number): void {

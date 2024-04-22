@@ -32,6 +32,7 @@ import { LeaseformComponent } from './pages/leaseform/leaseform.component';
 import { ViewLeaseComponent } from './pages/view-lease/view-lease.component';
 import { PrintLeaseComponent } from './pages/print-lease/print-lease.component';
 import { DeleteLeaseComponent } from './pages/delete-lease/delete-lease.component';
+import { UpdateLeaseComponent } from './pages/update-lease/update-lease.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { DeleteLeaseComponent } from './pages/delete-lease/delete-lease.componen
     ReportoptionsComponent,
     LeaseComponent,
     ViewLeaseComponent,
-    DeleteLeaseComponent
+    DeleteLeaseComponent,
+    UpdateLeaseComponent
   ],
 
   imports: [

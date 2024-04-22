@@ -68,6 +68,13 @@
                                                 </mat-error>
                                             </mat-form-field>
                                         </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                                <mat-label>Tenant Occupation</mat-label>
+                                                <input formControlName="tenantOccupation" matInput required pattern="[a-zA-Z '-]*"
+                                                (keypress)="onKeyPress($event)"/>
+                                            </mat-form-field>
+                                        </div>
                                         <!-- <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-3">
                                             <button mat-raised-button color="primary" (click)="verify()">
                                                 <b>Verify</b>
@@ -75,14 +82,6 @@
                                         </div> -->
 
                                     </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
-                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                            <mat-label>Tenant Occupation</mat-label>
-                                            <input formControlName="tenantOccupation" matInput required pattern="[a-zA-Z '-]*"
-                                            (keypress)="onKeyPress($event)"/>
-                                        </mat-form-field>
-                                    </div>
-                                    
                                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                             <mat-form-field class="example-full-width mb-1" appearance="outline">
                                                 <mat-label>Select payment period</mat-label>
@@ -249,7 +248,7 @@
                                
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <div class="example-button-row" align="end">
-                                        <button mat-raised-button color="warn" routerLink="/tenants/manage"
+                                        <button mat-raised-button color="primary" routerLink="/tenants/manage"
                                             tabindex="-1">
                                             Cancel
                                         </button>

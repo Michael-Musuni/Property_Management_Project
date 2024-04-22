@@ -135,32 +135,12 @@ onEndDateChange(): void {
     // Implement logic to refresh tenant data
     this.fetchTenantData();
   }
-  // Define the data and options for tenants onboarded bar graph
-
-
-  // Define the data and options for deleted tenants bar graph
-  // deletedTenantsData = [{ data: [5, 10, 15, 20], label: 'Deleted Tenants' }];
-  // deletedTenantsLabels = ['January', 'February', 'March', 'April'];
-  // deletedTenantsOptions = { responsive: true };
-
+ 
   issueContract(row) {
     console.log("Issue contract to: ", row);
     this.router.navigate(['/leasing/newcontract', row.id])
   }
-  // updateTenantCall(data: any) {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = false
-  //   dialogConfig.autoFocus = true
-  //   dialogConfig.width = "60%"
-  //   dialogConfig.data = {
-  //     tenant: data
-  //   }
-
-  //   const dialogRef = this.dialog.open(UpTenantComponent, dialogConfig)
-  //   dialogRef.afterClosed().subscribe((res)=> {
-  //     this.fetchTenantData()
-  //   })
-  // }
+ 
   updateTenant(tenant) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
@@ -199,7 +179,7 @@ onEndDateChange(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
-    dialogConfig.width = "100%"
+    dialogConfig.width = "60%"
     dialogConfig.data = {
       customer: data
     }
@@ -240,6 +220,7 @@ onEndDateChange(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
+    dialogConfig.height = '70%'
     dialogConfig.width = "60%"
     dialogConfig.data = {
       tenant,
@@ -250,4 +231,5 @@ onEndDateChange(): void {
       
     })
   }
+  
 }

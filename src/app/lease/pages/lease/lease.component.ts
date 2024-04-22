@@ -17,6 +17,7 @@ import { ViewLeaseComponent } from '../view-lease/view-lease.component';
 import { HttpParams } from '@angular/common/http';
 import { DeleteLeaseComponent } from '../delete-lease/delete-lease.component';
 import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
+import { UpdateLeaseComponent } from '../update-lease/update-lease.component';
 
 
 
@@ -61,7 +62,25 @@ export class LeaseComponent implements OnInit {
       this.getContracts();
     });
   }
+  updateLease(row: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height="90%"
+    dialogConfig.width = "800px";
+    dialogConfig.data = {
+      data: row
+    };
+console.log("the data"+row)
+    const dialogRef = this.dialog.open(UpdateLeaseComponent, dialogConfig);
 
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'success') {
+        this.snackbar.showNotification("snackbar-success", "Contract updated successfully.");
+        this.getContracts();
+      }
+    });
+  }
 
 
   getContracts() {
