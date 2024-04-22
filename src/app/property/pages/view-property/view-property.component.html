@@ -2,16 +2,19 @@
     <div class="row clearfix">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <div class="card">
-                <div class="header">
-                    <h2>View Property Details</h2>
-                </div>
+                <div class="d-flex justify-content-between">
+                    <h5>View Property Details</h5>
+                    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
                 <mat-stepper linear #stepper>
                     <mat-step [stepControl]="propertyDetails" [editable]="isEditable">
                         <form [formGroup]="propertyDetails">
                             <ng-template matStepLabel>Fill Property Details</ng-template>
                             <!--Property Details-->
                             <div class="row">
-                                <mat-card>
+                                
                                     <mat-card-title style="font-size: x-small;">Property Details</mat-card-title>
                                     <mat-card-content>
                                         <div class="row">
@@ -72,15 +75,16 @@
                                             </div>
                                         </div>
                                     </mat-card-content>
-                                </mat-card>
-                                <div>
-                                    <button mat-raised-button color="primary" mat-button (click)=" onCancel()" tabindex="-2">
-                                        <b>CANCEL</b>
-                                    </button>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <button mat-raised-button color="primary" matStepperNext>Next</button>
-                                </div>
+                                
+                           </div>
+                           <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <button mat-raised-button class="pull-left" color="primary" (click)="onCancel()">Cancel</button>
                             </div>
+                            <div class="col-md-6 col-sm-6"> 
+                                <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
+                            </div>
+                        </div>
                         </form>
                     </mat-step>
                     <mat-step [stepControl]="ownerDetails" [editable]="isEditable">
@@ -171,14 +175,14 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-        
-                            <div>
-                                <button mat-raised-button color="primary" matStepperPrevious>
-                                    <b>Back</b>
-                                </button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button mat-raised-button color="primary" matStepperNext>Next</button>
-                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                                </div>
+                                <div class="col-md-6 col-sm-6"> 
+                                    <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
+                                </div>
+                            </div>>
                         </form>
                     </mat-step>
                     <mat-step [stepControl]="caretakerDetails" [editable]="isEditable">
@@ -202,12 +206,13 @@
                            
                             <div>
                             </div>
-                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
-                                <button mat-raised-button color="primary" matStepperPrevious>
-                                    <b>Back</b>
-                                </button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button mat-raised-button color="primary" matStepperNext>Next</button>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                                </div>
+                                <div class="col-md-6 col-sm-6"> 
+                                    <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
+                                </div>
                             </div>
                         </div>
                         
@@ -337,16 +342,14 @@
                             <mat-divider></mat-divider>
         
                         </mat-accordion>
-        
-        
-                        <div>
-                            <button mat-raised-button color="primary" matStepperPrevious>
-                                <b>Back</b>
-                            </button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button mat-raised-button color="primary" matStepperNext>Next</button>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                            </div>
+                            <div class="col-md-6 col-sm-6"> 
+                                <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
+                            </div>
                         </div>
-        
                     </mat-step>
                     <!-- <mat-step [stepControl]="utilityForm" [editable]="isEditable">
         
@@ -575,28 +578,30 @@
         
                                     </mat-form-field>
                                 </div>
-        
                             </div>
-        
-                            <div>
-                                <button mat-raised-button color="primary" matStepperPrevious>
-                                    <b>Back</b>
-                                </button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button mat-raised-button color="primary" matStepperNext>Next</button>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                                </div>
+                                <div class="col-md-6 col-sm-6"> 
+                                    <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
+                                </div>
                             </div>
                         </form>
                     </mat-step>
                     <mat-step>
                         <ng-template matStepLabel>Done</ng-template>
                         <p>Viewing Done.</p>
-                        <div>
-                            <button mat-raised-button color="primary" matStepperPrevious>
-                                <b>Back</b>
-                            </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button mat-raised-button color="primary" mat-button (click)=" onCancel()" tabindex="-2">
-                                <b>CLOSE</b>
-                            </button>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <button mat-raised-button class="pull-left" color="primary" matStepperPrevious>Back</button>
+                            </div>
+                            <div class="col-md-6 col-sm-6"> 
+                                <!-- <button mat-raised-button class="float-right" color="primary" [disabled]="!propertyDetails.valid" (click)="viewProperty()">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    <b>SUBMIT</b>
+                                </button> -->
+                            </div>
                         </div>
                     </mat-step>
                 </mat-stepper>

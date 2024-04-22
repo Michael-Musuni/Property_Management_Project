@@ -24,11 +24,23 @@ export class AddUtilitiesComponent implements OnInit {
     this.utilityForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      // vat: ['', Validators.required],
+      
 
     });
+    const savedFormData = localStorage.getItem('formData');
+    if (savedFormData) {
+  this.utilityForm.patchValue(JSON.parse(savedFormData));
+    }
+  this.utilityForm.valueChanges.subscribe(value => {
+      localStorage.setItem('formData', JSON.stringify(value));
+    });
   }
-  // Method to add utility
+
+
+  // clearFormStorage() {
+  //   localStorage.removeItem('formData');
+  //   this.utilityForm.reset(); // Optionally reset the form fields
+  // }
   
   addUtility() {if (this.utilityForm.valid) {
     console.log(this.utilityForm.value)

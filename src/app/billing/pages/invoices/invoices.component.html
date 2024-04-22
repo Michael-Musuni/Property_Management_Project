@@ -13,7 +13,7 @@
                                         <div class="m-l-5">
                                             <mat-form-field class="example-full-width mb-3" appearance="outline">
                                                 <mat-label>Filter By </mat-label>
-                                                <mat-select [(value)]="selected" (selectionChange)="fetchData()">
+                                                <mat-select (value)="selected" (selectionChange)="fetchData()">
                                                     <mat-option value="all"><b>All Invoices</b></mat-option>
                                                     <mat-option value="paid"><b>Paid</b></mat-option>
                                                     <mat-option value="standing"><b>Not Paid</b></mat-option>

@@ -2,7 +2,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
                 <div class="d-flex justify-content-between">
-                    <h5>Add Amenity Details</h5>
+                    <h5>Update Amenity Details</h5>
                     <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
                         <mat-icon>close</mat-icon>
                     </button>
@@ -41,8 +41,8 @@
                                     Clear
                                 </button>
                                 <button mat-raised-button color="primary" [disabled]="!amenityForm.valid"
-                                    (click)="addAmenity()">
-                                    Add Amenity
+                                    (click)="editAmenity()">
+                                    Update Amenity
                                 </button>
                             </div>
                         </div>

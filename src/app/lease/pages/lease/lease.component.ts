@@ -26,10 +26,8 @@ import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/
   styleUrls: ['./lease.component.sass']
 })
 export class LeaseComponent implements OnInit {
-viewReportOptions() {
-throw new Error('Method not implemented.');
-}
-  
+
+
   loading: Boolean
   isdata: Boolean = false
   subscription: Subscription
@@ -105,7 +103,7 @@ throw new Error('Method not implemented.');
 
   addNew() {
 
-  }   
+  }
   pickProperty() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
@@ -114,9 +112,9 @@ throw new Error('Method not implemented.');
     dialogConfig.data = {
       user: '',
     };
-  
+
     const dialogRef = this.dialog.open(PropertyLookupComponent, dialogConfig);
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result); // Check if propertyId is present in the result
       if (result && result.propertyId) {
@@ -136,14 +134,14 @@ throw new Error('Method not implemented.');
       }
     });
   }
-  
+
   updateGraphs(activeContractsData: any) {
     // Update the graphs based on the active contracts data
     this.activeContractsData = activeContractsData.data;
     this.activeContractsLabels = activeContractsData.labels;
     this.activeContractsOptions = activeContractsData.options;
   }
-  
+
 
   activeContractsData = [{ data: [], label: 'Active Contracts' }];
   activeContractsLabels = ['January', 'February', 'March', 'April'];
@@ -173,10 +171,10 @@ throw new Error('Method not implemented.');
   downloadLease(row: any): void {
     const leaseId = row.id;
     console.log("id submitted", leaseId);
-  
+
     let params = new HttpParams();
     params = params.set('leaseId', leaseId);
-  
+
     this.leaseService.getLeaseReport(leaseId).subscribe({
       next: (res: Blob) => {
         console.log("our res", res);
@@ -189,7 +187,7 @@ throw new Error('Method not implemented.');
         a.download = `Lease_${leaseId}.pdf`;
         a.click();
         window.URL.revokeObjectURL(url);
-  
+
         // Display success message using MatSnackBar
         this.snackBar.open('Lease downloaded successfully!', 'Close', {
           duration: 3000 // Duration in milliseconds
@@ -200,9 +198,9 @@ throw new Error('Method not implemented.');
       }),
       complete: (() => {
 
-        })
-  })
-  
+      })
+    })
+
 
     //public next (res){}
 
@@ -218,21 +216,33 @@ throw new Error('Method not implemented.');
     //   a.click();
     //   window.URL.revokeObjectURL(url);
 
-  // });
-}
+    // });
+  }
 
-public onDelete(row){
+  public onDelete(row) {
 
-  
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = false;
-  dialogConfig.autoFocus = true;
-  dialogConfig.width = "800px";
-  dialogConfig.data = {
-    data: row
-  };
-  const dialogRef = this.dialog.open(DeleteLeaseComponent, dialogConfig);
-  dialogRef.afterClosed().subscribe((result) => {
-  });
-}
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "800px";
+    dialogConfig.data = {
+      data: row
+    };
+    const dialogRef = this.dialog.open(DeleteLeaseComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+
+  } 
+  viewReportOptions() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.disableClose = true
+    dialogConfig.autoFocus = true
+    dialogConfig.width = '600px'
+    dialogConfig.data = { test: "data" }
+    const dialogRef = this.dialog.open(ReportoptionsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('closed');
+    });
+  }
 }

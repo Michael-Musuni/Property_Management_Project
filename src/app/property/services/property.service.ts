@@ -39,7 +39,6 @@ export class PropertyService {
     return this.http.get(`${environment.apiUrl}/api/v1/analytics/onboardedTenants`, httpOptions);
   }
 
- 
    
   public getmonthlyrentdata(){
     return this.http.get(`${environment.apiUrl}/api/v1/analytics/monthly-rent`,httpOptions);

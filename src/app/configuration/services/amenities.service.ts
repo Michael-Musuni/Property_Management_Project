@@ -22,6 +22,13 @@ export class AmenitiesService {
 
     return this.httpClient.post(`${environment.apiUrl}/api/v1/amenities/add`, data)
   }
+  updateAmenity(id: any,data: any): Observable<any>{
+  
+    return this.httpClient.put(`${environment.apiUrl}/api/v1/amenities/update?id=${id}`,data)
+  }
+  public deleteAmenity(id: any): Observable<any>{
+    return this.httpClient.delete(`${environment.apiUrl}/api/v1/amenities/delete?id=${id}`)
+  }
 }
 
 

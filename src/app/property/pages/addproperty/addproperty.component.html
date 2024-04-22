@@ -795,13 +795,13 @@
                               <mat-label>Agent Commission in percentage (%)</mat-label>
                               <input matInput formControlName="managementCommission" type="number" min="1" max="100" required>
                               <mat-error *ngIf="rentConfigForm.get('managementCommission').hasError('required')">
-                                Management Commission is required
+                                Agent Commission is required
                               </mat-error>
                               <mat-error *ngIf="rentConfigForm.get('managementCommission').hasError('min')">
-                                Management Commission must be at least 1%
+                                Agent Commission must be at least 1%
                               </mat-error>
                               <mat-error *ngIf="rentConfigForm.get('managementCommission').hasError('max')">
-                                Management Commission cannot exceed 100%
+                                Agent Commission cannot exceed 100%
                               </mat-error>
                             </mat-form-field>
                           </div>
