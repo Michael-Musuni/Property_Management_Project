@@ -25,7 +25,7 @@
       <!-- </div> -->
 
       <!-- Date Picker -->
-      <input type="date" [(ngModel)]="selectedDate" (change)="onDateChange()" max="{{ today | date: 'yyyy-MM-dd' }}" />
+      <input type="date" (ngModel)="selectedDate" (change)="onDateChange()" max="{{ today | date: 'yyyy-MM-dd' }}" />
 
       <!-- Widget for active tenants -->
       <div class="widget">

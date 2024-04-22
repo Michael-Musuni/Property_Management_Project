@@ -8,7 +8,7 @@
   <p>Amount Paid: {{ data.invoice.amountPaid }}</p>
   <div class="example-container">
     <mat-form-field>
-      <input matInput placeholder="ksh.00" pattern="^\d+(\.\d{1,2})?$">
+      <input matInput placeholder="ksh.00" (keypress)="validateInput($event)">
     </mat-form-field>
 
   </div>

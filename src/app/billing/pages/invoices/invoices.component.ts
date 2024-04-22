@@ -290,16 +290,20 @@ export class InvoicesComponent implements OnInit {
   
 
 
-  viewReportOptions() {
+  viewReportOptions(){
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.disableClose = true
-    dialogConfig.autoFocus = true
-    dialogConfig.width = '600px'
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '600px';
     dialogConfig.data = { test: "data" }
+   
+
     const dialogRef = this.dialog.open(ReportOptionsComponent, dialogConfig);
+
+
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log('closed');
-    });
+      console.log('closed');
+    });
   }
 
 }
