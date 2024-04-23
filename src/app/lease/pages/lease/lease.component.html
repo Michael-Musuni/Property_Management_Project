@@ -152,9 +152,7 @@
                   <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                     class="column-nowrap">
                     {{row.status}}
-                    <ng-container *ngIf="row.status === 'ACTIVE' && role === 'ROLE_AGENT'">
-                      <a (click)="openTerminateDialog(contract)">{{ row.status }}</a>
-                    </ng-container>
+                   
                   </mat-cell>
                 </ng-container>
 

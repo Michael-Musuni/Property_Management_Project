@@ -172,6 +172,8 @@
                             <mat-label>Payment Period</mat-label>
                             <mat-select formControlName="paymentPeriod" required>
                                 <mat-option value="Monthly">Monthly</mat-option>
+                                <mat-option value="Quarterly">Quarterly</mat-option>
+                                <mat-option value="Quarterly">Semi-Anually</mat-option>
                                 <mat-option value="Yearly">Yearly</mat-option>
                             </mat-select>
                             <mat-error *ngIf="Leaseform.get('paymentPeriod').hasError('required')">

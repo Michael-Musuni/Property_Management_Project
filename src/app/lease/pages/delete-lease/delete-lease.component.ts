@@ -51,7 +51,7 @@ export class DeleteLeaseComponent implements OnInit {
 //   }
 
 // }
-onDelete() {
+onDelete(): void {
   this.leaseService.deleteContracts(this.rowdata.data.id).subscribe({
     next: (response) => {
       if (response.statusCode === 200) {

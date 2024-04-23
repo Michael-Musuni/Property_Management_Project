@@ -31,7 +31,6 @@ import { TerminateDialogComponent } from '../terminate-dialog/terminate-dialog.c
 export class LeaseComponent implements OnInit {
 
 
-  
   loading: Boolean
   isdata: Boolean = false
   subscription: Subscription
@@ -46,6 +45,8 @@ export class LeaseComponent implements OnInit {
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: "0px", y: "0px" };
   selectedProperty: any;
+  rowdata: any;
+  dialogRef: any;
   // params: HttpParams;
 
 
@@ -147,12 +148,12 @@ export class LeaseComponent implements OnInit {
   }
   
 
-  activeContractsData = [{ data: [10,20,30,40], label: 'Active Contracts', backgroundColor:'#3F51B5'}];
+  activeContractsData = [{ data: [10,20,30,40], label: 'Active Contracts', backgroundColor:'#3F51B5', hoverbackgroundcolor: '#3F51B5'}];
   activeContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
   activeContractsOptions = { responsive: true };
 
   // // Define the data and options for deleted tenants bar graph
-  terminatedContractsData = [{ data: [10,20,30,40], label: 'Terminated Contracts',backgroundColor:'#3F51B5' }];
+  terminatedContractsData = [{ data: [10,20,30,40], label: 'Terminated Contracts', backgroundColor:'#3F51B5', hoverbackgroundcolor: '#3F51B5'}];
   terminatedContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr','May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
   terminatedContractsOptions = { responsive: true };
 
@@ -223,20 +224,22 @@ export class LeaseComponent implements OnInit {
   // });
 }
 
-public onDelete(row){
-
-  
+onDelete(row: any): void {
   const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = false;
-  dialogConfig.autoFocus = true;
-  dialogConfig.width = "800px";
-  dialogConfig.data = {
-    data: row
-  };
+  dialogConfig.disableClose = false; // Allow closing the dialog with backdrop click or ESC key
+  dialogConfig.autoFocus = true; // Auto-focus on the first interactive element in the dialog
+  dialogConfig.width = "800px"; // Set the width of the dialog
+  dialogConfig.data = { data: row }; // Pass data (e.g., rowdata) to the dialog component
+
   const dialogRef = this.dialog.open(DeleteLeaseComponent, dialogConfig);
-  dialogRef.afterClosed().subscribe((result) => {
+
+  dialogRef.afterClosed().subscribe((result: any) => {
+    // Handle dialog close event if needed
+    console.log('Dialog result:', result);
+    // You can perform actions based on the dialog result here
   });
 }
+
 viewReportOptions() {
   const dialogConfig = new MatDialogConfig()
   dialogConfig.disableClose = true
@@ -244,6 +247,17 @@ viewReportOptions() {
   dialogConfig.width = '600px'
   dialogConfig.data = { test: "data" }
   const dialogRef = this.dialog.open(ReportoptionsComponent, dialogConfig);
+  dialogRef.afterClosed().subscribe((result) => {
+    console.log('closed');
+  });
+}
+onTerminate() {
+  const dialogConfig = new MatDialogConfig()
+  dialogConfig.disableClose = true
+  dialogConfig.autoFocus = true
+  dialogConfig.width = '600px'
+  dialogConfig.data = { test: "data" }
+  const dialogRef = this.dialog.open(TerminateDialogComponent, dialogConfig);
   dialogRef.afterClosed().subscribe((result) => {
     console.log('closed');
   });
@@ -265,4 +279,26 @@ openTerminateDialog(lease: any): void {
   });
 }
 
+// onTerminate(terminationReason: string) {
+//   const contractId = this.rowdata.data.id; // Assuming you have access to rowdata and its ID
+
+//   this.leaseService.terminatedContracts(contractId).subscribe({
+//     next: (response) => {
+//       if (response.statusCode === 200) {
+//         this.snackbar.open(response.message, 'Close', { duration: 3000 });
+//         console.log("Response", response.entity);
+//         this.dialogRef.close(); // Close the dialog upon successful termination
+//         this.leaseService.updateData(); // Optionally update data after successful termination
+//       } else {
+//         this.snackbar.open(response.message, 'Close', { duration: 3000 });
+//       }
+//     },
+//     error: (error) => {
+//       console.error('Error terminating contract:', error);
+//       this.snackbar.open('An error occurred', 'Close', { duration: 3000 });
+//     }
+//   });
+// }
 }
+ 
+
