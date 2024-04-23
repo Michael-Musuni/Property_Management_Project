@@ -28,13 +28,19 @@ export class MainBillingComponent implements OnInit {
       chart: {
         type: "bar",
         height: 100,
-        width: '100%', // Set width to utilize available space
+        width: '0%', // Set width to utilize available space
         toolbar: {
           show: false ,// Hide toolbar if not needed
-        
-      responsive: true,
-      maintainAspectRatio: false
-        }
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            stepSize: 200 // Specify the interval for the y-axis
+          }
+        }]
       }
     };
     this.invoiceData = [

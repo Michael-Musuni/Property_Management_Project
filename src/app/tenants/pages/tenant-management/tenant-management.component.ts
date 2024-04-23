@@ -48,13 +48,19 @@ onDateRangeInput: any;
   subscription!: Subscription
   isLoading: boolean = false;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['tenantName', 'tenantPhoneNumber', 'tenantIdNumber', 'propertyName', 'unit',  'actions'];
+  displayedColumns: string[] = ['tenantName', 'tenantPhoneNumber', 'tenantIdNumber',  'unit',  'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  tenantsOnboardedData = [{ data: [], label: 'Tenants Onboarded', backgroundColor: '#3F51B5' }]; 
-  tenantsOnboardedLabels = ['January', 'February', 'March', 'April'];
-  tenantsOnboardedOptions = { responsive: true };
+  tenantsOnboardedData = [{ data: [], label: 'Tenants Onboarded per month', backgroundColor: 'grey', hoverBackgroundColor:'grey' }]; 
+  tenantsOnboardedLabels = [];
+  tenantsOnboardedOptions = { responsive: true, scales: {
+    yAxes: [{
+      ticks: {
+        stepSize: 2 // Specify the interval for the y-axis
+      }
+    }]
+  } };
  
 
   ngOnInit(): void {
@@ -99,10 +105,16 @@ onEndDateChange(): void {
         console.log('Onboarded Tenants Data:', response);
 
         // Update tenantsOnboardedData with fetched values and labels
-        this.tenantsOnboardedData = [{ data: response.values, label: 'Tenants Onboarded', backgroundColor: '#3F51B5' }];
+        this.tenantsOnboardedData = [{ data: response.values, label: 'Tenants Onboarded per month', backgroundColor: 'grey',hoverBackgroundColor:'grey'  }];
 
         this.tenantsOnboardedLabels = response.labels;
-        this.tenantsOnboardedOptions = { responsive: true };
+        this.tenantsOnboardedOptions = { responsive: true, scales: {
+          yAxes: [{
+            ticks: {
+              stepSize: 2 // Specify the interval for the y-axis
+            }
+          }]
+        } };
       },
       error: (error) => {
         console.error('Error fetching onboarded tenants data:', error);
