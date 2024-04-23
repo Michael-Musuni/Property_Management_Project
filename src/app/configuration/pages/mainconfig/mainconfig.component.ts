@@ -27,9 +27,9 @@ export class MainconfigComponent implements OnInit {
   addNew(){
 
   }
-  AmenityOnboardedData = [{ data: [10, 20, 30, 40], label: 'Amenity Onboarded' }];
-  AmenityOnboardedLabels = ['January', 'February', 'March', 'April'];
-  AmenityOnboardedOptions = { responsive: true };
+  // AmenityOnboardedData = [{ data: [10, 20, 30, 40], label: 'Amenity Onboarded' }];
+  // AmenityOnboardedLabels = ['January', 'February', 'March', 'April'];
+  // AmenityOnboardedOptions = { responsive: true };
   
   // Define the data and options for deleted tenants bar graph
   utilityexpensesData = [{ data: [5, 10, 15, 20], label: 'Utility Costs' }];

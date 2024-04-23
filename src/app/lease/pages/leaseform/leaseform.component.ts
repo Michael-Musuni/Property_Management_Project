@@ -8,6 +8,7 @@ import { TenantService } from 'src/app/tenants/pages/tenant.service';
 import { LeaseService } from '../../service/lease.service';
 import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ReportoptionsComponent } from '../reportoptions/reportoptions.component';
 
 @Component({
   selector: 'app-leaseform',
@@ -108,26 +109,7 @@ export class LeaseformComponent implements OnInit {
         };
       });
   }
-
-  // getPropertyById(propertyId) {
-  //   this.loading = true;
-  //   this.subscription = this.propertyService.getPropertyByd(propertyId).subscribe(
-  //     (res) => {
-  //       this.loading = false;
-  //       this.tenantData = res.entity;
-
-  //       // Initialize the form after fetching all required data
-  //       this.initializeForm();
-  //       (err) => {
-  //         this.loading = false;
-  //         this.snackbar.showNotification('snackbar-danger', err);
-  //       };
-  //     });
-  // }
-
-
-
-  initializeForm() {
+initializeForm() {
     this.chargesArray = this.fb.array([]);
     // this.getChargesPerProperty(this.dialogData.data.id);
 
@@ -140,10 +122,6 @@ export class LeaseformComponent implements OnInit {
       termsAndConditions: ['',],
       tenant: [''],
       propertyId: [''],
-    
-
-    
-    
       tenantName: [this.tenantData.tenantName],
       tenantPhoneNo: [this.tenantData.tenantPhoneNumber],
       propertyOwner: [''],
@@ -256,6 +234,10 @@ pickProperty() {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
+ 
+
+  //   return `${year}-${month}-${day}`;
+  // }
  
 
     return `${year}-${month}-${day}`;

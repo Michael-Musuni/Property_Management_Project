@@ -34,7 +34,6 @@ export class TerminateDialogComponent implements OnInit {
     this.noChecked = true;
     this.yesChecked = false;
   }
-
   onYesChecked(): void {
     this.yesChecked = true;
     this.noChecked = false;

@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-4">
                                 <ul class="header-buttons">
-                                    <!-- <li>
+                                     <li>
                                         <div class="export-button m-l-10" matTooltip="XLSX">
                                             <img src="assets/images/icons/xlsx.png" alt="" (click)="
                                     exporter.exportTable('xlsx', {
@@ -52,7 +52,7 @@
                                                 (click)="exporter.exportTable('csv')" />
                                         </div>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <div class="export-button m-l-10" matTooltip="JSON">
                                             <img src="assets/images/icons/json.png" alt=""
                                                 (click)="exporter.exportTable('json')" />
@@ -104,12 +104,12 @@
                         </ng-container>
                         
                         <ng-container matColumnDef="managementCommission">
-                            <mat-header-cell *matHeaderCellDef>Management Commission</mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>Agent Commission (%)</mat-header-cell>
                             <mat-cell *matCellDef="let commission">{{ commission.managementCommission }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="totalCommission">
-                            <mat-header-cell *matHeaderCellDef>Total Commission</mat-header-cell>
-                            <mat-cell *matCellDef="let commission">{{ commission.totalCommission }}</mat-cell>
+                            <mat-header-cell *matHeaderCellDef>Total Commission (Ksh)</mat-header-cell>
+                            <mat-cell *matCellDef="let commission"> {{ commission.totalCommission }}</mat-cell>
                         </ng-container>
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'"

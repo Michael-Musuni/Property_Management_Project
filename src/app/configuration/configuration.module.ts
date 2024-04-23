@@ -30,6 +30,10 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddAmenitiesComponent } from './pages/add-amenities/add-amenities.component';
 import { AddUtilitiesComponent } from './pages/add-utilities/add-utilities.component';
+import { EditAmenityComponent } from './pages/edit-amenity/edit-amenity.component';
+import { EditUtilityComponent } from './pages/edit-utility/edit-utility.component';
+import { DeleteUtilityComponent } from './pages/delete-utility/delete-utility.component';
+import { DeleteAmenityComponent } from './pages/delete-amenity/delete-amenity.component';
 
 
 @NgModule({
@@ -39,6 +43,10 @@ import { AddUtilitiesComponent } from './pages/add-utilities/add-utilities.compo
     UtilitiesComponent,
     AddAmenitiesComponent,
     AddUtilitiesComponent,
+    EditAmenityComponent,
+    EditUtilityComponent,
+    DeleteUtilityComponent,
+    DeleteAmenityComponent,
 
 
   ],

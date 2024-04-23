@@ -173,11 +173,11 @@
                                 <mat-error *ngIf="ownerDetails.get('idNumber').hasError('required')">
                                     Id no is required
                                 <mat-label>Identification</mat-label>
-                                <mat-select formControlName="ownerType" required>
-                                    <mat-option value="Identification Number">Identification Number</mat-option>
-                                    <mat-option value="Passport Number">Passport Number</mat-option>
+                                <mat-select formControlName="ownerIdType" required>
+                                    <mat-option value="identificationNumber">Identification Number</mat-option>
+                                    <mat-option value="passportNumber">Passport Number</mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="ownerDetails.get('ownerType').hasError('required')">
+                                <mat-error *ngIf="ownerDetails.get('ownerIdType').hasError('required')">
                                     Identification is required
                                 </mat-error>
                                 </mat-error>
@@ -186,8 +186,8 @@
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>ID/Passport Number</mat-label>
-                                <input matInput formControlName="ID/Passport Number" required />
-                                <mat-error *ngIf="ownerDetails.get('IDPassportNumber').hasError('required')">
+                                <input matInput formControlName="idpassportNumber" required />
+                                <mat-error *ngIf="ownerDetails.get('idpassportNumber').hasError('required')">
                                     ID/Passport Number is required
                                 </mat-error>
                             </mat-form-field>
@@ -273,8 +273,8 @@
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
                         <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>CareTaker ID Number</mat-label>
-                            <input matInput formControlName="caretakerID" required />
-                            <mat-error *ngIf="caretakerDetails.get('caretakerID').hasError('required')">
+                            <input matInput formControlName="nationalId" required />
+                            <mat-error *ngIf="caretakerDetails.get('nationalId').hasError('required')">
                                 Caretaker ID Number is required
                             </mat-error>
                         </mat-form-field>
@@ -810,13 +810,13 @@
                               <mat-label>Agent Commission in percentage (%)</mat-label>
                               <input matInput formControlName="managementCommission" type="number" min="1" max="100" required>
                               <mat-error *ngIf="rentConfigForm.get('managementCommission').hasError('required')">
-                                Management Commission is required
+                                Agent Commission is required
                               </mat-error>
                               <mat-error *ngIf="rentConfigForm.get('managementCommission').hasError('min')">
-                                Management Commission must be at least 1%
+                                Agent Commission must be at least 1%
                               </mat-error>
                               <mat-error *ngIf="rentConfigForm.get('managementCommission').hasError('max')">
-                                Management Commission cannot exceed 100%
+                                Agent Commission cannot exceed 100%
                               </mat-error>
                             </mat-form-field>
                           </div>

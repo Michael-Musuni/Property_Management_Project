@@ -32,7 +32,6 @@ import { RentconfigurationsComponent } from './pages/rentconfigurations/rentconf
 import { MainComponent } from './pages/main/main.component';
 import { PropertyOwnersComponent } from './pages/property-owners/property-owners.component';
 
-import { MatNativeDateModule } from '@angular/material/core';
 import { ReportOptionsComponent } from './pages/report-options/report-options.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -42,6 +41,7 @@ import { ChartsModule } from 'ng2-charts';
 import { UpdatePropertyComponent } from './pages/update-property/update-property.component';
 import { ViewPropertyComponent } from './pages/view-property/view-property.component';
 import { DeletePropertyComponent } from './pages/delete-property/delete-property.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -100,7 +100,8 @@ import { DeletePropertyComponent } from './pages/delete-property/delete-property
     MatNativeDateModule,
     // AsyncPipe
 
-    ChartsModule
+    ChartsModule,
+     
 
   ],
   providers: [HttpClient ], 

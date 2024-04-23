@@ -17,7 +17,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./addproperty.component.scss']
 })
 export class AddpropertyComponent implements OnInit {
-  rentConfigForm: FormGroup;
+  
   min: 1
   max: 100
   role: any
@@ -39,7 +39,7 @@ export class AddpropertyComponent implements OnInit {
   displayedUnitColumns: string[] = ["unit", "maxOccupants", "rent", "deposit", "actions"]
   displayedUtilitiesColumns: string[] = ["utility", "charge", "actions"]
   displayedAmenitiesColumns: string[] = ["amenity", "charge", "actions"]
-
+  rentConfigForm: FormGroup;
   propertyDetails: FormGroup
   ownerDetails: FormGroup
   caretakerDetails: FormGroup
@@ -65,8 +65,6 @@ export class AddpropertyComponent implements OnInit {
     
   ) {
     this.user = this.tokenStorageService.getUser()
-
-
     this.propertyDetails = this.fb.group({
       propertyName: ["", [Validators.required]],
       description: ["",],
@@ -90,7 +88,8 @@ export class AddpropertyComponent implements OnInit {
       email: [this.user.email,],
       ownerType: ["", [Validators.required]],
       idNumber: ["",],
-      IDPassportNumber: ["",],
+      ownerIdType:["", [Validators.required]],
+      idpassportNumber: ["",],
       kraPin: ['',],
       physicalAddress: ["", [Validators.required]],//lease,rent
 
@@ -111,7 +110,7 @@ export class AddpropertyComponent implements OnInit {
     this.caretakerDetails = this.fb.group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
-      caretakerID: ['', [Validators.required]],
+      nationalId: ['', [Validators.required]],
       physicalAddress: ["", [Validators.required]],
     });
     this.subPropertiesForm = this.fb.group({
@@ -135,20 +134,31 @@ export class AddpropertyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Initialize the form with validation for managementCommission
-    // this.rentConfigForm = this.fb.group({
-    //   managementCommission: ['', [Validators.required, Validators.min(1), Validators.max(100)]]
-    // });
-  
-  
-
-    this.fetchAmenities();
+   this.fetchAmenities();
     this.fetchUtilities();
     this.role = this.tokenStorageService.getUser().roles[0]
-
-
-    console.log("Role: ", this.role)
-
+    this.populateFormValues();
+  }
+  populateFormValues(): void {
+    this.populateFormGroupFromLocalStorage('propertyDetails');
+    this.populateFormGroupFromLocalStorage('ownerDetails');
+    this.populateFormGroupFromLocalStorage('caretakerDetails');
+    this.populateFormGroupFromLocalStorage('subPropertiesForm');
+    this.populateFormGroupFromLocalStorage('unitsForm');
+    this.populateFormGroupFromLocalStorage('utilityForm');
+    this.populateFormGroupFromLocalStorage('amenityForm');
+    this.populateFormGroupFromLocalStorage('rentConfigForm');
+  }
+  populateFormGroupFromLocalStorage(formName: string): void {
+    const savedFormData = localStorage.getItem(formName);
+    if (savedFormData) {
+      const formGroup = this[formName] as FormGroup;
+      formGroup.patchValue(JSON.parse(savedFormData));
+    }
+    // Listen for form value changes and update local storage
+    this[formName].valueChanges.subscribe(value => {
+      localStorage.setItem(formName, JSON.stringify(value));
+    });
   }
 
   togglePanel() {

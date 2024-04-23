@@ -10,6 +10,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DashboardService {
+  pickproperty() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private http: HttpClient) {}
   public getRevenueFromPropertiesData(): Observable<any> {
@@ -24,8 +27,8 @@ export class DashboardService {
   public getConfigs() {
     return this.http.get(`${environment.apiUrl}/api/v1/rent/configuration/configuratios`,httpOptions);
   }
-  public getChartsdata(){
-    return this.http.get(`${environment.apiUrl}/api/v1/analytics/occupied-unoccupied/2`,httpOptions);
+  public getChartsdata(propertyId:any){
+    return this.http.get(`${environment.apiUrl}/api/v1/analytics/occupied-unoccupied/`+ propertyId, httpOptions);
   }
   public getlinegraphdata(){
     return this.http.get(`${environment.apiUrl}/api/v1/analytics/onboardedTenants`,httpOptions);

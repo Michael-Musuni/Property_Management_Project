@@ -16,6 +16,7 @@ import { BillingService } from '../../billing.service';
 export class CommissionsComponent implements OnInit {
   commissions: any[] = [];
   isLoading: boolean = false;
+  
   displayedColumns: string[] = ['propertyName','commissionMonth','managementCommission','totalCommission'];
   subscription: Subscription;
   dataSource!: MatTableDataSource<any>;

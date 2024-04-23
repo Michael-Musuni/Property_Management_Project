@@ -29,7 +29,7 @@ export class PropertyManagementComponent implements OnInit {
   role:any
   subscription!:Subscription
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["name","type","location","owner","totalUnits","vacantUnits","actions"]
+  displayedColumns: string[] = ["name","type","location","owner","units","vacantunits","actions"]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
@@ -64,10 +64,10 @@ export class PropertyManagementComponent implements OnInit {
     this.loading = true;
     this.subscription = this.propertyService.getProperties().subscribe(
       (res) => {
-        this.data = res;
-        console.log("Data ", this.data.entity);
-        if (this.data.entity.length > 0) {
-        this.loading = false;
+        this.data= res
+        console.log("Data",this.data.entity) 
+        if (this.data.length > 0) {
+          this.loading = false;
           this.isdata = true;
           this.dataSource = new MatTableDataSource<any>(this.data.entity);
           this.dataSource.paginator = this.paginator;
@@ -111,7 +111,6 @@ export class PropertyManagementComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = "90%"
     dialogConfig.width = "800px";
     dialogConfig.data = {
       property,
@@ -149,7 +148,7 @@ export class PropertyManagementComponent implements OnInit {
     dialogConfig.width = "60%"
     dialogConfig.data = {
       property: property,
-    }
+    };
 
     const dialogRef = this.dialog.open(ViewPropertyComponent, dialogConfig)
     dialogRef.afterClosed().subscribe((res)=> {

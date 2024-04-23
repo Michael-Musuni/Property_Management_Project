@@ -23,7 +23,6 @@ import { LeaseComponent } from './pages/lease/lease.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
@@ -35,6 +34,7 @@ import { ViewLeaseComponent } from './pages/view-lease/view-lease.component';
 import { ReportoptionsComponent } from './pages/reportoptions/reportoptions.component';
 import { DeleteLeaseComponent } from './pages/delete-lease/delete-lease.component';
 import { TerminateDialogComponent } from './pages/terminate-dialog/terminate-dialog.component'
+import { UpdateLeaseComponent } from './pages/update-lease/update-lease.component';
 
  @NgModule ({
   declarations: [
@@ -43,8 +43,9 @@ import { TerminateDialogComponent } from './pages/terminate-dialog/terminate-dia
     ViewLeaseComponent,
     DeleteLeaseComponent,
     ReportoptionsComponent,
-    TerminateDialogComponent
+    TerminateDialogComponent,
     
+    UpdateLeaseComponent
   ],
 
   imports: [

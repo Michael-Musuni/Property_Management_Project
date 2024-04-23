@@ -1,0 +1,55 @@
+<div class="row clearfix">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+                <div class="d-flex justify-content-between">
+                    <h5>Update Amenity Details</h5>
+                    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            <div class="body">
+
+                <form class="validate-form" [formGroup]="amenityForm">
+                    <div class="row">
+                        <div class="class=" col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="name" />
+                                
+                                <mat-error *ngIf="amenityForm.get('name').hasError('required')">
+                                    Name is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="class=" col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Description</mat-label>
+                                <input matInput formControlName="description" />
+                                
+                                <mat-error *ngIf="amenityForm.get('description').hasError('required')">
+                                    Name is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                      
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <div class="example-button-row" align="end">
+                                <button mat-raised-button color="primary" (click)="clearForm()">
+                                    Clear
+                                </button>
+                                <button mat-raised-button color="primary" [disabled]="!amenityForm.valid"
+                                    (click)="editAmenity()">
+                                    Update Amenity
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

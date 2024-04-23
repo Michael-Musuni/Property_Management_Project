@@ -31,5 +31,9 @@ export class TenantService {
   public downloadTenantsPerPropertyReport(propertyName: any): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/tenants-per-property?propertyName=${propertyName}`, { responseType: 'blob'});
   }
+  // getTenantById(tenantId:any){
+  //   const addTenantUrl = `${this.apiUrl}/api/property/tenant?tenantId=`+tenantId;
+  //   return this.http.get<any>(addTenantUrl);
+  // }
 
 }

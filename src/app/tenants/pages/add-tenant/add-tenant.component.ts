@@ -19,7 +19,7 @@ import { from } from 'rxjs';
 })
 export class AddTenantComponent implements OnInit {
   // Declare your FormGroup and any other necessary properties
-  tenantForm: FormGroup;
+  
   loading: boolean = false;
   i: number;
   tenantData: any;
@@ -29,19 +29,10 @@ export class AddTenantComponent implements OnInit {
   id: string | ArrayBuffer;
   dialogData: any
   units: any
-  
-  
-
-
-  // Declare a FormGroup for members
   membersForm: FormGroup;
-
-  // Declare a FormGroup for nextOfKin
+  tenantForm: FormGroup;
   nextOfKinForm: FormGroup
-
   submissionStatus: string = '';
-
-  // Initialize the memberTableDataSource
   memberTableDataSource = new MatTableDataSource<any>([]);
   memberTableData: any[] = [];
 
@@ -102,12 +93,24 @@ export class AddTenantComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //
-    // Additional initialization
+    this.populateFormValues();
   }
-
-
-  // Method to handle file changes
+populateFormValues() : void{
+  this.populateFormGroupFromLocalStorage('tenantForm');
+  this.populateFormGroupFromLocalStorage('membersForm');
+  this.populateFormGroupFromLocalStorage('nextOfKinForm');
+}
+populateFormGroupFromLocalStorage(formName: string): void {
+  const savedFormData = localStorage.getItem(formName);
+  if (savedFormData) {
+    const formGroup = this[formName] as FormGroup;
+    formGroup.patchValue(JSON.parse(savedFormData));
+  }
+  // Listen for form value changes and update local storage
+  this[formName].valueChanges.subscribe(value => {
+    localStorage.setItem(formName, JSON.stringify(value));
+  });
+}
   onFileChange(event: any) {
     const file = (event.target as HTMLInputElement).files?.["string"];
 
@@ -117,6 +120,7 @@ export class AddTenantComponent implements OnInit {
     });
 
     // ... other logic
+  
   }
   onIDChange(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -201,6 +205,8 @@ export class AddTenantComponent implements OnInit {
     // Update the table data source
     this.memberTableDataSource.data = [...this.memberTableDataSource.data];
 
+   
+
   }
 
   // New method to submit member table data to the 'members' form array
@@ -224,11 +230,13 @@ export class AddTenantComponent implements OnInit {
     });
 
     this.members.push(memberGroup);
+   
   }
 
   // Method to remove a member from the 'members' form array
   removeMember(index: number): void {
     this.members.removeAt(index);
+    
   }
 
   // Helper method to format date controls

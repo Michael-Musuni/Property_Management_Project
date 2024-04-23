@@ -20,6 +20,7 @@ import { HttpParams } from '@angular/common/http';
 import { DeleteLeaseComponent } from '../delete-lease/delete-lease.component';
 import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
 import { TerminateDialogComponent } from '../terminate-dialog/terminate-dialog.component';
+import { UpdateLeaseComponent } from '../update-lease/update-lease.component';
 
 
 
@@ -66,7 +67,25 @@ export class LeaseComponent implements OnInit {
       this.getContracts();
     });
   }
+  updateLease(row: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height="90%"
+    dialogConfig.width = "800px";
+    dialogConfig.data = {
+      data: row
+    };
+console.log("the data"+row)
+    const dialogRef = this.dialog.open(UpdateLeaseComponent, dialogConfig);
 
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'success') {
+        this.snackbar.showNotification("snackbar-success", "Contract updated successfully.");
+        this.getContracts();
+      }
+    });
+  }
 
 
   getContracts() {
@@ -108,7 +127,7 @@ export class LeaseComponent implements OnInit {
 
   addNew() {
 
-  }   
+  }
   pickProperty() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
@@ -117,9 +136,9 @@ export class LeaseComponent implements OnInit {
     dialogConfig.data = {
       user: '',
     };
-  
+
     const dialogRef = this.dialog.open(PropertyLookupComponent, dialogConfig);
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result); // Check if propertyId is present in the result
       if (result && result.propertyId) {
@@ -139,14 +158,14 @@ export class LeaseComponent implements OnInit {
       }
     });
   }
-  
+
   updateGraphs(activeContractsData: any) {
     // Update the graphs based on the active contracts data
     this.activeContractsData = activeContractsData.data;
     this.activeContractsLabels = activeContractsData.labels;
     this.activeContractsOptions = activeContractsData.options;
   }
-  
+
 
   activeContractsData = [{ data: [10,20,30,40], label: 'Active Contracts', backgroundColor:'#3F51B5', hoverbackgroundcolor: '#3F51B5'}];
   activeContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
@@ -176,10 +195,10 @@ export class LeaseComponent implements OnInit {
   downloadLease(row: any): void {
     const leaseId = row.id;
     console.log("id submitted", leaseId);
-  
+
     let params = new HttpParams();
     params = params.set('leaseId', leaseId);
-  
+
     this.leaseService.getLeaseReport(leaseId).subscribe({
       next: (res: Blob) => {
         console.log("our res", res);
@@ -192,7 +211,7 @@ export class LeaseComponent implements OnInit {
         a.download = `Lease_${leaseId}.pdf`;
         a.click();
         window.URL.revokeObjectURL(url);
-  
+
         // Display success message using MatSnackBar
         this.snackBar.open('Lease downloaded successfully!', 'Close', {
           duration: 3000 // Duration in milliseconds
@@ -203,9 +222,9 @@ export class LeaseComponent implements OnInit {
       }),
       complete: (() => {
 
-        })
-  })
-  
+      })
+    })
+
 
     //public next (res){}
 
@@ -221,8 +240,8 @@ export class LeaseComponent implements OnInit {
     //   a.click();
     //   window.URL.revokeObjectURL(url);
 
-  // });
-}
+    // });
+  }
 
 onDelete(row: any): void {
   const dialogConfig = new MatDialogConfig();

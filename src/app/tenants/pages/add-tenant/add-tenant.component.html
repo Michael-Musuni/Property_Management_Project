@@ -68,25 +68,20 @@
                                                 </mat-error>
                                             </mat-form-field>
                                         </div>
-                                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-3">
+                                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                                <mat-label>Tenant Occupation</mat-label>
+                                                <input formControlName="tenantOccupation" matInput required pattern="[a-zA-Z '-]*"
+                                                (keypress)="onKeyPress($event)"/>
+                                            </mat-form-field>
+                                        </div>
+                                        <!-- <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-3">
                                             <button mat-raised-button color="primary" (click)="verify()">
                                                 <b>Verify</b>
                                             </button>
-                                        </div>
+                                        </div> -->
 
                                     </div>
-
-
-
-
-                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
-                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                            <mat-label>Tenant Occupation</mat-label>
-                                            <input formControlName="tenantOccupation" matInput required pattern="[a-zA-Z '-]*"
-                                            (keypress)="onKeyPress($event)"/>
-                                        </mat-form-field>
-                                    </div>
-                                    
                                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                             <mat-form-field class="example-full-width mb-1" appearance="outline">
                                                 <mat-label>Select payment period</mat-label>
@@ -100,10 +95,6 @@
                                         </div>
 
                                 </div>
-
-                                
-                                
-                               
                                 <div class="row">
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
                                         <!-- File upload for PDF -->
@@ -118,7 +109,7 @@
 
 
                                 <!-- Next Of Kin -->
-                                <mat-card>
+                               
                                     <mat-card-header>
                                         <mat-card-title>Next Of Kin</mat-card-title>
                                     </mat-card-header>
@@ -167,10 +158,10 @@
                                             </form>
                                         </div>
                                     </div>
-                                </mat-card>
+                               
 
                                 <!-- List of members moving in with -->
-                                <mat-card>
+                               
                                     <mat-card-header>
                                         <mat-card-title>Members</mat-card-title>
                                     </mat-card-header>
@@ -254,10 +245,10 @@
                                             </table>
                                         </div>
                                     </div>
-                                </mat-card>
+                               
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <div class="example-button-row" align="end">
-                                        <button mat-raised-button color="warn" routerLink="/tenants/manage"
+                                        <button mat-raised-button color="primary" routerLink="/tenants/manage"
                                             tabindex="-1">
                                             Cancel
                                         </button>
