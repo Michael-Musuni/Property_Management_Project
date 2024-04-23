@@ -1,31 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
 import { PropertyService } from 'src/app/property/services/property.service';
 import { SnackbarService } from 'src/app/shared/snackbar.service';
 import { TenantService } from 'src/app/tenants/pages/tenant.service';
 import { LeaseService } from '../../service/lease.service';
-import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ReportoptionsComponent } from '../reportoptions/reportoptions.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-leaseform',
-  templateUrl: './leaseform.component.html',
-  styleUrls: ['./leaseform.component.scss']
+  selector: 'app-update-lease',
+  templateUrl: './update-lease.component.html',
+  styleUrls: ['./update-lease.component.sass']
 })
-export class LeaseformComponent implements OnInit {
+export class UpdateLeaseComponent implements OnInit {
   Leaseform: FormGroup;
   chargesForm: FormGroup
   loading: boolean;
   tenantId: string;
   propertyId:string;
   propertyData:string;
-  tenantName: string;
+  // tenantName: string;
   tenantData: any;
   property: any;
-  data: any;
+  // data: any;
   dialogData: any
   subscription: Subscription;
   units: any
@@ -46,6 +46,7 @@ export class LeaseformComponent implements OnInit {
     private leaseService: LeaseService,
     private router: Router,
     private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.tenantId = this.route.snapshot.paramMap.get('id');
     console.log("Tenant Id ", this.tenantId);
@@ -53,32 +54,21 @@ export class LeaseformComponent implements OnInit {
     console.log("Property Id", this.propertyId);
   }
   ngOnInit() {
-    // You can perform any additional initialization here
-    // Example in ngOnInit
-
-    this.getTenantById(this.tenantId);
-    console.log("Tenant Details ", this.tenantData)
-
-    //  this.getPropertyById(this.propertyId);
-    //  console.log("Property Details",this.propertyData)
+    this.tenantData = this.data.data
+    console.log("data received ", this.tenantData)
+    this.initializeForm();
+    this.getTenantById(this.data);
 
   }
 
-  onCancel() {
-    // Implement the cancellation logic if needed
-  }
-
-  submit() {
-    // Implement the form submission logic
+ submit() {
     const formData = this.Leaseform.value;
     console.log("formdata", formData);
     formData.tenant = this.tenantData
-    // console.log("Start Date Type:", typeof formData.startDate);
-    // console.log("End Date Type:", typeof formData.endDate);
     formData.startDate = this.formatDate(formData.startDate);
     formData.endDate = this.formatDate(formData.endDate);
     console.log("My Data ", this.Leaseform.value)
-    this.subscription = this.leaseService.newContract(this.Leaseform.value).subscribe({
+    this.subscription = this.leaseService.updateContract(this.Leaseform.value).subscribe({
       next: ((res) => {
         console.log("My response ", res)
         this.snackbar.showNotification("snackbar-success", this.data.message);
@@ -116,14 +106,14 @@ initializeForm() {
       termsAndConditions: ['',],
       tenant: [''],
       propertyId: [''],
-      tenantName: [this.tenantData.tenantName],
-      tenantPhoneNo: [this.tenantData.tenantPhoneNumber],
+      tenantName: [this.tenantData?.tenantName],
+      tenantPhoneNo: [this.tenantData?.tenant.tenantPhoneNumber],
       propertyOwner: [''],
       ownerName: [''],
       ownerPhoneNo: [''],
-      propertyName: [this.tenantData.propertyName],
+      propertyName: [this.tenantData?.charges.propertyName],
       propertyLocation: [''],
-      unitName: [''],
+      unitName: [this.tenantData?.tenant.unitName],
       unit: [],
       charges: this.chargesArray,
      
@@ -142,10 +132,7 @@ pickProperty() {
     dialogConfig.data = {
       user: '',
     };
-    const dialogRef = this.dialog.open(
-      PropertyLookupComponent,
-      dialogConfig
-    );
+    const dialogRef = this.dialog.open(PropertyLookupComponent,dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
       this.dialogData = result;
       this.Leaseform.patchValue({
@@ -223,6 +210,7 @@ pickProperty() {
   getChargeFormGroup(index: number): FormGroup {
     return this.chargesArray.at(index) as FormGroup;
   }
+  
 
   private formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -235,5 +223,7 @@ pickProperty() {
 
     return `${year}-${month}-${day}`;
   }
+  onCancel() {
+    // this.dialogRef.close();
+  }
 }
-

@@ -114,6 +114,7 @@ throw new Error('Method not implemented.');
     this.dialogRef.close();
   }
 
+
   updateTenant() {
     this.loading = true;
     // Update the backend service call to include members and nextOfKin data
