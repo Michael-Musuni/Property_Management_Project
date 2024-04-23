@@ -1,18 +1,21 @@
+<div class="card">
 <h1 mat-dialog-title>Initiate Payment</h1>
+
+<form [formGroup]="payment">
 <div mat-dialog-content class="dialog-content" *ngIf="data && data.invoice" style="padding-top: 10px;overflow-y: hidden;">
-  <p>Invoice Number: {{ data.invoice.invoiceNumber }}</p>
-  <p>Property: {{ data.invoice.propertyName }}</p>
-  <p>Tenant: {{ data.invoice.tenantName }}</p>
-  <p>Amount: {{ data.invoice.amount }}</p>
-  <p>Status: {{ data.invoice.status }}</p>
-  <p>Amount Paid: {{ data.invoice.amountPaid }}</p>
+  <p><b>Invoice Number:</b> {{ data.invoice.invoiceNumber }}</p>
+  <p><b>Property:</b> {{ data.invoice.propertyName }}</p>
+  <p><b>Tenant:</b> {{ data.invoice.tenantName }}</p>
+  <p><b>Amount:</b> {{ data.invoice.amount }}</p>
+  <p><b>Status:</b> {{ data.invoice.status }}</p>
+  <p><b>Amount Paid:</b> {{ data.invoice.amountPaid }}</p>
   <div class="example-container">
     <mat-form-field>
-      <input matInput placeholder="ksh.00" (keypress)="validateInput($event)">
+      <input matInput formControlName="amountPaid" placeholder="Ksh" (keypress)="validateInput($event)">
     </mat-form-field>
 
   </div>
-  <p>Date Paid: {{ data.invoice.datePaid }}</p>
+  <p><b>Date Paid:</b> {{ data.invoice.datePaid }}</p>
   <!-- <mat-form-field>
     <input matInput [matDatepicker]="picker">
     <mat-datepicker-toggle matSuffix [for]="picker" class="right-position"></mat-datepicker-toggle>
@@ -32,9 +35,13 @@
   <mat-form-field appearance="outline">
     <mat-label>Amount Received</mat-label>
     <input matInput type="number" [(ngModel)]="amountReceived" name="amountReceived">
-  </mat-form-field>
-</div> -->
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button color="primary"(click)="onSubmitClick()">Submit</button>
+  </mat-form-field>-->
+</div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button color="primary"(click)="onSubmitClick()">Submit</button>
+  </div>
+
+</form>
 </div>

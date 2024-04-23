@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BillingService } from '../../billing.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -15,10 +16,11 @@ export class PaymentDialogComponent {
   paymentModes: string[] = ['Cash'];
   invoice: any;
   loading: boolean = false;
-  
+  payment:FormGroup;
   constructor(
     private billing: BillingService,
     private snackbar: MatSnackBar,
+    private fb: FormBuilder,
     public dialogRef: MatDialogRef<PaymentDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       amountPaid: any; invoice: any 
@@ -26,6 +28,12 @@ export class PaymentDialogComponent {
   ) {
     this.invoice = data.invoice;
     this.invoice=data.amountPaid; // Initialize the invoice object
+  }
+  ngOnInit(): void {
+    this.payment=this.fb.group({
+      amountPaid: ["", [Validators.required]],
+
+    })
   }
 
   onCancelClick(): void {
@@ -36,7 +44,7 @@ export class PaymentDialogComponent {
     this.loading = true;
   
     console.log(this.data.invoice.invoiceNumber, "invoice");
-    this.billing.submitPayment(this.data.invoice.amountPaid).subscribe({
+    this.billing.submitPayment(this.payment.value,this.data.invoice.invoiceNumber).subscribe({
       next: (response) => {
         console.log('Response:', response);
         if (response.statusCode==200) {
