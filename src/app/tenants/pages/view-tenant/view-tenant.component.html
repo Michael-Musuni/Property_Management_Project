@@ -55,14 +55,15 @@
                                                 
                                             </mat-form-field>
                                         </div>
-                                     </div>
                                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
-                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                            <mat-label>Tenant Occupation</mat-label>
-                                            <input formControlName="tenantOccupation" readonly matInput />
-                                            
-                                        </mat-form-field>
-                                    </div>
+                                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                                <mat-label>Tenant Occupation</mat-label>
+                                                <input formControlName="tenantOccupation" readonly matInput />
+                                                
+                                            </mat-form-field>
+                                        </div>
+                                     </div>
+                                       
                                 </div>
                                <mat-card>
                                     <mat-card-header>
@@ -199,7 +200,7 @@
                                 </mat-card> -->
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                                     <div class="example-button-row" align="end">
-                                        <button mat-raised-button color="primary" (click)="onCancel">
+                                        <button mat-raised-button color="primary" (click)="onCancel()">
                                             Cancel
                                         </button>
                                         <p *ngIf="submissionStatus" class="submission-status">{{
