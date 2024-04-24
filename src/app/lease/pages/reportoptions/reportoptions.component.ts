@@ -58,56 +58,6 @@ export class ReportoptionsComponent implements OnInit {
 
   public downloadReport() {
     // Add your download logic here
-    const reportType = this.optionsForm.value.reportType;
-    const propertyName = this.optionsForm.value.propertyName;
-    console.log("property name", propertyName)
-    if (reportType === "Active contracts"){
-      console.log("property name", propertyName)
-      this.propertyService.downloadActiveContractsReport (propertyName).subscribe({
-        next: ((res) => {
-          console.log("response", res);
-          const blob = new Blob([res], { type: 'application/pdf' });
-
-          const url = window.URL.createObjectURL(res);
-          const a = document.createElement('a');
-          document.body.appendChild(a);
-          a.style.display = 'none';
-          a.href = url;
-          a.download = `Report_${propertyName}.pdf`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-        }),
-        error: ((error) => {
-  
-        }),
-        complete: (() => {})
-      })
-    } 
-    if (reportType === "Terminated contracts"){
-      console.log("property name", propertyName)
-      this.propertyService.downloadTerminatedContractsReport (propertyName).subscribe({
-        next: ((res) => {
-          console.log("response", res);
-          const blob = new Blob([res], { type: 'application/pdf' });
-
-          const url = window.URL.createObjectURL(res);
-          const a = document.createElement('a');
-          document.body.appendChild(a);
-          a.style.display = 'none';
-          a.href = url;
-          a.download = `Report_${propertyName}.pdf`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-        }),
-        error: ((error) => {
-  
-        }),
-        complete: (() => {})
-      })
-
-
-    }
+   
   }
 }
-
-

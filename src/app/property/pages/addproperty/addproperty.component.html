@@ -96,24 +96,26 @@
                                                 placeholder="Percentage Commision" type="number" />
                                         </mat-form-field>
                                     </div> -->
+                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                        <mat-form-field class="example-full-width" appearance="outline">
                                     <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                         <mat-form-field class="example-full-width mb-1" appearance="outline">
                                             <mat-label>Description</mat-label>
                                             <textarea matInput formControlName="description"
                                                 placeholder="Describe property..."></textarea>
+
                                         </mat-form-field>
-                                    </div> -->
-                                </div>
-                            </mat-card-content>
-                        </mat-card>
+                                    <!-- </div> -->
+                                <!-- </div>
+<                       </mat-card> -->
+                        </mat-form-field>
                         <div class="col-md-12 col-sm-12">
                             <button mat-raised-button class="pull-left "color="primary" routerLink="/property/manage">Cancel</button>
                             <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
                         </div>
                      
                     </div>
-                </form>
-            </mat-step>
+                </div>
             <mat-step [stepControl]="ownerDetails" [editable]="isEditable">
                 <form [formGroup]="ownerDetails">
                     <ng-template matStepLabel>Fill out Owner Details</ng-template>
@@ -132,7 +134,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Owner phone</mat-label>
-                                <input matInput formControlName="phone"/>
+                                <input matInput formControlName="phone" required type="number" />
                                 <mat-error *ngIf="ownerDetails.get('phone').hasError('required')">
                                     phone name is required
                                 </mat-error>
@@ -166,6 +168,10 @@
                       
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Identification Number</mat-label>
+                                <input matInput formControlName="idNumber"type="number" />
+                                <mat-error *ngIf="ownerDetails.get('idNumber').hasError('required')">
+                                    Id no is required
                                 <mat-label>Identification</mat-label>
                                 <mat-select formControlName="ownerIdType" required>
                                     <mat-option value="identificationNumber">Identification Number</mat-option>
@@ -174,7 +180,8 @@
                                 <mat-error *ngIf="ownerDetails.get('ownerIdType').hasError('required')">
                                     Identification is required
                                 </mat-error>
-                            </mat-form-field>
+                                </mat-error>
+                                </mat-form-field>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
                             <mat-form-field class="example-full-width" appearance="outline">
@@ -210,7 +217,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Owner Account</mat-label>
-                                <input matInput formControlName="accountNumber"/>
+                                <input matInput formControlName="accountNumber"type="number" />
                                 <mat-error *ngIf="ownerDetails.get('accountNumber').hasError('required')">
                                     Owner Acccount is required
                                 </mat-error>
@@ -257,7 +264,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
                         <mat-form-field class="example-full-width" appearance="outline">
                             <mat-label>CareTaker Phone</mat-label>
-                            <input matInput formControlName="phone" required />
+                            <input matInput formControlName="phone" type="number" required />
                             <mat-error *ngIf="caretakerDetails.get('phone').hasError('required')">
                                 Caretaker Phone is required
                             </mat-error>
@@ -299,7 +306,7 @@
                 <ng-template matStepLabel>Fill out Subproperty</ng-template>
 
                 <mat-accordion>
-                    <!-- <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
                             <mat-panel-title (click)="togglePanel()">
                                 <div class="row">
@@ -365,21 +372,21 @@
                             </mat-row>
                             <mat-cell *matNoDataRow colspan="4">
                                 No data matching the filter "{{ input.value }}"</mat-cell>
-                        <!-- </mat-table>
+                        </mat-table>
 
-                    </mat-expansion-panel> -->
+                    </mat-expansion-panel>
                     <mat-divider></mat-divider>
 
                     <mat-expansion-panel (opened)="unitPanelState = true" (closed)="unitPanelState = false">
                         <mat-expansion-panel-header>
                             <mat-panel-title (click)="togglePanel2()">
                                 <div class="row">
-                                    <p *ngIf="!unitPanelState">Add Property Units</p>
+                                    <p *ngIf="!unitPanelState">Click to Open </p>
                                     <p *ngIf="unitPanelState">Close</p>
                                 </div>
                             </mat-panel-title>
                             <mat-panel-description>
-                                Click to Open 
+                                Add property Units
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <form [formGroup]="unitsForm">
@@ -394,15 +401,15 @@
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-0">
                                     <mat-form-field class="example-full-width" appearance="outline">
-                                        <mat-label>Maximum Occupants</mat-label>
-                                        <input matInput formControlName="maxOccupants"/>
+                                        <mat-label>Maximum Number of accupants</mat-label>
+                                        <input matInput formControlName="maxOccupants" type="number" />
 
                                     </mat-form-field>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-0">
                                     <mat-form-field class="example-full-width" appearance="outline">
                                         <mat-label>Rent Amount</mat-label>
-                                        <input matInput formControlName="rentAmount" required />
+                                        <input matInput formControlName="rentAmount" type="number" required />
                                         <mat-error *ngIf="unitsForm.get('rentAmount').hasError('required')">
                                             Rent amount is required
                                         </mat-error>
@@ -412,7 +419,7 @@
                                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-0">
                                     <mat-form-field class="example-full-width" appearance="outline">
                                         <mat-label>Deposit Amount</mat-label>
-                                        <input matInput formControlName="deposit"/>
+                                        <input matInput formControlName="deposit" type="number" />
                                         <mat-error *ngIf="unitsForm.get('deposit').hasError('required')">
                                             Deposit is required
                                         </mat-error>
@@ -446,7 +453,7 @@
                             </ng-container>
                             <ng-container matColumnDef="maxOccupants">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
-                                    Maximum Occupants
+                                    Max No. of Occupants
                                 </mat-header-cell>
                                 <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
                                     [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.maxOccupants
@@ -509,14 +516,14 @@
                         <mat-panel-title (click)="togglePanel3()">
                             <div class="row">
 
-                                <p *ngIf="!utilityPanelState"> Add Utilities </p>
+                                <p *ngIf="!utilityPanelState">Click to Open </p>
                                 <p *ngIf="utilityPanelState">Close</p>
 
                             </div>
 
                         </mat-panel-title>
                         <mat-panel-description>
-                              Click to Open
+                            Add Utilities
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <form [formGroup]="utilityForm">
@@ -604,12 +611,14 @@
                             <div class="row">
 
 
-                                <p *ngIf="!amenityPanelState"> Add Amenities </p>
+                                <p *ngIf="!amenityPanelState">Click to Open </p>
                                 <p *ngIf="amenityPanelState">Close</p>
                             </div>
 
                         </mat-panel-title>
-                        <mat-panel-description>Click to Open</mat-panel-description>
+                        <mat-panel-description>
+                            Add Amenities
+                        </mat-panel-description>
                     </mat-expansion-panel-header>
                     <form [formGroup]="amenityForm">
                         <div class="row">
@@ -702,7 +711,7 @@
             <mat-step [stepControl]="rentConfigForm" [editable]="isEditable">
                 <form [formGroup]="rentConfigForm">
                     <ng-template matStepLabel>Fill Rent Configuration Details</ng-template>
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Select Payment Method </mat-label>
@@ -737,11 +746,14 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
                               <mat-label>Rent Due Date</mat-label>
+                              <input matInput [matDatepicker]="picker" formControlName="rentDueDate" required />
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
                               <mat-select formControlName="rentDueDate" required>
                                 <mat-option value="1">1</mat-option>
                                 <mat-option value="2">2</mat-option>
@@ -792,6 +804,9 @@
                      
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                             <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Management Commission in percentage (%)</mat-label>
+                                <input matInput formControlName="managementCommission" type="number" />
+
                               <mat-label>Agent Commission in percentage (%)</mat-label>
                               <input matInput formControlName="managementCommission" type="number" min="1" max="100" required>
                               <mat-error *ngIf="rentConfigForm.get('managementCommission').hasError('required')">
@@ -835,7 +850,5 @@
                     </button>
                 </div>
             </mat-step>
-        </mat-stepper>
 
-    </div>
-</section>
+  

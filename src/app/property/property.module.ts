@@ -41,6 +41,7 @@ import { ChartsModule } from 'ng2-charts';
 import { UpdatePropertyComponent } from './pages/update-property/update-property.component';
 import { ViewPropertyComponent } from './pages/view-property/view-property.component';
 import { DeletePropertyComponent } from './pages/delete-property/delete-property.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -96,6 +97,7 @@ import { DeletePropertyComponent } from './pages/delete-property/delete-property
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatNativeDateModule,
     // AsyncPipe
 
     ChartsModule,
