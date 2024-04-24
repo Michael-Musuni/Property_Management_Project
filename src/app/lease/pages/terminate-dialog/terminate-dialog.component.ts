@@ -17,6 +17,12 @@ export class TerminateDialogComponent implements OnInit {
   subscription: any;
   color: any;
   terminationReason: any;
+  tenantName = ''
+ 
+  
+    terminate(): void {
+      this.dialogRef.close('Contract terminated successfully!');
+    }
 
   constructor(
     public dialogRef: MatDialogRef<TerminateDialogComponent>,
@@ -26,8 +32,9 @@ export class TerminateDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.tenantName = this.data.tenantName
     // Initialization tasks can be performed here
-    console.log('TerminateDialogComponent initialized');
+    console.log('TerminateDialogComponent initialized', this.data.tenantName);
   }
 
   onNoChecked(): void {

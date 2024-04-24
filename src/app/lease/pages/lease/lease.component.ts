@@ -58,6 +58,7 @@ export class LeaseComponent implements OnInit {
     private snackBar: MatSnackBar,
 
     private dialog: MatDialog
+    
 
   ) { }
 
@@ -128,55 +129,36 @@ console.log("the data"+row)
   addNew() {
 
   }
-  pickProperty() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '50%';
-    dialogConfig.data = {
-      user: '',
-    };
+  
 
-    const dialogRef = this.dialog.open(PropertyLookupComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result); // Check if propertyId is present in the result
-      if (result && result.propertyId) {
-        this.selectedProperty = result.propertyName; // Update the selected property
-        // Call API to get active contracts for the selected property
-        this.leaseService.getActiveContractsPerProperty(result.propertyId)
-          .subscribe(
-            (activeContractsData) => {
-              // Update the graphs based on the active contracts data
-              this.updateGraphs(activeContractsData);
-            },
-            (error) => {
-              console.error('Error fetching active contracts:', error);
-              // Handle error, show error message, etc.
-            }
-          );
-      }
-    });
-  }
-
-  updateGraphs(activeContractsData: any) {
-    // Update the graphs based on the active contracts data
-    this.activeContractsData = activeContractsData.data;
-    this.activeContractsLabels = activeContractsData.labels;
-    this.activeContractsOptions = activeContractsData.options;
-  }
+  // updateGraphs(activeContractsData: any) {
+  //   // Update the graphs based on the active contracts data
+  //   this.activeContractsData = activeContractsData.data;
+  //   this.activeContractsLabels = activeContractsData.labels;
+  //   this.activeContractsOptions = activeContractsData.options;
+  // }
 
 
-  activeContractsData = [{ data: [10,20,30,40], label: 'Active Contracts', backgroundColor:'#3F51B5', hoverbackgroundcolor: '#3F51B5'}];
+  activeContractsData = [{ data: [], label: 'Active Contracts', backgroundColor:'grey', hoverBackgroundColor: 'grey'}];
   activeContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
   activeContractsOptions = { responsive: true };
 
   // // Define the data and options for deleted tenants bar graph
-  terminatedContractsData = [{ data: [10,20,30,40], label: 'Terminated Contracts', backgroundColor:'#3F51B5', hoverbackgroundcolor: '#3F51B5'}];
+  terminatedContractsData = [{ data: [], label: 'Terminated Contracts', backgroundColor:'grey', hoverBackgroundColor: 'grey'}];
   terminatedContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr','May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
   terminatedContractsOptions = { responsive: true };
 
-
+  // fetchActiveContracts() {
+  //   this.leaseService.getActiveContracts().subscribe(
+  //     (activeContractsData) => {
+  //       // Update graphs or perform other actions based on activeContractsData
+  //       console.log('Active Contracts Data:', activeContractsData);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching active contracts:', error);
+  //     }
+  //   );
+  // }
 
   public viewLease(row: any) {
 
@@ -287,9 +269,14 @@ openTerminateDialog(lease: any): void {
   dialogConfig.disableClose = false;
   dialogConfig.autoFocus = true;
   dialogConfig.width = '400px';
-  dialogConfig.data = {
-    lease,
-  };
+    dialogConfig.data = {
+      lease,
+      tenantName: lease.tenantName // Pass the tenant's name to the dialog
+    }
+  
+
+
+  
 
   const dialogRef = this.dialog.open(TerminateDialogComponent, dialogConfig);
 
@@ -319,5 +306,3 @@ openTerminateDialog(lease: any): void {
 //   });
 // }
 }
- 
-

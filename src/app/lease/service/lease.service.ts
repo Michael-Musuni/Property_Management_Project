@@ -14,6 +14,8 @@ export class LeaseService {
 
   private apiUrl = environment.apiUrl
 
+  private baseUrl = '/api/v1';
+
   private updateDataSubject = new Subject<void>();
 
   constructor(private http:HttpClient) { }
@@ -48,9 +50,13 @@ export class LeaseService {
   public getLeaseReport(leaseId: any):Observable <Blob>{
     return this.http.get(`${environment.apiUrl}/api/v1/lease/download?leaseId=${leaseId}`, { responseType: 'blob'});
   }
-  getActiveContractsPerProperty(propertyId:number):Observable<any>{
-    const url = `${this.apiUrl}/api/v1/analytics/active-contracts/{propertyId}/${propertyId}`;
-    return this.http.get<any>(url, httpOptions);
+  // getActiveContracts(): Observable<any> {
+  //   const url = `${this.apiUrl}/api/v1/analytics/active-contracts`;
+  //   return this.http.get(url);
+  // }
+  getActiveContractsData(): Observable<any> {
+    const endpointUrl = `${this.baseUrl}/api/v1/analytics/active-contracts`;
+    return this.http.get<any>(endpointUrl);
   }
   public getProperties() {
     return this.http.get(`${environment.apiUrl}/api/v1/property/get`);

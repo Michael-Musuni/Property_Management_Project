@@ -22,7 +22,7 @@
 </div> -->
   <h1 mat-dialog-title>Terminate Contract</h1>
   <div mat-dialog-content class="dialog-content" style="padding-top: 10px; overflow-y: hidden;">
-    <p>Do you want to terminate contract for? </p>
+    <p>Are you sure you want to terminate contract for {{tenantName}}? </p>
 
     <div align="left">
       <mat-checkbox [checked]="yesChecked" (change)="onYesChecked()"
@@ -48,3 +48,4 @@
   <div mat-dialog-actions>
     <button mat-button (click)="onCancelClick()">Cancel</button>
     <button mat-button mat-raised-button color="primary" (click)="onTerminate(data.contractId)">Terminate</button>
+                   
