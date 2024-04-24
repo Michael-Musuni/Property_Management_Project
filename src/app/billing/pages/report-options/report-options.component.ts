@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, map, startWith, switchMap } from 'rxjs';
 import { InvoicesComponent } from '../invoices/invoices.component';
 import { BillingService } from '../../billing.service';
-import { DatePipe } from '@angular/common';
+// import { DatePipe } from '@angular/common';
 
 // const today = new Date();
 // const month = today.getMonth();
@@ -22,9 +22,9 @@ export class ReportOptionsComponent implements OnInit {
   selectedStartDate: Date;
   selectedEndDate: Date;
   maxEndDate = new Date();
-    minStartDate: Date;
-    
-    form: FormGroup;
+  minStartDate: Date;
+
+  form: FormGroup;
 
 
   options: string[] = ['Paid Invoice', 'Unpaid Invoice',];
@@ -34,17 +34,18 @@ export class ReportOptionsComponent implements OnInit {
   filteredPropertyNames: Observable<string[]>;
   service: any;
   group: any;
-  
+maxStartDate: any;
+
 
   // months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   // filteredMonths: Observable<string[]>;
 
 
 
-  constructor(private formBuilder: FormBuilder, private datePipe: DatePipe,
+  constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<InvoicesComponent>,
     private propertyService: BillingService) { }
-    
+
 
 
 
@@ -70,11 +71,11 @@ export class ReportOptionsComponent implements OnInit {
       ))
     );
     this.minStartDate = new Date();
-        this.form = this.group({
-            start: [null, Validators.required],
-            end: [null, Validators.required]
-        });
-    }
+    this.form = this.group({
+      start: [null, Validators.required],
+      end: [null, Validators.required]
+    });
+  }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -100,7 +101,7 @@ export class ReportOptionsComponent implements OnInit {
   updateMinEndDate(event: Event) {
     const startDate = (event.target as HTMLInputElement).value;
     this.minStartDate = new Date(startDate);
-}
+  }
 
 
 
@@ -112,7 +113,8 @@ export class ReportOptionsComponent implements OnInit {
     const propertyName = this.optionsForm.value.propertyName;
     const startDate = this.dateForm.get('start').value;
     const endDate = this.dateForm.get('end').value;
-
+    // formData.startDate = this.formatDate(formData.startDate);
+    // formData.endDate = this.formatDate(formData.endDate);
 
     console.log("property name:", propertyName);
     console.log("start date:", startDate);
@@ -148,7 +150,7 @@ export class ReportOptionsComponent implements OnInit {
       this.propertyService.downloadUnpaidInvoiceReport(propertyName, startDate, endDate).subscribe({
         next: ((res) => {
 
-          
+
           const blob = new Blob([res], { type: 'application/pdf' });
           const url = window.URL.createObjectURL(res);
           const a = document.createElement('a');
@@ -165,7 +167,7 @@ export class ReportOptionsComponent implements OnInit {
         }),
         error: ((error) => {
           console.log("error", error);
-  
+
           this.dialogRef.close();
 
         }),
@@ -173,5 +175,12 @@ export class ReportOptionsComponent implements OnInit {
       })
 
     }
+  }
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 }

@@ -20,7 +20,7 @@ import { ExportType,MatTableExporterDirective   } from 'mat-table-exporter';
 export class VatComponent implements OnInit {
   
   selection = new SelectionModel<any>(true, []);
-  vats: any[] = [];
+  vat: any[] = [];
   isLoading: boolean = false;
   displayedColumns: string[] = [ 'propertyName', 'grossRevenue', 'taxAmount', 'Penalty','overDueTaxAndPenalty']; // Removed extra comma
   subscription: Subscription; 
@@ -65,23 +65,45 @@ export class VatComponent implements OnInit {
     console.log("the data"+this.selectedMonth)
   }
 
-  fetchVatData(selectedMonth: number): void {
+  // fetchVatData(month: number): void {
+  //   this.isLoading = true;
+  //   this.billingService.getVatData(month).subscribe(
+  //     data => {
+  //       this.vat = data;
+        
+  //       this.dataSource = new MatTableDataSource<any>(this.vat);
+       
+  //       console.log("thehhhhhhhhhhh"+this.vat)
+  //       this.dataSource.paginator = this.paginator;
+  //       this.dataSource.sort = this.sort;
+  //       this.isLoading = false;
+  //     },
+  //     error => {
+  //       console.error('Error fetching VAT data:', error);
+  //       console.log('Error status:', error.status);
+  //       console.log('Error message:', error.message);
+  //       this.isLoading = false;
+  //     }
+  //   );
+  // }
+  
+  fetchVatData(month: number): void {
     this.isLoading = true;
-    this.billingService.getVatData(selectedMonth).subscribe(
-      data => {
-        this.vats = data;
-        this.dataSource = new MatTableDataSource(this.vats);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.isLoading = false;
-      },
-      error => {
-        console.error('Error fetching VAT data:', error);
-        console.log('Error status:', error.status);
-        console.log('Error message:', error.message);
-        this.isLoading = false;
-      }
-    );
+    this.subscription = this.billingService.getVatData(month)
+      .subscribe(
+        (data: any) => {
+          console.log("my vat", data);
+          this.vat = data.entity;
+          this.isLoading = false;
+          this.dataSource = new MatTableDataSource<any>(this.vat);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        (error) => {
+          console.error('Error fetching vat:', error);
+          this.isLoading = false;
+        }
+      );
   }
 
   applyFilter(event: Event) {

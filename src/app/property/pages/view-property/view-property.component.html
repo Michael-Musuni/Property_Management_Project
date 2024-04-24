@@ -182,7 +182,7 @@
                                 <div class="col-md-6 col-sm-6"> 
                                     <button mat-raised-button class="float-right" color="primary" matStepperNext>Next</button>
                                 </div>
-                            </div>>
+                            </div>
                         </form>
                     </mat-step>
                     <mat-step [stepControl]="caretakerDetails" [editable]="isEditable">
@@ -203,7 +203,20 @@
                                     
                                 </mat-form-field>
                             </div>
-                           
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-12">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>CareTaker ID Number</mat-label>
+                                    <input matInput formControlName="nationalId" readonly matInput  />
+                                  
+                                </mat-form-field>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Physical Address</mat-label>
+                                    <input matInput formControlName="physicalAddress" readonly matInput />
+                                    
+                                </mat-form-field>
+                            </div>
                             <div>
                             </div>
                             <div class="row">

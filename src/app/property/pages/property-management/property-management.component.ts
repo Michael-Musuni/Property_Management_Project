@@ -113,7 +113,7 @@ export class PropertyManagementComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "800px";
     dialogConfig.data = {
-      property,
+      property: property
     };
 
     const dialogRef = this.dialog.open(UpdatePropertyComponent, dialogConfig);

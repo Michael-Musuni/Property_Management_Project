@@ -35,7 +35,7 @@ export class DeletePropertyComponent implements OnInit {
     this.subscription = this.propertyService.deleteProperty(this.property.id)
     .subscribe((res)=> {
       this.isloading = true;
-      this.snackbar.showNotification("snackbar-success", "Successful!");
+      this.snackbar.showNotification("snackbar-success", "Property Successful Deleted!");
       this.dialogRef.close();
     },
     (err)=> {

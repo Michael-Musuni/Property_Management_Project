@@ -128,7 +128,7 @@
               <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
                 class="pr-0">
 
-                <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateProperty(property)"
+                <button *ngIf="role=='ROLE_LANDLORD'" mat-icon-button color="primary" (click)="$event.stopPropagation(); updateProperty(row)"
                   matTooltip="Update Property"><mat-icon>edit</mat-icon>
                 </button>
 
@@ -136,7 +136,7 @@
                   matTooltip="View Details">
                   <mat-icon>visibility</mat-icon>
                 </button>
-                <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall(property)">
+                <button *ngIf="role=='ROLE_LANDLORD'" mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall(row)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </mat-cell>

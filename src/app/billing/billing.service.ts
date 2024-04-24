@@ -86,7 +86,7 @@ export class BillingService {
   }
 
   getVatData(month: number): Observable<any> {
-    return this.http.get(`/api/property/revenue/tax/${month}`);
+    return this.http.get(`${this.apiUrl}/api/property/revenue/tax/${month}`);
 }
   getTotalExpenses(month: number){
     return this.http.get(`${this.apiUrl}/api/property/revenue/expenses/${month}`, httpOptions);
@@ -94,9 +94,9 @@ export class BillingService {
   
   deleteExpense(expenseName:string){}
 
-  submitPayment(invoiceNumber: string): Observable<any> {
-    const url = `${this.apiUrl}/api/v1/invoices/request-payment/${invoiceNumber}`
-    return this.http.put<any>(url, invoiceNumber);
+  submitPayment(amountPaid: any,invoice: string): Observable<any> {
+    const url = `${this.apiUrl}/api/v1/invoices/request-payment/${invoice}`
+    return this.http.put<any>(url, amountPaid);
   }
   verifyPayment(invoiceNumber: string): Observable<any> {
     const url = `${this.apiUrl}/api/v1/invoices/approve-payment/${invoiceNumber}`
