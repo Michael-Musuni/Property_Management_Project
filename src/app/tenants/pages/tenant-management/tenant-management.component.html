@@ -26,24 +26,38 @@
       
 
       <!-- Date Picker -->
+      
+
       <mat-card>
         <mat-card-content>
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <mat-date-range-input [rangePicker]="picker" (dateRangeInput)="onDateRangeInput($event)">
-                <input matStartDate placeholder="Start date" [max]="maxEndDate" [(ngModel)]="startDate">
-                <input matEndDate placeholder="End date" [min]="startDate" [max]="maxEndDate" [(ngModel)]="endDate" (dateChange)="onEndDateChange()">
-              </mat-date-range-input>
+              <mat-form-field>
+                <mat-label>Select Start Date</mat-label>
+                <input matInput [matDatepicker]="startPicker" placeholder="Choose a start date" [(ngModel)]="startDate">
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <mat-form-field>
+                <mat-label>Select End Date</mat-label>
+                <input matInput [matDatepicker]="endPicker" placeholder="Choose an end date" [min]="startDate" [max]="today" [(ngModel)]="endDate">
+                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
             </div>
           </div>
-      
-    
-    
-      
-       
-       <h4>  Number of tenants {{ startDate | date: 'mediumDate' }}  {{ endDate | date: 'mediumDate' }}: {{ activeTenantsForSelectedDates }}</h4> 
+          <h4>
+            Number of tenants between
+            {{ startDate | date: 'mediumDate' }}
+            and
+            {{ endDate | date: 'mediumDate' }}:
+            {{ activeTenantsInRange }}
+          </h4>
         </mat-card-content>
       </mat-card>
+      
     </div>
 
 
@@ -164,10 +178,10 @@
                   <mat-header-cell *matHeaderCellDef>Unit</mat-header-cell>
                   <mat-cell *matCellDef="let tenant">{{ tenant.unit?.unitName || '-' }}</mat-cell>
                 </ng-container>
-                <!-- <ng-container matColumnDef="propertyName">
+                <ng-container matColumnDef="propertyName">
                   <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
                   <mat-cell *matCellDef="let tenant">{{ tenant.property?.propertyName || '-' }}</mat-cell>
-                </ng-container> -->
+                </ng-container>
 
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>

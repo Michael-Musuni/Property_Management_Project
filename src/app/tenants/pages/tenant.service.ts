@@ -66,8 +66,6 @@ export class TenantService {
   // }
   getActiveTenants(startDate: Date, endDate: Date): Observable<number> {
     const activeTenantsUrl = `${this.apiUrl}/api/property/tenant/active/range`;
-
-    
     return this.http.get<number>(activeTenantsUrl, {
       params: {
         startDate: startDate.toISOString(),
