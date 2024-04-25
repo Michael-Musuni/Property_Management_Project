@@ -68,7 +68,9 @@ export class UpdateLeaseComponent implements OnInit {
     formData.startDate = this.formatDate(formData.startDate);
     formData.endDate = this.formatDate(formData.endDate);
     console.log("My Data ", this.Leaseform.value)
-    this.subscription = this.leaseService.updateContract(this.Leaseform.value).subscribe({
+
+    const body = this.updateBody(formData)
+    this.subscription = this.leaseService.updateContract(body).subscribe({
       next: ((res) => {
         console.log("My response ", res)
         this.snackbar.showNotification("snackbar-success", this.data.message);
@@ -225,5 +227,18 @@ pickProperty() {
   }
   onCancel() {
     // this.dialogRef.close();
+  }
+
+  updateBody(data: any) {
+    let body = {
+      endDate: data.endDate,
+      rentDueDate: data.rentDueDate,
+      unit: data.unit,
+      tenantPhoneNo: data.tenantPhoneNo,
+      monthlyRent: data.monthlyRent,
+      renewalStatus: data.renewalStatus,
+      createdDate: data.createdDate
+    };
+    return  body; 
   }
 }

@@ -96,6 +96,20 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
 
+ 
+  {
+    path: "/leasing/lease",
+    title: "Leasing",
+    moduleName: "lease",
+    iconType: "feather",
+    icon: "server",
+    class: "",
+    groupTitle: false,
+    badge: "",
+    badgeClass: "",
+    role: ["ROLE_AGENT", "ROLE_LANDLORD"],
+    submenu: [],
+  },
   {
     path: "/billing/main",
     title: "Bill Management",
@@ -109,21 +123,6 @@ export const ROUTES: RouteInfo[] = [
     role: ["ROLE_AGENT", "ROLE_LANDLORD"],
     submenu: [
     ]
-  },
-
-
-  {
-    path: "/leasing/lease",
-    title: "Leasing",
-    moduleName: "lease",
-    iconType: "feather",
-    icon: "server",
-    class: "",
-    groupTitle: false,
-    badge: "",
-    badgeClass: "",
-    role: ["ROLE_AGENT", "ROLE_LANDLORD"],
-    submenu: [],
   },
   
 
