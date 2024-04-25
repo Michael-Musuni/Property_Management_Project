@@ -56,6 +56,8 @@ export class UpdatePropertyComponent implements OnInit {
 
   ngOnInit(): void {
     this.property = this.data.property;
+
+    console.log("the data"+this.property)
     this.getUnits();
     this.initOwnerDetails(); 
     this.initCaretackerDetails();
@@ -80,36 +82,36 @@ this.propertyDetails = this.fb.group({
       phone: [this.property.propertyOwner.phone, [Validators.required]],
       ownerType: [this.property.propertyOwner.ownerType, [Validators.required]],
       email: [this.property.propertyOwner.email, [Validators.required]],
-      idNumber: [this.property.propertyOwner.idNumber, [Validators.required]],
-      kraPin: [this.property.propertyOwner.kraPin, [Validators.required]],
-      physicalAddress: [this.property.propertyOwner.physicalAddress, [Validators.required]],
-      accountNumber: [this.property.propertyOwner.accountNumber, [Validators.required]],
-      paymentMethod: [this.property.propertyOwner.paymentMethod, [Validators.required]],
+      idNumber: [this.property.propertyOwner .idNumber, [Validators.required]],
+      kraPin: [this.property .propertyOwner .kraPin, [Validators.required]],
+      physicalAddress: [this.property .propertyOwner .physicalAddress, [Validators.required]],
+      accountNumber: [this.property .propertyOwner .accountNumber, [Validators.required]],
+      paymentMethod: [this.property .propertyOwner .paymentMethod, [Validators.required]],
 
     });
   }
   initCaretackerDetails():void {
    this.caretakerDetails=this.fb.group({
-    name: [this.property.caretaker.name, [Validators.required]],
-    phone: [this.property.caretaker.phone, [Validators.required]],
-    caretakerID: ['', [Validators.required]],
-    physicalAddress: ["", [Validators.required]],
+    name: [this.property .caretaker .name, [Validators.required]],
+    phone: [this.property .caretaker .phone, [Validators.required]],
+    caretakerID: [this.property .caretaker .caretakerID, [Validators.required]],
+    physicalAddress: [this.property .caretaker .physicalAddress, [Validators.required]],
    });
   }
   initUnitsForm():void {
     this.unitsForm=this.fb.group({
-      unitName: [this.property.units.unitName, [Validators.required]],
-      maxOccupants: [this.property.units.maxOccupants, [Validators.required]],
-      deposit: [this.property.units.deposit, [Validators.required]],
-      rentAmount: [this.property.units.rentAmount, [Validators.required]],
+      unitName: [this.property .units .unitName, [Validators.required]],
+      maxOccupants: [this.property .units .maxOccupants, [Validators.required]],
+      deposit: [this.property .units .deposit, [Validators.required]],
+      rentAmount: [this.property .units .rentAmount, [Validators.required]],
     });
     
   }
   initRentConfigForm():void {
     this.rentConfigForm=this.fb.group({
-      rentDueDate: [this.property.rentConfig.rentDueDate, [Validators.required]],
-      latePaymentFee: [this.property.rentConfig.latePaymentFee, [Validators.required]],
-      managementCommission: [this.property.rentConfig.managementCommission, [Validators.required]],
+      rentDueDate: [this.property .rentConfig .rentDueDate, [Validators.required]],
+      latePaymentFee: [this.property .rentConfig .latePaymentFee, [Validators.required]],
+      managementCommission: [this.property .rentConfig .managementCommission, [Validators.required]],
     });
   }
   get members() {
@@ -150,6 +152,7 @@ this.propertyDetails = this.fb.group({
     this.unitsForm.reset()
     this.getUnits()
   }
+  
   onKeyPress(event: KeyboardEvent) {
     const allowedChars = /[a-zA-Z '-]/;
     if (!allowedChars.test(event.key)) {

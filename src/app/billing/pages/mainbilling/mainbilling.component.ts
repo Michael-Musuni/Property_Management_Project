@@ -13,11 +13,12 @@ export class MainBillingComponent implements OnInit {
   role: any;
   selectedProperty: string; // Selected property name
   properties: string[] = ['Samtech', 'Kafira', 'Unity']; // List of property names
-  monthLabels: string[]; // Array to hold month names for x-axis
+  monthLabels: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   barGraphOptions: any; // Options for the bar graph
   invoiceData: any; // Data for paid and unpaid invoices for each month
   totalPaidAmount: number; // Total amount for paid invoices
   totalUnpaidAmount: number; // Total amount for unpaid invoices
+  propertyName: ['']
 
   constructor(private billingService: BillingService,
     private tokenStorageService: TokenStorageService,
@@ -27,8 +28,8 @@ export class MainBillingComponent implements OnInit {
     this.barGraphOptions = {
       chart: {
         type: "bar",
-        height: 100,
-        width: '0%', // Set width to utilize available space
+        height: 60,
+        width: '50%', // Set width to utilize available space
         toolbar: {
           show: false ,// Hide toolbar if not needed
         },
@@ -45,6 +46,10 @@ export class MainBillingComponent implements OnInit {
     };
     this.invoiceData = [
       { data: [], label: 'Paid' },
+      // { data: [], label: 'Unpaid' },
+    ];
+    this.invoiceData = [
+      // { data: [], label: 'Paid' },
       { data: [], label: 'Unpaid' },
     ];
   }
@@ -53,6 +58,7 @@ export class MainBillingComponent implements OnInit {
     this.role = this.tokenStorageService.getUser().roles[0];
     this.selectedProperty = this.properties[0]; // Initialize with the first property
     this.updateBarGraph(this.selectedProperty);
+    
   }
 
   pickProperty(): void {
@@ -70,43 +76,38 @@ export class MainBillingComponent implements OnInit {
       if (result) {
         console.log(result)
       
-        this.selectedProperty = result.propertyName; // Update the selected property
-        this.updateBarGraph(result.data.id); // Update the bar graph based on the selected property
+        this.selectedProperty = result.propertyName; 
+        this.updateBarGraph(result.data.id); 
       }
     });
   }
 
   updateBarGraph(propertyId: any): void {
-    // const propertyId = this.properties.findIndex(prop => prop === property) + 1
-  
     this.billingService.getInvoiceStatusPerProperty(propertyId).subscribe({
       next: (data) => {
-        // Initialize arrays to hold monthly paid and unpaid amounts
-        this.monthLabels = data.PAID.labels
+        this.monthLabels = data.PAID.labels;
         
-        const monthlyPaidAmounts = data.PAID.values; // Initialize with zeros for each month
-        const monthlyUnpaidAmounts = data.PAID.values; // Initialize with zeros for each month
-  
-        // Check if the 'PAID' and 'NOT PAID' properties exist in the data object
+        const monthlyPaidAmounts = data.PAID.values;
+        const monthlyUnpaidAmounts = data['NOT PAID'].values; 
+        
         if (data.hasOwnProperty('PAID') && data.hasOwnProperty('NOT PAID')) {
-          // Iterate over each month in the 'PAID' and 'NOT PAID' properties
           for (const month in data['PAID']) {
-            const monthIndex = parseInt(month) - 1; // Adjust month index since JavaScript months are zero-based
-            monthlyPaidAmounts[monthIndex] = data['PAID'][month]; // Assign paid amount for the respective month
-            monthlyUnpaidAmounts[monthIndex] = data['NOT PAID'][month]; // Assign unpaid amount for the respective month
+            const monthIndex = parseInt(month) - 1;
+            monthlyPaidAmounts[monthIndex] = data['PAID'][month];
+            monthlyUnpaidAmounts[monthIndex] = data['NOT PAID'][month];
           }
         } else {
           console.error('Expected properties (PAID and NOT PAID) not found in data:', data);
-          // Handle the case where the expected properties are not found
+      
         }
   
-        // Update the invoice data with the calculated amounts
+        
         this.invoiceData = [
           { data: monthlyPaidAmounts, label: 'Total Amount for Paid Invoices', backgroundColor: 'rgba(255, 99, 132, 0.5)' },
           { data: monthlyUnpaidAmounts, label: 'Total Amount for Unpaid Invoices', backgroundColor: 'rgba(54, 162, 235, 0.5)' }
         ];
   
-        // Calculate total paid and unpaid amounts
+     
         this.totalPaidAmount = monthlyPaidAmounts.reduce((acc, curr) => acc + curr, 0);
         this.totalUnpaidAmount = monthlyUnpaidAmounts.reduce((acc, curr) => acc + curr, 0);
       },
@@ -116,4 +117,6 @@ export class MainBillingComponent implements OnInit {
       }
     });
   }
+
+  
 }

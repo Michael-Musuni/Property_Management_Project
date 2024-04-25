@@ -89,43 +89,7 @@ export class UploadBillComponent implements OnInit {
     }
   }
 
-  onUpload(): void {
-    this.loading = true;
-    console.log('Property Selected is:', this.uploadForm.value.propertyId);
-    console.log('Date Selected is:', this.selectedDate);
-
-    if (this.selectedFile) {
-      this.billingService.uploadFile(this.selectedFile, this.uploadForm.value.propertyId, this.selectedDate)
-        .subscribe(
-          response => {
-            this.loading = false;
-            console.log('File uploaded successfully:', response);
-            this.snackbar.showNotification("snackbar-success", response.message);
-            this.dialog.closeAll();
-          },
-          error => {
-            this.snackbar.showNotification("snackbar-success", "Error in file upload");
-          }
-        );
-    } else {
-      this.snackbar.showNotification("snackbar-danger", "No file selected");
-    }
-  }
-
-  // months: Month[] = [
-  //   { value: 1, viewValue: 'January' },
-  //   { value: 2, viewValue: 'February' },
-  //   { value: 3, viewValue: 'March' },
-  //   { value: 4, viewValue: 'April' },
-  //   { value: 5, viewValue: 'May' },
-  //   { value: 6, viewValue: 'June' },
-  //   { value: 7, viewValue: 'July' },
-  //   { value: 8, viewValue: 'August' },
-  //   { value: 9, viewValue: 'September' },
-  //   { value: 10, viewValue: 'October' },
-  //   { value: 11, viewValue: 'November' },
-  //   { value: 12, viewValue: 'December' }
-  // ];
+  
 
   selectedDate: number;
 }

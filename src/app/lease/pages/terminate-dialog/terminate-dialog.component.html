@@ -22,7 +22,7 @@
 </div> -->
   <h1 mat-dialog-title>Terminate Contract</h1>
   <div mat-dialog-content class="dialog-content" style="padding-top: 10px; overflow-y: hidden;">
-    <p>Do you want to terminate contract for {{ this.rowdata.data.id }}? </p>
+    <p>Do you want to terminate contract for? </p>
 
     <div align="left">
       <mat-checkbox [checked]="yesChecked" (change)="onYesChecked()"
@@ -35,9 +35,9 @@
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
       <p>Give reason for termination:</p>
-      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-0">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-0">
         <mat-form-field class="example-full-width mb-1" appearance="outline">
-          <mat-label>Description</mat-label>
+          <mat-label id="terminationReason">Description</mat-label>
           <textarea matInput [formControl]="descriptionFormControl"
             placeholder="Describe reason for termination..."></textarea>
           <mat-error *ngIf="descriptionFormControl.hasError('required')">Description is required</mat-error>
@@ -47,4 +47,4 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onCancelClick()">Cancel</button>
-    <button mat-button mat-raised-button color="primary" (click)="onTerminate()">Terminate</button>
+    <button mat-button mat-raised-button color="primary" (click)="onTerminate(data.contractId)">Terminate</button>

@@ -93,7 +93,7 @@
                         <ng-container matColumnDef="propertyName">
                             <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
                             <mat-cell *matCellDef="let vat">
-                                <a (click)="selectProperty()">{{ vat.propertyName }}</a>
+                                <a (click)="selectProperty()">{{ vat.propertyId }}</a>
                             </mat-cell>
                         </ng-container>
                         <!-- Monthly Rent Column -->
@@ -109,7 +109,7 @@
                         <!-- Late Penalty Column -->
                         <ng-container matColumnDef="Penalty">
                             <mat-header-cell *matHeaderCellDef>Penalty</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.Penalty }}</mat-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.latePenalty }}</mat-cell>
                         </ng-container>
                         <!-- Net Revenue Column -->
                         <ng-container matColumnDef="lastTaxResetDate">
@@ -119,7 +119,7 @@
                         <ng-container matColumnDef="overDueTaxAndPenalty">
                             <mat-header-cell *matHeaderCellDef>Over Due Tax And Penalty</mat-header-cell>
                             <mat-cell *matCellDef="let vat">
-                                <a (click)="selectProperty()">{{ vat.overDueTaxAndPenalty }}</a>
+                                <a (click)="selectProperty()">{{ vat.accumulatedOverdueTaxAndPenalty }}</a>
                             </mat-cell>
                         </ng-container>
                         <!-- Table header row -->

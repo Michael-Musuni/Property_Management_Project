@@ -13,12 +13,13 @@
                     <input placeholder="Search" type="text" (keyup)="applyFilter($event)" #filter
                       class="browser-default search-field" aria-label="Search box" />
                   </li>
-                  <li>
+                  <li >
                     <div class="m-l-5" matTooltip="Add">
-                      <button mat-mini-fab color="primary" (click)="addNew()">
-                        <mat-icon class="col-white">add</mat-icon>
+                      <button mat-mini-fab color="primary" (click)="addNew()"style="width: auto !important;padding: 0px 7px;border-radius: 5%;">
+                        <mat-icon matTooltip="Add new Amenity" class="col-white">add</mat-icon>Add new Amenity
                       </button>
                     </div>
+              
                   </li>
                   <li>
                     <div class="m-l" matTooltip="Refresh">

@@ -11,6 +11,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class LeaseService {
+
   private apiUrl = environment.apiUrl
 
   private updateDataSubject = new Subject<void>();
@@ -30,7 +31,7 @@ export class LeaseService {
     return this.http.post(`${environment.apiUrl}/api/v1/lease/create-contract`,data)
   }
   updateContract(data:any): Observable<any>{
-    return this.http.put(`${environment.apiUrl}/api/v1/lease/update-contract`,data)
+    return this.http.put(`${environment.apiUrl}/api/v1/lease/update-contract/`,data)
   }
   getContracts(){
     return this.http.get(`${environment.apiUrl}/api/v1/lease/all-contracts`,httpOptions)
@@ -60,6 +61,12 @@ export class LeaseService {
   public downloadTerminatedContractsReport(propertyName: any): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/terminated-lease?propertyName=${propertyName}`, { responseType: 'blob' });
   }
+  terminateContract(contractId: any): Observable<any> {
+    // Construct the URL with the contractId
+    const url = `${this.apiUrl}/api/v1/lease/terminate/${contractId}`;
 
+    // Send a DELETE request to terminate the contract
+    return this.http.delete(url);
+  }
   
 }

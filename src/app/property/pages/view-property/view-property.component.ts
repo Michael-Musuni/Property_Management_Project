@@ -94,6 +94,8 @@ this.propertyDetails = this.fb.group({
    this.caretakerDetails=this.fb.group({
     name: [this.property.caretaker.name ],
     phone: [this.property.caretaker.phone ],
+    nationalId: [this.property.caretaker.nationalId ],
+    physicalAddress: [this.property.caretaker.physicalAddress ],
    });
   }
   initUnitsForm():void {

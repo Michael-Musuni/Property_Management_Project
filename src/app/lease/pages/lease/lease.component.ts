@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ReportoptionsComponent } from '../reportoptions/reportoptions.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 import { MatTable } from '@angular/material/table';
 import { MatTableExporterModule } from 'mat-table-exporter';
@@ -17,6 +19,7 @@ import { ViewLeaseComponent } from '../view-lease/view-lease.component';
 import { HttpParams } from '@angular/common/http';
 import { DeleteLeaseComponent } from '../delete-lease/delete-lease.component';
 import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
+import { TerminateDialogComponent } from '../terminate-dialog/terminate-dialog.component';
 import { UpdateLeaseComponent } from '../update-lease/update-lease.component';
 
 
@@ -43,6 +46,8 @@ export class LeaseComponent implements OnInit {
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: "0px", y: "0px" };
   selectedProperty: any;
+  rowdata: any;
+  dialogRef: any;
   // params: HttpParams;
 
 
@@ -162,14 +167,14 @@ console.log("the data"+row)
   }
 
 
-  activeContractsData = [{ data: [], label: 'Active Contracts' }];
-  activeContractsLabels = ['January', 'February', 'March', 'April'];
+  activeContractsData = [{ data: [10,20,30,40], label: 'Active Contracts', backgroundColor:'#3F51B5', hoverbackgroundcolor: '#3F51B5'}];
+  activeContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
   activeContractsOptions = { responsive: true };
 
   // // Define the data and options for deleted tenants bar graph
-  // deactivatedContractsData = [{ data: [10, 20, 30, 40], label: 'Deactivated Contracts' }];
-  // deactivatedContractsLabels = ['January', 'February', 'March', 'April'];
-  // deactivatedContractsOptions = { responsive: true };
+  terminatedContractsData = [{ data: [10,20,30,40], label: 'Terminated Contracts', backgroundColor:'#3F51B5', hoverbackgroundcolor: '#3F51B5'}];
+  terminatedContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr','May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
+  terminatedContractsOptions = { responsive: true };
 
 
 
@@ -238,30 +243,81 @@ console.log("the data"+row)
     // });
   }
 
-  public onDelete(row) {
+onDelete(row: any): void {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = false; // Allow closing the dialog with backdrop click or ESC key
+  dialogConfig.autoFocus = true; // Auto-focus on the first interactive element in the dialog
+  dialogConfig.width = "800px"; // Set the width of the dialog
+  dialogConfig.data = { data: row }; // Pass data (e.g., rowdata) to the dialog component
 
+  const dialogRef = this.dialog.open(DeleteLeaseComponent, dialogConfig);
 
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "800px";
-    dialogConfig.data = {
-      data: row
-    };
-    const dialogRef = this.dialog.open(DeleteLeaseComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {
-    });
-
-  } 
-  viewReportOptions() {
-    const dialogConfig = new MatDialogConfig()
-    dialogConfig.disableClose = true
-    dialogConfig.autoFocus = true
-    dialogConfig.width = '600px'
-    dialogConfig.data = { test: "data" }
-    const dialogRef = this.dialog.open(ReportoptionsComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('closed');
-    });
-  }
+  dialogRef.afterClosed().subscribe((result: any) => {
+    // Handle dialog close event if needed
+    console.log('Dialog result:', result);
+    // You can perform actions based on the dialog result here
+  });
 }
+
+viewReportOptions() {
+  const dialogConfig = new MatDialogConfig()
+  dialogConfig.disableClose = true
+  dialogConfig.autoFocus = true
+  dialogConfig.width = '600px'
+  dialogConfig.data = { test: "data" }
+  const dialogRef = this.dialog.open(ReportoptionsComponent, dialogConfig);
+  dialogRef.afterClosed().subscribe((result) => {
+    console.log('closed');
+  });
+}
+onTerminate() {
+  const dialogConfig = new MatDialogConfig()
+  dialogConfig.disableClose = true
+  dialogConfig.autoFocus = true
+  dialogConfig.width = '600px'
+  dialogConfig.data = { test: "data" }
+  const dialogRef = this.dialog.open(TerminateDialogComponent, dialogConfig);
+  dialogRef.afterClosed().subscribe((result) => {
+    console.log('closed');
+  });
+}
+
+openTerminateDialog(lease: any): void {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = false;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = '400px';
+  dialogConfig.data = {
+    lease,
+  };
+
+  const dialogRef = this.dialog.open(TerminateDialogComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(result => {
+    this.ngOnInit();
+  });
+}
+
+// onTerminate(terminationReason: string) {
+//   const contractId = this.rowdata.data.id; // Assuming you have access to rowdata and its ID
+
+//   this.leaseService.terminatedContracts(contractId).subscribe({
+//     next: (response) => {
+//       if (response.statusCode === 200) {
+//         this.snackbar.open(response.message, 'Close', { duration: 3000 });
+//         console.log("Response", response.entity);
+//         this.dialogRef.close(); // Close the dialog upon successful termination
+//         this.leaseService.updateData(); // Optionally update data after successful termination
+//       } else {
+//         this.snackbar.open(response.message, 'Close', { duration: 3000 });
+//       }
+//     },
+//     error: (error) => {
+//       console.error('Error terminating contract:', error);
+//       this.snackbar.open('An error occurred', 'Close', { duration: 3000 });
+//     }
+//   });
+// }
+}
+ 
+

@@ -186,29 +186,29 @@
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                   <mat-cell *matCellDef="let tenant">
-                    <div *ngIf="role === 'ROLE_LANDLORD'">
-                      <button mat-icon-button color="primary" (click)="$event.stopPropagation(); viewTenant(tenant)"
+                   
+                      <!-- <button mat-icon-button color="primary" (click)="$event.stopPropagation(); viewTenant(tenant)"
                       matTooltip="view"> <mat-icon>visibility</mat-icon>
-                      </button>
-                    </div>
-                    <div *ngIf="role === 'ROLE_AGENT'">
-                      <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateTenant(tenant)"
+                      </button> -->
+                 
+                  
+                      <button *ngIf="role=='ROLE_AGENT'" mat-icon-button color="primary" (click)="$event.stopPropagation(); updateTenant(tenant)"
                         matTooltip="update"> <mat-icon>edit</mat-icon>
                       </button>
                      
             
-                      <button mat-icon-button color="primary"*ngIf="role === 'ROLE_AGENT'" (click)="$event.stopPropagation(); viewTenant(tenant)"
+                      <button mat-icon-button color="primary"(click)="$event.stopPropagation(); viewTenant(tenant)"
                       matTooltip="view"> <mat-icon>visibility</mat-icon>
                       </button>
                     
-                      <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall($event, tenant)">
+                      <button *ngIf="role=='ROLE_AGENT'"mat-icon-button color="primary" matTooltip="Delete" (click)="deleteCall($event, tenant)">
                         <mat-icon>delete</mat-icon>
                       </button>
-                      <button mat-icon-button color="primary" (click)="issueContract(tenant)"
+                      <button *ngIf="role=='ROLE_AGENT'" mat-icon-button color="primary" (click)="issueContract(tenant)"
                         matTooltip="Issue contract">
                         <mat-icon>note</mat-icon>
                       </button>
-                    </div>
+                    
                   </mat-cell>
                 </ng-container>
 
