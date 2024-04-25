@@ -50,10 +50,12 @@ export class LeaseService {
   public getLeaseReport(leaseId: any):Observable <Blob>{
     return this.http.get(`${environment.apiUrl}/api/v1/lease/download?leaseId=${leaseId}`, { responseType: 'blob'});
   }
-  // getActiveContracts(): Observable<any> {
-  //   const url = `${this.apiUrl}/api/v1/analytics/active-contracts`;
-  //   return this.http.get(url);
-  // }
+  getActiveContracts(): Observable<any> {
+    const onboardedTenantsUrl = `${this.apiUrl}/api/v1/analytics/onboardedTenants`;
+   
+    return this.http.get<any>(onboardedTenantsUrl);
+   
+  }
   getActiveContractsData(): Observable<any> {
     const endpointUrl = `${this.baseUrl}/api/v1/analytics/active-contracts`;
     return this.http.get<any>(endpointUrl);

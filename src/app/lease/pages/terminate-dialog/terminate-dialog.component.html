@@ -1,35 +1,14 @@
-<!-- <h1 mat-dialog-title>Terminate Contract</h1>
-<div mat-dialog-content class="dialog-content" style="padding-top: 10px;overflow-y: hidden;">
-  <p>Do you want to terminate contract for {{this.rowdata.data.tenantName}}?</p>
 
-  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12
-  mb-2">
-    <div class="example-button-row" align="center">
-      <button mat-raised-button color="primary">
-        Yes
-      </button>
-      <p>Give reason for termination</p>
-      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
-        <mat-form-field class="example-full-width mb-1" appearance="outline">
-          <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description" placeholder="Describe property..."></textarea>
-        </mat-form-field>
-      </div>
-    </div>
-  </div>
-  <button mat-raised-button color="primary" (click)="onTerminate()">
-    Terminate</button>
-</div> -->
-  <h1 mat-dialog-title>Terminate Contract</h1>
+  <h1 mat-dialog-title>Terminate Contract for {{tenantName}}</h1>
   <div mat-dialog-content class="dialog-content" style="padding-top: 10px; overflow-y: hidden;">
-    <p>Are you sure you want to terminate contract for {{tenantName}}? </p>
-
+    <!-- <p>Terminate contract for {{tenantName}}</p> -->
+<!-- 
     <div align="left">
       <mat-checkbox [checked]="yesChecked" (change)="onYesChecked()"
         [color]="yesChecked ? 'primary' : 'accent'">Yes</mat-checkbox>
       <mat-checkbox [checked]="noChecked" (change)="onNoChecked()"
         [color]="noChecked ? 'primary' : 'accent' ">No</mat-checkbox>
-    </div>
+    </div> -->
 
 
 
