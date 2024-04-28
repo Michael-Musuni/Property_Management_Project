@@ -1,0 +1,49 @@
+<section class="content">
+  <div class="content-block">
+      <div class="block-header">
+          <!-- breadcrumb -->
+          <app-breadcrumb [title]="'Available Units'" [items]="['Units']" [active_item]="'Property-Units'">
+          </app-breadcrumb>
+      </div>
+      <div class="card">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <table mat-table [dataSource]="memberTableDataSource"
+                class="table table-bordered table-hover w-100">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Unit Name </th>
+                    <td mat-cell *matCellDef="let element"> {{ row.name }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="propertyName">
+                    <th mat-header-cell *matHeaderCellDef> Property Name
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{row.propertyName}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="caretakerNo">
+                    <th mat-header-cell *matHeaderCellDef> CareTaker Phone No </th>
+                    <td mat-cell *matCellDef="let element"> {{ row.idNumber}}
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row
+                    *matHeaderRowDef="['name', 'propertyName', 'caretakerNo']">
+                </tr>
+                <tr mat-row
+                    *matRowDef="let row; columns: ['name', 'propertyName', 'caretakerNo']">
+                </tr>
+               
+            </table>
+            <div *ngIf="loading" class="tbl-spinner">
+              <mat-progress-spinner color="primary" [diameter]="60" mode="indeterminate">
+              </mat-progress-spinner>
+            </div>
+            <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+        </div>
+        
+    </div>
+  </div>
+  </div>
+</section>

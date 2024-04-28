@@ -75,8 +75,9 @@ export class UpdateLeaseComponent implements OnInit {
         console.log("My response ", res)
         this.snackbar.showNotification("snackbar-success", this.data.message);
         this.router.navigate(["/leasing/lease"])
+        
       })
-    
+      
     })
   }
 

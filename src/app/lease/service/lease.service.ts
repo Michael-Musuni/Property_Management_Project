@@ -69,12 +69,10 @@ export class LeaseService {
   public downloadTerminatedContractsReport(propertyName: any): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/terminated-lease?propertyName=${propertyName}`, { responseType: 'blob' });
   }
-  terminateContract(contractId: any): Observable<any> {
+  terminateContract(terminationReason:any ,contractId: any): Observable<any> {
     // Construct the URL with the contractId
     const url = `${this.apiUrl}/api/v1/lease/terminate/${contractId}`;
-
-    // Send a DELETE request to terminate the contract
-    return this.http.delete(url);
+    return this.http.put(url, terminationReason,contractId);
   }
   
 }

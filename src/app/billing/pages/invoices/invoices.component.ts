@@ -15,6 +15,7 @@ import { SendOptionsDialogComponent } from '../send-options-dialog/send-options-
 import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
 import { CheckerDialogComponent } from '../checker-dialog/checker-dialog.component';
 import { ReportOptionsComponent } from '../report-options/report-options.component';
+import { Role } from 'src/app/core/models/role';
 
 @Component({
   selector: 'app-invoices',
@@ -29,7 +30,7 @@ export class InvoicesComponent implements OnInit {
   invoices: any[] = [];
   isLoading: boolean = false;
   isDownloadSuccessful: boolean = false;
-  displayedColumns: string[] = ['invoicingDate','invoiceNumber', 'status', 'totalAmount', 'tenantName', 'actions'];
+  displayedColumns: string[] = ['invoicingDate','invoiceNumber', 'status', 'totalAmount', 'tenantName'];
   subscription: Subscription;
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -47,6 +48,10 @@ export class InvoicesComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = this.tokenStorageService.getUser().roles[0]
+
+    if (this.role === Role.agent) {
+      this.displayedColumns = ['invoicingDate','invoiceNumber', 'status', 'totalAmount', 'tenantName', 'actions']
+    }
     this.fetchInvoices();
   }
   applyFilter(event: Event) {

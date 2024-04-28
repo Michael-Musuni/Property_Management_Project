@@ -1,5 +1,11 @@
-
-  <h1 mat-dialog-title>Terminate Contract for {{tenantName}}</h1>
+<div class="d-flex justify-content-between">
+  <h5>Terminate Contract for {{tenantName}}</h5>
+  <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+  </button>
+</div>
+  
+  <div class="card">
   <div mat-dialog-content class="dialog-content" style="padding-top: 10px; overflow-y: hidden;">
     <!-- <p>Terminate contract for {{tenantName}}</p> -->
 <!-- 
@@ -11,19 +17,20 @@
     </div> -->
 
 
-
+  <form [formGroup]="terminate">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
       <p>Give reason for termination:</p>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-0">
-        <mat-form-field class="example-full-width mb-1" appearance="outline">
-          <mat-label id="terminationReason">Description</mat-label>
-          <textarea matInput [formControl]="descriptionFormControl"
-            placeholder="Describe reason for termination..."></textarea>
-          <mat-error *ngIf="descriptionFormControl.hasError('required')">Description is required</mat-error>
-        </mat-form-field>
+       <mat-form-field class="example-full-width mb-1" appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="terminationReason"
+              placeholder="Describe property..."></textarea>
+      </mat-form-field>
       </div>
     </div>
+  </form>
   </div>
+</div>
   <div mat-dialog-actions>
     <button mat-button (click)="onCancelClick()">Cancel</button>
     <button mat-button mat-raised-button color="primary" (click)="onTerminate(data.contractId)">Terminate</button>
