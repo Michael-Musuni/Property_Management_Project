@@ -92,8 +92,7 @@ export class AddpropertyComponent implements OnInit {
       idpassportNumber: ["",],
       kraPin: ['',],
       physicalAddress: ["", [Validators.required]],//lease,rent
-
-
+      paymentMethod: [""],
     });
     this.rentConfigForm = this.fb.group({
       rentDueDate: ["", [Validators.required]],

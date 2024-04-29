@@ -47,6 +47,9 @@ export class TenantService {
   public deleteTenant(id: any): Observable<any>{
     return this.http.delete(`${environment.apiUrl}/api/property/tenant/${id}`)
   }
+  getunits(){
+    return this.http.get(`${environment.apiUrl}/api/v1/lease/all-contracts`)
+  }
   public updateTenant(id: any, data: any): Observable<any>{
     console.log("next of kin to be submitted "+data.nextOfKin.nextOfKinName)
     return this.http.put(`${environment.apiUrl}/api/property/tenant/${id}`, data)

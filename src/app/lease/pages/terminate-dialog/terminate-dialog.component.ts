@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LeaseService } from '../../service/lease.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
@@ -17,32 +17,28 @@ export class TerminateDialogComponent implements OnInit {
   subscription: any;
   color: any;
   terminationReason: any;
+  tenantName = ''
+  terminate:FormGroup;
+  
+    
 
   constructor(
     public dialogRef: MatDialogRef<TerminateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private leaseService: LeaseService,
-    private snackbar: SnackbarService
+    private snackbar: SnackbarService,
+    private fb:FormBuilder,
   ) {}
 
   ngOnInit(): void {
-    // Initialization tasks can be performed here
-    console.log('TerminateDialogComponent initialized');
+    this.tenantName = this.data.tenantName
+    this.terminate=this.fb.group({
+      terminationReason:["", [Validators.required]],
+    })
+    
   }
-
-  onNoChecked(): void {
-    this.noChecked = true;
-    this.yesChecked = false;
-  }
-  onYesChecked(): void {
-    this.yesChecked = true;
-    this.noChecked = false;
-  }
-
- 
-
   onTerminate(contractId: any): void {
-    this.leaseService.terminateContract(contractId).subscribe({
+    this.leaseService.terminateContract(this.terminate.value,contractId).subscribe({
       next: (response) => {
         if (response.statusCode === 200) {
           this.snackbar.showNotification(response.message, 'success');
@@ -59,7 +55,16 @@ export class TerminateDialogComponent implements OnInit {
     });
   }
 
-  onCancelClick(): void {
+  onNoChecked(): void {
+    this.noChecked = true;
+    this.yesChecked = false;
+  }
+  onYesChecked(): void {
+    this.yesChecked = true;
+    this.noChecked = false;
+  }
+
+ onCancelClick(): void {
     this.dialogRef.close();
   }
 }

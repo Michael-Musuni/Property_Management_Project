@@ -14,6 +14,8 @@ export class LeaseService {
 
   private apiUrl = environment.apiUrl
 
+  private baseUrl = '/api/v1';
+
   private updateDataSubject = new Subject<void>();
 
   constructor(private http:HttpClient) { }
@@ -48,9 +50,15 @@ export class LeaseService {
   public getLeaseReport(leaseId: any):Observable <Blob>{
     return this.http.get(`${environment.apiUrl}/api/v1/lease/download?leaseId=${leaseId}`, { responseType: 'blob'});
   }
-  getActiveContractsPerProperty(propertyId:number):Observable<any>{
-    const url = `${this.apiUrl}/api/v1/analytics/active-contracts/{propertyId}/${propertyId}`;
-    return this.http.get<any>(url, httpOptions);
+  getActiveContracts(): Observable<any> {
+    const onboardedTenantsUrl = `${this.apiUrl}/api/v1/analytics/onboardedTenants`;
+   
+    return this.http.get<any>(onboardedTenantsUrl);
+   
+  }
+  getActiveContractsData(): Observable<any> {
+    const endpointUrl = `${this.baseUrl}/api/v1/analytics/active-contracts`;
+    return this.http.get<any>(endpointUrl);
   }
   public getProperties() {
     return this.http.get(`${environment.apiUrl}/api/v1/property/get`);
@@ -61,12 +69,10 @@ export class LeaseService {
   public downloadTerminatedContractsReport(propertyName: any): Observable<Blob> {
     return this.http.get(`${environment.apiUrl}/api/v1/reports/property/terminated-lease?propertyName=${propertyName}`, { responseType: 'blob' });
   }
-  terminateContract(contractId: any): Observable<any> {
+  terminateContract(terminationReason:any ,contractId: any): Observable<any> {
     // Construct the URL with the contractId
     const url = `${this.apiUrl}/api/v1/lease/terminate/${contractId}`;
-
-    // Send a DELETE request to terminate the contract
-    return this.http.delete(url);
+    return this.http.put(url, terminationReason,contractId);
   }
   
 }

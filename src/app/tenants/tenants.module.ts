@@ -38,6 +38,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { DeleteComponent } from './pages/delete/delete.component';
 import { ViewTenantComponent } from './pages/view-tenant/view-tenant.component';
+import { PropertyUnitComponent } from './pages/property-unit/property-unit.component';
 
 
 
@@ -48,7 +49,7 @@ import { ViewTenantComponent } from './pages/view-tenant/view-tenant.component';
     AddTenantComponent,
     IdverificationComponent,
     DeleteComponent,
-    
+    PropertyUnitComponent,
 
     ReportoptionsComponent,
  

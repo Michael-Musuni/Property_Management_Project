@@ -6,21 +6,14 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SnackbarService } from 'src/app/shared/snackbar.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ReportoptionsComponent } from '../reportoptions/reportoptions.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-
-
-import { MatTable } from '@angular/material/table';
-import { MatTableExporterModule } from 'mat-table-exporter';
 import { ViewLeaseComponent } from '../view-lease/view-lease.component';
 import { HttpParams } from '@angular/common/http';
 import { DeleteLeaseComponent } from '../delete-lease/delete-lease.component';
-import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
 import { TerminateDialogComponent } from '../terminate-dialog/terminate-dialog.component';
 import { UpdateLeaseComponent } from '../update-lease/update-lease.component';
+
 
 
 
@@ -39,6 +32,9 @@ export class LeaseComponent implements OnInit {
   label: string
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = ["tenantName", "startDate", "endDate", "status", "actions"]
+  activeContractsData = [{ data: [], label: 'Active Contracts', backgroundColor:'grey', hoverBackgroundColor: 'grey'}];
+  activeContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
+  activeContractsOptions = { responsive: true };
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
@@ -48,6 +44,7 @@ export class LeaseComponent implements OnInit {
   selectedProperty: any;
   rowdata: any;
   dialogRef: any;
+  snackBar: any;
   // params: HttpParams;
 
 
@@ -55,18 +52,37 @@ export class LeaseComponent implements OnInit {
   constructor(
     private leaseService: LeaseService,
     private snackbar: SnackbarService,
-    private snackBar: MatSnackBar,
-
-    private dialog: MatDialog
+   
+   
+ private dialog: MatDialog
+    
 
   ) { }
 
   ngOnInit(): void {
     this.getContracts();
+    this.activeLease();
     this.leaseService.getUpdateData().subscribe(() => {
       this.getContracts();
+      
     });
   }
+  activeLease(){
+    this.leaseService.getActiveContracts().subscribe({
+      next:(response)=>{
+      
+        this.activeContractsData=[{data: response.values,label:'Active Contracts',backgroundColor:'#3F51B5',hoverBackgroundColor: '#3F51B5'}];
+       
+        this.activeContractsLabels=response.labels;
+        this.activeContractsOptions={responsive:true};
+      },
+      error:(error)=>{
+        console.error('error in fetching active contacts:',error);
+        this.snackBar.showNotification("snackbar",error);
+      }
+    })
+  }
+
   updateLease(row: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
@@ -128,55 +144,34 @@ console.log("the data"+row)
   addNew() {
 
   }
-  pickProperty() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '50%';
-    dialogConfig.data = {
-      user: '',
-    };
+  
 
-    const dialogRef = this.dialog.open(PropertyLookupComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result); // Check if propertyId is present in the result
-      if (result && result.propertyId) {
-        this.selectedProperty = result.propertyName; // Update the selected property
-        // Call API to get active contracts for the selected property
-        this.leaseService.getActiveContractsPerProperty(result.propertyId)
-          .subscribe(
-            (activeContractsData) => {
-              // Update the graphs based on the active contracts data
-              this.updateGraphs(activeContractsData);
-            },
-            (error) => {
-              console.error('Error fetching active contracts:', error);
-              // Handle error, show error message, etc.
-            }
-          );
-      }
-    });
-  }
-
-  updateGraphs(activeContractsData: any) {
-    // Update the graphs based on the active contracts data
-    this.activeContractsData = activeContractsData.data;
-    this.activeContractsLabels = activeContractsData.labels;
-    this.activeContractsOptions = activeContractsData.options;
-  }
+  // updateGraphs(activeContractsData: any) {
+  //   // Update the graphs based on the active contracts data
+  //   this.activeContractsData = activeContractsData.data;
+  //   this.activeContractsLabels = activeContractsData.labels;
+  //   this.activeContractsOptions = activeContractsData.options;
+  // }
 
 
-  activeContractsData = [{ data: [10,20,30,40], label: 'Active Contracts', backgroundColor:'#3F51B5', hoverbackgroundcolor: '#3F51B5'}];
-  activeContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
-  activeContractsOptions = { responsive: true };
+
 
   // // Define the data and options for deleted tenants bar graph
-  terminatedContractsData = [{ data: [10,20,30,40], label: 'Terminated Contracts', backgroundColor:'#3F51B5', hoverbackgroundcolor: '#3F51B5'}];
+  terminatedContractsData = [{ data: [], label: 'Terminated Contracts', backgroundColor:'#3F51B5', hoverBackgroundColor: '#3F51B5'}];
   terminatedContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr','May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
   terminatedContractsOptions = { responsive: true };
 
-
+  // fetchActiveContracts() {
+  //   this.leaseService.getActiveContracts().subscribe(
+  //     (activeContractsData) => {
+  //       // Update graphs or perform other actions based on activeContractsData
+  //       console.log('Active Contracts Data:', activeContractsData);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching active contracts:', error);
+  //     }
+  //   );
+  // }
 
   public viewLease(row: any) {
 
@@ -224,23 +219,6 @@ console.log("the data"+row)
 
       })
     })
-
-
-    //public next (res){}
-
-    // const invoiceNumber = invoice.invoiceNumber;
-    // this.leaseService.downloadLease(invoiceNumber).subscribe((data: Blob) => {
-    //   const blob = new Blob([data], { type: 'application/pdf' });
-    //   const url = window.URL.createObjectURL(blob);
-    //   const a = document.createElement('a');
-    //   document.body.appendChild(a);
-    //   a.style.display = 'none';
-    //   a.href = url;
-    //   a.download = Lease_${invoiceNumber}.pdf;
-    //   a.click();
-    //   window.URL.revokeObjectURL(url);
-
-    // });
   }
 
 onDelete(row: any): void {
@@ -287,10 +265,11 @@ openTerminateDialog(lease: any): void {
   dialogConfig.disableClose = false;
   dialogConfig.autoFocus = true;
   dialogConfig.width = '400px';
-  dialogConfig.data = {
-    lease,
-  };
-
+    dialogConfig.data = {
+      lease,
+      tenantName: lease.tenantName // Pass the tenant's name to the dialog
+    }
+ 
   const dialogRef = this.dialog.open(TerminateDialogComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(result => {
@@ -319,5 +298,3 @@ openTerminateDialog(lease: any): void {
 //   });
 // }
 }
- 
-

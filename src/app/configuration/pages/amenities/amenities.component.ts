@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { EditAmenityComponent } from '../edit-amenity/edit-amenity.component';
 import { DeleteAmenityComponent } from '../delete-amenity/delete-amenity.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Role } from 'src/app/core/models/role';
 
 @Component({
   selector: 'app-amenities',
@@ -29,6 +30,7 @@ export class AmenitiesComponent implements OnInit {
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: "0px", y: "0px" };
+  role: Role;
 
   constructor(
     private amenityService:AmenitiesService,   
@@ -39,6 +41,7 @@ export class AmenitiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAmenities()
+   
 
   }
   applyFilter(event: Event) {

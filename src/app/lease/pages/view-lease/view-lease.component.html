@@ -11,8 +11,12 @@
     <p><strong>Monthly Rent:</strong> {{ this.lease.data.monthlyRent }}</p>
     <p><strong>Deposit:</strong> {{ this.lease.data.deposit }}</p>
     <p><strong>Late Payment Fee:</strong> {{ this.lease.data.latePaymentFee }}</p>
-    <p><strong>Charge Name:</strong> {{ this.lease.data.charges.chargeName}}</p>
-    <p><strong>Charge Amount:</strong> {{ this.lease.data.charges.chargeAmount}}</p>
+    <!-- <p><strong>Charge Name:</strong> {{ this.lease.data.charges.chargeName}}</p>
+    <p><strong>Charge Amount:</strong> {{ this.lease.data.charges.chargeAmount}}</p> -->
+    <div *ngIf="lease && lease.data && lease.data.charges && lease.data.charges.length > 0">
+      <div *ngFor="let charge of lease.data.charges">
+        <p><strong>Charge Name:</strong> {{ charge.chargeName }}</p>
+        <p><strong>Charge Amount:</strong> {{ charge.chargeAmount }}</p>
 
 
   </div>

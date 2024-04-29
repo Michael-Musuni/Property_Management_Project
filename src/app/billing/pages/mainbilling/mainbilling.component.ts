@@ -46,12 +46,12 @@ export class MainBillingComponent implements OnInit {
     };
     this.invoiceData = [
       { data: [], label: 'Paid' },
-      // { data: [], label: 'Unpaid' },
-    ];
-    this.invoiceData = [
-      // { data: [], label: 'Paid' },
       { data: [], label: 'Unpaid' },
     ];
+    // this.invoiceData = [
+    //   // { data: [], label: 'Paid' },
+    //   // { data: [], label: 'Unpaid' },
+    // ];
   }
 
   ngOnInit(): void {

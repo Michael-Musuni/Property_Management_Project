@@ -5,7 +5,7 @@
       </app-breadcrumb>
     </div>
 
-    <div class="row justify-content-center"> <!-- Add justify-content-center class to center the content -->
+    <div class="row"> <!-- Add justify-content-center class to center the content -->
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <div class="card">
           <div class="body">
@@ -14,39 +14,41 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-        <div class="card">
-          <div class="body">
-            <canvas baseChart [datasets]="deletedTenantsData" [labels]="deletedTenantsLabels" [options]="deletedTenantsOptions"
-              [chartType]="'bar'"></canvas>
-          </div>
-        </div> -->
-      <!-- </div> -->
       
-
-      <!-- Date Picker -->
-      
-
-       <mat-card>
-        <mat-card-content>
+        
+          <!-- <div class="row"> -->
+            <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <mat-date-range-input [rangePicker]="picker" (dateRangeInput)="onDateRangeInput($event)">
+                <input matStartDate placeholder="Start date" [max]="maxEndDate" [(ngModel)]="startDate">
+                <input matEndDate placeholder="End date" [min]="startDate" [max]="maxEndDate" [(ngModel)]="endDate" (dateChange)="onEndDateChange()">
+              </mat-date-range-input>
+            </div> -->
+          <!-- </div> -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <div class="card">
           <div class="row">
-            <!-- Your date range inputs (if needed) -->
-          </div>
-    
-          <div class="container">
-            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-3">
-              <!-- Start Date Input -->
-            </div>
-    
-            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-3">
-              <!-- End Date Input -->
-            </div>
-          </div>
-    
-          <h4>Number of tenants {{ startDate | date: 'mediumDate' }} {{ endDate | date: 'mediumDate' }}: {{ activeTenantsForSelectedDates }}</h4>
-        </mat-card-content>
-      </mat-card>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" readonly>
+                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #startDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+          
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="endDatePicker" formControlName="endDate" readonly>
+                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+          
+        </div>
+        <h4>  Number of tenants {{ startDate | date: 'mediumDate' }}  {{ endDate | date: 'mediumDate' }}: {{ activeTenantsForSelectedDates }}</h4> 
+      </div>
+    </div>
+        </div>
     </div>
 
 

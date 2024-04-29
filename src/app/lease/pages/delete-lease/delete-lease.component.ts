@@ -24,6 +24,9 @@ export class DeleteLeaseComponent implements OnInit {
     this.rowdata = this.data;
     console.log("Data", this.rowdata);
   }
+  delete(): void {
+    this.dialogRef.close('delete');
+  }
 
 //   onDelete() {
 
