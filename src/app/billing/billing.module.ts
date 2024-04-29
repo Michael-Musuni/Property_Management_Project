@@ -62,6 +62,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { VatComponent } from './pages/vat/vat.component';
 import { InvoicesComponent } from './pages/invoices/invoices.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
+import { DepositsComponent } from './pages/deposits/deposits.component';
 
 
 @NgModule({
@@ -92,6 +93,7 @@ import { ExpensesComponent } from './pages/expenses/expenses.component';
     CheckerDialogComponent,
     TotalExpensesComponent,
     AllExpensesComponent,
+    DepositsComponent,
 
   ],
   imports: [

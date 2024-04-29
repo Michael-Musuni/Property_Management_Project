@@ -59,11 +59,11 @@ export class MainComponent implements OnInit {
   chartOptions: any;
 
 public rentchartoptions: { series: { data: any; name: string; }[]; chart: { type: string; height: number; }; xaxis: { categories: any; }; };
-public rentpaidData: any = [];
+public rentpaidData: any = [{ data: [],  backgroundColor:'grey', hoverBackgroundColor: 'grey'}];
 public rentpaidLabels: any = [];
 public rentpaidOptions: any = [];
 loaded = false;
-  PropertyOnboardedData: { data: any; label: string; }[];
+  PropertyOnboardedData:  [ { data: any; label: string; }];
   PropertyOnboardedLabels: any;
   PropertyOnboardedOptions: { responsive: boolean; };
 
@@ -83,7 +83,7 @@ loaded = false;
       this.data = res;
       console.log("mymonthlyrentdata", this.data);
       this.loaded = true;
-      this.rentpaidData = [{ data: this.data.values, label: 'Rent Paid' }];
+      this.rentpaidData = [{ data: this.data.values, label: 'Rent Paid', backgroundColor:'#3F51B5',hoverBackgroundColor: '#3F51B5'}];
       this.rentpaidLabels = this.data.labels;
       this.rentpaidOptions = {
         responsive: true,
@@ -96,14 +96,15 @@ loaded = false;
       this.data = res;
       console.log("mypropertycountdata", this.data);
       this.loaded = true;
-      this.PropertyOnboardedData  = [{ data: this.data.values, label: 'Property Onboarded' }];
+      this.PropertyOnboardedData  = [{ data: this.data.values, label: 'Property Onboarded'}];
       this.PropertyOnboardedLabels = this.data.labels;
       this.PropertyOnboardedOptions= {
         responsive: true,
         // Add other necessary options
       };
     });
-  } 
+  }
+   
  
     issueContract(row) {
       console.log("Issue contract to: ", row);

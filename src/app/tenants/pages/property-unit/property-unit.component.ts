@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+
 import { TenantService } from '../tenant.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { ExportType, MatTableExporterDirective } from 'mat-table-exporter';
 
 
 
@@ -22,7 +24,7 @@ export class PropertyUnitComponent implements OnInit {
   paginator: any;
   sort: any;
   snackbar: any;
-
+  @ViewChild('exporter', { static: true }) exporter: MatTableExporterDirective;
   constructor(
     private tenantService:TenantService,
   ) { }
@@ -53,5 +55,18 @@ export class PropertyUnitComponent implements OnInit {
         this.snackbar.showNotification("snackbar-danger", err);
       }
     );
+  }
+  exportData(format: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json'): void {
+    this.exporter.exportTable(format, {
+      fileName: 'vat-list',
+      sheet: 'sheet1'
+    });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

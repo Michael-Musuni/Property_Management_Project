@@ -25,12 +25,12 @@ export class TenantManagementComponent implements OnInit {
   maxEndDate: Date;
   data: any;
   role :string
-  selectedDates: string; // Selected date from the date picker
-    today: Date = new Date(); // Today's date
-    // activeTenantsForSelectedDate: number; // Number of active tenants for the selected date
-activeTenantsForSelectedDates: number;
-picker: any;
-onDateRangeInput: any;
+  selectedDates: string; 
+  today: Date = new Date(); 
+    
+  activeTenantsForSelectedDates: number;
+  picker: any;
+  onDateRangeInput: any;
 
 
 
@@ -92,6 +92,7 @@ onEndDateChange(): void {
     this.calculateActiveTenantsForSelectedDates();
   }
 }
+  
 
   fetchOnboardedTenantsData() {
     this.tenantService.getOnboardedTenantsData().subscribe({

@@ -6,6 +6,49 @@
           </app-breadcrumb>
       </div>
       <div class="card">
+        <div class="materialTableHeader">
+            <div class="row">
+                <div class="col-8">
+                    <ul class="header-buttons-left ms-0">
+                       <li class="dropdown m-l-5">
+                            <label for="search-input"><i
+                                    class="material-icons search-icon">search</i></label>
+                            <input placeholder="Search" type="text" (keyup)="applyFilter($event)" #filter
+                                class="browser-default search-field" aria-label="Search box" />
+                        </li>
+                        
+                        <li>
+                            <!-- <div class="m-l" matTooltip="Refresh">
+                                <button mat-mini-fab color="primary" (click)="refresh(selectedMonth)">
+                                    <mat-icon class="col-white">refresh</mat-icon>
+                                </button>
+                            </div> -->
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Export buttons -->
+                
+                <div class="col-4">
+                    <ul class="header-buttons">
+                        <li>
+                            <div class="export-button m-l-10" matTooltip="XLSX">
+                                <img src="assets/images/icons/xlsx.png" alt=""
+                                    (click)="exportData('xlsx')" />
+                            </div>
+                        </li>
+                        <li>
+                            <div class="export-button m-l-10" matTooltip="CSV">
+                                <img src="assets/images/icons/csv.png" alt="" (click)="exportData('csv')" />
+                            </div>
+                        </li>
+                      
+                    </ul>
+                </div>
+            </div>
+        </div>
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <table mat-table [dataSource]="memberTableDataSource"

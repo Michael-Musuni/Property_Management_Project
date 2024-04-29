@@ -267,6 +267,7 @@ openTerminateDialog(lease: any): void {
   dialogConfig.width = '400px';
     dialogConfig.data = {
       lease,
+      contractId: lease.id,
       tenantName: lease.tenantName // Pass the tenant's name to the dialog
     }
  

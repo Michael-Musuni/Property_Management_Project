@@ -35,13 +35,14 @@ export class TerminateDialogComponent implements OnInit {
     this.terminate=this.fb.group({
       terminationReason:["", [Validators.required]],
     })
-    
+    console.log("hhhwhwh"+this.data.contractId)
   }
   onTerminate(contractId: any): void {
     this.leaseService.terminateContract(this.terminate.value,contractId).subscribe({
+      
       next: (response) => {
         if (response.statusCode === 200) {
-          this.snackbar.showNotification(response.message, 'success');
+          this.snackbar.showNotification("Contract Terminated Successiful", 'success');
           this.dialogRef.close(); // Close the dialog upon successful termination
           this.leaseService.updateData(); // Optionally update data after successful termination
         } else {
