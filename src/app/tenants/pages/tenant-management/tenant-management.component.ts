@@ -66,7 +66,15 @@ export class TenantManagementComponent implements OnInit {
       }]
     }
   };
-
+  plugins: {
+    legend: {
+      labels: {
+        font: {
+          weight: 'bold'
+        }
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.fetchTenantData();

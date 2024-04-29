@@ -10,6 +10,12 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class BillingService {
+  getUnpaidInvoiceStatusPerProperty(propertyId: any) {
+    throw new Error('Method not implemented.');
+  }
+  getPaidInvoiceStatusPerProperty(propertyId: any) {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl = environment.apiUrl;
   selectedTenant: any;
 
