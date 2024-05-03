@@ -8,7 +8,7 @@
                             <div class="col-8">
                                 <ul class="header-buttons-left ms-0">
                                     <!-- Month selection dropdown -->
-                                    <li>
+                                    <!-- <li>
                                         <mat-form-field appearance="fill">
                                             <mat-label>Select Month</mat-label>
                                             <mat-select (selectionChange)="onMonthSelectionChange()">
@@ -17,7 +17,7 @@
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                    </li>
+                                    </li> -->
 
                                     <!-- Search input -->
                                     <li class="dropdown m-l-5">
@@ -60,7 +60,7 @@
                     <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
                         #exporter="matTableExporter">
                         <!-- Checkbox Column -->
-                        <ng-container matColumnDef="select">
+                        <!-- <ng-container matColumnDef="select">
                             <mat-header-cell *matHeaderCellDef>
                                 <mat-checkbox (change)="$event ? masterToggle() : null"
                                     [checked]="selection.hasValue() && isAllSelected()"
@@ -73,34 +73,32 @@
                                     [checked]="selection.isSelected(row)">
                                 </mat-checkbox>
                             </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
                         <!-- Property Name Column -->
 
                         <ng-container matColumnDef="propertyName">
                             <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">
-                                <a (click)="selectProperty()">{{ vat.propertyId }}</a>
-                            </mat-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.propertyName }}</mat-cell>
                         </ng-container>
                         <!-- Monthly Rent Column -->
                         <ng-container matColumnDef="unitName">
                             <mat-header-cell *matHeaderCellDef>Unit Name</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.grossRevenue }}</mat-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.unitName }}</mat-cell>
                         </ng-container>
                         <!-- Tax Amount Column -->
                         <ng-container matColumnDef="tenantName">
                             <mat-header-cell *matHeaderCellDef>Tenant Name</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.taxAmount }}</mat-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.tenantName }}</mat-cell>
                         </ng-container>
                         <!-- Late Penalty Column -->
-                        <ng-container matColumnDef="tenantPhoneNo">
+                        <ng-container matColumnDef="phone">
                             <mat-header-cell *matHeaderCellDef>Tenant Phone No</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.latePenalty }}</mat-cell>
+                            <mat-cell *matCellDef="let vat">{{vat. phone }}</mat-cell>
                         </ng-container>
                         <!-- Net Revenue Column -->
-                        <ng-container matColumnDef="deposit">
+                        <ng-container matColumnDef="deposits">
                             <mat-header-cell *matHeaderCellDef>Deposit Paid (Ksh) </mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.lastTaxRestDate }}</mat-cell>
+                            <mat-cell *matCellDef="let vat">{{vat. deposits }}</mat-cell>
                         </ng-container>
                         <!--  -->
                         <!-- Table header row -->

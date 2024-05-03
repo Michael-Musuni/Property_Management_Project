@@ -18,13 +18,14 @@ export class PropertyUnitComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   memberTableDataSource = new MatTableDataSource<any>([]);
   data: any
-  displayedColumns: string[] = ["name", "propertyName", "caretakerNo"]
+  displayedColumns: string[] = [ "propertyName","unitName","phone"]
   subscription: any;
   isdata: boolean;
   paginator: any;
   sort: any;
   snackbar: any;
   @ViewChild('exporter', { static: true }) exporter: MatTableExporterDirective;
+  isLoading: boolean = false;
   constructor(
     private tenantService:TenantService,
   ) { }
@@ -32,29 +33,23 @@ export class PropertyUnitComponent implements OnInit {
   ngOnInit(): void {
     this.getUnits();
   }
-
-  getUnits() {
-    this.loading = true;
-    this.subscription = this.tenantService.getunits().subscribe(
-      (res) => {
-        this.data = res
-        if (this.data.entity.length > 0) {
-          this.loading = false;
-          this.isdata = true;
-          this.dataSource = new MatTableDataSource<any>(this.data.entity);
+getUnits(){
+    this.isLoading = true;
+    this.subscription = this.tenantService.getunits()
+      .subscribe(
+        (data: any) => {
+          console.log("my units", data);
+          this.data = data;
+          this.isLoading = false;
+          this.dataSource = new MatTableDataSource<any>(this.data);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+        },
+        (error) => {
+          console.error('Error fetching vat:', error);
+          this.isLoading = false;
         }
-        else {
-          this.loading = false;
-          this.isdata = false;
-          this.dataSource = new MatTableDataSource<any>(this.data.entity);
-        }
-      },
-      (err) => {
-        this.snackbar.showNotification("snackbar-danger", err);
-      }
-    );
+      );
   }
   exportData(format: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json'): void {
     this.exporter.exportTable(format, {

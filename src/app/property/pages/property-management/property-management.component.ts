@@ -29,7 +29,7 @@ export class PropertyManagementComponent implements OnInit {
   role:any
   subscription!:Subscription
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["name","type","location","owner","units","vacantunits","actions"]
+  displayedColumns: string[] = ["name","type","location","owner","units","actions"]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
@@ -139,7 +139,7 @@ export class PropertyManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('closed');
-    });
+    });
   }
   viewProperty(property) {
     const dialogConfig = new MatDialogConfig();

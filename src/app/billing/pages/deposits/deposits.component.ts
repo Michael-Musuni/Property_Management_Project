@@ -9,6 +9,7 @@ import { MatTableExporterDirective, ExportType } from 'mat-table-exporter';
 import { Subscription } from 'rxjs';
 import { BillingService } from '../../billing.service';
 
+
 @Component({
   selector: 'app-deposits',
   templateUrl: './deposits.component.html',
@@ -17,9 +18,10 @@ import { BillingService } from '../../billing.service';
 export class DepositsComponent implements OnInit {
   
   selection = new SelectionModel<any>(true, []);
-  vat: any[] = [];
+ 
+  data:any;
   isLoading: boolean = false;
-  displayedColumns: string[] = [ 'propertyName', 'unitName', 'tenantPhoneNo', 'deposit']; // Removed extra comma
+  displayedColumns: string[] = ['propertyName', 'unitName', 'tenantName','phone', 'deposits']; // Removed extra comma
   subscription: Subscription; 
   selectedMonth: number;
   months: { name: string, value: number }[];
@@ -31,47 +33,23 @@ export class DepositsComponent implements OnInit {
   contextMenuPosition = { x: "0px", y: "0px" };
   @ViewChild('exporter', { static: true }) exporter: MatTableExporterDirective;
 
-  constructor(private router: Router, private billingService: BillingService) { }
+  constructor(private router: Router, private billingService: BillingService
+              
+  ) { }
 
   ngOnInit(): void {
-    this.selectedMonth = new Date().getMonth() + 1;
-
-    // Populate months array
-    this.months = [
-      { name: 'January', value: 1 },
-      { name: 'February', value: 2 },
-      { name: 'March', value: 3 },
-      { name: 'April', value: 4 },
-      { name: 'May', value: 5 },
-      { name: 'June', value: 6 },
-      { name: 'July', value: 7 },
-      { name: 'August', value: 8 },
-      { name: 'September', value: 9 },
-      { name: 'October', value: 10 },
-      { name: 'November', value: 11 },
-      { name: 'December', value: 12 }
-    ];
-
-    // Fetch VAT data for the initially selected month
-    this.fetchVatData(this.selectedMonth);
+    this.fetchVatData();
   }
   
-  onMonthSelectionChange(): void {
-    // Fetch VAT data for the selected month
-    this.fetchVatData(this.selectedMonth);
-    console.log("the data"+this.selectedMonth)
-  }
-
- 
-  fetchVatData(month: number): void {
+ fetchVatData(): void {
     this.isLoading = true;
-    this.subscription = this.billingService.getVatData(month)
+    this.subscription = this.billingService.getDepositData()
       .subscribe(
         (data: any) => {
           console.log("my vat", data);
-          this.vat = data.entity;
+          this.data = data;
           this.isLoading = false;
-          this.dataSource = new MatTableDataSource<any>(this.vat);
+          this.dataSource = new MatTableDataSource<any>(this.data);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },
@@ -91,7 +69,7 @@ export class DepositsComponent implements OnInit {
   }
 
   refresh(selectedMonth: number) {
-    this.fetchVatData(selectedMonth);
+    this.fetchVatData();
   }
 
   selectProperty() {
