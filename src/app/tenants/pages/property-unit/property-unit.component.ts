@@ -51,6 +51,7 @@ getUnits(){
         }
       );
   }
+ 
   exportData(format: ExportType | 'xls' | 'xlsx' | 'csv' | 'txt' | 'json'): void {
     this.exporter.exportTable(format, {
       fileName: 'vat-list',

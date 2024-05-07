@@ -56,6 +56,12 @@ export class LeaseService {
     return this.http.get<any>(onboardedTenantsUrl);
    
   }
+  getterminatedContracts(): Observable<any> {
+    const onboardedTenantsUrl = `${this.apiUrl}/api/v1/analytics/terminatedContracts`;
+   
+    return this.http.get<any>(onboardedTenantsUrl);
+   
+  }
   getActiveContractsData(): Observable<any> {
     const endpointUrl = `${this.baseUrl}/api/v1/analytics/active-contracts`;
     return this.http.get<any>(endpointUrl);
