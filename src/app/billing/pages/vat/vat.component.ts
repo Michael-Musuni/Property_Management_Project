@@ -18,11 +18,11 @@ import { ExportType,MatTableExporterDirective   } from 'mat-table-exporter';
   styleUrls: ['./vat.component.sass']
 })
 export class VatComponent implements OnInit {
-  
+  data:any;
   selection = new SelectionModel<any>(true, []);
   vat: any[] = [];
   isLoading: boolean = false;
-  displayedColumns: string[] = [ 'propertyName', 'grossRevenue', 'taxAmount', 'Penalty','overDueTaxAndPenalty']; // Removed extra comma
+  displayedColumns: string[] = [ 'propertyName', 'grossRevenue', 'taxAmount', 'latePenalty','accumulatedOverdueTaxAndPenalty']; // Removed extra comma
   subscription: Subscription; 
   selectedMonth: number;
   months: { name: string, value: number }[];
@@ -92,10 +92,11 @@ export class VatComponent implements OnInit {
     this.subscription = this.billingService.getVatData(month)
       .subscribe(
         (data: any) => {
+          
+          this.data = data;
           console.log("my vat", data);
-          this.vat = data.entity;
           this.isLoading = false;
-          this.dataSource = new MatTableDataSource<any>(this.vat);
+          this.dataSource = new MatTableDataSource<any>(this.data);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },

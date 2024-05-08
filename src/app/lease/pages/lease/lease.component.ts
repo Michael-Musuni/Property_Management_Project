@@ -35,6 +35,9 @@ export class LeaseComponent implements OnInit {
   activeContractsData = [{ data: [], label: 'Active Contracts', backgroundColor:'grey', hoverBackgroundColor: 'grey'}];
   activeContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
   activeContractsOptions = { responsive: true };
+  terminatedContractsData = [{ data: [], label: 'Terminated Contracts', backgroundColor:'#3F51B5', hoverBackgroundColor: '#3F51B5'}];
+  terminatedContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr','May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
+  terminatedContractsOptions = { responsive: true };
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
@@ -62,6 +65,7 @@ export class LeaseComponent implements OnInit {
   ngOnInit(): void {
     this.getContracts();
     this.activeLease();
+    this.terminatedLease();
     this.leaseService.getUpdateData().subscribe(() => {
       this.getContracts();
       
@@ -78,6 +82,21 @@ export class LeaseComponent implements OnInit {
       },
       error:(error)=>{
         console.error('error in fetching active contacts:',error);
+        this.snackBar.showNotification("snackbar",error);
+      }
+    })
+  }
+  terminatedLease(){
+    this.leaseService.getterminatedContracts().subscribe({
+      next:(response)=>{
+      
+        this.terminatedContractsData=[{data: response.values,label:'Terminated Contracts',backgroundColor:'#3F51B5',hoverBackgroundColor: '#3F51B5'}];
+       
+        this.terminatedContractsLabels=response.labels;
+        this.terminatedContractsOptions={responsive:true};
+      },
+      error:(error)=>{
+        console.error('error in fetching terminated contacts:',error);
         this.snackBar.showNotification("snackbar",error);
       }
     })
@@ -145,33 +164,6 @@ console.log("the data"+row)
 
   }
   
-
-  // updateGraphs(activeContractsData: any) {
-  //   // Update the graphs based on the active contracts data
-  //   this.activeContractsData = activeContractsData.data;
-  //   this.activeContractsLabels = activeContractsData.labels;
-  //   this.activeContractsOptions = activeContractsData.options;
-  // }
-
-
-
-
-  // // Define the data and options for deleted tenants bar graph
-  terminatedContractsData = [{ data: [], label: 'Terminated Contracts', backgroundColor:'#3F51B5', hoverBackgroundColor: '#3F51B5'}];
-  terminatedContractsLabels = ['Jan', 'Feb', 'Mar', 'Apr','May' , 'June' , 'July', 'Aug' ,'Sept', 'Oct', 'Nov','Dec'];
-  terminatedContractsOptions = { responsive: true };
-
-  // fetchActiveContracts() {
-  //   this.leaseService.getActiveContracts().subscribe(
-  //     (activeContractsData) => {
-  //       // Update graphs or perform other actions based on activeContractsData
-  //       console.log('Active Contracts Data:', activeContractsData);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching active contracts:', error);
-  //     }
-  //   );
-  // }
 
   public viewLease(row: any) {
 
@@ -267,6 +259,7 @@ openTerminateDialog(lease: any): void {
   dialogConfig.width = '400px';
     dialogConfig.data = {
       lease,
+      contractId: lease.id,
       tenantName: lease.tenantName // Pass the tenant's name to the dialog
     }
  
@@ -277,24 +270,5 @@ openTerminateDialog(lease: any): void {
   });
 }
 
-// onTerminate(terminationReason: string) {
-//   const contractId = this.rowdata.data.id; // Assuming you have access to rowdata and its ID
 
-//   this.leaseService.terminatedContracts(contractId).subscribe({
-//     next: (response) => {
-//       if (response.statusCode === 200) {
-//         this.snackbar.open(response.message, 'Close', { duration: 3000 });
-//         console.log("Response", response.entity);
-//         this.dialogRef.close(); // Close the dialog upon successful termination
-//         this.leaseService.updateData(); // Optionally update data after successful termination
-//       } else {
-//         this.snackbar.open(response.message, 'Close', { duration: 3000 });
-//       }
-//     },
-//     error: (error) => {
-//       console.error('Error terminating contract:', error);
-//       this.snackbar.open('An error occurred', 'Close', { duration: 3000 });
-//     }
-//   });
-// }
 }

@@ -8,7 +8,7 @@
                             <div class="col-8">
                                 <ul class="header-buttons-left ms-0">
                                     <!-- Month selection dropdown -->
-                                    <li>
+                                    <!-- <li>
                                         <mat-form-field appearance="fill">
                                             <mat-label>Select Month</mat-label>
                                             <mat-select (selectionChange)="onMonthSelectionChange()">
@@ -17,7 +17,7 @@
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                    </li>
+                                    </li> -->
 
                                     <!-- Search input -->
                                     <li class="dropdown m-l-5">
@@ -38,9 +38,6 @@
                                 </ul>
 
                             </div>
-
-                            <!-- Export buttons -->
-                            
                             <div class="col-4">
                                 <ul class="header-buttons">
                                     <li>
@@ -54,18 +51,7 @@
                                             <img src="assets/images/icons/csv.png" alt="" (click)="exportData('csv')" />
                                         </div>
                                     </li>
-                                    <!-- <li>
-                                        <div class="export-button m-l-10" matTooltip="JSON">
-                                            <img src="assets/images/icons/json.png" alt=""
-                                                (click)="exportData('json')" />
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="export-button m-l-10" matTooltip="TXT">
-                                            <img src="assets/images/icons/txt.png" alt="" (click)="exportData('txt')" />
-                                        </div>
-                                    </li>
-                                    -->
+                                 
                                 </ul>
                             </div>
                         </div>
@@ -74,7 +60,7 @@
                     <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
                         #exporter="matTableExporter">
                         <!-- Checkbox Column -->
-                        <ng-container matColumnDef="select">
+                        <!-- <ng-container matColumnDef="select">
                             <mat-header-cell *matHeaderCellDef>
                                 <mat-checkbox (change)="$event ? masterToggle() : null"
                                     [checked]="selection.hasValue() && isAllSelected()"
@@ -87,41 +73,34 @@
                                     [checked]="selection.isSelected(row)">
                                 </mat-checkbox>
                             </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
                         <!-- Property Name Column -->
 
                         <ng-container matColumnDef="propertyName">
                             <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">
-                                <a (click)="selectProperty()">{{ vat.propertyName }}</a>
-                            </mat-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.propertyName }}</mat-cell>
                         </ng-container>
                         <!-- Monthly Rent Column -->
-                        <ng-container matColumnDef="grossRevenue">
-                            <mat-header-cell *matHeaderCellDef>Gross Revenue</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.grossRevenue }}</mat-cell>
+                        <ng-container matColumnDef="unitName">
+                            <mat-header-cell *matHeaderCellDef>Unit Name</mat-header-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.unitName }}</mat-cell>
                         </ng-container>
                         <!-- Tax Amount Column -->
-                        <ng-container matColumnDef="taxAmount">
-                            <mat-header-cell *matHeaderCellDef>Tax Amount</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.taxAmount }}</mat-cell>
+                        <ng-container matColumnDef="tenantName">
+                            <mat-header-cell *matHeaderCellDef>Tenant Name</mat-header-cell>
+                            <mat-cell *matCellDef="let vat">{{ vat.tenantName }}</mat-cell>
                         </ng-container>
                         <!-- Late Penalty Column -->
-                        <ng-container matColumnDef="latePenalty">
-                            <mat-header-cell *matHeaderCellDef>Penalty</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.latePenalty }}</mat-cell>
+                        <ng-container matColumnDef="phone">
+                            <mat-header-cell *matHeaderCellDef>Tenant Phone No</mat-header-cell>
+                            <mat-cell *matCellDef="let vat">{{vat. phone }}</mat-cell>
                         </ng-container>
                         <!-- Net Revenue Column -->
-                        <ng-container matColumnDef="lastTaxResetDate">
-                            <mat-header-cell *matHeaderCellDef>Last Tax Reset Date </mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{vat.lastTaxRestDate }}</mat-cell>
+                        <ng-container matColumnDef="deposits">
+                            <mat-header-cell *matHeaderCellDef>Deposit Paid (Ksh) </mat-header-cell>
+                            <mat-cell *matCellDef="let vat">{{vat. deposits }}</mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="accumulatedOverdueTaxAndPenalty">
-                            <mat-header-cell *matHeaderCellDef>Over Due Tax And Penalty</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">
-                                <a (click)="selectProperty()">{{ vat.accumulatedOverdueTaxAndPenalty }}</a>
-                            </mat-cell>
-                        </ng-container>
+                        <!--  -->
                         <!-- Table header row -->
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <!-- Table row -->
