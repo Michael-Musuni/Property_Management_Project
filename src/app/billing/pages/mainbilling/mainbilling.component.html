@@ -9,14 +9,14 @@
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="card">
           <div style="text-align: center; margin-top: 20px;">
-            <h5 style="margin: 0;">Unpaid Invoices Per Property</h5>
+            <h5 style="margin: 0;">Paid Invoices Per Property</h5>
           </div>
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-left: 20px;">
               <mat-form-field class="example-full-width mb-3" appearance="outline">
                 <mat-label>Select property</mat-label>
                 <input formControlName="propertyName" matInput required readonly />
-                <button (click)="pickProperty()" mat-icon-button matSuffix [attr.aria-label]="'Search for property'">
+                <button (click)="pickProperty('paid')" mat-icon-button matSuffix [attr.aria-label]="'Search for property'">
                   <mat-icon>search</mat-icon>
                 </button>
               </mat-form-field>
@@ -37,9 +37,10 @@
               <mat-form-field class="example-full-width mb-3" appearance="outline">
                 <mat-label>Select property</mat-label>
                 <input formControlName="propertyName" matInput required readonly />
-                <button (click)="pickProperty()" mat-icon-button matSuffix [attr.aria-label]="'Search for property'">
+                <button (click)="pickProperty('unpaid')" mat-icon-button matSuffix [attr.aria-label]="'Search for property'">
                   <mat-icon>search</mat-icon>
                 </button>
+                
               </mat-form-field>
             </div>
           </div>

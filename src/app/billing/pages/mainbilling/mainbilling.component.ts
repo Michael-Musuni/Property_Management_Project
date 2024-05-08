@@ -19,6 +19,8 @@ export class MainBillingComponent implements OnInit {
   totalPaidAmount: number; // Total amount for paid invoices
   totalUnpaidAmount: number; // Total amount for unpaid invoices
   propertyName: ['']
+invoiceDataUnpaid: any;
+invoiceDataPaid: any;
 
   constructor(private billingService: BillingService,
     private tokenStorageService: TokenStorageService,
@@ -57,11 +59,11 @@ export class MainBillingComponent implements OnInit {
   ngOnInit(): void {
     this.role = this.tokenStorageService.getUser().roles[0];
     this.selectedProperty = this.properties[0]; // Initialize with the first property
-    this.updateBarGraph(this.selectedProperty);
-    
+    this.updateBarGraph(this.selectedProperty, 'paid');
+    this.updateBarGraph(this.selectedProperty, 'unpaid');
   }
 
-  pickProperty(): void {
+  pickProperty(graphType: string): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -69,47 +71,56 @@ export class MainBillingComponent implements OnInit {
     dialogConfig.data = {
       user: '',
     };
-
+  
     const dialogRef = this.dialog.open(PropertyLookupComponent, dialogConfig);
-
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log(result)
-      
-        this.selectedProperty = result.propertyName; 
-        this.updateBarGraph(result.data.id); 
+        if (graphType === 'paid') {
+          this.selectedProperty = result.propertyName;
+          this.updateBarGraph(result.data.id, 'paid');
+        } else if (graphType === 'unpaid') {
+          this.selectedProperty = result.propertyName;
+          this.updateBarGraph(result.data.id, 'unpaid');
+        }
       }
     });
   }
-
-  updateBarGraph(propertyId: any): void {
+  
+  updateBarGraph(propertyId: any, graphType: string): void {
     this.billingService.getInvoiceStatusPerProperty(propertyId).subscribe({
       next: (data) => {
         this.monthLabels = data.PAID.labels;
-        
+  
         const monthlyPaidAmounts = data.PAID.values;
-        const monthlyUnpaidAmounts = data['NOT PAID'].values; 
-        
-        if (data.hasOwnProperty('PAID') && data.hasOwnProperty('NOT PAID')) {
-          for (const month in data['PAID']) {
-            const monthIndex = parseInt(month) - 1;
-            monthlyPaidAmounts[monthIndex] = data['PAID'][month];
-            monthlyUnpaidAmounts[monthIndex] = data['NOT PAID'][month];
-          }
+        const monthlyUnpaidAmounts = data['NOT PAID'].values;
+  
+        if (monthlyPaidAmounts.length > 0 && monthlyUnpaidAmounts.length > 0) {
+          // Update both graphs for a property that has both paid and unpaid invoices
+          this.invoiceData = [
+            { data: monthlyPaidAmounts, label: 'Total Amount for Paid Invoices', backgroundColor: 'rgba(255, 99, 132, 0.5)' },
+            { data: monthlyUnpaidAmounts, label: 'Total Amount for Unpaid Invoices', backgroundColor: 'rgba(54, 162, 235, 0.5)' }
+          ];
+          this.totalPaidAmount = monthlyPaidAmounts.reduce((acc, curr) => acc + curr, 0);
+          this.totalUnpaidAmount = monthlyUnpaidAmounts.reduce((acc, curr) => acc + curr, 0);
+        } else if (graphType === 'paid' && monthlyPaidAmounts.length > 0) {
+          // Update data and labels for the paid invoices graph if there are paid invoices
+          this.invoiceData = [{ data: monthlyPaidAmounts, label: 'Total Amount for Paid Invoices', backgroundColor: 'rgba(255, 99, 132, 0.5)' }];
+          this.totalPaidAmount = monthlyPaidAmounts.reduce((acc, curr) => acc + curr, 0);
+          this.totalUnpaidAmount = 0; // Reset total unpaid amount
+        } else if (graphType === 'unpaid' && monthlyUnpaidAmounts.length > 0) {
+          // Update data and labels for the unpaid invoices graph if there are unpaid invoices
+          this.invoiceData = [{ data: monthlyUnpaidAmounts, label: 'Total Amount for Unpaid Invoices', backgroundColor: 'rgba(54, 162, 235, 0.5)' }];
+          this.totalUnpaidAmount = monthlyUnpaidAmounts.reduce((acc, curr) => acc + curr, 0);
+          this.totalPaidAmount = 0; // Reset total paid amount
         } else {
-          console.error('Expected properties (PAID and NOT PAID) not found in data:', data);
-      
+          // Clear the data and labels for both graphs if there are no paid or unpaid invoices
+          this.invoiceData = [];
+          this.totalPaidAmount = 0;
+          this.totalUnpaidAmount = 0;
         }
-  
         
-        this.invoiceData = [
-          { data: monthlyPaidAmounts, label: 'Total Amount for Paid Invoices', backgroundColor: 'rgba(255, 99, 132, 0.5)' },
-          { data: monthlyUnpaidAmounts, label: 'Total Amount for Unpaid Invoices', backgroundColor: 'rgba(54, 162, 235, 0.5)' }
-        ];
-  
-     
-        this.totalPaidAmount = monthlyPaidAmounts.reduce((acc, curr) => acc + curr, 0);
-        this.totalUnpaidAmount = monthlyUnpaidAmounts.reduce((acc, curr) => acc + curr, 0);
       },
       error: (error) => {
         console.error('Error fetching invoice status per property:', error);
@@ -117,6 +128,4 @@ export class MainBillingComponent implements OnInit {
       }
     });
   }
-
-  
 }
