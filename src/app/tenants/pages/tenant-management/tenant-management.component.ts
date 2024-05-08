@@ -48,7 +48,7 @@ export class TenantManagementComponent implements OnInit {
   subscription!: Subscription
   isLoading: boolean = false;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['tenantName', 'tenantPhoneNumber', 'tenantIdNumber', 'propertyName', 'unit',  'actions'];
+  displayedColumns: string[] = ['tenantName', 'tenantPhoneNumber', 'tenantIdNumber', 'unit',  'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
@@ -165,7 +165,7 @@ onEndDateChange(): void {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.disableClose = true
     dialogConfig.autoFocus = true
-    dialogConfig.height = '70%'
+    // dialogConfig.height = '0%'
     dialogConfig.width = '600px'
     dialogConfig.data = { test: "data" }
 

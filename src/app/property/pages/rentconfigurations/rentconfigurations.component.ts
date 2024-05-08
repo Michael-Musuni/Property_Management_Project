@@ -19,7 +19,7 @@ export class RentconfigurationsComponent implements OnInit {
   data: any
   subscription!: Subscription
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["property_name", "owner_name", "rent_due_date", "late_payment_fee", "account_number", "pay_bill_number", "management_commission", "actions"]
+  displayedColumns: string[] = ["property_name", "owner_name", "rent_due_date", "late_payment_fee", "management_commission", ]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
