@@ -90,7 +90,7 @@ export class PropertyManagementComponent implements OnInit {
       next: (response: any) => {
         console.log('Response:', response);
         this.dataSource = new MatTableDataSource<any>(response.entity);
-        this.dataSource.paginator = this.paginator;
+        
         this.isLoading = false;
       },
       error: (error) => {

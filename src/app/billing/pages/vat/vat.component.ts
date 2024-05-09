@@ -22,7 +22,7 @@ export class VatComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   vat: any[] = [];
   isLoading: boolean = false;
-  displayedColumns: string[] = [ 'propertyName', 'grossRevenue', 'taxAmount', 'latePenalty','accumulatedOverdueTaxAndPenalty']; // Removed extra comma
+  displayedColumns: string[] = ['propertyId', 'grossRevenue', 'taxAmount', 'latePenalty','accumulatedOverdueTaxAndPenalty']; // Removed extra comma
   subscription: Subscription; 
   selectedMonth: number;
   months: { name: string, value: number }[];
@@ -65,27 +65,7 @@ export class VatComponent implements OnInit {
     console.log("the data"+this.selectedMonth)
   }
 
-  // fetchVatData(month: number): void {
-  //   this.isLoading = true;
-  //   this.billingService.getVatData(month).subscribe(
-  //     data => {
-  //       this.vat = data;
-        
-  //       this.dataSource = new MatTableDataSource<any>(this.vat);
-       
-  //       console.log("thehhhhhhhhhhh"+this.vat)
-  //       this.dataSource.paginator = this.paginator;
-  //       this.dataSource.sort = this.sort;
-  //       this.isLoading = false;
-  //     },
-  //     error => {
-  //       console.error('Error fetching VAT data:', error);
-  //       console.log('Error status:', error.status);
-  //       console.log('Error message:', error.message);
-  //       this.isLoading = false;
-  //     }
-  //   );
-  // }
+
   
   fetchVatData(month: number): void {
     this.isLoading = true;
@@ -96,7 +76,7 @@ export class VatComponent implements OnInit {
           this.data = data;
           console.log("my vat", data);
           this.isLoading = false;
-          this.dataSource = new MatTableDataSource<any>(this.data);
+          this.dataSource = new MatTableDataSource<any>(this.data.entity);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },

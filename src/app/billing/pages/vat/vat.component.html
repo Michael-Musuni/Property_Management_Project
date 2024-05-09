@@ -11,7 +11,7 @@
                                     <li>
                                         <mat-form-field appearance="fill">
                                             <mat-label>Select Month</mat-label>
-                                            <mat-select (selectionChange)="onMonthSelectionChange()">
+                                            <mat-select [(ngModel)]="selectedMonth" (selectionChange)="onMonthSelectionChange()">
                                                 <mat-option *ngFor="let month of months" [value]="month.value">
                                                     {{ month.name }}
                                                 </mat-option>
@@ -74,7 +74,7 @@
                     <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
                         #exporter="matTableExporter">
                         <!-- Checkbox Column -->
-                        <ng-container matColumnDef="select">
+                        <!-- <ng-container matColumnDef="select">
                             <mat-header-cell *matHeaderCellDef>
                                 <mat-checkbox (change)="$event ? masterToggle() : null"
                                     [checked]="selection.hasValue() && isAllSelected()"
@@ -87,13 +87,13 @@
                                     [checked]="selection.isSelected(row)">
                                 </mat-checkbox>
                             </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
                         <!-- Property Name Column -->
 
-                        <ng-container matColumnDef="propertyName">
+                        <ng-container matColumnDef="propertyId">
                             <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
                             <mat-cell *matCellDef="let vat">
-                                <a (click)="selectProperty()">{{ vat.propertyName }}</a>
+                                <a (click)="selectProperty()">{{ vat.propertyId }}</a>
                             </mat-cell>
                         </ng-container>
                         <!-- Monthly Rent Column -->
@@ -128,7 +128,7 @@
                         <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple>
                         </mat-row>
                         <!-- No data message -->
-                        <mat-cell *matNoDataRow colspan="5">No data matching the filter "{{ input.value }}"</mat-cell>
+                        <!-- <mat-cell *matNoDataRow colspan="5">No data matching the filter "{{ input.value }}"</mat-cell> -->
                     </mat-table>
                     <!-- Loading spinner -->
                     <div *ngIf="isLoading" class="tbl-spinner">

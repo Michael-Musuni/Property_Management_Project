@@ -63,6 +63,7 @@ import { VatComponent } from './pages/vat/vat.component';
 import { InvoicesComponent } from './pages/invoices/invoices.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
 import { DepositsComponent } from './pages/deposits/deposits.component';
+import { CdkColumnDef } from '@angular/cdk/table';
 
 
 @NgModule({
@@ -129,6 +130,7 @@ import { DepositsComponent } from './pages/deposits/deposits.component';
     ChartsModule
     
     
-  ]
+  ],
+  providers: [CdkColumnDef]
 })
 export class BillingModule { }
