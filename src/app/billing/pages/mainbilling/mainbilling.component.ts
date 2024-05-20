@@ -47,8 +47,8 @@ invoiceDataPaid: any;
       }
     };
     this.invoiceData = [
-      { data: [], label: 'Paid' },
-      { data: [], label: 'Unpaid' },
+      // { data: [], label: 'Paid' },
+      // { data: [], label: 'Unpaid' },
     ];
     // this.invoiceData = [
     //   // { data: [], label: 'Paid' },
