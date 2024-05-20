@@ -55,11 +55,7 @@ export class TenantManagementComponent implements OnInit {
   subscription!: Subscription
   isLoading: boolean = false;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-<<<<<<< HEAD
   displayedColumns: string[] = ['tenantName', 'tenantPhoneNumber', 'tenantIdNumber', 'unit', 'actions'];
-=======
-  displayedColumns: string[] = ['tenantName', 'tenantPhoneNumber', 'tenantIdNumber', 'unit',  'actions'];
->>>>>>> e30393ad5b4d33cb77baf2b81a7ab67d58f602d2
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
