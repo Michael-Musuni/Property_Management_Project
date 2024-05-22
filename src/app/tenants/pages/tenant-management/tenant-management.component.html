@@ -153,21 +153,25 @@
 
                 <ng-container matColumnDef="tenantName">
                   <mat-header-cell *matHeaderCellDef>Tenant Name</mat-header-cell>
-                  <mat-cell *matCellDef="let tenant">{{ tenant.tenantName }}</mat-cell>
+                  <mat-cell *matCellDef="let tenant;let i = index" [class.odd-row]="i % 2"
+                  [class.even-row]="!(i % 2)">{{ tenant.tenantName }}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="tenantPhoneNumber">
                   <mat-header-cell *matHeaderCellDef>Tenant Phone</mat-header-cell>
-                  <mat-cell *matCellDef="let tenant">{{ tenant.tenantPhoneNumber }}</mat-cell>
+                  <mat-cell *matCellDef="let tenant;let i = index" [class.odd-row]="i % 2"
+                  [class.even-row]="!(i % 2)">{{ tenant.tenantPhoneNumber }}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="tenantIdNumber">
                   <mat-header-cell *matHeaderCellDef>Tenant Id</mat-header-cell>
-                  <mat-cell *matCellDef="let tenant">{{ tenant.identificationNumber }}</mat-cell>
+                  <mat-cell *matCellDef="let tenant;let i = index" [class.odd-row]="i % 2"
+                  [class.even-row]="!(i % 2)">{{ tenant.identificationNumber }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="unit">
                   <mat-header-cell *matHeaderCellDef>Unit</mat-header-cell>
-                  <mat-cell *matCellDef="let tenant">{{ tenant.unit?.unitName || '-' }}</mat-cell>
+                  <mat-cell *matCellDef="let tenant;let i = index" [class.odd-row]="i % 2"
+                  [class.even-row]="!(i % 2)">{{ tenant.unit?.unitName || '-' }}</mat-cell>
                 </ng-container>
                 <!-- <ng-container matColumnDef="propertyName">
                   <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
@@ -176,7 +180,8 @@
 
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-                  <mat-cell *matCellDef="let tenant">
+                  <mat-cell *matCellDef="let tenant;let i = index" [class.odd-row]="i % 2"
+                  [class.even-row]="!(i % 2)">
                    
                       <!-- <button mat-icon-button color="primary" (click)="$event.stopPropagation(); viewTenant(tenant)"
                       matTooltip="view"> <mat-icon>visibility</mat-icon>

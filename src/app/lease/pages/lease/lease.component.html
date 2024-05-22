@@ -158,20 +158,20 @@
 
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-                  <mat-cell *matCellDef="let row">
+                  <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)">
                     <button mat-icon-button color="primary" (click)="viewLease(row)" matTooltip="View">
                       <mat-icon>visibility</mat-icon>
                     </button>
                     <button mat-icon-button color="primary" (click)="downloadLease(row)" matTooltip="Download">
                       <mat-icon>cloud_download</mat-icon>
                     </button>
-                    <button *ngIf="role=='ROLE_AGENT'"mat-icon-button color="primary" (click)="$event.stopPropagation(); updateLease(lease)"
+                    <button mat-icon-button color="primary" (click)="$event.stopPropagation(); updateLease(lease)"
                       matTooltip="Update"> <mat-icon>edit</mat-icon>
                     </button>
-                    <button *ngIf="role=='ROLE_AGENT'"mat-icon-button color="primary" (click)="openTerminateDialog(row)" matTooltip="Terminate Contract">
+                    <button mat-icon-button color="primary" (click)="openTerminateDialog(row)" matTooltip="Terminate Contract">
                       <mat-icon aria-hidden="false" aria-label="Image Breaking Apart">broken_image</mat-icon>
                     </button>
-                    <button *ngIf="role=='ROLE_AGENT'"mat-icon-button color="primary" (click)="$event.stopPropagation()" (click)="onDelete(row)"
+                    <button mat-icon-button color="primary" (click)="$event.stopPropagation()" (click)="onDelete(row)"
                       matTooltip="Delete"><mat-icon>delete</mat-icon>
                     </button>
 

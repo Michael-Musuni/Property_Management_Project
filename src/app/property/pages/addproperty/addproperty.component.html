@@ -67,16 +67,42 @@
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                         <mat-form-field class="example-full-width mb-1" appearance="outline">
                                             <mat-label>Select type</mat-label>
-                                            <mat-select formControlName="propertyType">
+                                            <mat-select formControlName="propertyType" (selectionChange)="onPropertyTypeChange($event.value)">
                                                 <mat-option value="Residential">Residential</mat-option>
                                                 <mat-option value="Commercial">Commercial</mat-option>
                                                 <mat-option value="Industrial">Industrial</mat-option>
                                             </mat-select>
-                                            <mat-error *ngIf="propertyDetails.get('category').hasError('required')">
+                                            <mat-error *ngIf="propertyDetails.get('propertyType').hasError('required')">
                                                 Property Type Is required
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
+                                    
+                                    <!-- Conditional VAT Field -->
+                                    <div *ngIf="showVATField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                        <mat-form-field class="example-full-width mb-1" appearance="outline">
+                                            <mat-label>VAT</mat-label>
+                                            <mat-select formControlName="vatOption" (selectionChange)="onVATOptionChange($event.value)">
+                                                <mat-option value="None">NO</mat-option>
+                                                <mat-option value="VAT">YES</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="propertyDetails.get('vatOption').hasError('required')">
+                                                VAT selection is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                    <!-- Conditional VAT Number Input -->
+                                    <div *ngIf="showVATNumberField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                        <mat-form-field class="example-full-width mb-1" appearance="outline">
+                                            <mat-label>VAT %</mat-label>
+                                            <input matInput formControlName="vatNumber" placeholder="Enter VAT %">
+                                            <mat-error *ngIf="propertyDetails.get('vatNumber').hasError('required')">
+                                                VAT % is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                         <mat-form-field class="example-full-width mb-1" appearance="outline">
                                             <mat-label>Description</mat-label>

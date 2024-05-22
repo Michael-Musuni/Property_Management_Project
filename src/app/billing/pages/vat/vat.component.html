@@ -90,35 +90,41 @@
                         </ng-container> -->
                         <!-- Property Name Column -->
 
-                        <ng-container matColumnDef="propertyId">
+                        <ng-container matColumnDef="propertyName">
                             <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">
-                                <a (click)="selectProperty()">{{ vat.propertyId }}</a>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">
+                                <a (click)="selectProperty()">{{ vat.propertyName }}</a>
                             </mat-cell>
                         </ng-container>
                         <!-- Monthly Rent Column -->
                         <ng-container matColumnDef="grossRevenue">
                             <mat-header-cell *matHeaderCellDef>Gross Revenue</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.grossRevenue }}</mat-cell>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ vat.grossRevenue }}</mat-cell>
                         </ng-container>
                         <!-- Tax Amount Column -->
                         <ng-container matColumnDef="taxAmount">
                             <mat-header-cell *matHeaderCellDef>Tax Amount</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.taxAmount }}</mat-cell>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ vat.taxAmount }}</mat-cell>
                         </ng-container>
                         <!-- Late Penalty Column -->
                         <ng-container matColumnDef="latePenalty">
                             <mat-header-cell *matHeaderCellDef>Penalty</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.latePenalty }}</mat-cell>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ vat.latePenalty }}</mat-cell>
                         </ng-container>
                         <!-- Net Revenue Column -->
                         <ng-container matColumnDef="lastTaxResetDate">
                             <mat-header-cell *matHeaderCellDef>Last Tax Reset Date </mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{vat.lastTaxRestDate }}</mat-cell>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{vat.lastTaxRestDate }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="accumulatedOverdueTaxAndPenalty">
                             <mat-header-cell *matHeaderCellDef>Over Due Tax And Penalty</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">
                                 <a (click)="selectProperty()">{{ vat.accumulatedOverdueTaxAndPenalty }}</a>
                             </mat-cell>
                         </ng-container>

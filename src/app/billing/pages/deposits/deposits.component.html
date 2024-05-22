@@ -78,27 +78,32 @@
 
                         <ng-container matColumnDef="propertyName">
                             <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.propertyName }}</mat-cell>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ vat.propertyName }}</mat-cell>
                         </ng-container>
                         <!-- Monthly Rent Column -->
                         <ng-container matColumnDef="unitName">
                             <mat-header-cell *matHeaderCellDef>Unit Name</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.unitName }}</mat-cell>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ vat.unitName }}</mat-cell>
                         </ng-container>
                         <!-- Tax Amount Column -->
                         <ng-container matColumnDef="tenantName">
                             <mat-header-cell *matHeaderCellDef>Tenant Name</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{ vat.tenantName }}</mat-cell>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ vat.tenantName }}</mat-cell>
                         </ng-container>
                         <!-- Late Penalty Column -->
                         <ng-container matColumnDef="phone">
                             <mat-header-cell *matHeaderCellDef>Tenant Phone No</mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{vat. phone }}</mat-cell>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{vat. phone }}</mat-cell>
                         </ng-container>
                         <!-- Net Revenue Column -->
                         <ng-container matColumnDef="deposits">
                             <mat-header-cell *matHeaderCellDef>Deposit Paid (Ksh) </mat-header-cell>
-                            <mat-cell *matCellDef="let vat">{{vat. deposits }}</mat-cell>
+                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{vat. deposits }}</mat-cell>
                         </ng-container>
                         <!--  -->
                         <!-- Table header row -->
