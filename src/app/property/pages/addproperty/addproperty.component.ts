@@ -383,6 +383,30 @@ export class AddpropertyComponent implements OnInit {
     this.propertyDetails.value.utilities.splice(index);
     this.getUtilities();
   }
+  openPreviewDialog(): void {
+    const combinedFormData = {
+      propertyDetails: this.propertyDetails.value,
+      ownerDetails: this.ownerDetails.value,
+      caretakerDetails: this.caretakerDetails.value,
+      subProperties: this.propertyDetails.get('subProperties').value,
+      units: this.propertyDetails.get('units').value,
+      utilities: this.propertyDetails.get('utilities').value,
+      amenities: this.propertyDetails.get('amenities').value,
+      rentConfigForm: this.rentConfigForm.value
+      // Add more form groups as needed
+    };
+  
+    // const dialogRef = this.dialog.open(PropertypreviewComponent, {
+    //   data: combinedFormData // Pass the combined form data to the Preview Dialog
+    // });
+  
+    // // Subscription to dialog close event
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result === 'confirm') {
+    //     this.onSubmit(); // Submit the form if user confirms
+    //   }
+    // });
+  }
 
 
 }
