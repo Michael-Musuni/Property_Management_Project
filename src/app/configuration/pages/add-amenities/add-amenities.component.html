@@ -21,17 +21,39 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="class=" col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Description</mat-label>
-                                <input matInput formControlName="description" />
-                                
-                                <mat-error *ngIf="amenityForm.get('description').hasError('required')">
-                                    Name is required
-                                </mat-error>
+                              <mat-label>Amount</mat-label>
+                              <input matInput formControlName="amount" />
+                              <mat-error *ngIf="amenityForm.get('amount').hasError('required')">
+                                Amount is required
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          
+                          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>VAT %(if applicable)</mat-label>
+                              <input matInput formControlName="vat" />
+                            </mat-form-field>
+                          </div>
+                          
+                          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Total Amount</mat-label>
+                              <input matInput formControlName="totalAmount" readonly />
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Property Name</mat-label>
+                                <input formControlName="propertyName" matInput required readonly />
+                                <button (click)="pickProperty()" mat-icon-button matSuffix
+                                    [attr.aria-label]="'Hide password'">
+                                    <mat-icon>search</mat-icon>
+                                </button>
                             </mat-form-field>
                         </div>
-                      
                     </div>
 
                     <div class="row">

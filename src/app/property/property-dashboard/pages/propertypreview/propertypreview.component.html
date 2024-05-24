@@ -1,0 +1,75 @@
+<h2>Preview of Form Data</h2>
+<div class="landscape-preview">
+  <div class="section">
+    <h3>Property Details</h3>
+    <p><strong>Property Name:</strong> {{ data.propertyDetails.propertyName }}</p>
+    <p><strong>Location:</strong> {{ data.propertyDetails.location }}</p>
+    <p><strong>Select Property Type:</strong> {{ data.propertyDetails.category }}</p>
+    <p><strong>Property Physical Address:</strong> {{ data.propertyDetails.physicalAddress }}</p>
+    <p><strong>Select Type:</strong> {{ data.propertyDetails.propertyType }}</p>
+    <p><strong>Description:</strong> {{ data.propertyDetails.description }}</p>
+  </div>
+
+  <div class="section">
+    <h3>Owner Details</h3>
+    <p><strong>Owner Name:</strong> {{ data.ownerDetails.ownerName }}</p>
+    <p><strong>Owner Phone:</strong> {{ data.ownerDetails.phone }}</p>
+    <p><strong>Select Owner Type:</strong> {{ data.ownerDetails.ownerType }}</p>
+    <p><strong>Owner email:</strong> {{ data.ownerDetails.email }}</p>
+    <p><strong>Identification:</strong> {{ data.ownerDetails.idNumber }}</p>
+    <p><strong>ID/Passport Number:</strong> {{ data.ownerDetails.IDPassportNumber }}</p>
+    <p><strong>KRA Pin:</strong> {{ data.ownerDetails.kraPin }}</p>
+    <p><strong>Physical Address:</strong> {{ data.ownerDetails.physicalAddress }}</p>
+    <p><strong>Owner Account:</strong> {{ data.ownerDetails.accountNumber }}</p>
+    <p><strong>Select Payment Method:</strong> {{ data.ownerDetails.paymentMethod }}</p>
+  </div>
+
+  <div class="section">
+    <h3>Caretaker Details</h3>
+    <p><strong>Caretaker Name:</strong> {{ data.caretakerDetails.name }}</p>
+    <p><strong>Caretaker Phone:</strong> {{ data.caretakerDetails.phone }}</p>
+    <p><strong>ID Number:</strong> {{ data.caretakerDetails.caretakerID }}</p>
+    <p><strong>Physical Address:</strong> {{ data.caretakerDetails.physicalAddress }}</p>
+  </div>
+
+<div>
+  <h3>Units</h3>
+  <div style="max-height: 300px; overflow-y: auto;">
+    <ul>
+      <li *ngFor="let unit of data.units">
+        <p><strong>Unit Name:</strong> {{ unit.unitName }}</p>
+        <p><strong>Maximum Occupants:</strong> {{ unit.maxOccupants }}</p>
+        <p><strong>Rent Amount:</strong> {{ unit.rentAmount }}</p>
+        <p><strong>Deposit Amount:</strong> {{ unit.deposit }}</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+  <div class="section">
+    <h3>Utilities</h3>
+    <ul>
+      <li *ngFor="let utility of data.utilities">
+        <p><strong>Utility Name:</strong> {{ utility.name }}</p>
+        <p><strong>Charge Amount:</strong> {{ utility.cost }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Amenities</h3>
+    <ul>
+      <li *ngFor="let amenity of data.amenities">
+        <p><strong>Amenity Name:</strong> {{ amenity.name }}</p>
+        <p><strong>Charge Amount:</strong> {{ amenity.cost }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Rent Configuration</h3>
+    <p><strong>Rent Due Date:</strong> {{ data.rentConfigForm.rentDueDate }}</p>
+    <p><strong>Late Payment Fee:</strong> {{ data.rentConfigForm.latePaymentFee }}</p>
+    <p><strong>Agent Commission in Percentage (%):</strong> {{ data.rentConfigForm.managementCommission }}</p>
+  </div>
+</div>

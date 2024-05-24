@@ -73,12 +73,17 @@
                             <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
                                 [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.name }}</mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="description">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Utility
-                            Description</mat-header-cell>
-                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
-                                [class.even-row]="!(i % 2)" class="table-img column-nowrap">{{ row.description }}</mat-cell>
-                        </ng-container>
+                        <ng-container matColumnDef="totalAmount">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">
+                              Amount Charged</mat-header-cell>
+                            <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                              class="table-img column-nowrap">{{ row.totalAmount }}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="propertName">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Property Name</mat-header-cell>
+                            <mat-cell *matCellDef="let row; let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                              class="table-img column-nowrap mat-cell-wrap mat-line-clamp-2">{{ row.propertName }}</mat-cell>
+                          </ng-container>
                      
                         <ng-container matColumnDef="actions">
                             <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Actions

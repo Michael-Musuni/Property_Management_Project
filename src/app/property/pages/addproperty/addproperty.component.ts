@@ -37,7 +37,7 @@ export class AddpropertyComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ["subPropertyName", "actions"]
   displayedUnitColumns: string[] = ["unit", "maxOccupants", "rent", "deposit", "actions"]
-  displayedUtilitiesColumns: string[] = ["utility", "charge", "actions"]
+  displayedUtilitiesColumns: string[] = ["utility","charge", "actions"]
   displayedAmenitiesColumns: string[] = ["amenity", "charge", "actions"]
   rentConfigForm: FormGroup;
   propertyDetails: FormGroup
