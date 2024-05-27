@@ -24,7 +24,7 @@ import { Role } from 'src/app/core/models/role';
 })
 export class InvoicesComponent implements OnInit {
 
-
+  divcss= false;
   selected = 'all';
   role: any
   invoices: any[] = [];
@@ -53,6 +53,10 @@ export class InvoicesComponent implements OnInit {
       this.displayedColumns = ['invoicingDate','invoiceNumber', 'status', 'totalAmount', 'tenantName', 'actions']
     }
     this.fetchInvoices();
+     if(this.router.url == '/billing/invoices') this.divcss=true
+    this.role = this.tokenStorageService.getUser().roles[0]
+
+    this.fetchInvoices()
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

@@ -40,9 +40,7 @@ export class TenantManagementComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private tokenStorage: TokenStorageService,
-    
-
-  ) {this.maxEndDate = new Date();
+) {this.maxEndDate = new Date();
   }
   
   subscription!: Subscription
@@ -92,7 +90,12 @@ onEndDateChange(): void {
     this.calculateActiveTenantsForSelectedDates();
   }
 }
-  
+selectTenant() {
+  this.router.navigate(['leasing/lease']);
+}
+selectUnit() {
+  this.router.navigate(['tenants/details']);
+}
 
   fetchOnboardedTenantsData() {
     this.tenantService.getOnboardedTenantsData().subscribe({

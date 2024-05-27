@@ -59,6 +59,9 @@ export class PropertyManagementComponent implements OnInit {
   refresh(){
     this.getProperties()
   }
+  selectProperty() {
+    this.router.navigate(['tenants/details']);
+  }
 
   getProperties() {
     this.loading = true;

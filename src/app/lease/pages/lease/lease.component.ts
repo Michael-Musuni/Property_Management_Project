@@ -13,6 +13,7 @@ import { HttpParams } from '@angular/common/http';
 import { DeleteLeaseComponent } from '../delete-lease/delete-lease.component';
 import { TerminateDialogComponent } from '../terminate-dialog/terminate-dialog.component';
 import { UpdateLeaseComponent } from '../update-lease/update-lease.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -24,7 +25,7 @@ import { UpdateLeaseComponent } from '../update-lease/update-lease.component';
 })
 export class LeaseComponent implements OnInit {
 
-
+  tenantId: number;
   loading: Boolean
   isdata: Boolean = false
   subscription: Subscription
@@ -55,8 +56,8 @@ export class LeaseComponent implements OnInit {
   constructor(
     private leaseService: LeaseService,
     private snackbar: SnackbarService,
-   
-   
+    private route: ActivatedRoute,
+    private router: Router,
  private dialog: MatDialog
     
 
@@ -69,6 +70,10 @@ export class LeaseComponent implements OnInit {
     this.leaseService.getUpdateData().subscribe(() => {
       this.getContracts();
       
+    });
+    this.route.paramMap.subscribe(params => {
+      this.tenantId = +params.get('id');
+      // Fetch tenant details using this.tenantId
     });
   }
   activeLease(){
@@ -162,6 +167,9 @@ console.log("the data"+row)
 
   addNew() {
 
+  }
+  selectTenant() {
+    this.router.navigate(['leasing/lease']);
   }
   
 

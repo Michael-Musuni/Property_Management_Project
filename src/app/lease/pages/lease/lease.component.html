@@ -126,7 +126,7 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap">Tenant
                     Name</mat-header-cell>
                   <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
-                    class="column-nowrap">
+                    class="column-nowrap" (click)="viewLease(row)">
                     {{row.tenantName}}
                   </mat-cell>
                 </ng-container>

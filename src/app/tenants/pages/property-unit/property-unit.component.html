@@ -77,9 +77,10 @@
                 <tr mat-header-row
                     *matHeaderRowDef="['propertyName','unitName',  'phone']">
                 </tr>
-                <tr mat-row
-                    *matRowDef="let row; columns: [ 'propertyName','unitName',  'phone']">
-                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['propertyName', 'unitName', 'phone']" 
+    [style.cursor]="'pointer'" matRipple (click)="selectProperty" 
+    [routerLink]="['/property/manage']">
+</tr>
                
             </table>
             <div *ngIf="loading" class="tbl-spinner">
