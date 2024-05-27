@@ -20,7 +20,7 @@ export class UtilitiesComponent implements OnInit {
   subscription: Subscription
   isLoading: Boolean
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["name", "propertName","totalAmount", "actions"]
+  displayedColumns: string[] = ["name", "propertyName","totalAmount", "actions"]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;

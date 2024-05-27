@@ -39,7 +39,7 @@ amenityDetails(): FormGroup {
       name: [this.data.customer.name, [Validators.required]],
       totalAmount: [this.data.customer.totalAmount, [Validators.required]],
       amount: [this.data.customer.amount, [Validators.required]],
-      propertName: [this.data.customer.propertName],
+      propertyName: [this.data.customer.propertyName],
       vat: [this.data.customer.vat],
     });
     

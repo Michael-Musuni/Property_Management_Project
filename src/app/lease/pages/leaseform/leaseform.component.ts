@@ -60,12 +60,24 @@ export class LeaseformComponent implements OnInit {
 
     this.getTenantById(this.tenantId);
     console.log("Tenant Details ", this.tenantData)
-
+    this.Leaseform.valueChanges.subscribe(() => {
+      this.calculateTotalAmount();
+    });
     //  this.getPropertyById(this.propertyId);
     //  console.log("Property Details",this.propertyData)
 
   }
+ calculateTotalAmount() {
+    const amount = parseFloat(this.Leaseform.get('amount')?.value) || 0;
+    const vat = parseFloat(this.Leaseform.get('vat')?.value) || 0;
 
+    const vatAmount = (amount * vat) / 100;
+    const totalAmount = amount + vatAmount;
+
+    this.Leaseform.patchValue({
+      totalAmount: totalAmount.toFixed(2)
+    }, { emitEvent: false });
+  }
  
   submit() {
     const formData = this.Leaseform.value;
@@ -132,7 +144,10 @@ initializeForm() {
       unitName: [''],
       unit: [],
       charges: this.chargesArray,
-     
+      name: [''],
+      amount: [''],
+      vat: [''],
+      totalAmount: [''],
       latePaymentFee: [''],
       rentDueDate: [''],
       paymentPeriod: ['', [Validators.required]],

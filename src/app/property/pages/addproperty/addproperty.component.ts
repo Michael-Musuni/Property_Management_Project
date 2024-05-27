@@ -78,11 +78,11 @@ export class AddpropertyComponent implements OnInit {
       rentConfig: ["",],
       subProperties: this.fb.array([]), // FormArray for subproperties
       units: this.fb.array([]), // FormArray for units
-      amenities: this.fb.array([]), // FormArray for units
-      utilities: this.fb.array([]), // FormArray for units
+      // amenities: this.fb.array([]), // FormArray for units
+      // utilities: this.fb.array([]), // FormArray for units
       category: ["",],//lease,rent
       vatOption: ["", Validators.required],
-      vatNumber: ["", Validators.required],
+      vat: ["", Validators.required],
 
     });
     this.ownerDetails = this.fb.group({

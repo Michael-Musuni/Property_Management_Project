@@ -153,7 +153,7 @@
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                             <mat-label>Charge Amount:</mat-label>
-                                            <input formControlName="chargeAmount"  matInput required/>
+                                            <input formControlName="chargeAmount"  matInput required [disabled]="isReadOnly"/>
                                             <mat-error
                                                 *ngIf="getChargeFormGroup(i).get('chargeAmount').hasError('required')">
                                                 Charge Amount is required
@@ -165,9 +165,51 @@
                         </div>
 
                     </div>
+                    <div class="row">
+                        <mat-card class="mb-3">
+                            <mat-card-header>
+                                <mat-card-title>Other Charges Applicable</mat-card-title>
+                            </mat-card-header>
+                        </mat-card>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="name" />
+                                <mat-error *ngIf="Leaseform.get('name').hasError('required')">
+                                    Name is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Amount</mat-label>
+                                <input matInput formControlName="amount" (input)="calculateTotalAmount()" />
+                                <mat-error *ngIf="Leaseform.get('amount').hasError('required')">
+                                    Amount is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>VAT %(if applicable)</mat-label>
+                                <input matInput formControlName="vat" (input)="calculateTotalAmount()" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Total Amount</mat-label>
+                                <input matInput formControlName="totalAmount" readonly />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
 
-
-
+                    <div class="row">
+                    <mat-card class="mb-3">
+                        <mat-card-header>
+                            <mat-card-title>Lease Period Information</mat-card-title>
+                        </mat-card-header>
+                    </mat-card>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                             <mat-label>Payment Period</mat-label>
@@ -206,7 +248,7 @@
                                 required</mat-error>
                         </mat-form-field>
                     </div>
-
+                </div>
 
 
 

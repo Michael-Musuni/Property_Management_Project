@@ -96,8 +96,8 @@
                                     <div *ngIf="showVATNumberField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                         <mat-form-field class="example-full-width mb-1" appearance="outline">
                                             <mat-label>VAT %</mat-label>
-                                            <input matInput formControlName="vatNumber" placeholder="Enter VAT %">
-                                            <mat-error *ngIf="propertyDetails.get('vatNumber').hasError('required')">
+                                            <input matInput formControlName="vat" placeholder="Enter VAT %">
+                                            <mat-error *ngIf="propertyDetails.get('vat').hasError('required')">
                                                 VAT % is required
                                             </mat-error>
                                         </mat-form-field>
