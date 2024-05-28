@@ -153,14 +153,8 @@
 
                 <ng-container matColumnDef="tenantName">
                   <mat-header-cell *matHeaderCellDef>Tenant Name</mat-header-cell>
-<<<<<<< HEAD
-                  <mat-cell *matCellDef="let tenant">
-                    <a [routerLink]="['/lease',tenant.tenantName]">{{ tenant.tenantName }}</a>
-                  </mat-cell>
-=======
                   <mat-cell *matCellDef="let tenant;let i = index" [class.odd-row]="i % 2"
                   [class.even-row]="!(i % 2)"><a (click)="selectTenant()">{{ tenant.tenantName }}</a></mat-cell>
->>>>>>> 5ea1f08c4af8c749fce80fd8b59784d612905c92
                 </ng-container>
 
                 <ng-container matColumnDef="tenantPhoneNumber">
