@@ -8,6 +8,7 @@ const routes: Routes = [
     path:"lease",
     component:LeaseComponent
   },
+
   {
     path:"newcontract/:id",//leasing/newcontract
     component:LeaseformComponent

@@ -4,6 +4,7 @@ import { TenantManagementComponent } from './pages/tenant-management/tenant-mana
 import { AddTenantComponent } from './pages/add-tenant/add-tenant.component';
 import { PropertyUnitComponent } from './pages/property-unit/property-unit.component';
 
+
 const routes: Routes = [
   {
     path: "manage",
@@ -17,7 +18,8 @@ const routes: Routes = [
     path: "unit",
    component: PropertyUnitComponent
   },
-];
+  
+ ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

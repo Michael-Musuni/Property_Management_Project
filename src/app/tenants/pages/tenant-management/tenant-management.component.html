@@ -153,7 +153,9 @@
 
                 <ng-container matColumnDef="tenantName">
                   <mat-header-cell *matHeaderCellDef>Tenant Name</mat-header-cell>
-                  <mat-cell *matCellDef="let tenant">{{ tenant.tenantName }}</mat-cell>
+                  <mat-cell *matCellDef="let tenant">
+                    <a [routerLink]="['/lease',tenant.tenantName]">{{ tenant.tenantName }}</a>
+                  </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="tenantPhoneNumber">
@@ -164,6 +166,10 @@
                 <ng-container matColumnDef="tenantIdNumber">
                   <mat-header-cell *matHeaderCellDef>Tenant Id</mat-header-cell>
                   <mat-cell *matCellDef="let tenant">{{ tenant.identificationNumber }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="propertyName">
+                  <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
+                  <mat-cell *matCellDef="let tenant">{{ tenant.property }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="unit">
                   <mat-header-cell *matHeaderCellDef>Unit</mat-header-cell>

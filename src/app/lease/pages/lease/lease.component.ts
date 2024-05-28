@@ -24,7 +24,7 @@ import { UpdateLeaseComponent } from '../update-lease/update-lease.component';
 })
 export class LeaseComponent implements OnInit {
 
-
+ 
   loading: Boolean
   isdata: Boolean = false
   subscription: Subscription
@@ -55,6 +55,7 @@ export class LeaseComponent implements OnInit {
   constructor(
     private leaseService: LeaseService,
     private snackbar: SnackbarService,
+    
    
    
  private dialog: MatDialog
@@ -63,6 +64,7 @@ export class LeaseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.getContracts();
     this.activeLease();
     this.terminatedLease();
