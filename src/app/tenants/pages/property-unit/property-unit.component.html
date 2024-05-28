@@ -56,27 +56,31 @@
                 <ng-container matColumnDef="propertyName">
                     <th mat-header-cell *matHeaderCellDef> Property Name
                     </th>
-                    <td mat-cell *matCellDef="let row"> {{row.propertyName}}
+                    <td mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                    [class.even-row]="!(i % 2)"> {{row.propertyName}}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="unitName">
                     <th mat-header-cell *matHeaderCellDef> Unit Name </th>
-                    <td mat-cell *matCellDef="let row"> {{ row.unitName }}
+                    <td mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                    [class.even-row]="!(i % 2)"> {{ row.unitName }}
                     </td>
                 </ng-container>
                 
                 <ng-container matColumnDef="phone">
                     <th mat-header-cell *matHeaderCellDef> CareTaker Phone No </th>
-                    <td mat-cell *matCellDef="let row"> {{row.phone}}
+                    <td mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
+                    [class.even-row]="!(i % 2)"> {{row.phone}}
                     </td>
                 </ng-container>
 
                 <tr mat-header-row
                     *matHeaderRowDef="['propertyName','unitName',  'phone']">
                 </tr>
-                <tr mat-row
-                    *matRowDef="let row; columns: [ 'propertyName','unitName',  'phone']">
-                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['propertyName', 'unitName', 'phone']" 
+    [style.cursor]="'pointer'" matRipple (click)="selectProperty" 
+    [routerLink]="['/property/manage']">
+</tr>
                
             </table>
             <div *ngIf="loading" class="tbl-spinner">

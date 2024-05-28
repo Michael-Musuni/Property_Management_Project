@@ -5,6 +5,7 @@ import { AuthGuard } from "./core/guard/auth.guard";
 import { Role } from "./core/models/role";
 import { AuthLayoutComponent } from "./layout/app-layout/auth-layout/auth-layout.component";
 import { MainLayoutComponent } from "./layout/app-layout/main-layout/main-layout.component";
+import { LeaseComponent } from "./lease/pages/lease/lease.component";
 const routes: Routes = [
   {
     path: "",
@@ -12,6 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: "", redirectTo: "/authentication/signin", pathMatch: "full" },
+   
       {
         path: "admin",
         canActivate: [AuthGuard],

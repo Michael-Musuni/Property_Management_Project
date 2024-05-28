@@ -23,7 +23,7 @@ export class AmenitiesComponent implements OnInit {
   isLoading: Boolean
   subscription:Subscription
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["name","description","actions"]
+  displayedColumns: string[] = ["name","propertyName","totalAmount","actions"]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
@@ -59,7 +59,7 @@ export class AmenitiesComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
-    dialogConfig.width = "40%"
+    dialogConfig.width = "60%"
     dialogConfig.data = {
       test: ""
     }
@@ -69,7 +69,7 @@ export class AmenitiesComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
-    dialogConfig.width = "40%"
+    dialogConfig.width = "60%"
     dialogConfig.data = {
       customer: data
     }

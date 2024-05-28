@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AmenitiesService } from '../../services/amenities.service';
-import { MatDialogRef } from '@angular/material/dialog';
+
 import { UtilitiesComponent } from '../utilities/utilities.component';
 import { UtilitiesService } from '../../services/utilities.service';
 import { SnackbarService } from 'src/app/shared/snackbar.service';
+import { PropertyLookupComponent } from 'src/app/property/pages/property-lookup/property-lookup.component';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-utilities',
@@ -17,15 +18,24 @@ export class AddUtilitiesComponent implements OnInit {
   submittedUtilities: any[] = []; // Define submitted utilities array
   loading:boolean
   
-  constructor(private formBuilder: FormBuilder, private utilitiesService: UtilitiesService,private snackbar:SnackbarService,
+  dialogData: any;
+  amenityForm: any;
+  
+  constructor(private formBuilder: FormBuilder,public dialog: MatDialog, private utilitiesService: UtilitiesService,private snackbar:SnackbarService,
     public dialogRef: MatDialogRef<UtilitiesComponent>,
     ) { }
   ngOnInit(): void {
     this.utilityForm = this.formBuilder.group({
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      amount: [null, Validators.required],
+      propertyName: [null, Validators.required],
+      vat: [null],
+      totalAmount: [{value: null, disabled: false}, Validators.required]
       
 
+    });
+    this.utilityForm.valueChanges.subscribe(values => {
+      this.calculateTotalAmount();
     });
     const savedFormData = localStorage.getItem('formData');
     if (savedFormData) {
@@ -35,12 +45,50 @@ export class AddUtilitiesComponent implements OnInit {
       localStorage.setItem('formData', JSON.stringify(value));
     });
   }
+  calculateTotalAmount(): void {
+    const amount = parseFloat(this.utilityForm.get('amount')?.value);
+    const vat = parseFloat(this.utilityForm.get('vat')?.value);
 
+    if (!isNaN(amount)) {
+      let totalAmount;
+      if (!isNaN(vat)) {
+        const vatAmount = (amount * vat) / 100;
+        totalAmount = amount + vatAmount;
+      } else {
+        totalAmount = amount;
+      }
+      this.utilityForm.get('totalAmount')?.setValue(totalAmount.toFixed(2), { emitEvent: false });
+    } else {
+      this.utilityForm.get('totalAmount')?.setValue(null, { emitEvent: false });
+    }
+  }
+  pickProperty() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '50%';
+    dialogConfig.data = {
+      user: '',
+    };
+    const dialogRef = this.dialog.open(
+      PropertyLookupComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {
+      this.dialogData = result;
+      this.utilityForm.patchValue({
+       
+        propertyId: this.dialogData.data.id,
+        propertyName: this.dialogData.data.propertyName,
+       
 
-  // clearFormStorage() {
-  //   localStorage.removeItem('formData');
-  //   this.utilityForm.reset(); // Optionally reset the form fields
-  // }
+      });
+     
+
+    });
+
+  }
+ 
   
   addUtility() {if (this.utilityForm.valid) {
     console.log(this.utilityForm.value)

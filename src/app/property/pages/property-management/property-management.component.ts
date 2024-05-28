@@ -59,6 +59,9 @@ export class PropertyManagementComponent implements OnInit {
   refresh(){
     this.getProperties()
   }
+  selectProperty() {
+    this.router.navigate(['tenants/details']);
+  }
 
   getProperties() {
     this.loading = true;
@@ -66,7 +69,7 @@ export class PropertyManagementComponent implements OnInit {
       (res) => {
         this.data= res
         console.log("Data",this.data.entity) 
-        if (this.data.length > 0) {
+        if (this.data.entity.length > 0) {
           this.loading = false;
           this.isdata = true;
           this.dataSource = new MatTableDataSource<any>(this.data.entity);
@@ -75,7 +78,8 @@ export class PropertyManagementComponent implements OnInit {
           console.log("datasource", this.dataSource);
         } else {
           this.isdata = false;
-          this.dataSource = new MatTableDataSource<Account>(this.data.entity);
+          this.dataSource = new MatTableDataSource<any>(this.data.entity);
+          this.dataSource.paginator = this.paginator
           console.log("datasource else", this.dataSource);
         }
       },

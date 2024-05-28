@@ -1,24 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-
-import { TenantService } from '../tenant.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { ExportType, MatTableExporterDirective } from 'mat-table-exporter';
-
-
+import { MatTableExporterDirective, ExportType } from 'mat-table-exporter';
+import { TenantService } from '../tenant.service';
 
 @Component({
-  selector: 'app-property-unit',
-  templateUrl: './property-unit.component.html',
-  styleUrls: ['./property-unit.component.sass']
+  selector: 'app-property-details',
+  templateUrl: './property-details.component.html',
+  styleUrls: ['./property-details.component.sass']
 })
-export class PropertyUnitComponent implements OnInit {
+export class PropertyDetailsComponent implements OnInit {
   loading: Boolean
   membersForm: FormGroup;
   dataSource: MatTableDataSource<any>;
   memberTableDataSource = new MatTableDataSource<any>([]);
   data: any
-  displayedColumns: string[] = [ "propertyName","unitName","phone"]
+  displayedColumns: string[] = [ "unitName","propertyName","amount","status","date"]
   subscription: any;
   isdata: boolean;
   paginator: any;
@@ -44,14 +41,10 @@ getUnits(){
           this.dataSource = new MatTableDataSource<any>(this.data);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
         },
         (error) => {
           console.error('Error fetching vat:', error);
           this.isLoading = false;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
         }
       );
   }

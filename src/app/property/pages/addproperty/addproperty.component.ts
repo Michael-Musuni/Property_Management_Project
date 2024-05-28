@@ -37,7 +37,7 @@ export class AddpropertyComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ["subPropertyName", "actions"]
   displayedUnitColumns: string[] = ["unit", "maxOccupants", "rent", "deposit", "actions"]
-  displayedUtilitiesColumns: string[] = ["utility", "charge", "actions"]
+  displayedUtilitiesColumns: string[] = ["utility","charge", "actions"]
   displayedAmenitiesColumns: string[] = ["amenity", "charge", "actions"]
   rentConfigForm: FormGroup;
   propertyDetails: FormGroup
@@ -49,6 +49,8 @@ export class AddpropertyComponent implements OnInit {
   amenityForm: FormGroup
   ID: any;
   Passport: any;
+  showVATField = false;
+  showVATNumberField = false;
 
 
 
@@ -76,9 +78,11 @@ export class AddpropertyComponent implements OnInit {
       rentConfig: ["",],
       subProperties: this.fb.array([]), // FormArray for subproperties
       units: this.fb.array([]), // FormArray for units
-      amenities: this.fb.array([]), // FormArray for units
-      utilities: this.fb.array([]), // FormArray for units
-      category: ["",]//lease,rent
+      // amenities: this.fb.array([]), // FormArray for units
+      // utilities: this.fb.array([]), // FormArray for units
+      category: ["",],//lease,rent
+      vatOption: ["", Validators.required],
+      vat: ["", Validators.required],
 
     });
     this.ownerDetails = this.fb.group({
@@ -138,6 +142,8 @@ export class AddpropertyComponent implements OnInit {
     this.fetchUtilities();
     this.role = this.tokenStorageService.getUser().roles[0]
     this.populateFormValues();
+    this.propertyDetails.get('vatOption').disable();
+    this.propertyDetails.get('vatNumber').disable();
   }
   populateFormValues(): void {
     this.populateFormGroupFromLocalStorage('propertyDetails');
@@ -148,6 +154,30 @@ export class AddpropertyComponent implements OnInit {
     this.populateFormGroupFromLocalStorage('utilityForm');
     this.populateFormGroupFromLocalStorage('amenityForm');
     this.populateFormGroupFromLocalStorage('rentConfigForm');
+  }
+  onPropertyTypeChange(propertyType: string): void {
+    if (propertyType === 'Commercial'|| propertyType === 'Industrial') {
+      this.showVATField = true;
+      this.propertyDetails.get('vatOption').enable();
+    } else {
+      this.showVATField = false;
+      this.showVATNumberField = false;
+      this.propertyDetails.get('vatOption').disable();
+      this.propertyDetails.get('vatNumber').disable();
+      this.propertyDetails.get('vatOption').reset();
+      this.propertyDetails.get('vatNumber').reset();
+    }
+  }
+
+  onVATOptionChange(vatOption: string): void {
+    if (vatOption === 'VAT') {
+      this.showVATNumberField = true;
+      this.propertyDetails.get('vatNumber').enable();
+    } else {
+      this.showVATNumberField = false;
+      this.propertyDetails.get('vatNumber').disable();
+      this.propertyDetails.get('vatNumber').reset();
+    }
   }
   populateFormGroupFromLocalStorage(formName: string): void {
     const savedFormData = localStorage.getItem(formName);
@@ -352,6 +382,30 @@ export class AddpropertyComponent implements OnInit {
     console.log(`Deleting utility with ID ${unitId} at index ${index}`);
     this.propertyDetails.value.utilities.splice(index);
     this.getUtilities();
+  }
+  openPreviewDialog(): void {
+    const combinedFormData = {
+      propertyDetails: this.propertyDetails.value,
+      ownerDetails: this.ownerDetails.value,
+      caretakerDetails: this.caretakerDetails.value,
+      subProperties: this.propertyDetails.get('subProperties').value,
+      units: this.propertyDetails.get('units').value,
+      utilities: this.propertyDetails.get('utilities').value,
+      amenities: this.propertyDetails.get('amenities').value,
+      rentConfigForm: this.rentConfigForm.value
+      // Add more form groups as needed
+    };
+  
+    // const dialogRef = this.dialog.open(PropertypreviewComponent, {
+    //   data: combinedFormData // Pass the combined form data to the Preview Dialog
+    // });
+  
+    // // Subscription to dialog close event
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result === 'confirm') {
+    //     this.onSubmit(); // Submit the form if user confirms
+    //   }
+    // });
   }
 
 

@@ -22,7 +22,7 @@ export class VatComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   vat: any[] = [];
   isLoading: boolean = false;
-  displayedColumns: string[] = ['propertyId', 'grossRevenue', 'taxAmount', 'latePenalty','accumulatedOverdueTaxAndPenalty']; // Removed extra comma
+  displayedColumns: string[] = ['propertyName', 'grossRevenue', 'taxAmount', 'latePenalty','accumulatedOverdueTaxAndPenalty']; // Removed extra comma
   subscription: Subscription; 
   selectedMonth: number;
   months: { name: string, value: number }[];

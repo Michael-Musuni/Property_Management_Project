@@ -87,29 +87,34 @@
                         </ng-container>
                         <ng-container matColumnDef="propertyId">
                             <mat-header-cell *matHeaderCellDef>Property Id</mat-header-cell>
-                            <mat-cell *matCellDef="let commission">
+                            <mat-cell *matCellDef="let commission;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">
                                 <a (click)="selectProperty()">{{ commission.propertyId }}</a>
                             </mat-cell>      
                         </ng-container>
                         <ng-container matColumnDef="propertyName">
                             <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
-                            <mat-cell *matCellDef="let commission">
+                            <mat-cell *matCellDef="let commission;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">
                                 <a (click)="selectProperty()">{{ commission.propertyName }}</a>
                             </mat-cell>      
                         </ng-container>
 
                         <ng-container matColumnDef="commissionMonth">
                             <mat-header-cell *matHeaderCellDef>Month</mat-header-cell>
-                            <mat-cell *matCellDef="let commission">{{ commission.commissionMonth }}</mat-cell>
+                            <mat-cell *matCellDef="let commission;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ commission.commissionMonth }}</mat-cell>
                         </ng-container>
                         
                         <ng-container matColumnDef="managementCommission">
                             <mat-header-cell *matHeaderCellDef>Agent Commission (%)</mat-header-cell>
-                            <mat-cell *matCellDef="let commission">{{ commission.managementCommission }}</mat-cell>
+                            <mat-cell *matCellDef="let commission;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ commission.managementCommission }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="totalCommission">
                             <mat-header-cell *matHeaderCellDef>Total Commission (Ksh)</mat-header-cell>
-                            <mat-cell *matCellDef="let commission"> {{ commission.totalCommission }}</mat-cell>
+                            <mat-cell *matCellDef="let commission;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)"> {{ commission.totalCommission }}</mat-cell>
                         </ng-container>
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'"

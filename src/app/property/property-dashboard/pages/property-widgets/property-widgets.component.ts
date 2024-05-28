@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../dashboardservice/dashboard.service';
 import { Subscription } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-property-widgets',
@@ -18,7 +19,9 @@ export class PropertyWidgetsComponent implements OnInit {
   availableUnits=0
   allTenants=0
   paidInvoices=0
-  constructor(private service: DashboardService) { }
+  constructor(private service: DashboardService,
+              private router:Router
+  ) { }
 
 
 
@@ -51,4 +54,7 @@ export class PropertyWidgetsComponent implements OnInit {
       
     })
   };
+  selectInvoice() {
+    this.router.navigate(['dashboard/invoices']);
+  }
 }
