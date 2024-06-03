@@ -15,13 +15,15 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { AddRolesComponent } from './add-roles/add-roles.component';
 import { DeleteRoleComponent } from './delete-role/delete-role.component';
 import { UpdateRoleComponent } from './update-role/update-role.component';
+import { AddPrivilegeComponent } from './add-privilege/add-privilege.component';
 
 @NgModule({
   declarations: [
   SystemrolesComponent,
   AddRolesComponent,
   DeleteRoleComponent,
-  UpdateRoleComponent
+  UpdateRoleComponent,
+  AddPrivilegeComponent
   ],
   imports: [
     CommonModule,

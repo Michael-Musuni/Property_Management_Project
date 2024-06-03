@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guard/auth.guard';
 import { SystemrolesComponent } from './systemroles/systemroles.component';
 import { Page404Component } from 'src/app/authentication/page404/page404.component';
+import { AddRolesComponent } from './add-roles/add-roles.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,12 @@ const routes: Routes = [
   },
   { 
     path: "**", component: Page404Component 
+  },
+
+  {
+    path: "add",
+    canActivate: [AuthGuard],
+    component: AddRolesComponent,
   },
 ];
 

@@ -43,6 +43,20 @@ export const ROUTES: RouteInfo[] = [
     role: ["ROLE_ADMIN"],
     submenu: [],
   },
+  
+  {
+    path: "/admin/privelege",
+    title: "Add Privilege",
+    moduleName: "roles",
+    iconType: "feather",
+    icon: "user-check",
+    class: "",
+    groupTitle: false,
+    badge: "",
+    badgeClass: "",
+    role: ["ROLE_ADMIN"],
+    submenu: [],
+  },
   {
     path: "/property/dashboard/dashboard",
     title: "Dashboard",

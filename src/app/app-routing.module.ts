@@ -6,6 +6,7 @@ import { Role } from "./core/models/role";
 import { AuthLayoutComponent } from "./layout/app-layout/auth-layout/auth-layout.component";
 import { MainLayoutComponent } from "./layout/app-layout/main-layout/main-layout.component";
 import { LeaseComponent } from "./lease/pages/lease/lease.component";
+import { AddRolesComponent } from "./admin/roles/add-roles/add-roles.component";
 const routes: Routes = [
   {
     path: "",
@@ -13,7 +14,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: "", redirectTo: "/authentication/signin", pathMatch: "full" },
-   
+     
       {
         path: "admin",
         canActivate: [AuthGuard],
@@ -23,7 +24,7 @@ const routes: Routes = [
         loadChildren: () =>
           import("./admin/admin.module").then((m) => m.AdminModule),
       },
-
+      
       {
         path: "rent",
         canActivate: [AuthGuard],
