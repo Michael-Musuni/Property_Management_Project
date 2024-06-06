@@ -87,13 +87,23 @@ export class SystemrolesComponent implements OnInit {
     this.dialog.open(AddPrivilegeComponent, dialogConfig)
   }
 
-  editRoleCall(role){
+  // editRoleCall(role){
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = false
+  //   dialogConfig.autoFocus = true
+  //   dialogConfig.width = "500px"
+  //   dialogConfig.data = {
+  //     role: role
+  //   }
+  //   this.dialog.open(UpdateRoleComponent, dialogConfig)
+  // }
+  editCall(id: any){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
     dialogConfig.width = "500px"
     dialogConfig.data = {
-      role: role
+      id: id
     }
     this.dialog.open(UpdateRoleComponent, dialogConfig)
   }
