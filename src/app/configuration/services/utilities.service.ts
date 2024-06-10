@@ -14,7 +14,7 @@ export class UtilitiesService {
   constructor(private httpClient: HttpClient) { }
 
  getUtilities() {
-    return this.httpClient.get(`${environment.apiUrl}/api/v1/utilities/getall`, httpOptions)
+    return this.httpClient.get(`${environment.apiUrl}/api/v1/utilities/utilities`, httpOptions)
   }
   addUtilities(data: any) {
   

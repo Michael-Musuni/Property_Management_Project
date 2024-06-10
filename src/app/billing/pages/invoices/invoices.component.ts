@@ -16,6 +16,7 @@ import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.compone
 import { CheckerDialogComponent } from '../checker-dialog/checker-dialog.component';
 import { ReportOptionsComponent } from '../report-options/report-options.component';
 import { Role } from 'src/app/core/models/role';
+import { MpesaDialogComponent } from '../mpesa-dialog/mpesa-dialog.component';
 
 @Component({
   selector: 'app-invoices',
@@ -236,6 +237,21 @@ export class InvoicesComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(PaymentDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+  openMpesaDialog(invoice: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    dialogConfig.data = {
+      invoice,
+    };
+
+    const dialogRef = this.dialog.open(MpesaDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();

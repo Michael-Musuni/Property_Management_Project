@@ -20,7 +20,7 @@ export class AmenitiesService {
   }
   addAmenities(data: any) {
 
-    return this.httpClient.post(`${environment.apiUrl}/api/v1/amenities/add`, data)
+    return this.httpClient.post(`${environment.apiUrl}/api/v1/amenities/create`, data)
   }
   updateAmenity(id: any,data: any): Observable<any>{
   

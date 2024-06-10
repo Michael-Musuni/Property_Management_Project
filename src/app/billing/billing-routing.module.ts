@@ -32,6 +32,9 @@ const routes: Routes = [
   { 
     path: 'property/main', component: PropertyManagementComponent
   },
+  { 
+    path: 'tenants/details', component: PropertyManagementComponent
+  },
 
 ];
 
