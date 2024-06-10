@@ -144,8 +144,11 @@
                             <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
                             <mat-cell *matCellDef="let invoice;let i = index" [class.odd-row]="i % 2"
                             [class.even-row]="!(i % 2)">
-                             <ng-container *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_AGENT'">
+                             <!-- <ng-container *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_AGENT'">
                                     <a (click)="openPaymentDialog(invoice)">{{ invoice.status }}</a>
+                                  </ng-container> -->
+                                  <ng-container *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_AGENT'">
+                                    <a (click)="openPamentDialog(invoice)">{{ invoice.status }}</a>
                                   </ng-container>
                                   <ng-container *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_LANDLORD'">
                                     {{ invoice.status }}
@@ -263,10 +266,31 @@
                                     (click)="openSendOptionsDialog(invoice)" matTooltip="Send" *ngIf="role=='ROLE_AGENT'">
                                     <mat-icon size="small">send</mat-icon>
                                 </button>
-                                <button mat-raised-button color="primary" (click)="openPaymentDialog(invoice)"
+                                <!-- <button mat-raised-button color="primary" (click)="openPaymentDialog(invoice)"
                                     matTooltip="Pay" *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_AGENT'">
                                     <mat-icon size="small">payment</mat-icon>
+                                </button> -->
+                               <!-- your-main.component.html -->
+                                <button mat-raised-button color="primary" [matMenuTriggerFor]="paymentMenu"
+                                matTooltip="Pay" *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_AGENT'">
+                                <mat-icon size="small">payment</mat-icon>
                                 </button>
+
+                                                    <mat-menu #paymentMenu="matMenu">
+                                                    <button mat-menu-item (click)="openPaymentDialog(invoice)">
+                                                    <mat-icon>attach_money</mat-icon>
+                                                    <span>Pay by Cash</span>
+                                                    </button>
+                                                    <button mat-menu-item (click)="openMpesaDialog(invoice)">
+                                                    <mat-icon>phone_iphone</mat-icon>
+                                                    <span>Pay by M-Pesa</span>
+                                                    </button>
+                                                    <button mat-menu-item (click)="openMpesaDialog(invoice)">
+                                                    <mat-icon>account_balance</mat-icon>
+                                                    <span>Pay by Bank</span>
+                                                    </button>
+                                                    </mat-menu>
+
                                 <button mat-raised-button color="primary" (click)="handlePendingInvoice(invoice)"
                                     matTooltip="Verify" *ngIf="invoice.status === 'PENDING'">
                                     <mat-icon style="outline: none;">check_circle</mat-icon>

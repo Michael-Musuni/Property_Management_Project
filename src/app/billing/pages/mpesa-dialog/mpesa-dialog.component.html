@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>M-Pesa Payment Instructions</h1>
+<div mat-dialog-content>
+  <p><b>Follow the Steps Below. Once you receive a successful reply from Mpesa, click the complete button below.</b></p>
+  <ol>
+    <li>Go to M-PESA on your phone</li>
+    <li>Select Pay Bill option</li>
+    <li>Enter Business no. <strong>222222</strong></li>
+    <li>Enter Account no. <strong>MQWSRJH</strong></li>
+    <li>Enter the Amount. <strong>KES 1050</strong></li>
+    <li>Enter your M-PESA PIN and Send</li>
+    <li>You will receive a confirmation SMS from MPESA</li>
+  </ol>
+  <p>Pay Invoices Using MPESA, upload your Excell file Here</p>
+  <input type="file" (change)="onFileChange($event)">
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button color="primary" (click)="completePayment()">Complete</button>
+</div>
