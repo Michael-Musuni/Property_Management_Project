@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableExporterDirective, ExportType } from 'mat-table-exporter';
 import { TenantService } from '../tenant.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-details',
@@ -21,18 +22,24 @@ export class PropertyDetailsComponent implements OnInit {
   paginator: any;
   sort: any;
   snackbar: any;
+  id:any;
   @ViewChild('exporter', { static: true }) exporter: MatTableExporterDirective;
   isLoading: boolean = false;
   constructor(
     private tenantService:TenantService,
-  ) { }
+    private router: Router
+  ) {
+    
+   this. id = router.getCurrentNavigation().extras.queryParams.id;
+    console.log("sdfhjkfds",this. id)
+   }
 
   ngOnInit(): void {
-    this.getUnits();
+    this.getUnits(this.id);
   }
-getUnits(){
+getUnits(id){
     this.isLoading = true;
-    this.subscription = this.tenantService.getunits()
+    this.subscription = this.tenantService.getunits(this.id)
       .subscribe(
         (data: any) => {
           console.log("my units", data);

@@ -125,6 +125,7 @@
         }
       }
     }
+  
   },
   "defaultProject": "kuber",
   "cli": {

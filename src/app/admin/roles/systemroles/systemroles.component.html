@@ -113,16 +113,26 @@
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
                                     <mat-cell *matCellDef="let role;let i = index" [class.odd-row]="i % 2"
                                         [class.even-row]="!(i % 2)" (contextmenu)="onContextMenu($event, role)">
-                                        <button mat-icon-button color="accent" (click)="$event.stopPropagation()"
-                                            (click)="deleteRoleCall(role)" class="tbl-action-btn">
-                                            <app-feather-icons matTooltip="Delete Role" [icon]="'trash-2'"
-                                                [class]="'tbl-fav-delete'"></app-feather-icons>
+                                      
+                                        <button mat-mini-fab color="primary" (click)="addPrivilege(role.id)"style="width: auto !important;padding: 0px 7px;border-radius: 5%;">
+                                            <mat-icon matTooltip="Add Privilege" class="col-white">add</mat-icon>Add Privilege
                                         </button>
+                                        <button mat-icon-button color="primary" (click)="$event.stopPropagation()" (click)="editCall(role.id)"
+                                            class="tbl-action-btn" matTooltip="Edit Privilege">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="accent" (click)="$event.stopPropagation()"
+                                          (click)="deleteRoleCall(role)" class="tbl-action-btn">
+                                          <app-feather-icons matTooltip="Delete Role" [icon]="'trash-2'"
+                                              [class]="'tbl-fav-delete'"></app-feather-icons>
+                                        </button>
+                                        
                                     </mat-cell>
+                                    
                                 </ng-container>
 
                                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                                <mat-row *matRowDef="let row; columns: displayedColumns" (click)="roleDetailsCall(role)"
+                                <mat-row *matRowDef="let row; columns: displayedColumns"
                                     [style.cursor]="'pointer'" matRipple>
                                 </mat-row>
                             </mat-table>

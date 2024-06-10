@@ -1,0 +1,144 @@
+<section class="content">
+    <div class="content-block">
+        
+       <div class="card">
+        
+        <form class="register-form m-4" [formGroup]="addRoleForm">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Add Privilege</mat-label>
+                        <input matInput formControlName="privilegeName" required />
+                        <mat-error *ngIf="addRoleForm.get('privilegeName').hasError('required')">
+                            Privilege name is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <div class="example-button-row" align="end">
+                            <button mat-raised-button color="primary" [disabled]="!addRoleForm.valid" (click)="onSubmit()">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                <b>SUBMIT</b>
+                            </button>
+                            <button mat-raised-button color="warn" (click)="onClick()" tabindex="-1">
+                                CANCEL
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        <div class="submitted-privelege m-4">
+            <div class="materialTableHeader">
+                <div class="row">
+                    <div class="col-8">
+                        <ul class="header-buttons-left ms-0">
+                            <li class="dropdown">
+                                <h2>Roles</h2>
+                            </li>
+                            <li class="dropdown m-l-20">
+                                <label for="search-input"><i
+                                        class="material-icons search-icon">search</i></label>
+                                <input placeholder="Search" type="text"
+                                    style="text-transform: capitalize;" (keyup)="applyFilter($event)"
+                                    class="browser-default search-field" aria-label="Search box" />
+                            </li>
+                           
+                            <li>
+                                <div class="m-l-10" matTooltip="REFRESH">
+                                    <button mat-mini-fab color="primary" (click)="getData()">
+                                        <mat-icon class="col-white">refresh</mat-icon>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <ul class="header-buttons">
+                            <li>
+                                <div class="export-button m-l-10" matTooltip="XLSX">
+                                    <img src="assets/images/icons/xlsx.png" alt="" (click)="
+                exporter.exportTable('xlsx', {
+                  fileName: 'system-user-roles',
+                  sheet: 'sheet1'
+                })
+              " />
+                                </div>
+                            </li>
+                            <li>
+                                <div class="export-button m-l-10" matTooltip="CSV">
+                                    <img src="assets/images/icons/csv.png" alt=""
+                                        (click)="exporter.exportTable('csv')" />
+                                </div>
+                            </li>
+                            <li>
+                                <div class="export-button m-l-10" matTooltip="JSON">
+                                    <img src="assets/images/icons/json.png" alt=""
+                                        (click)="exporter.exportTable('json')" />
+                                </div>
+                            </li>
+                            <li>
+                                <div class="export-button m-l-10" matTooltip="TXT">
+                                    <img src="assets/images/icons/txt.png" alt=""
+                                        (click)="exporter.exportTable('txt')" />
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          
+            <mat-table #table matTableExporter [dataSource]="dataSource" mat-row-hover matSort class="mat-cell"
+            #exporter="matTableExporter">
+            <ng-container matColumnDef="index">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap">S/N </mat-header-cell>
+                <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                  class="column-nowrap">
+                  {{ i + 1 }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap">Privilege Name</mat-header-cell>
+                <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                  class="column-nowrap">
+                  {{row.privilegeName }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="table-img column-nowrap">Actions
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2" [class.even-row]="!(i % 2)"
+                  class="table-img column-nowrap">
+                  <button mat-icon-button color="primary" (click)="$event.stopPropagation()" (click)="editCall(row)"
+                    class="tbl-action-btn" matTooltip="Update">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="primary" (click)="$event.stopPropagation()" (click)="deleteCall(row)"
+                    class="tbl-action-btn" matTooltip="Delete">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-cell>
+  
+              </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple>
+            </mat-row>
+            <mat-cell *matNoDataRow colspan="3">
+              No data matching the filter "{{ input.value }}"</mat-cell>
+          </mat-table>
+          <!-- Loading spinner -->
+          <div *ngIf="isLoading" class="tbl-spinner">
+            <mat-progress-spinner color="primary" [diameter]="60" mode="indeterminate">
+            </mat-progress-spinner>
+          </div>
+          <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+        </div>
+        
+       
+        </div>
+    </div>
+</section>

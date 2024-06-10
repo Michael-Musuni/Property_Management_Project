@@ -31,11 +31,11 @@ export class PropertyUnitComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUnits();
+    this.getUnit();
   }
-getUnits(){
+getUnit(){
     this.isLoading = true;
-    this.subscription = this.tenantService.getunits()
+    this.subscription = this.tenantService.getunit()
       .subscribe(
         (data: any) => {
           console.log("my units", data);

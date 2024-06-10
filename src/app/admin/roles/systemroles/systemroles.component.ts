@@ -10,6 +10,7 @@ import { AddRolesComponent } from '../add-roles/add-roles.component';
 import { DeleteRoleComponent } from '../delete-role/delete-role.component';
 import { RolesService } from '../roles.service';
 import { UpdateRoleComponent } from '../update-role/update-role.component';
+import { AddPrivilegeComponent } from '../add-privilege/add-privilege.component';
 
 @Component({
   selector: 'app-systemroles',
@@ -69,20 +70,40 @@ export class SystemrolesComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
-    dialogConfig.width = "500px"
+    dialogConfig.width = "40%"
     dialogConfig.data = {
       test: ""
     }
     this.dialog.open(AddRolesComponent, dialogConfig)
   }
+  addPrivilege(id: any){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false
+    dialogConfig.autoFocus = true
+    dialogConfig.width = "50%"
+    dialogConfig.data = {
+      id: id
+    }
+    this.dialog.open(AddPrivilegeComponent, dialogConfig)
+  }
 
-  editRoleCall(role){
+  // editRoleCall(role){
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = false
+  //   dialogConfig.autoFocus = true
+  //   dialogConfig.width = "500px"
+  //   dialogConfig.data = {
+  //     role: role
+  //   }
+  //   this.dialog.open(UpdateRoleComponent, dialogConfig)
+  // }
+  editCall(id: any){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false
     dialogConfig.autoFocus = true
     dialogConfig.width = "500px"
     dialogConfig.data = {
-      role: role
+      id: id
     }
     this.dialog.open(UpdateRoleComponent, dialogConfig)
   }

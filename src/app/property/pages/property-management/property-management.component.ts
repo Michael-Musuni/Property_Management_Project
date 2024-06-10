@@ -51,7 +51,7 @@ export class PropertyManagementComponent implements OnInit {
   ngOnInit(): void {
     if(this.router.url == '/property/manage') this.divcss=true
     this.role = this.tokenStorageService.getUser().roles[0]
-
+    
     this.getProperties()
   }
 
@@ -59,8 +59,10 @@ export class PropertyManagementComponent implements OnInit {
   refresh(){
     this.getProperties()
   }
-  selectProperty() {
-    this.router.navigate(['tenants/details']);
+  selectProperty(row) {
+    this.router.navigate(['tenants/details',], {queryParams: {id: row.id}});
+    row.data
+     console.log("the row passses the id", row.data)
   }
 
   getProperties() {

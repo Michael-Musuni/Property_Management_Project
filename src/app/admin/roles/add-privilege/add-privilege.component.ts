@@ -1,18 +1,19 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from 'src/app/shared/snackbar.service';
 import { RolesService } from '../roles.service';
 import { SystemrolesComponent } from '../systemroles/systemroles.component';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
-  selector: 'app-update-role',
-  templateUrl: './update-role.component.html',
-  styleUrls: ['./update-role.component.sass']
+  selector: 'app-add-privilege',
+  templateUrl: './add-privilege.component.html',
+  styleUrls: ['./add-privilege.component.sass']
 })
-export class UpdateRoleComponent implements OnInit {
+export class AddPrivilegeComponent implements OnInit {
   pri:any;
   addRoleForm: FormGroup;
   loading = false;
@@ -37,6 +38,7 @@ export class UpdateRoleComponent implements OnInit {
     
     
   }
+
  
   privilege() {
     this.isLoading = true
@@ -52,21 +54,6 @@ export class UpdateRoleComponent implements OnInit {
       
     })
   }
- 
-  // privilege() {
-  //   this.isLoading = true
-  
-  //   this.subscription = this.service.upPrivilege(this.data.id).subscribe(res => {
-  //     this.data = res
-  
-  //     console.log(this.data.message)
-  //     this.isLoading = false;
-  //     this.dataSource = new MatTableDataSource<any>(this.data.entity);
-  //     this.dataSource.paginator = this.paginator;
-  //     this.dataSource.sort = this.sort;
-      
-  //   })
-  // }
   onSelectionChange(event: any, row: any) {
     const index = this.selectedEvents.findIndex(selectedRow => selectedRow.id === row.id);
     if (index === -1) {
@@ -81,7 +68,7 @@ export class UpdateRoleComponent implements OnInit {
   onSubmit() {
     this.loading = true;
     console.log("Role Submit:", this.data, this.selectedEvents);
-    this.subscription = this.service.removePrivilege(this.selectedEvents, this.data.id).subscribe(
+    this.subscription = this.service.postPrivilege(this.selectedEvents, this.data.id).subscribe(
       res => {
         this.snackbar.showNotification("snackbar-success", "SUCCESSFUL!");
         this.loading = false;

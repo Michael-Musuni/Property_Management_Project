@@ -25,7 +25,24 @@ export class RolesService {
   addNewRole(data: any): Observable<any> {
     return this.http.post(this.rolesUrl + 'add', data, httpOptions);
   }
+  public getPrivilege() {
+    return this.http.get(`${environment.apiUrl}/api/v1/privilege/privileges`, httpOptions)
+  }
+  public upPrivilege(id:any) {
+    return this.http.get(`${environment.apiUrl}/api/v1/privilege/assigned/privileges?roleId=${id}`, httpOptions)
+  }
+  public postPrivilege(event:any[],id:any) {
+    console.log(event)
+    return this.http.post(`${environment.apiUrl}/api/v1/privilege/attach-privilege-to-role?roleId=${id}`, event)
+  }
+  public removePrivilege(event:any[],id:any) {
+    console.log(event)
+    return this.http.post(`${environment.apiUrl}/api/v1/privilege/api/v1/privilege/update-privileges?roleId=${id}`, event)
+  }
 
+  addPrivilege(data:any): Observable<any>{
+    return this.http.post(`${environment.apiUrl}/api/v1/privilege/add`,data)
+  }
   deleteRole(id: any): Observable<any> {
     return this.http.delete(this.rolesUrl + `delete/` + id, httpOptions);
   }
