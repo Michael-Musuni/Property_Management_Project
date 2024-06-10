@@ -95,8 +95,8 @@
                       </li> -->
                       <li>
                         <div class="m-l mb-2" matTooltip="Download report">
-                          <button mat-mini-fab color="primary" (click)="viewReportOptions()">
-                            <mat-icon class="col-white">cloud_download</mat-icon>
+                          <button mat-mini-fab color="primary" (click)="viewReportOptions()"style="width: auto !important;padding: 0px 7px;border-radius: 5%;">
+                            <mat-icon class="col-white">cloud_download</mat-icon>Download Reports
                           </button>
                         </div>
                       </li>
@@ -167,10 +167,6 @@
                   <mat-header-cell *matHeaderCellDef>Tenant Id</mat-header-cell>
                   <mat-cell *matCellDef="let tenant;let i = index" [class.odd-row]="i % 2"
                   [class.even-row]="!(i % 2)">{{ tenant.identificationNumber }}</mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="propertyName">
-                  <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
-                  <mat-cell *matCellDef="let tenant">{{ tenant.property }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="unit">
                   <mat-header-cell *matHeaderCellDef>Unit</mat-header-cell>
