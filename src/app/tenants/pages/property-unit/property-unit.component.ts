@@ -49,6 +49,8 @@ getUnit(){
         },
         (error) => {
           console.error('Error fetching vat:', error);
+          this.dataSource = new MatTableDataSource<any>(this.data);
+          this.isdata = false;
           this.isLoading = false;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;

@@ -93,8 +93,9 @@ onEndDateChange(): void {
 selectTenant() {
   this.router.navigate(['leasing/lease']);
 }
-selectUnit() {
-  this.router.navigate(['tenants/details']);
+selectUnit(row) {
+  this.router.navigate(['tenants/bills'], {queryParams: {id: row.id}});
+  row.data
 }
 
   fetchOnboardedTenantsData() {

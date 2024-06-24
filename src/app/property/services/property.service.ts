@@ -24,8 +24,12 @@ export class PropertyService {
     return this.http.get(`${environment.apiUrl}/api/v1/property/get`);
   }
 
+  // public getCharges(propertyId: any) {
+  //   return this.http.get(`${environment.apiUrl}/api/v1/property/charges?propertyId=` + propertyId, httpOptions);
+  // }
+  
   public getCharges(propertyId: any) {
-    return this.http.get(`${environment.apiUrl}/api/v1/property/charges?propertyId=` + propertyId, httpOptions);
+    return this.http.get(`${environment.apiUrl}/api/v1/utilities/charges?propertyId=` + propertyId, httpOptions);
   }
 
   getUnits(status: string, propertyId: any) {

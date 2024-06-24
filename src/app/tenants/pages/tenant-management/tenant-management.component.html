@@ -171,7 +171,7 @@
                 <ng-container matColumnDef="unit">
                   <mat-header-cell *matHeaderCellDef>Unit</mat-header-cell>
                   <mat-cell *matCellDef="let tenant;let i = index" [class.odd-row]="i % 2"
-                  [class.even-row]="!(i % 2)"><a (click)="selectUnit()">{{ tenant.unit?.unitName || '-' }}</a></mat-cell>
+                  [class.even-row]="!(i % 2)"><a (click)="selectUnit(row)">{{ tenant.unit?.unitName || '-' }}</a></mat-cell>
                 </ng-container>
                 <!-- <ng-container matColumnDef="propertyName">
                   <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>

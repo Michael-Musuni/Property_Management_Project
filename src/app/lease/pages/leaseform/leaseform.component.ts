@@ -31,7 +31,10 @@ export class LeaseformComponent implements OnInit {
   units: any
   startDate: String;
   endDate: String;
-  
+  name:any;
+  amount:any;
+  vat:any;
+  totalAmount:any;
   // Initialize the FormArray
   chargesArray = this.fb.array([]);
 
@@ -148,6 +151,7 @@ initializeForm() {
       amount: [''],
       vat: [''],
       totalAmount: [''],
+      previousReadings: [''],
       latePaymentFee: [''],
       rentDueDate: [''],
       paymentPeriod: ['', [Validators.required]],
@@ -214,8 +218,8 @@ pickProperty() {
         // Populate the charges in the form array
         this.chargesfetched.forEach((charge) => {
           const chargeGroup = this.fb.group({
-            chargeName: [charge.name],
-            chargeAmount: [charge.cost],
+            name: [charge.name],
+            totalAmount: [charge.totalAmount],
           });
 
           this.chargesArray.push(chargeGroup);

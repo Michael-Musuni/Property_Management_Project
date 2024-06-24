@@ -4,6 +4,8 @@ import { TenantManagementComponent } from './pages/tenant-management/tenant-mana
 import { AddTenantComponent } from './pages/add-tenant/add-tenant.component';
 import { PropertyUnitComponent } from './pages/property-unit/property-unit.component';
 import { PropertyDetailsComponent } from './pages/property-details/property-details.component';
+import { BillingModule } from '../billing/billing.module';
+import { InvoicesComponent } from '../billing/pages/invoices/invoices.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,10 @@ const routes: Routes = [
   {
     path: "details",
    component: PropertyDetailsComponent
+  },
+  {
+    path: "bills",
+   component: InvoicesComponent
   },
 ];
 

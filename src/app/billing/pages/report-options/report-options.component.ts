@@ -37,8 +37,9 @@ export class ReportOptionsComponent implements OnInit {
 maxStartDate: any;
 
 
-  // months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  // filteredMonths: Observable<string[]>;
+  months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  filteredMonths: Observable<string[]>;
+  years: string[] = ['2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031'];
 
 
 

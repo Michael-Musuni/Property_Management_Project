@@ -20,7 +20,7 @@ export class PropertyLookupComponent implements OnInit {
   isdata: Boolean;
   subscription!: Subscription
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ["name", "type", "location", "owner"]
+  displayedColumns: string[] = ["name", "type", "location", ]
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filter", { static: true }) filter: ElementRef;
@@ -69,6 +69,8 @@ export class PropertyLookupComponent implements OnInit {
           this.loading = false;
           this.isdata = false;
           this.dataSource = new MatTableDataSource<any>(this.data.entity);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         }
       },
       (err) => {

@@ -40,21 +40,28 @@
                 </mat-autocomplete>
             </mat-form-field>
         </div>
-
-        <!-- <div class="col-md-12 mb-2">
+        <div class="col-md-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Year</mat-label>
+                <mat-select placeholder="Select Year" formControlName="selectedYear">
+                    <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Month</mat-label>
                 <mat-select placeholder="Select Month" formControlName="selectedMonth">
                     <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
                 </mat-select>
             </mat-form-field>
-        </div> -->
+        </div>
 
 
         
 
         
-        <div class="col-md-12 mb-2">
+        <!-- <div class="col-md-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Start Date</mat-label>
                 <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" formControlName="start" [max]="maxEndDate">
@@ -71,7 +78,7 @@
                 <mat-datepicker #endDatePicker></mat-datepicker>
             </mat-form-field>
         </div>
-        
+         -->
 
 
 

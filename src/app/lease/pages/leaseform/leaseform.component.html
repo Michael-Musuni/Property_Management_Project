@@ -65,6 +65,15 @@
                             </mat-form-field>
 
                         </div>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Current Water Metre Reading</mat-label>
+                                <input matInput formControlName="previousReadings" />
+                                <mat-error *ngIf="Leaseform.get('previousReadings').hasError('required')">
+                                    Name is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
 
                 </div>
@@ -142,9 +151,9 @@
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                             <mat-label>Service Charges</mat-label>
-                                            <input formControlName="chargeName" matInput required [disabled]="isReadOnly" />
+                                            <input formControlName="name" matInput required [disabled]="isReadOnly" />
                                             <mat-error
-                                                *ngIf="getChargeFormGroup(i).get('chargeName').hasError('required')">
+                                                *ngIf="getChargeFormGroup(i).get('name').hasError('required')">
                                                 Charge Name is required
                                             </mat-error>
                                         </mat-form-field>
@@ -153,9 +162,9 @@
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                             <mat-label>Charge Amount:</mat-label>
-                                            <input formControlName="chargeAmount"  matInput required [disabled]="isReadOnly"/>
+                                            <input formControlName="totalAmount"  matInput required [disabled]="isReadOnly"/>
                                             <mat-error
-                                                *ngIf="getChargeFormGroup(i).get('chargeAmount').hasError('required')">
+                                                *ngIf="getChargeFormGroup(i).get('totalAmount').hasError('required')">
                                                 Charge Amount is required
                                             </mat-error>
                                         </mat-form-field>

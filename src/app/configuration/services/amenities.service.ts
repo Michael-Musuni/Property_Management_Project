@@ -16,11 +16,21 @@ export class AmenitiesService {
   constructor(private httpClient: HttpClient) { }
 
   public getAmenities() {
-    return this.httpClient.get(`${environment.apiUrl}/api/v1/amenities/amenities`, httpOptions)
+    return this.httpClient.get(`${environment.apiUrl}/api/v1/utilities/utilities`, httpOptions)
+  }
+  // getUtilities() {
+  //   return this.httpClient.get(`${environment.apiUrl}/api/v1/utilities/utilities`, httpOptions)
+  // }
+  public getWaters() {
+    return this.httpClient.get(`${environment.apiUrl}/api/waters`, httpOptions)
   }
   addAmenities(data: any) {
 
     return this.httpClient.post(`${environment.apiUrl}/api/v1/amenities/create`, data)
+  }
+  addWaters(data: any) {
+
+    return this.httpClient.post(`${environment.apiUrl}/api/waters`, data)
   }
   updateAmenity(id: any,data: any): Observable<any>{
   
