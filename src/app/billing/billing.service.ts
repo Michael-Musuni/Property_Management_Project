@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-
+import { map, switchMap } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -18,7 +18,21 @@ export class BillingService {
   }
   private apiUrl = environment.apiUrl;
   selectedTenant: any;
+  private fileToBase64(file: File): Observable<string> {
+    const reader = new FileReader();
+    const fileReaderObservable = new Observable<string>((observer) => {
+      reader.onload = () => {
+        observer.next(reader.result as string);
+        observer.complete();
+      };
+      reader.onerror = (error) => {
+        observer.error(error);
+      };
+    });
 
+    reader.readAsDataURL(file);
+    return fileReaderObservable.pipe(map(result => result.split(',')[1])); // Remove the base64 header
+  }
   constructor(private http: HttpClient) { }
 
   getAllInvoices() {
@@ -46,8 +60,16 @@ export class BillingService {
   sendInvoiceViaEmail(invoiceNumber: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/api/v1/invoices/send/email?invoiceNumber=${invoiceNumber}`);
   }
+  uploadFile(file: File): Observable<any> {
+    const url = `${this.apiUrl}/bulk-payments/upload`;
 
-
+    return this.fileToBase64(file).pipe(
+      switchMap(base64File => {
+        const payload = { file: base64File };
+        return this.http.post<any>(url, payload);
+      })
+    );
+  }
   getAllRents() {
     return this.http.get(`${this.apiUrl}/api/v1/invoices/invoices`, httpOptions);
   }
@@ -66,11 +88,11 @@ export class BillingService {
   getAllCommissions(month: number) {
     return this.http.get(`${this.apiUrl}/api/property/revenue/commission/${month}`, httpOptions);
   }
-  uploadFile(file: File, propertyId: number, month: number) {
-    const formData = new FormData();
-    formData.append('file', file);
-    return this.http.post<any>(`${this.apiUrl}/api/bill/water/upload?propertyId=` + propertyId + `&month=` + month, formData);
-  }
+  // uploadFile(file: File, propertyId: number, month: number) {
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   return this.http.post<any>(`${this.apiUrl}/api/bill/water/upload?propertyId=` + propertyId + `&month=` + month, formData);
+  // }
   onSubmit(expensesData: any): Observable<any> {
 
     const url = `${this.apiUrl}/api/v1/expenses/add`;

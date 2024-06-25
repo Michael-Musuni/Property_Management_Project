@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ViewRevenuesComponent } from '../view-revenues/view-revenues.component';
 import { BillingService } from '../../billing.service';
+import { MpesaDialogComponent } from '../mpesa-dialog/mpesa-dialog.component';
+import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
 
 @Component({
   selector: 'app-revenues',
@@ -16,8 +18,9 @@ import { BillingService } from '../../billing.service';
 })
 export class RevenuesComponent implements OnInit {
   revenues: any[] = [];
+  expenseName:any;
   isLoading: boolean = false;
-  displayedColumns: string[] = ['propertyName','netAmount', 'date','actions'];
+  displayedColumns: string[] = ['propertyName','netAmount','incomeTax', 'date','actions'];
   subscription: Subscription;
   dataSource!: MatTableDataSource<any>;
   selectedMonth: number; 
@@ -110,6 +113,36 @@ export class RevenuesComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(ViewRevenuesComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+  openPaymentDialog(invoice: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    dialogConfig.data = {
+      invoice,
+    };
+
+    const dialogRef = this.dialog.open(PaymentDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+  openMpesaDialog(invoice: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    dialogConfig.data = {
+      invoice,
+    };
+
+    const dialogRef = this.dialog.open(MpesaDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
     });
   }
 }

@@ -20,7 +20,7 @@
                                     <div class="form-line m-b-10 m-t-10 m-l-2 m-r-2">
                                         <input placeholder="Filter..." type="text" (keyup)="applyFilter($event)" #filter
                                             class="form-control" placeholder="Search..." />
-                                    </div>Name
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             </ng-container>
                             <ng-container matColumnDef="type">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header
-                                    class="column-nowrap">Property Style</mat-header-cell>
+                                    class="column-nowrap">Property Type</mat-header-cell>
                                 <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
                                     [class.even-row]="!(i % 2)" class="column-nowrap">
                                     {{row.propertyType}}
@@ -61,20 +61,20 @@
                             </ng-container>
                             <ng-container matColumnDef="location">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header
-                                    class="column-nowrap">row</mat-header-cell>
+                                    class="column-nowrap">Location</mat-header-cell>
                                 <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
                                     [class.even-row]="!(i % 2)" class="column-nowrap">
                                     {{row.location}}
                                 </mat-cell>
                             </ng-container>
-                            <ng-container matColumnDef="owner">
+                            <!-- <ng-container matColumnDef="owner">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header
                                     class="column-nowrap">Owner</mat-header-cell>
                                 <mat-cell *matCellDef="let row;let i = index" [class.odd-row]="i % 2"
                                     [class.even-row]="!(i % 2)" class="column-nowrap">
                                     {{row.propertyOwner.firstName}}
                                 </mat-cell>
-                            </ng-container>
+                            </ng-container> -->
                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onSelectRow(row)"
                                 [style.cursor]="'pointer'" matRipple>

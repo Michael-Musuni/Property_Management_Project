@@ -34,6 +34,8 @@ import { EditAmenityComponent } from './pages/edit-amenity/edit-amenity.componen
 import { EditUtilityComponent } from './pages/edit-utility/edit-utility.component';
 import { DeleteUtilityComponent } from './pages/delete-utility/delete-utility.component';
 import { DeleteAmenityComponent } from './pages/delete-amenity/delete-amenity.component';
+import { WaterServiceComponent } from './pages/water-service/water-service.component';
+import { AddWaterComponent } from './pages/add-water/add-water.component';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ import { DeleteAmenityComponent } from './pages/delete-amenity/delete-amenity.co
     EditUtilityComponent,
     DeleteUtilityComponent,
     DeleteAmenityComponent,
+    WaterServiceComponent,
+    AddWaterComponent,
 
 
   ],
