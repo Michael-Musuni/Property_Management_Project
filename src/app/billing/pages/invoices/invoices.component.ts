@@ -227,6 +227,7 @@ export class InvoicesComponent implements OnInit {
       }
     );
   }
+
   openPaymentDialog(invoice: any): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;

@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpClient } from '@angular/common/http';
 import { BillingService } from '../../billing.service';
+import { SnackbarService } from 'src/app/shared/snackbar.service';
 @Component({
   selector: 'app-mpesa-dialog',
   templateUrl: './mpesa-dialog.component.html',
@@ -19,7 +20,8 @@ export class MpesaDialogComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     public dialogRef: MatDialogRef<MpesaDialogComponent>,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackbar: SnackbarService,
   ){
 
   }
@@ -43,55 +45,31 @@ export class MpesaDialogComponent implements OnInit {
 
   completePayment(): void {
     if (this.uploadedFile) {
-      this.billingService.uploadFile(this.uploadedFile).subscribe(
-        (response) => {
-          console.log('File successfully uploaded', response);
-          // Optionally, handle success (e.g., show a success message, navigate away, etc.)
-        },
-        (error) => {
-          console.error('Error uploading file', error);
-          // Optionally, handle error (e.g., show an error message)
-        }
-      );
+        this.billingService.uploadFile(this.uploadedFile).subscribe(
+            (response) => {
+                console.log('File successfully uploaded', response);
+                // Handle success: show a success notification
+                this.snackbar.showNotification("snackbar-success", "SUCCESSFUL DONE!");
+                // Close the dialog
+                this.dialogRef.close();
+            },
+            (error) => {
+                console.error('Error uploading file', error);
+                this.snackbar.showNotification("snackbar-success", "Error uploading file");
+                // Close the dialog (if you want to close on error too, otherwise remove this line)
+                this.dialogRef.close();
+            }
+        );
     } else {
-      console.error('No file selected');
-      // Optionally, show an error message to the user
+        console.error('No file selected');
+        // Handle case where no file is selected: show an error notification
+        this.snackbar.showNotification("snackbar-success", "No file selected");
+        // Close the dialog
+        this.dialogRef.close();
     }
-  }
+    
+}
 
-  // readExcel(file: File): void {
-  //   const reader: FileReader = new FileReader();
-
-  //   reader.onload = (e: any) => {
-  //     const data: ArrayBuffer = e.target.result;
-  //     const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'array' });
-  //     const sheetName: string = workbook.SheetNames[0];
-  //     const worksheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
-      
-  //     // Convert excel data to JSON
-  //     const excelData: any[] = XLSX.utils.sheet_to_json(worksheet, { raw: true });
-
-  //     // Remove the header row
-  //     if (excelData.length > 0) {
-  //       excelData.shift(); // Remove the first row
-  //     }
-
-  //     this.dataSource = new MatTableDataSource<any>(excelData)
-  //     console.log("data received from excel",excelData);
-
-  //     this.patchFormArray(excelData)
-      
-  //   };
-
-  //   reader.readAsArrayBuffer(file);
-  // }
-  // patchFormArray(excelData: any[]) {
-  //   throw new Error('Method not implemented.');
-  // }
-
- 
-
- 
  
 
 }
