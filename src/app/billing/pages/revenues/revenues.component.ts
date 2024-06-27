@@ -10,7 +10,7 @@ import { ViewRevenuesComponent } from '../view-revenues/view-revenues.component'
 import { BillingService } from '../../billing.service';
 import { MpesaDialogComponent } from '../mpesa-dialog/mpesa-dialog.component';
 import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
-
+import { ProfitLossComponent } from '../profit-loss/profit-loss.component';
 @Component({
   selector: 'app-revenues',
   templateUrl: './revenues.component.html',
@@ -144,5 +144,20 @@ export class RevenuesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
     });
+  }
+  viewProfitAndLoss(){
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '600px';
+    dialogConfig.data = { test: "data" }
+   
+
+    const dialogRef = this.dialog.open(ProfitLossComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('closed');
+    });
   }
 }

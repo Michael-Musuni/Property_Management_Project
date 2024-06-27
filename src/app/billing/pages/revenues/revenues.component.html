@@ -26,29 +26,28 @@
                                             class="browser-default search-field" aria-label="Search box" />
                                     </li>
                                     <li>
+                                        <div class="m-l mb-2" matTooltip="Profitandloss report">
+                                            <button mat-mini-fab color="primary" (click)="viewProfitAndLoss()"
+                                                style="width: auto !important;padding: 0px 7px;border-radius: 5%;">
+                                                <mat-icon class="col-white">cloud_download</mat-icon>P&L Reports
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <!-- <li>
                                         <div class="m-l" matTooltip="Refresh">
                                             <button mat-mini-fab color="primary" (click)="refresh(selectedMonth)">
                                                 <mat-icon class="col-white">refresh</mat-icon>
                                             </button>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
-                                            <mat-form-field class="example-full-width" appearance="outline">
-                                                <mat-label>Expense</mat-label>
-                                                <input matInput formControlName="expenseName" required />
-                                                <mat-error *ngIf="expensesForm.get('expenseName').hasError('required')">
-                        
-                                                    Field required
-                                                </mat-error>
-                                            </mat-form-field>
-                                        </div> -->
-                                    </li>
+                                    </li> -->
+
+
+
                                 </ul>
                             </div>
                             <div class="col-4">
                                 <ul class="header-buttons">
-                                     <li>
+                                    <li>
                                         <div class="export-button m-l-10" matTooltip="XLSX">
                                             <img src="assets/images/icons/xlsx.png" alt="" (click)="
                                     exporter.exportTable('xlsx', {
@@ -58,13 +57,13 @@
                                   " />
                                         </div>
                                     </li>
-                                    <li> 
-                                         <div class="export-button m-l-10" matTooltip="CSV">
+                                    <li>
+                                        <div class="export-button m-l-10" matTooltip="CSV">
                                             <img src="assets/images/icons/csv.png" alt=""
                                                 (click)="exporter.exportTable('csv')" />
                                         </div>
                                     </li>
-                                    <li> 
+                                    <li>
                                         <!-- <div class="export-button m-l-10" matTooltip="JSON">
                                             <img src="assets/images/icons/json.png" alt=""
                                                 (click)="exporter.exportTable('json')" />
@@ -100,7 +99,7 @@
                         <ng-container matColumnDef="propertyName">
                             <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">
+                                [class.even-row]="!(i % 2)">
                                 <a (click)="selectProperty()">{{ revenue.propertyName }}</a>
                             </mat-cell>
                         </ng-container>
@@ -108,78 +107,78 @@
                         <ng-container matColumnDef="grossRevenue">
                             <mat-header-cell *matHeaderCellDef>Gross Revenue</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ revenue.grossRevenue }}</mat-cell>
+                                [class.even-row]="!(i % 2)">{{ revenue.grossRevenue }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="totalExpenses">
                             <mat-header-cell *matHeaderCellDef>Expenses</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ revenue.totalExpenses }}</mat-cell>
+                                [class.even-row]="!(i % 2)">{{ revenue.totalExpenses }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="totalTax">
                             <mat-header-cell *matHeaderCellDef>Tax</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ revenue.totalTax }}</mat-cell>
+                                [class.even-row]="!(i % 2)">{{ revenue.totalTax }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="agentCommission">
                             <mat-header-cell *matHeaderCellDef>Commission</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ revenue.agentCommission }}</mat-cell>
+                                [class.even-row]="!(i % 2)">{{ revenue.agentCommission }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="netAmount">
                             <mat-header-cell *matHeaderCellDef>Net Revenue (Ksh.)</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ revenue.netAmount }}</mat-cell>
+                                [class.even-row]="!(i % 2)">{{ revenue.netAmount }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="incomeTax">
                             <mat-header-cell *matHeaderCellDef>Rental Income Tax (Ksh.)</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ revenue.netAmount }}</mat-cell>
+                                [class.even-row]="!(i % 2)">{{ revenue.netAmount }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="date">
                             <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ revenue.date }}</mat-cell>
+                                [class.even-row]="!(i % 2)">{{ revenue.date }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="totalDeposits">
                             <mat-header-cell *matHeaderCellDef>Deposits</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ revenue.totalDeposits }}</mat-cell>
+                                [class.even-row]="!(i % 2)">{{ revenue.totalDeposits }}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="totalLatePaymentFee">
                             <mat-header-cell *matHeaderCellDef>Late Payment Fees</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ revenue.totalLatePaymentFee }}</mat-cell>
+                                [class.even-row]="!(i % 2)">{{ revenue.totalLatePaymentFee }}</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="actions">
                             <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                             <mat-cell *matCellDef="let revenue;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">
+                                [class.even-row]="!(i % 2)">
                                 <button mat-icon-button color="primary" (click)="viewRevenueDetails(revenue)"
                                     matTooltip="View">
                                     <mat-icon>visibility</mat-icon>
                                 </button>
                                 <button mat-raised-button color="primary" [matMenuTriggerFor]="paymentMenu"
-                                matTooltip="Pay" >
-                                <mat-icon size="small">payment</mat-icon>
+                                    matTooltip="Pay">
+                                    <mat-icon size="small">payment</mat-icon>
                                 </button>
                                 <mat-menu #paymentMenu="matMenu">
                                     <button mat-menu-item (click)="openPaymentDialog(invoice)">
-                                    <mat-icon>attach_money</mat-icon>
-                                    <span>Pay by Cash</span>
+                                        <mat-icon>attach_money</mat-icon>
+                                        <span>Pay by Cash</span>
                                     </button>
                                     <button mat-menu-item (click)="openMpesaDialog(invoice)">
-                                    <mat-icon>phone_iphone</mat-icon>
-                                    <span>Pay by M-Pesa</span>
+                                        <mat-icon>phone_iphone</mat-icon>
+                                        <span>Pay by M-Pesa</span>
                                     </button>
                                     <button mat-menu-item (click)="openMpesaDialog(invoice)">
-                                    <mat-icon>account_balance</mat-icon>
-                                    <span>Pay by Bank</span>
+                                        <mat-icon>account_balance</mat-icon>
+                                        <span>Pay by Bank</span>
                                     </button>
-                                    </mat-menu>
+                                </mat-menu>
                             </mat-cell>
                         </ng-container>
-                    
+
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'"
                             matRipple></mat-row>

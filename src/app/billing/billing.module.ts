@@ -66,6 +66,7 @@ import { DepositsComponent } from './pages/deposits/deposits.component';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { MpesaDialogComponent } from './pages/mpesa-dialog/mpesa-dialog.component';
 import { ExpressMpesaComponent } from './pages/express-mpesa/express-mpesa.component';
+import { ProfitLossComponent } from './pages/profit-loss/profit-loss.component';
 
 
 @NgModule({
@@ -99,6 +100,7 @@ import { ExpressMpesaComponent } from './pages/express-mpesa/express-mpesa.compo
     DepositsComponent,
     MpesaDialogComponent,
     ExpressMpesaComponent,
+    ProfitLossComponent,
 
   ],
   imports: [
