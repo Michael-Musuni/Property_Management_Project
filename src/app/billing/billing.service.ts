@@ -62,13 +62,10 @@ export class BillingService {
   }
   uploadFile(file: File): Observable<any> {
     const url = `${this.apiUrl}/bulk-payments/upload`;
-
-    return this.fileToBase64(file).pipe(
-      switchMap(base64File => {
-        const payload = { file: base64File };
-        return this.http.post<any>(url, payload);
-      })
-    );
+    const formData: FormData = new FormData()
+    formData.append("file",file)
+    
+        return this.http.post<any>(url, formData);  
   }
   getAllRents() {
     return this.http.get(`${this.apiUrl}/api/v1/invoices/invoices`, httpOptions);

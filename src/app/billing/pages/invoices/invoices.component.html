@@ -65,6 +65,27 @@
                                               </button>
                                         </div>
                                     </li>
+                                    <li>
+                                        <div class="m-l mb-2" matTooltip="Payments for Mpesa and Bank">
+                                            <button mat-mini-fab color="primary" [matMenuTriggerFor]="paymentMenu" style="width: auto !important;padding: 0px 7px;border-radius: 5%;">
+                                                <mat-icon class="col-white">payment</mat-icon>Click here
+                                              </button>
+                                              <mat-menu #paymentMenu="matMenu">
+                                                <!-- <button mat-menu-item (click)="openPaymentDialog(invoices)">
+                                                <mat-icon>attach_money</mat-icon>
+                                                <span>Pay by Cash</span>
+                                                </button> -->
+                                                <button mat-menu-item (click)="openMpesaDialog(invoices)">
+                                                <mat-icon>phone_iphone</mat-icon>
+                                                <span>Pay by M-Pesa</span>
+                                                </button>
+                                                <button mat-menu-item (click)="openMpesaDialog(invoices)">
+                                                <mat-icon>account_balance</mat-icon>
+                                                <span>Pay by Bank</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </li>
                                 </ul>
 
                             </div>
@@ -272,7 +293,7 @@
                                 </button> -->
                                <!-- your-main.component.html -->
                                 <button mat-raised-button color="primary" [matMenuTriggerFor]="paymentMenu"
-                                matTooltip="Pay" *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_AGENT'">
+                                matTooltip="Pay By Cash" *ngIf="invoice.status === 'NOT PAID' && role === 'ROLE_AGENT'">
                                 <mat-icon size="small">payment</mat-icon>
                                 </button>
 
@@ -281,14 +302,14 @@
                                                     <mat-icon>attach_money</mat-icon>
                                                     <span>Pay by Cash</span>
                                                     </button>
-                                                    <button mat-menu-item (click)="openMpesaDialog(invoice)">
+                                                    <!-- <button mat-menu-item (click)="openMpesaDialog(invoice)">
                                                     <mat-icon>phone_iphone</mat-icon>
                                                     <span>Pay by M-Pesa</span>
                                                     </button>
                                                     <button mat-menu-item (click)="openMpesaDialog(invoice)">
                                                     <mat-icon>account_balance</mat-icon>
                                                     <span>Pay by Bank</span>
-                                                    </button>
+                                                    </button> -->
                                                     </mat-menu>
 
                                 <button mat-raised-button color="primary" (click)="handlePendingInvoice(invoice)"
@@ -297,7 +318,7 @@
                                 </button>
                             </mat-cell>
                         </ng-container>
-
+                            for payments
 
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'"
@@ -310,6 +331,7 @@
                         <mat-progress-spinner color="primary" [diameter]="60" mode="indeterminate">
                         </mat-progress-spinner>
                     </div>
+                    
                     <mat-paginator #paginator [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
                     </mat-paginator>
                 </div>
