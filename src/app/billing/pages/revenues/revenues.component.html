@@ -26,6 +26,14 @@
                                             class="browser-default search-field" aria-label="Search box" />
                                     </li>
                                     <li>
+                                        <div class="m-l mb-2" matTooltip="Profitandloss report">
+                                            <button mat-mini-fab color="primary" (click)="viewProfitAndLoss()"
+                                                style="width: auto !important;padding: 0px 7px;border-radius: 5%;">
+                                                <mat-icon class="col-white">cloud_download</mat-icon>P&L Reports
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li>
                                         <div class="m-l" matTooltip="Refresh">
                                             <button mat-mini-fab color="primary" (click)="refresh(selectedMonth)">
                                                 <mat-icon class="col-white">refresh</mat-icon>

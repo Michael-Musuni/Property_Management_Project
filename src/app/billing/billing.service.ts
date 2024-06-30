@@ -61,6 +61,13 @@ export class BillingService {
     
         return this.http.post<any>(url, formData);  
   }
+  uploadwaterFile(file: File): Observable<any> {
+    const url = `${this.apiUrl}/bulk-payments/upload`;
+    const formData: FormData = new FormData()
+    formData.append("file",file)
+    
+        return this.http.post<any>(url, formData);  
+  }
   getAllRents() {
     return this.http.get(`${this.apiUrl}/api/v1/invoices/invoices`, httpOptions);
   }
