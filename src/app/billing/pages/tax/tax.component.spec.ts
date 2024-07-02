@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VatComponent } from './vat.component';
+import { VatComponent } from './tax.component';
 
 describe('VatComponent', () => {
   let component: VatComponent;

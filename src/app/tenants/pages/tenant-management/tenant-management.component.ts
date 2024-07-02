@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { TokenStorageService } from 'src/app/core/service/token-storage.service';
 import { DeleteComponent } from '../delete/delete.component';
 import { ViewTenantComponent } from '../view-tenant/view-tenant.component';
+import { TenantpaymentsComponent } from '../tenantpayments/tenantpayments.component';
 @Component({
   selector: 'app-tenant-management',
   templateUrl: './tenant-management.component.html',
@@ -235,6 +236,21 @@ selectUnit(row) {
     dialogRef.afterClosed().subscribe((res)=> {
       
     })
+  }
+  viewTenantpayments(){
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '600px';
+    dialogConfig.data = { test: "data" }
+   
+
+    const dialogRef = this.dialog.open(TenantpaymentsComponent , dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('closed');
+    });
   }
   
 }

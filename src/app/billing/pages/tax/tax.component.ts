@@ -13,16 +13,16 @@ import { ExportType,MatTableExporterDirective   } from 'mat-table-exporter';
 
 
 @Component({
-  selector: 'app-vat',
-  templateUrl: './vat.component.html',
-  styleUrls: ['./vat.component.sass']
+  selector: 'app-tax',
+  templateUrl: './tax.component.html',
+  styleUrls: ['./tax.component.sass']
 })
-export class VatComponent implements OnInit {
+export class TaxComponent implements OnInit {
   data:any;
   selection = new SelectionModel<any>(true, []);
   vat: any[] = [];
   isLoading: boolean = false;
-  displayedColumns: string[] = ['propertyName', 'grossRevenue', 'taxAmount', 'latePenalty','accumulatedOverdueTaxAndPenalty']; // Removed extra comma
+  displayedColumns: string[] = ['propertyName', 'grossRevenue', 'rentalIncomeTax', 'vat','withholdingTax']; // Removed extra comma
   subscription: Subscription; 
   selectedMonth: number;
   months: { name: string, value: number }[];
@@ -56,32 +56,32 @@ export class VatComponent implements OnInit {
     ];
 
     // Fetch VAT data for the initially selected month
-    this.fetchVatData(this.selectedMonth);
+    this.fetchTaxData(this.selectedMonth);
   }
   
   onMonthSelectionChange(): void {
     // Fetch VAT data for the selected month
-    this.fetchVatData(this.selectedMonth);
+    this.fetchTaxData(this.selectedMonth);
     console.log("the data"+this.selectedMonth)
   }
 
 
   
-  fetchVatData(month: number): void {
+  fetchTaxData(month: number): void {
     this.isLoading = true;
-    this.subscription = this.billingService.getVatData(month)
+    this.subscription = this.billingService.getTaxData(month)
       .subscribe(
         (data: any) => {
           
           this.data = data;
-          console.log("my vat", data);
+          console.log("my tax", data);
           this.isLoading = false;
           this.dataSource = new MatTableDataSource<any>(this.data.entity);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         },
         (error) => {
-          console.error('Error fetching vat:', error);
+          console.error('Error fetching tax:', error);
           this.isLoading = false;
         }
       );
@@ -96,7 +96,7 @@ export class VatComponent implements OnInit {
   }
 
   refresh(selectedMonth: number) {
-    this.fetchVatData(selectedMonth);
+    this.fetchTaxData(selectedMonth);
   }
 
   selectProperty() {

@@ -51,6 +51,12 @@ export class AddpropertyComponent implements OnInit {
   Passport: any;
   showVATField = false;
   showVATNumberField = false;
+  showWHTField = false;
+  showWHTNumberField = false;
+  showRITField = false;
+  showRITNumberField = false;
+
+  
 
 
 
@@ -83,7 +89,10 @@ export class AddpropertyComponent implements OnInit {
       category: ["",],//lease,rent
       vatOption: ["", Validators.required],
       vat: ["", Validators.required],
-
+      whtOption: ["", Validators.required],
+      wht: ["", Validators.required],
+      ritOption: ["", Validators.required],
+      rit: ["", Validators.required],
     });
     this.ownerDetails = this.fb.group({
       ownerName: ["", [Validators.required]],
@@ -144,6 +153,10 @@ export class AddpropertyComponent implements OnInit {
     this.populateFormValues();
     this.propertyDetails.get('vatOption').disable();
     this.propertyDetails.get('vatNumber').disable();
+    this.propertyDetails.get('whtOption').disable();
+    this.propertyDetails.get('whtNumber').disable();
+    this.propertyDetails.get('ritOption').disable();
+    this.propertyDetails.get('ritNumber').disable();
   }
   populateFormValues(): void {
     this.populateFormGroupFromLocalStorage('propertyDetails');
@@ -167,18 +180,30 @@ export class AddpropertyComponent implements OnInit {
       this.propertyDetails.get('vatOption').reset();
       this.propertyDetails.get('vatNumber').reset();
     }
+    if (propertyType === 'Residential'|| propertyType === 'Industrial') {
+      this.showWHTField = true;
+      this.propertyDetails.get('whtOption').enable();
+      this.showRITField = true;
+      this.propertyDetails.get('ritOption').enable()
+    } else {
+      this.showWHTField = false;
+      this.showWHTNumberField = false;
+      this.showRITField = false;
+      this.showRITNumberField = false;
+      this.propertyDetails.get('whtOption').disable();
+      this.propertyDetails.get('whtNumber').disable();
+      this.propertyDetails.get('whtOption').reset();
+      this.propertyDetails.get('whtNumber').reset();
+      this.propertyDetails.get('ritOption').disable();
+      this.propertyDetails.get('ritNumber').disable();
+      this.propertyDetails.get('ritOption').reset();
+      this.propertyDetails.get('ritNumber').reset();
+    }
+    
   }
 
-  onVATOptionChange(vatOption: string): void {
-    if (vatOption === 'VAT') {
-      this.showVATNumberField = true;
-      this.propertyDetails.get('vatNumber').enable();
-    } else {
-      this.showVATNumberField = false;
-      this.propertyDetails.get('vatNumber').disable();
-      this.propertyDetails.get('vatNumber').reset();
-    }
-  }
+ 
+  
   populateFormGroupFromLocalStorage(formName: string): void {
     const savedFormData = localStorage.getItem(formName);
     if (savedFormData) {

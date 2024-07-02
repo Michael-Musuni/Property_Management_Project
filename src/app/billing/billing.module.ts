@@ -59,7 +59,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { ReportOptionsComponent } from './pages/report-options/report-options.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { VatComponent } from './pages/vat/vat.component';
+import { TaxComponent } from './pages/tax/tax.component';
 import { InvoicesComponent } from './pages/invoices/invoices.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
 import { DepositsComponent } from './pages/deposits/deposits.component';
@@ -91,7 +91,7 @@ import { ProfitLossComponent } from './pages/profit-loss/profit-loss.component';
     UpdateExpensesComponent,
 
     ReportOptionsComponent,
-    VatComponent,
+    TaxComponent,
     SendOptionsDialogComponent,
     PaymentDialogComponent,
     CheckerDialogComponent,

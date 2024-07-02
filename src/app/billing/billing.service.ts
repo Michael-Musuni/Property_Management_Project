@@ -110,7 +110,7 @@ export class BillingService {
     return this.http.get(`${environment.apiUrl}/api/v1/property/get`);
   }
 
-  getVatData(month: number): Observable<any> {
+  getTaxData(month: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/api/property/revenue/tax/${month}`);
 }
 

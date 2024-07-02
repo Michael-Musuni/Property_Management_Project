@@ -40,6 +40,8 @@ import { DeleteComponent } from './pages/delete/delete.component';
 import { ViewTenantComponent } from './pages/view-tenant/view-tenant.component';
 import { PropertyUnitComponent } from './pages/property-unit/property-unit.component';
 import { PropertyDetailsComponent } from './pages/property-details/property-details.component';
+import { TenantpaymentsComponent } from './pages/tenantpayments/tenantpayments.component';
+
 
 
 
@@ -60,6 +62,8 @@ import { PropertyDetailsComponent } from './pages/property-details/property-deta
     ReportoptionsComponent,
     ViewTenantComponent,
     PropertyDetailsComponent,
+    TenantpaymentsComponent,
+    
   
  
   ],

@@ -92,28 +92,28 @@
 
                         <ng-container matColumnDef="propertyName">
                             <mat-header-cell *matHeaderCellDef>Property Name</mat-header-cell>
-                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                            <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
                             [class.even-row]="!(i % 2)">
-                                <a (click)="selectProperty()">{{ vat.propertyName }}</a>
+                                <a (click)="selectProperty()">{{ tax.propertyName }}</a>
                             </mat-cell>
                         </ng-container>
                         <!-- Monthly Rent Column -->
                         <ng-container matColumnDef="grossRevenue">
                             <mat-header-cell *matHeaderCellDef>Gross Revenue</mat-header-cell>
-                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ vat.grossRevenue }}</mat-cell>
+                            <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ tax.grossRevenue }}</mat-cell>
                         </ng-container>
                         <!-- Tax Amount Column -->
-                        <ng-container matColumnDef="taxAmount">
-                            <mat-header-cell *matHeaderCellDef>Tax Amount</mat-header-cell>
-                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ vat.taxAmount }}</mat-cell>
+                        <ng-container matColumnDef="rentalIncomeTax">
+                            <mat-header-cell *matHeaderCellDef>Rental Income Tax</mat-header-cell>
+                            <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ tax.rentaIncomeTax }}</mat-cell>
                         </ng-container>
                         <!-- Late Penalty Column -->
-                        <ng-container matColumnDef="latePenalty">
-                            <mat-header-cell *matHeaderCellDef>Penalty</mat-header-cell>
-                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ vat.latePenalty }}</mat-cell>
+                        <ng-container matColumnDef="vat">
+                            <mat-header-cell *matHeaderCellDef>Vat</mat-header-cell>
+                            <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ tax.vat }}</mat-cell>
                         </ng-container>
                         <!-- Net Revenue Column -->
                         <ng-container matColumnDef="lastTaxResetDate">
@@ -121,11 +121,11 @@
                             <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
                             [class.even-row]="!(i % 2)">{{vat.lastTaxRestDate }}</mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="accumulatedOverdueTaxAndPenalty">
-                            <mat-header-cell *matHeaderCellDef>Over Due Tax And Penalty</mat-header-cell>
-                            <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
+                        <ng-container matColumnDef="withholdingTax">
+                            <mat-header-cell *matHeaderCellDef>WithHolding Tax</mat-header-cell>
+                            <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
                             [class.even-row]="!(i % 2)">
-                                <a (click)="selectProperty()">{{ vat.accumulatedOverdueTaxAndPenalty }}</a>
+                                <a (click)="selectProperty()">{{ tax.withholdingTax }}</a>
                             </mat-cell>
                         </ng-container>
                         <!-- Table header row -->

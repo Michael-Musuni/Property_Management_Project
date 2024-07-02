@@ -8,6 +8,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TenantService {
+  downloadtenantpayementsReport(propertyName: any, selectedYear: any, selectedMonth: any) {
+    throw new Error('Method not implemented.');
+  }
+  getProperties() {
+    throw new Error('Method not implemented.');
+  }
   getTenants(startDate: Date, endDate: Date) {
     throw new Error('Method not implemented.');
   }
