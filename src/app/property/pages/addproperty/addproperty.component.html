@@ -91,31 +91,6 @@
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
-                                    <div *ngIf="showRITField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
-                                        <mat-form-field class="example-full-width mb-1" appearance="outline">
-                                            <mat-label>RENTAL INCOME TAX</mat-label>
-                                            <mat-select formControlName="ritOption" (selectionChange)="onRITOptionChange($event.value)">
-                                                <mat-option value="None">NO</mat-option>
-                                                <mat-option value="RIT">YES</mat-option>
-                                            </mat-select>
-                                            <mat-error *ngIf="propertyDetails.get('ritOption').hasError('required')">
-                                                RENTAL INCOME TAX selection is required
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                    <div *ngIf="showWHTField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
-                                        <mat-form-field class="example-full-width mb-1" appearance="outline">
-                                            <mat-label>WITHHOLDING TAX</mat-label>
-                                            <mat-select formControlName="whtOption" (selectionChange)="onWHTOptionChange($event.value)">
-                                                <mat-option value="None">NO</mat-option>
-                                                <mat-option value="WHT">YES</mat-option>
-                                            </mat-select>
-                                            <mat-error *ngIf="propertyDetails.get('whtOption').hasError('required')">
-                                                WHT selection is required
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                    
                                     <!-- Conditional VAT Number Input -->
                                     <div *ngIf="showVATNumberField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                         <mat-form-field class="example-full-width mb-1" appearance="outline">
@@ -126,20 +101,45 @@
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
-                                    <div *ngIf="showWHTNumberField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <div *ngIf="showRENTALINCOMETAXField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                         <mat-form-field class="example-full-width mb-1" appearance="outline">
-                                            <mat-label> WHT %</mat-label>
-                                            <input matInput formControlName="WHT" placeholder="Enter WHT %">
-                                            <mat-error *ngIf="propertyDetails.get('wht').hasError('required')">
-                                                WHT % is required
+                                            <mat-label>RENTAL INCOME TAX</mat-label>
+                                            <mat-select formControlName="rentalIncomeTaxOption" (selectionChange)="onRENTALINCOMETAXOptionChange($event.value)">
+                                                <mat-option value="None">NO</mat-option>
+                                                <mat-option value="RENTALINCOMETAX">YES</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="propertyDetails.get('rentalIncomeTaxOption').hasError('required')">
+                                                RENTAL INCOME TAX selection is required
                                             </mat-error>
                                         </mat-form-field>
                                     </div>
-                                    <div *ngIf="showRITNumberField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                    <!-- <div *ngIf="showWITHHOLDINGTAXField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                        <mat-form-field class="example-full-width mb-1" appearance="outline">
+                                            <mat-label>WITHHOLDING TAX</mat-label>
+                                            <mat-select formControlName="withholdingtaxOption" (selectionChange)="onWITHHOLDINGTAXOptionChange($event.value)">
+                                                <mat-option value="None">NO</mat-option>
+                                                <mat-option value="WITHHOLDINGTAX">YES</mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="propertyDetails.get('withholdingtaxOption').hasError('required')">
+                                                WITHHOLDING TAX selection is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div> -->
+                                    
+                                    <!-- <div *ngIf="showWITHHOLDINGTAXNumberField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
+                                        <mat-form-field class="example-full-width mb-1" appearance="outline">
+                                            <mat-label> WITHHOLDING TAX %</mat-label>
+                                            <input matInput formControlName="withholdingtax" placeholder="Enter WITHHOLDINGTAX %">
+                                            <mat-error *ngIf="propertyDetails.get('withholdingtax').hasError('required')">
+                                                WITHHOLDING TAX % is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div> -->
+                                    <div *ngIf="showRENTALINCOMETAXNumberField" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-0">
                                         <mat-form-field class="example-full-width mb-1" appearance="outline">
                                             <mat-label> RENTAL INCOME TAX %</mat-label>
-                                            <input matInput formControlName="RIT" placeholder="Enter RIT %">
-                                            <mat-error *ngIf="propertyDetails.get('rit').hasError('required')">
+                                            <input matInput formControlName="rentalIncomeTax" placeholder="Enter RENTALINCOMETAX %">
+                                            <mat-error *ngIf="propertyDetails.get('rentalIncomeTax').hasError('required')">
                                                 RENTAL INCOME TAX % is required
                                             </mat-error>
                                         </mat-form-field>

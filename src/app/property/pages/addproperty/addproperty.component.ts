@@ -51,10 +51,11 @@ export class AddpropertyComponent implements OnInit {
   Passport: any;
   showVATField = false;
   showVATNumberField = false;
-  showWHTField = false;
-  showWHTNumberField = false;
-  showRITField = false;
-  showRITNumberField = false;
+  // showWITHHOLDINGTAXField = false;
+  // showWITHHOLDINGTAXNumberField = false;
+  showRENTALINCOMETAXField = false;
+  showRENTALINCOMETAXNumberField = false;
+ 
 
   
 
@@ -89,10 +90,10 @@ export class AddpropertyComponent implements OnInit {
       category: ["",],//lease,rent
       vatOption: ["", Validators.required],
       vat: ["", Validators.required],
-      whtOption: ["", Validators.required],
-      wht: ["", Validators.required],
-      ritOption: ["", Validators.required],
-      rit: ["", Validators.required],
+      // withholdingtaxOption: ["", Validators.required],
+      // withholdingtax: ["", Validators.required],
+      rentalIncomeTaxOption: ["", Validators.required],
+      rentalIncomeTax: ["", Validators.required],
     });
     this.ownerDetails = this.fb.group({
       ownerName: ["", [Validators.required]],
@@ -153,10 +154,10 @@ export class AddpropertyComponent implements OnInit {
     this.populateFormValues();
     this.propertyDetails.get('vatOption').disable();
     this.propertyDetails.get('vatNumber').disable();
-    this.propertyDetails.get('whtOption').disable();
-    this.propertyDetails.get('whtNumber').disable();
-    this.propertyDetails.get('ritOption').disable();
-    this.propertyDetails.get('ritNumber').disable();
+    // this.propertyDetails.get('withholdingtaxOption').disable();
+    // this.propertyDetails.get('withholdingtaxNumber').disable();
+    this.propertyDetails.get('rentalIncomeTaxOption').disable();
+    this.propertyDetails.get('rentalIncomeTaxNumber').disable();
   }
   populateFormValues(): void {
     this.populateFormGroupFromLocalStorage('propertyDetails');
@@ -169,38 +170,71 @@ export class AddpropertyComponent implements OnInit {
     this.populateFormGroupFromLocalStorage('rentConfigForm');
   }
   onPropertyTypeChange(propertyType: string): void {
-    if (propertyType === 'Commercial'|| propertyType === 'Industrial') {
-      this.showVATField = true;
-      this.propertyDetails.get('vatOption').enable();
+    if (propertyType === 'Commercial' || propertyType === 'Industrial') {
+        this.showVATField = true;
+        this.propertyDetails.get('vatOption')?.enable();
     } else {
-      this.showVATField = false;
-      this.showVATNumberField = false;
-      this.propertyDetails.get('vatOption').disable();
-      this.propertyDetails.get('vatNumber').disable();
-      this.propertyDetails.get('vatOption').reset();
-      this.propertyDetails.get('vatNumber').reset();
+        this.showVATField = false;
+        this.showVATNumberField = false;
+        this.propertyDetails.get('vatOption')?.disable();
+        this.propertyDetails.get('vat')?.disable();
+        this.propertyDetails.get('vatOption')?.reset();
+        this.propertyDetails.get('vat')?.reset();
     }
-    if (propertyType === 'Residential'|| propertyType === 'Industrial') {
-      this.showWHTField = true;
-      this.propertyDetails.get('whtOption').enable();
-      this.showRITField = true;
-      this.propertyDetails.get('ritOption').enable()
+
+    if (propertyType === 'Residential' || propertyType === 'Industrial') {
+        // this.showWITHHOLDINGTAXField = true;
+        // this.propertyDetails.get('withholdingtaxOption')?.enable();
+        this.showRENTALINCOMETAXField = true;
+        this.propertyDetails.get('rentalIncomeTaxOption')?.enable();
     } else {
-      this.showWHTField = false;
-      this.showWHTNumberField = false;
-      this.showRITField = false;
-      this.showRITNumberField = false;
-      this.propertyDetails.get('whtOption').disable();
-      this.propertyDetails.get('whtNumber').disable();
-      this.propertyDetails.get('whtOption').reset();
-      this.propertyDetails.get('whtNumber').reset();
-      this.propertyDetails.get('ritOption').disable();
-      this.propertyDetails.get('ritNumber').disable();
-      this.propertyDetails.get('ritOption').reset();
-      this.propertyDetails.get('ritNumber').reset();
+        // this.showWITHHOLDINGTAXField = false;
+        // this.showWITHHOLDINGTAXNumberField = false;
+        this.showRENTALINCOMETAXField = false;
+        this.showRENTALINCOMETAXNumberField = false;
+        // this.propertyDetails.get('withholdingtaxOption')?.disable();
+        // this.propertyDetails.get('withholdingtax')?.disable();
+        // this.propertyDetails.get('withholdingtaxOption')?.reset();
+        // this.propertyDetails.get('withholdingtax')?.reset();
+        this.propertyDetails.get('rentalIncomeTaxOption')?.disable();
+        this.propertyDetails.get('rentalIncomeTax')?.disable();
+        this.propertyDetails.get('rentalIncomeTaxOption')?.reset();
+        this.propertyDetails.get('rentalIncomeTax')?.reset();
     }
-    
-  }
+}
+
+onVATOptionChange(vatOption: string): void {
+    if (vatOption === 'VAT') {
+        this.showVATNumberField = true;
+        this.propertyDetails.get('vat')?.enable();
+    } else {
+        this.showVATNumberField = false;
+        this.propertyDetails.get('vat')?.disable();
+        this.propertyDetails.get('vat')?.reset();
+    }
+}
+
+// onWITHHOLDINGTAXOptionChange(withholdingtaxOption: string): void {
+//     if (withholdingtaxOption === 'WITHHOLDINGTAX') {
+//         this.showWITHHOLDINGTAXNumberField = true;
+//         this.propertyDetails.get('withholdingtax')?.enable();
+//     } else {
+//         this.showWITHHOLDINGTAXNumberField = false;
+//         this.propertyDetails.get('withholdingtax')?.disable();
+//         this.propertyDetails.get('withholdingtax')?.reset();
+//     }
+// }
+
+onRENTALINCOMETAXOptionChange(rentalIncomeTaxOption: string): void {
+    if (rentalIncomeTaxOption === 'RENTALINCOMETAX') {
+        this.showRENTALINCOMETAXNumberField = true;
+        this.propertyDetails.get('rentalIncomeTax')?.enable();
+    } else {
+        this.showRENTALINCOMETAXNumberField = false;
+        this.propertyDetails.get('rentalIncomeTax')?.disable();
+        this.propertyDetails.get('rentalIncomeTax')?.reset();
+    }
+}
 
  
   

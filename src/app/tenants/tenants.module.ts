@@ -41,6 +41,7 @@ import { ViewTenantComponent } from './pages/view-tenant/view-tenant.component';
 import { PropertyUnitComponent } from './pages/property-unit/property-unit.component';
 import { PropertyDetailsComponent } from './pages/property-details/property-details.component';
 import { TenantpaymentsComponent } from './pages/tenantpayments/tenantpayments.component';
+import { TenantlookupComponent } from './pages/tenantlookup/tenantlookup.component';
 
 
 
@@ -63,6 +64,7 @@ import { TenantpaymentsComponent } from './pages/tenantpayments/tenantpayments.c
     ViewTenantComponent,
     PropertyDetailsComponent,
     TenantpaymentsComponent,
+    TenantlookupComponent,
     
   
  

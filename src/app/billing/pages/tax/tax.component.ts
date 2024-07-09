@@ -22,7 +22,7 @@ export class TaxComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
   vat: any[] = [];
   isLoading: boolean = false;
-  displayedColumns: string[] = ['propertyName', 'grossRevenue', 'rentalIncomeTax', 'vat','withholdingTax']; // Removed extra comma
+  displayedColumns: string[] = ['propertyName','propertyType', 'grossRevenue' ,'taxAmount']; // Removed extra comma
   subscription: Subscription; 
   selectedMonth: number;
   months: { name: string, value: number }[];
@@ -84,7 +84,7 @@ export class TaxComponent implements OnInit {
           console.error('Error fetching tax:', error);
           this.isLoading = false;
         }
-      );
+      ); 
   }
 
   applyFilter(event: Event) {

@@ -11,8 +11,8 @@ export const environment = {
 
 
   //  apiUrl: "http://192.168.89.225:9701",
-    // apiUrl: "http://192.168.90.163:9701",
-
+    apiUrl: "http://192.168.88.33:9701",
+    // apipUrl:"102.210.240.222:9701",
 
 
  
@@ -20,7 +20,7 @@ export const environment = {
 
   // apiUrl: "http://localhost:9701", 
 
-  apiUrl: "http://192.168.90.68:9701",
+  // apiUrl: "http://102.210.244.222:9701",
  
   // apiUrl: "http://52.15.152.26:9701",
   

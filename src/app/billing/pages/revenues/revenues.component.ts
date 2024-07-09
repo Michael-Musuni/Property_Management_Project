@@ -159,5 +159,6 @@ export class RevenuesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('closed');
     });
+    };
   }
-}
+ 

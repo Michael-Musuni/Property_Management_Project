@@ -103,31 +103,33 @@
                             <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
                             [class.even-row]="!(i % 2)">{{ tax.grossRevenue }}</mat-cell>
                         </ng-container>
-                        <!-- Tax Amount Column -->
-                        <ng-container matColumnDef="rentalIncomeTax">
-                            <mat-header-cell *matHeaderCellDef>Rental Income Tax</mat-header-cell>
+
+                        <ng-container matColumnDef="propertyType">
+                            <mat-header-cell *matHeaderCellDef>Property Type</mat-header-cell>
                             <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ tax.rentaIncomeTax }}</mat-cell>
+                            [class.even-row]="!(i % 2)">{{ tax. propertyType }}</mat-cell>
+                        </ng-container>
+                        <!-- Tax Amount Column -->
+                        <ng-container matColumnDef="taxAmount">
+                            <mat-header-cell *matHeaderCellDef>Tax Amount</mat-header-cell>
+                            <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
+                            [class.even-row]="!(i % 2)">{{ tax.taxAmount }}</mat-cell>
                         </ng-container>
                         <!-- Late Penalty Column -->
-                        <ng-container matColumnDef="vat">
-                            <mat-header-cell *matHeaderCellDef>Vat</mat-header-cell>
-                            <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
-                            [class.even-row]="!(i % 2)">{{ tax.vat }}</mat-cell>
-                        </ng-container>
+                      
                         <!-- Net Revenue Column -->
                         <ng-container matColumnDef="lastTaxResetDate">
                             <mat-header-cell *matHeaderCellDef>Last Tax Reset Date </mat-header-cell>
                             <mat-cell *matCellDef="let vat;let i = index" [class.odd-row]="i % 2"
                             [class.even-row]="!(i % 2)">{{vat.lastTaxRestDate }}</mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="withholdingTax">
+                        <!-- <ng-container matColumnDef="withholdingTax">
                             <mat-header-cell *matHeaderCellDef>WithHolding Tax</mat-header-cell>
                             <mat-cell *matCellDef="let tax;let i = index" [class.odd-row]="i % 2"
                             [class.even-row]="!(i % 2)">
                                 <a (click)="selectProperty()">{{ tax.withholdingTax }}</a>
                             </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
                         <!-- Table header row -->
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <!-- Table row -->

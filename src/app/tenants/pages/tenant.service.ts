@@ -8,9 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TenantService {
-  downloadtenantpayementsReport(propertyName: any, selectedYear: any, selectedMonth: any) {
-    throw new Error('Method not implemented.');
-  }
+  
+  
   getProperties() {
     throw new Error('Method not implemented.');
   }
@@ -85,6 +84,10 @@ export class TenantService {
       }
     });
   }
-  
+  downloadtenantpaymentsReport(tenantName: string): Observable<Blob> {
+    const url = `${this.apiUrl}/api/tenantpayments/${tenantName}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
 
 }

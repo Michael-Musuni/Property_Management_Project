@@ -25,17 +25,18 @@
             </mat-form-field>
         </div>
 
+        
         <div class="col-md-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Tenant Name</mat-label>
-                <input type="text" placeholder="Pick one" aria-label="Property Name" matInput
-                    formControlName="propertyName" [matAutocomplete]="auto2">
-                <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredTenantNames | async" [value]="option">{{ option
-                        }}</mat-option>
-                </mat-autocomplete>
+                <input type="text" placeholder="Pick one" aria-label="Tenant Name" matInput
+                    formControlName="tenantName" >
+                    <button (click)="selectTenant()" mat-icon-button matSuffix [attr.aria-label]="'Hide password'">
+                        <mat-icon>search</mat-icon>
+                      </button>
             </mat-form-field>
         </div>
+  
         <div class="col-md-12 mb-2">
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Year</mat-label>

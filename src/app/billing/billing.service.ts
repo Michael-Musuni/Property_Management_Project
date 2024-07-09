@@ -67,6 +67,13 @@ export class BillingService {
     
         return this.http.post<any>(url, formData);  
   }
+  uploadwaterFile(file: File): Observable<any> {
+    const url = `${this.apiUrl}/bulk-payments/upload`;
+    const formData: FormData = new FormData()
+    formData.append("file",file)
+    
+        return this.http.post<any>(url, formData);  
+  }
   getAllRents() {
     return this.http.get(`${this.apiUrl}/api/v1/invoices/invoices`, httpOptions);
   }
@@ -135,6 +142,10 @@ getDepositData(): Observable<any> {
   public downloadPaidInvoiceReport(propertyName: string, startDate: string, endDate: string): Observable<Blob> {
     // Adjust the URL and parameters as per your backend API
     const url = `/api/v1/reports/property/paid-invoices-report=${startDate}&endDate=${endDate}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+  public downloadProfitandLossPerPropertyReport(propertyName: string): Observable<Blob> {
+    const url = `${this.apiUrl}/api/v1/reports/profit-loss?propertyName=${propertyName}`;
     return this.http.get(url, { responseType: 'blob' });
   }
 
