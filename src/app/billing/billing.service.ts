@@ -74,8 +74,16 @@ export class BillingService {
     
         return this.http.post<any>(url, formData);  
   }
+  submitBillingData(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/api/water`, data, httpOptions);
+  }
   getAllRents() {
     return this.http.get(`${this.apiUrl}/api/v1/invoices/invoices`, httpOptions);
+  }
+ 
+  getPropertyData(propertyName: string): Observable<any> {
+    console.log("gdgdgdgdgdg"+propertyName)
+    return this.http.get<any>(`${this.apiUrl}/api/water/water-bills?propertyName=${propertyName}`);
   }
   getRentById(invoiceId: number): Observable<any> {
     const url = `${this.apiUrl}/${invoiceId}`;

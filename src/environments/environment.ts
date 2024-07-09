@@ -23,6 +23,7 @@ export const environment = {
   // apiUrl: "http://102.210.244.222:9701",
  
   // apiUrl: "http://52.15.152.26:9701",
+  // apiUrl: "http://52.15.152.26:9701",
   
   // apiUrl: "http://192.168.2.28:9701",
   // apiUrl: "http://192.168.88.206:9701"

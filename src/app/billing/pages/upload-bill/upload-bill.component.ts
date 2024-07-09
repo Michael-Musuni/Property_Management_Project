@@ -7,11 +7,12 @@ import { BillingService } from '../../billing.service';
 import { InvoicesComponent } from '../invoices/invoices.component';
 import { SnackbarService } from 'src/app/shared/snackbar.service';
 import * as XLSX from 'xlsx';
+import { FileUploadService } from './readings_upload-service';
 
 interface Unit {
   unitName: string;
-  previousReadings: number;
-  costPerUnit: number;
+  previousReading: number;
+  value: number;
   currentReadings: number;
   totalCost: number;
   totalUnits: number;
@@ -30,19 +31,29 @@ export class UploadBillComponent implements OnInit {
   units: Unit[] = [];
   property: any;
   dataSource: MatTableDataSource<Unit>;
-
+  file: File | null = null;
+  dataFetched: boolean = false; // Property to track if data is fetched
+  dataSelected: boolean = false; // Property to track if data is selected
+  dataList: string[] = []; // Array to hold fetched data
   constructor(
     private dialog: MatDialog,
     private fb: FormBuilder,
     private billingService: BillingService,
+    private fileUploadService: FileUploadService,
     public dialogRef: MatDialogRef<InvoicesComponent>,
     private snackbar: SnackbarService
   ) {
     this.uploadForm = this.fb.group({
-      propertyName: ["", Validators.required],
-      propertyId: [""],
-      uploadDate: [''],
-      currentReadings: this.fb.array([])
+      // propertyName: ["", Validators.required],
+      leaseId: ["", Validators.required],
+      // unitName: [""],
+    
+      // value:[""],
+      // totalUnits:[''],
+      // totalCost:[],
+      // previousReading:[''],
+    
+      currentReadings: ["", Validators.required],
     });
     this.dataSource = new MatTableDataSource<Unit>([]);
   }
@@ -58,77 +69,154 @@ export class UploadBillComponent implements OnInit {
     dialogConfig.data = {
       user: '',
     };
+  
     const dialogRef = this.dialog.open(PropertyLookupComponent, dialogConfig);
+  
     dialogRef.afterClosed().subscribe((result) => {
-      this.dialogData = result;
-      this.property = this.dialogData.data.propertyName;
-      this.uploadForm.get('propertyName').setValue(this.property);
-      this.uploadForm.get('propertyId').setValue(this.dialogData.data.id);
-      if (this.dialogData.data.units) {
-        this.units = this.dialogData.data.units;
-        this.dataSource.data = this.units;
-        this.populateCurrentReadingsControl();
-        console.log('Units:', this.units);
+      console.log("Dialog result:", result.data.propertyName); 
+      
+      if (result && result.data.propertyName) { 
+        const propertyName = result.data.propertyName;
+        console.log("Selected propertyName:", propertyName); 
+  
+       
+        this.billingService.getPropertyData(propertyName).subscribe(
+          (response) => {
+            this.units = response; 
+            this.dataSource.data = this.units;
+            console.log('Units:', this.units);
+          },
+          (error) => {
+            console.error('Error fetching units:', error);
+            this.units = []; 
+          }
+        );
+  
+        // Update form values based on selected property
+        this.uploadForm.get('propertyName').setValue(result.data.propertyName);
+        this.uploadForm.get('propertyId').setValue(result.data.id); // Assuming you also need propertyId
       } else {
-        console.log('Units data is not available.');
+        console.error('Selected propertyName is undefined:', result);
       }
     });
+  
+    setTimeout(() => {
+      this.dataList = ['Property 1', 'Property 2', 'Property 3']; // Simulate fetched data
+      this.dataFetched = true; // Set to true when data is fetched
+    }, 1000);
   }
-
-  populateCurrentReadingsControl() {
-    const currentReadingsControl = this.uploadForm.get('currentReadings') as FormArray;
-    this.units.forEach(unit => {
-      currentReadingsControl.push(this.fb.control(unit.currentReadings || 0));
-    });
+  
+  
+  onDataSelected(item: string) {
+    console.log(`Selected item: ${item}`);
+    this.dataSelected = true; // Set to true when data is selected
   }
 
   onFileChange(event: any) {
-    const target: DataTransfer = <DataTransfer>(event.target);
-    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
-
-    const reader: FileReader = new FileReader();
-    reader.onload = (e: any) => {
-      const bstr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
-
-      const wsname: string = wb.SheetNames[0];
-      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-
-      const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
-      this.populateCurrentReadings(data);
-    };
-    reader.readAsBinaryString(target.files[0]);
+    this.file = event.target.files[0];
+    console.log("File selected");
+    this.uploadFile();
   }
-
-  populateCurrentReadings(data: any[]): void {
-    const currentReadingsControl = this.uploadForm.get('currentReadings') as FormArray;
-
-    data.forEach((row, index) => {
-      if (index === 0) return; // Skip header row
-      const unitName = row[0];
-      const currentReading = row[1];
-
-      const unitIndex = this.units.findIndex(unit => unit.unitName === unitName);
-      if (unitIndex !== -1) {
-        // Assuming units and currentReadingsControl have the same length and order
-        const control = currentReadingsControl.at(unitIndex);
-        control.setValue(currentReading);
-      }
+  
+  uploadFile() {
+    if (this.file) {
+      this.fileUploadService.readExcelFile(this.file).then((excelData) => {
+        const transformedData = this.transformExcelData(excelData);
+        this.updateReadings(transformedData);
+      });
+    }
+  }
+  
+  transformExcelData(data: any[]): any[] {
+    const [headers, ...rows] = data;
+    return rows.map(row => {
+      let obj: any = {};
+      headers.forEach((header: string, index: number) => {
+        obj[header] = row[index];
+      });
+      return obj;
     });
   }
+  
+get formLocation() {
+  return this.uploadForm.get('Data') as FormArray;
+}
+  
+  updateReadings(excelData: any[]) {
+    console.log("Excel Data:", JSON.stringify(excelData));
+    console.log("Before Update - DataSource Data:", JSON.stringify(this.dataSource.data));
+  
+    excelData.forEach((item: any) => {
+      const existingUnit = this.dataSource.data.find(d => d.unitName === item.unitName);
+      console.log(existingUnit)
+      console.log(item)
+      if (existingUnit) {
+        
+        existingUnit.currentReadings = item.currentReadings;
+        
+        existingUnit.totalUnits = existingUnit.currentReadings - existingUnit.previousReading;
+        existingUnit.totalCost = existingUnit.totalUnits * existingUnit.value;
+        var data = {currentReadings:item.currentReadings ,unitName: item.unitName }
+        // this.formLocation.push(this.initLocations(data))
+       
+        this.uploadForm.get("currentReadings").patchValue(item.currentReadings);
+        var data3 = existingUnit
+        console.log(data3['id'])
+        this.uploadForm.get("leaseId").patchValue(data3['id']);
+        this.uploadForm.get("totalUnits").patchValue(existingUnit.totalUnits);
+        this.uploadForm.get("totalCost").patchValue(existingUnit.totalCost);
+        // this.uploadForm.get("previousReading").patchValue(existingUnit.previousReading);
+        this.uploadForm.get("unitName").patchValue(existingUnit.unitName);
+      } else {
+        console.warn(`No existing unit found for unitName: ${item.unitName}`);
+      }
+    });
+  
+    console.log("After Update - DataSource Data:", JSON.stringify(this.dataSource.data));
+    this.dataSource.data = [...this.dataSource.data];
+    console.log(this.uploadForm)
 
+  }
+
+  initLocations(data:any | null){
+    console.log(data)
+    if(data != undefined && data != null){
+      return this.fb.group({
+        currentReadings:[data.currentReadings, Validators.required],
+        unitName: data.unitName
+      });
+    }else{
+      return this.fb.group({
+        currentReadings:[null, Validators.required],
+        unitName: [null],
+        
+      });
+    }
+  }
+  
   submitForm(): void {
     if (this.uploadForm.valid) {
       const formData = this.uploadForm.value;
       console.log('Form Data:', formData);
       this.loading = true;
 
-      // Simulating server delay
-      setTimeout(() => {
-        this.uploadForm.reset();
-        this.loading = false;
-        this.snackbar.openSnackBar('Bill uploaded successfully!', 'Close');
-      }, 2000);
+      this.billingService.submitBillingData(formData).subscribe(
+        response => {
+          console.log('Server response:', response);
+          this.uploadForm.reset();
+          this.loading = false;
+          this.snackbar.open('Bill uploaded successfully!', 'Close', {
+            duration: 3000,
+          });
+        },
+        error => {
+          console.error('Error:', error);
+          this.loading = false;
+          this.snackbar.open('Failed to upload bill. Please try again.', 'Close', {
+            duration: 3000,
+          });
+        }
+      );
     } else {
       this.uploadForm.markAllAsTouched();
     }
